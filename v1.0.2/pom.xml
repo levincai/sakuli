@@ -51,6 +51,9 @@
         <developerConnection>${project.parent.scm.developerConnection}</developerConnection>
     </scm>
 
+    <!-- TODO TS: move to seperate maven module ander src/ -->
+    <!-- TODO TS: include api generation + update docu to CI build (maybe as separate job) -->
+    <!-- TODO TS: check css from citrus -->
     <profiles>
         <profile>
             <id>docs</id>
@@ -62,6 +65,24 @@
             </activation>
             <build>
                 <plugins>
+
+                    <!-- generate git/build information for `book.json` to set correct edit link -->
+                    <plugin>
+                        <groupId>pl.project13.maven</groupId>
+                        <artifactId>git-commit-id-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>revision</goal>
+                                </goals>
+                                <configuration>
+                                    <generateGitPropertiesFile>false</generateGitPropertiesFile>
+                                    <skipPoms>false</skipPoms>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
                     <plugin>
                         <artifactId>maven-resources-plugin</artifactId>
                         <executions>
@@ -85,6 +106,7 @@
                                             <directory>${md.source}</directory>
                                             <filtering>true</filtering>
                                             <includes>
+                                                <include>book.json</include>
                                                 <include>package.json</include>
                                                 <include>README.md</include>
                                             </includes>
@@ -198,6 +220,7 @@
                                     <message>Add new sakuli documentation for ${sakuli.version}</message>
                                 </configuration>
                             </execution>
+
                             <!-- all after this is needed, so that removed files will be updated also-->
                             <execution>
                                 <id>gh-pages-remove-for-deploy2</id>
@@ -235,5 +258,5 @@
             </build>
         </profile>
     </profiles>
- 
+
 </project>
