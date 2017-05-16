@@ -31,19 +31,19 @@
     <artifactId>docs-gitbook</artifactId>
     <version>1.0.2</version>
     <name>${project.artifactId}</name>
-    <description>maven module to build the gitbook based sakuli documentation</description>
+    <description>maven module to build the AsciiDoc based sakuli documentation: http://consol.github.io/sakuli
+    </description>
 
     <packaging>pom</packaging>
 
     <properties>
         <sakuli.version>v${project.version}</sakuli.version>
-        <node.version>v5.12.0</node.version>
-        <npm.version>3.10.10</npm.version>
-        <md.source>${project.basedir}</md.source>
-        <gitbook.source.directory>${project.build.outputDirectory}/src</gitbook.source.directory>
-        <gitbook.output.directory>${project.build.outputDirectory}/gh_local</gitbook.output.directory>
-        <gh-pages.workingDirectory>${project.build.directory}/checkout</gh-pages.workingDirectory>
-        <gh-pages.targetDirectory>${gh-pages.workingDirectory}/${sakuli.version}</gh-pages.targetDirectory>
+        <docs.source.dir>${project.basedir}</docs.source.dir>
+        <!-- needed this way to generate correct "edit on github" links -->
+        <ascii.build.source.dir>${project.build.outputDirectory}</ascii.build.source.dir>
+        <ascii.build.output.directory>${project.build.directory}/generated-docs</ascii.build.output.directory>
+        <gh-pages.working.dir>${project.build.directory}/checkout</gh-pages.working.dir>
+        <gh-pages.target.dir>${gh-pages.working.dir}/${sakuli.version}</gh-pages.target.dir>
     </properties>
 
     <scm>
@@ -53,19 +53,12 @@
 
     <!-- TODO TS: move to seperate maven module ander src/ -->
     <!-- TODO TS: include api generation + update docu to CI build (maybe as separate job) -->
-    <!-- TODO TS: check css from citrus -->
+    <!--TODO TS enable § anchor links like in asciidoc docu-->
     <profiles>
         <profile>
-            <id>docs</id>
-            <activation>
-                <property>
-                    <name>performRelease</name>
-                    <value>true</value>
-                </property>
-            </activation>
+            <id>doc-html</id>
             <build>
                 <plugins>
-
                     <!-- generate git/build information for `book.json` to set correct edit link -->
                     <plugin>
                         <groupId>pl.project13.maven</groupId>
@@ -83,6 +76,7 @@
                         </executions>
                     </plugin>
 
+                    <!-- prepare doc sources -->
                     <plugin>
                         <artifactId>maven-resources-plugin</artifactId>
                         <executions>
@@ -93,22 +87,20 @@
                                 </goals>
                                 <phase>process-resources</phase>
                                 <configuration>
-                                    <outputDirectory>${gitbook.source.directory}</outputDirectory>
+                                    <outputDirectory>${ascii.build.source.dir}</outputDirectory>
                                     <resources>
                                         <resource>
-                                            <directory>${md.source}</directory>
+                                            <directory>${docs.source.dir}</directory>
                                             <excludes>
                                                 <exclude>target/</exclude>
                                             </excludes>
                                         </resource>
                                         <!--Filtered resources: replace ${xxxx.xxx.xxx} properties in files -->
                                         <resource>
-                                            <directory>${md.source}</directory>
+                                            <directory>${docs.source.dir}</directory>
                                             <filtering>true</filtering>
                                             <includes>
-                                                <include>book.json</include>
-                                                <include>package.json</include>
-                                                <include>README.md</include>
+                                                <include>index.*</include>
                                             </includes>
                                         </resource>
                                     </resources>
@@ -116,35 +108,85 @@
                             </execution>
                         </executions>
                     </plugin>
+
+                    <!-- generate aciidoc HTML and PDF -->
                     <plugin>
-                        <groupId>com.github.eirslett</groupId>
-                        <artifactId>frontend-maven-plugin</artifactId>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctor-maven-plugin</artifactId>
+                        <version>1.5.3</version>
                         <configuration>
-                            <installDirectory>${project.build.directory}/node-mvn</installDirectory>
-                            <workingDirectory>${gitbook.source.directory}</workingDirectory>
-                            <nodeVersion>${node.version}</nodeVersion>
-                            <npmVersion>${npm.version}</npmVersion>
+                            <backend>html</backend>
+                            <sourceHighlighter>coderay</sourceHighlighter>
+                            <attributes>
+                                <toc>left</toc>
+                            </attributes>
+                            <sourceDirectory>${ascii.build.source.dir}</sourceDirectory>
+                            <!--<imagesDir>pics</imagesDir>-->
+                            <!--<outputDirectory>${ascii.build.output.directory}</outputDirectory>-->
                         </configuration>
                         <executions>
                             <execution>
-                                <id>node-npm-setup</id>
-                                <goals>
-                                    <goal>install-node-and-npm</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>npm-install</id>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                                <configuration>
-                                    <arguments>install --verbose</arguments>
-                                </configuration>
+                                <id>generate ascii</id>
                                 <phase>package</phase>
+                                <goals>
+                                    <goal>process-asciidoc</goal>
+                                </goals>
                             </execution>
                         </executions>
+                        <!--See https://jmini.github.io/asciidoctorj-gh-edit/-->
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.bsiag.asciidoctorj</groupId>
+                                <artifactId>gh-edit</artifactId>
+                                <version>3.0.0</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                 </plugins>
+            </build>
+            <!-- needed for com.bsiag.asciidoctorj:gh-edit depededency -->
+            <repositories>
+                <repository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>bintray-jmini-maven</id>
+                    <name>bintray</name>
+                    <url>http://dl.bintray.com/jmini/maven</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>bintray-jmini-maven</id>
+                    <name>bintray-plugins</name>
+                    <url>http://dl.bintray.com/jmini/maven</url>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+        <profile>
+            <id>doc-pdf</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctor-maven-plugin</artifactId>
+                        <configuration>
+                            <backend>pdf</backend>
+                            <sourceHighlighter>rouge</sourceHighlighter>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.asciidoctor</groupId>
+                                <artifactId>asciidoctorj-pdf</artifactId>
+                                <version>1.5.0-alpha.11</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+                <defaultGoal>generate-resources asciidoctor:process-asciidoc</defaultGoal>
             </build>
         </profile>
 
@@ -163,10 +205,10 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-resources-plugin</artifactId>
                         <configuration>
-                            <outputDirectory>${gh-pages.targetDirectory}</outputDirectory>
+                            <outputDirectory>${gh-pages.target.dir}</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${gitbook.output.directory}</directory>
+                                    <directory>${ascii.build.output.directory}</directory>
                                 </resource>
                             </resources>
                         </configuration>
@@ -195,7 +237,7 @@
                         <configuration>
                             <scmVersion>gh-pages</scmVersion>
                             <scmVersionType>branch</scmVersionType>
-                            <workingDirectory>${gh-pages.workingDirectory}</workingDirectory>
+                            <workingDirectory>${gh-pages.working.dir}</workingDirectory>
                         </configuration>
                         <executions>
                             <!-- checkout the current documentation state -->
