@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Example projects on GitHub</title>
+<title>Windows Troubleshooting</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -508,30 +508,84 @@ table.CodeRay td.code>pre{padding:0}
 .CodeRay .head .head{color:#f4f}
 </style>
 </head>
-<body id="examples" class="article toc2 toc-left">
+<body class="article toc2 toc-left">
 <div id="header">
-<h1>Example projects on GitHub</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-
+<ul class="sectlevel4">
+<li><a href="#_windows_troubleshooting">Windows Troubleshooting</a></li>
+</ul>
 </div>
 </div>
 <div id="content">
+<div class="sect4">
+<h5 id="_windows_troubleshooting">Windows Troubleshooting</h5>
 <div id="git-edit-section" class="paragraph">
-<p>git-link:docs/example-projects.adoc{git-view} | git-link:docs/example-projects.adoc{git-edit}</p>
+<p>git-link:docs/manual/execution/native/windows-troubleshooting.adoc{git-view} | git-link:docs/manual/execution/native/windows-troubleshooting.adoc{git-edit}</p>
 </div>
-<div class="ulist">
-<ul>
+<div class="paragraph">
+<p>If you have some errors with your Windows installation, you can check the following points:</p>
+</div>
+<div class="sect5">
+<h6 id="_change_windows_theme_and_title_bar_colors">Change Windows theme and title bar colors</h6>
+<div class="paragraph">
+<p>Windows 7 comes by default with an "aero" theme, which is quite awkward for Sikuli, because there are many transparency effects which cause window elements to change their appearance dependend on the elements below. For that, change the theme to "Windows Classic".
+<span class="image"><img src="images/w_classictheme.jpg" alt="classic"></span></p>
+</div>
+<div class="paragraph">
+<p>Furthermore, change the colors of <strong>active</strong> and <strong>inactive</strong> title bars to <strong>non gradient</strong>:
+<span class="image"><img src="images/w_titlebar.jpg" alt="titlebars"></span></p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_rdp_related_settings">RDP related settings</h6>
+<div class="paragraph">
+<p>The following steps have only to be done if you are accessing the Sakuli Client via RDP.</p>
+</div>
+<div class="paragraph">
+<div class="title">Disable Clipboard Sharing</div>
+<p>The "paste" function of Sakuli uses the clipboard at runtime to decrypt and paste passwords. For this reason, the clipboard exchange of the Sakuli client and the RDP client should be suppressed in the settings tab of your <strong>local Remote Desktop client</strong>:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/w_clipboard.jpg" alt="clipboard"></span></p>
+</div>
+<div class="paragraph">
+<p>This can be set globally in the registry <strong>of your local host</strong>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p><strong><a href="https://github.com/ConSol/sakuli-examples">ConSol/sakuli-examples</a></strong></p>
+<p><code>regedit</code></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/toschneck/sakuli-example-bakery-testing">toschneck/sakuli-example-bakery-testing</a></strong></p>
+<p><code>[ HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client ]</code></p>
 </li>
 <li>
-<p><strong><a href="https://github.com/ConSol/sakuli-example-testautomation-day">ConSol/sakuli-example-testautomation-day</a></strong></p>
+<p><code>DisableDriveRedirection</code> <code>(DWORD)</code> =&gt; <code>1</code></p>
 </li>
-</ul>
+</ol>
+</div>
+<div class="paragraph">
+<div class="title">Disable the "GUI-less" mode</div>
+<p>If you minimize the Remote Desktop window (the window that display the remote computer’s desktop), the operating system switches the remote session to a "GUI-less mode" which does not transfer any window data anymore. As a result, Sakuli is unable to interact with the tested application’s GUI, as the whole screen is not visible.</p>
+</div>
+<div class="paragraph">
+<p>To disable the "GUI-less" mode <strong>on your local host</strong>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>regedit</code></p>
+</li>
+<li>
+<p><code>[ HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client ]</code></p>
+</li>
+<li>
+<p><code>RemoteDesktop_SuppressWhenMinimized</code> <code>(DWORD)</code> =&gt; <code>2</code></p>
+</li>
+</ol>
+</div>
+</div>
 </div>
 </div>
 <div id="footer">

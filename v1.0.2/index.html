@@ -536,6 +536,25 @@ table.CodeRay td.code>pre{padding:0}
         font-weight: 500;
     }
 
+    h5 {
+        font-size: 1.3em;
+    }
+
+    h6 {
+        font-size: 1.2em;
+        font-weight: 400;
+    }
+
+    h7 {
+        /*color: #7a2518;*/
+        color: #3583bd;
+        font-weight: 300;
+        font-style: italic;
+        font-size: 1.1em;
+        display: block;
+        padding-bottom: 0.5em;
+    }
+
     div#toctitle {
         content: url("images/sakuli_logo_smaller.png");
     }
@@ -582,7 +601,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.0.2,</span>
-<span id="revdate">18.05.2017 @ 16:11:27 CEST</span>
+<span id="revdate">18.05.2017 @ 18:35:03 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -607,7 +626,19 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel3">
 <li><a href="#_native_execution">1.2.1. Native Execution</a>
 <ul class="sectlevel4">
-<li><a href="#_windows_client">1.2.1.1. Windows Client</a></li>
+<li><a href="#_windows_client">1.2.1.1. Windows Client</a>
+<ul class="sectlevel5">
+<li><a href="#_how_to_install_sakuli_natively_on_windows">How to install Sakuli natively on Windows</a></li>
+<li><a href="#_prerequisites">Prerequisites</a></li>
+<li><a href="#_recommendations">Recommendations</a></li>
+<li><a href="#_sakuli_installation">Sakuli installation</a></li>
+<li><a href="#_additional_software">Additional software</a></li>
+<li><a href="#_test">Test</a></li>
+<li><a href="#_next_steps">Next steps</a></li>
+<li><a href="#rdp-peculiarities">RDP peculiarities</a></li>
+<li><a href="#_windows_troubleshooting">Windows Troubleshooting</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_maven_execution">1.2.2. Maven Execution</a></li>
@@ -1235,6 +1266,143 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 <p>Sakuli can also be integrated in <strong>continuous integration environments like Jenkins</strong>. Documentation is coming in the next time (…have one?)</p>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="rdp-peculiarities"><a class="anchor" href="#rdp-peculiarities"></a>RDP peculiarities</h6>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/execution/native/windows-rdp-peculiarities.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/execution/native/windows-rdp-peculiarities.adoc" target="_blank">edit</a></p>
+</div>
+<div class="sect6">
+<h7 id="_things_to_know"><a class="anchor" href="#_things_to_know"></a>Things to know</h7>
+<div class="paragraph">
+<p>There are four ways to connect to and work on a Sakuli client machine:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>VNC</strong></p>
+</li>
+<li>
+<p><strong>Console</strong> of a virtualization platform (ESX, Virtualbox, etc.)</p>
+</li>
+<li>
+<p><strong>Remote Desktop</strong> (Windows)</p>
+</li>
+<li>
+<p><strong>local screen</strong></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>For case 1. and 2. there is nothing special to watch out for, except that the screen must not be locked (otherwise Sikuli will also see a locked screen). The screen content will be the same as displays on a local screen (4.).</p>
+</div>
+<div class="paragraph">
+<p>For RDP on Windows there are some special things to know. Connecting to the Sakuli test client via RDP <strong>locks any existing local console session of that user</strong> and <strong>attaches (="moves") it to a RDP session</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Sakuli will just as well run within that RDP session. But closing/disconnecting/logging of that RDP session will not unlock the local console session again. Sakuli will see the same as a regular user: nothing but a locked screen. Read the next paragraph to learn how to avoid this.</p>
+</div>
+</div>
+<div class="sect6">
+<h7 id="__code_logoff_bat_code"><a class="anchor" href="#__code_logoff_bat_code"></a><code>LOGOFF.bat</code></h7>
+<div class="paragraph">
+<p>To log off a RDP session, right-click <code>%SAKULI_HOME%\bin\helper\LOGOFF.bat</code> and execute the script with administrator privileges. The script then</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>determines the current RDP session ID</p>
+</li>
+<li>
+<p>redirects this session back to the local console</p>
+</li>
+<li>
+<p>terminates the RDP session.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect6">
+<h7 id="__code_check_logon_session_ps1_code"><a class="anchor" href="#__code_check_logon_session_ps1_code"></a><code>check_logon_session.ps1</code></h7>
+<div class="paragraph">
+<p>In <code>%SAKULI_HOME%\setup\nagios</code> you can find <strong>check_logon_session.ps1</strong> which can be used as a client-side Nagios check to ensure that the Sakuli user is always logged on, either via RDP or on the local console. Instructions for the implementation of this check can be found in the script header.</p>
+</div>
+<div class="paragraph">
+<p>Define a service dependency of all Sakuli checks to this logon check; this will ensure that a locked session will not raise false alarms.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/userloggedin.jpg" alt="user-login"></span></p>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_windows_troubleshooting"><a class="anchor" href="#_windows_troubleshooting"></a>Windows Troubleshooting</h6>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/execution/native/windows-troubleshooting.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/execution/native/windows-troubleshooting.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>If you have some errors with your Windows installation, you can check the following points:</p>
+</div>
+<div class="sect6">
+<h7 id="_change_windows_theme_and_title_bar_colors"><a class="anchor" href="#_change_windows_theme_and_title_bar_colors"></a>Change Windows theme and title bar colors</h7>
+<div class="paragraph">
+<p>Windows 7 comes by default with an "aero" theme, which is quite awkward for Sikuli, because there are many transparency effects which cause window elements to change their appearance dependend on the elements below. For that, change the theme to "Windows Classic".
+<span class="image"><img src="images/w_classictheme.jpg" alt="classic"></span></p>
+</div>
+<div class="paragraph">
+<p>Furthermore, change the colors of <strong>active</strong> and <strong>inactive</strong> title bars to <strong>non gradient</strong>:
+<span class="image"><img src="images/w_titlebar.jpg" alt="titlebars"></span></p>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_rdp_related_settings"><a class="anchor" href="#_rdp_related_settings"></a>RDP related settings</h7>
+<div class="paragraph">
+<p>The following steps have only to be done if you are accessing the Sakuli Client via RDP.</p>
+</div>
+<div class="paragraph">
+<div class="title">Disable Clipboard Sharing</div>
+<p>The "paste" function of Sakuli uses the clipboard at runtime to decrypt and paste passwords. For this reason, the clipboard exchange of the Sakuli client and the RDP client should be suppressed in the settings tab of your <strong>local Remote Desktop client</strong>:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/w_clipboard.jpg" alt="clipboard"></span></p>
+</div>
+<div class="paragraph">
+<p>This can be set globally in the registry <strong>of your local host</strong>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>regedit</code></p>
+</li>
+<li>
+<p><code>[ HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client ]</code></p>
+</li>
+<li>
+<p><code>DisableDriveRedirection</code> <code>(DWORD)</code> =&gt; <code>1</code></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<div class="title">Disable the "GUI-less" mode</div>
+<p>If you minimize the Remote Desktop window (the window that display the remote computer’s desktop), the operating system switches the remote session to a "GUI-less mode" which does not transfer any window data anymore. As a result, Sakuli is unable to interact with the tested application’s GUI, as the whole screen is not visible.</p>
+</div>
+<div class="paragraph">
+<p>To disable the "GUI-less" mode <strong>on your local host</strong>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>regedit</code></p>
+</li>
+<li>
+<p><code>[ HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client ]</code></p>
+</li>
+<li>
+<p><code>RemoteDesktop_SuppressWhenMinimized</code> <code>(DWORD)</code> =&gt; <code>2</code></p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </div>
@@ -2327,7 +2495,7 @@ The Sakuli team members are reachable on the email address <strong><a href="mail
 <div id="footer">
 <div id="footer-text">
 Version v1.0.2<br>
-Last updated 2017-05-18 16:11:28 CEST
+Last updated 2017-05-18 18:35:04 CEST
 </div>
 </div>
 <!--
