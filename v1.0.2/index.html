@@ -601,7 +601,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.0.2,</span>
-<span id="revdate">18.05.2017 @ 18:35:03 CEST</span>
+<span id="revdate">19.05.2017 @ 16:36:45 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -639,6 +639,20 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_windows_troubleshooting">Windows Troubleshooting</a></li>
 </ul>
 </li>
+<li><a href="#_linux_client">1.2.1.2. Linux Client</a>
+<ul class="sectlevel5">
+<li><a href="#_how_to_install_sakuli_natively_on_linux">How to install Sakuli natively on Linux</a></li>
+<li><a href="#_prerequisites_2">Prerequisites</a></li>
+<li><a href="#_recommendations_2">Recommendations</a></li>
+<li><a href="#_sakuli_installation_2">Sakuli installation</a></li>
+<li><a href="#_additional_software_2">Additional software</a></li>
+<li><a href="#_test_2">Test</a></li>
+<li><a href="#_next_steps_2">Next steps</a></li>
+<li><a href="#_headless_sakuli_checks_on_linux">Headless Sakuli checks on Linux</a></li>
+<li><a href="#_linux_troubleshooting">Linux Troubleshooting</a></li>
+</ul>
+</li>
+<li><a href="#_upgrade_process">1.2.1.3. Upgrade process</a></li>
 </ul>
 </li>
 <li><a href="#_maven_execution">1.2.2. Maven Execution</a></li>
@@ -676,11 +690,18 @@ table.CodeRay td.code>pre{padding:0}
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/index.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/index.adoc" target="_blank">edit</a></p>
 </div>
-<div class="paragraph">
-<p>TODO TS update to github pages structure
-* Stable version (latest tagged <code>vX.X.X</code> documentation) <span class="image"><a class="image" href="http://sakuli.readthedocs.org/en/stable/"><img src="https://readthedocs.org/projects/sakuli/badge/?version=stable" alt="Documentation Status"></a></span>
-* Latest verison (documentation on <code>master</code> branch, with corrections) <span class="image"><a class="image" href="http://sakuli.readthedocs.org/en/latest/"><img src="https://readthedocs.org/projects/sakuli/badge/?version=latest" alt="Documentation Status"></a></span>
-* Dev version (current development version on <code>dev</code> branch) <span class="image"><a class="image" href="http://sakuli.readthedocs.org/en/dev/"><img src="https://readthedocs.org/projects/sakuli/badge/?version=dev" alt="Documentation Status"></a></span></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Stable version (latest tagged <code>vX.X.X</code> documentation) <span class="image"><a class="image" href="http://sakuli.readthedocs.org/en/stable/"><img src="https://readthedocs.org/projects/sakuli/badge/?version=stable" alt="Documentation Status"></a></span></p>
+</li>
+<li>
+<p>Latest verison (documentation on <code>master</code> branch, with corrections) <span class="image"><a class="image" href="http://sakuli.readthedocs.org/en/latest/"><img src="https://readthedocs.org/projects/sakuli/badge/?version=latest" alt="Documentation Status"></a></span></p>
+</li>
+<li>
+<p>Dev version (current development version on <code>dev</code> branch) <span class="image"><a class="image" href="http://sakuli.readthedocs.org/en/dev/"><img src="https://readthedocs.org/projects/sakuli/badge/?version=dev" alt="Documentation Status"></a></span></p>
+</li>
+</ul>
 </div>
 <div class="sect2">
 <h3 id="contributors"><a class="anchor" href="#contributors"></a>Contributors</h3>
@@ -1015,24 +1036,24 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 <div class="paragraph">
 <p><span class="image"><img src="images/installer_2.png" alt="inst_2"></span></p>
 </div>
-<div class="ulist">
-<ul>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p><strong>1)</strong> will set/update the environment variable <code>%SAKULI_HOME%</code> to the new version.</p>
+<p>will set/update the environment variable <code>%SAKULI_HOME%</code> to the new version.</p>
 </li>
 <li>
-<p><strong>2)</strong> will set/update environment settings which have proved as best practice for UI tests.</p>
+<p>will set/update environment settings which have proved as best practice for UI tests.</p>
 </li>
 <li>
-<p><strong>3)</strong> will install one example test suite per OS which will help you to test and understand Sakuli.</p>
+<p>will install one example test suite per OS which will help you to test and understand Sakuli.</p>
 </li>
 <li>
-<p><strong>4)</strong> will install Firefox Portable, which can be used exclusively for Sakuli Tests.</p>
+<p>will install Firefox Portable, which can be used exclusively for Sakuli Tests.</p>
 </li>
 <li>
-<p><strong>5)</strong> will install <a href="http://sourceforge.net/projects/qres/">QRes</a>, a open source screen mode changer (Windows only)</p>
+<p>will install <a href="http://sourceforge.net/projects/qres/">QRes</a>, a open source screen mode changer (Windows only)</p>
 </li>
-</ul>
+</ol>
 </div>
 <div class="paragraph">
 <p>After the files have been copied, the installer updates the current user&#8217;s environment.</p>
@@ -1076,16 +1097,10 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 <li>
 <p>on <strong>Windows</strong> press the ALT key</p>
 </li>
-<li>
-<p>on <strong>Linux</strong> press the ALT+CTRL key</p>
-</li>
 </ul>
 </div>
 <div class="paragraph">
 <p>and double-click on any white space. If you are getting a new window showing the "Sahi Controller", you&#8217;re done. Close all browser windows and Sahi.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="images/installer_4_l.png" alt="controller_linux"></span></p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="images/installer_4_w.png" alt="controller_windows"></span></p>
@@ -1164,12 +1179,6 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 <li>
 <p><a href="http://www.getgreenshot.org">Greenshot</a> on <strong>Windows</strong></p>
 </li>
-<li>
-<p><a href="http://shutter-project.org/">Shutter</a> on <strong>Linux</strong>.</p>
-</li>
-<li>
-<p><a href="https://wiki.ubuntuusers.de/Scrot/">Scrot</a> on <strong>Linux</strong> (lightweight, cli-based).</p>
-</li>
 </ul>
 </div>
 <div class="paragraph">
@@ -1189,9 +1198,6 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 <li>
 <p>on <strong>Windows</strong> install for instance <a href="http://notepad-plus-plus.org/">Notepad++</a></p>
 </li>
-<li>
-<p>on <strong>Linux</strong> use <a href="https://atom.io">Atom</a></p>
-</li>
 </ul>
 </div>
 <div class="paragraph">
@@ -1206,12 +1212,6 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 </div>
 <div class="ulist">
 <ul>
-<li>
-<p><strong>Ubuntu</strong>: <code>sakuli run <em>INST_DIR</em>/example_test_suites/example_ubuntu/</code></p>
-</li>
-<li>
-<p><strong>openSUSE</strong>: <code>sakuli run <em>INST_DIR</em>/example_test_suites/example_opensuse/</code></p>
-</li>
 <li>
 <p><strong>Windows 7</strong>: <code>sakuli run <em>INST_DIR</em>\example_test_suites\example_windows7\</code></p>
 </li>
@@ -1404,6 +1404,565 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 </ol>
 </div>
 </div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_linux_client"><a class="anchor" href="#_linux_client"></a>1.2.1.2. Linux Client</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/execution/native/linux.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/execution/native/linux.adoc" target="_blank">edit</a></p>
+</div>
+<div class="sect5">
+<h6 id="_how_to_install_sakuli_natively_on_linux"><a class="anchor" href="#_how_to_install_sakuli_natively_on_linux"></a>How to install Sakuli natively on Linux</h6>
+<div class="paragraph">
+<p>This page describes the steps to <strong>install and test</strong> Sakuli on <strong>Linux</strong>.
+If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.md">upgrade process</a> documentation.</p>
+</div>
+<div class="paragraph">
+<p>The default installation path of a particular Sakuli version is referenced as <code>$SAKULI_HOME</code> (also called the "<em>version</em>" folder) which is inside of the folder "sakuli":</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>&gt; echo $SAKULI_HOME
+  /opt/sakuli/sakuli-v1.1.0-SNAPSHOT</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Values surrounded by double underscores are have to be filled individually by you (e.g. <code><em>IP_ADDRESS</em></code>).</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_prerequisites_2"><a class="anchor" href="#_prerequisites_2"></a>Prerequisites</h6>
+<div class="paragraph">
+<p>You can run Sakuli on physical as well as on virtual Linux machines.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>one of the following <strong>Linux OS</strong> with any desktop environment:</p>
+</li>
+<li>
+<p><strong>Ubuntu 14/16</strong></p>
+</li>
+<li>
+<p><strong>CentOS 6/7</strong></p>
+</li>
+<li>
+<p><strong>OpenSUSE FIXME</strong></p>
+</li>
+<li>
+<p><strong>RAM</strong>: 2GB or more</p>
+</li>
+<li>
+<p><strong>CPU</strong>: at least two CPU cores</p>
+</li>
+<li>
+<p><strong>Software:</strong></p>
+</li>
+<li>
+<p>Java JRE &gt;= 1.8</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_recommendations_2"><a class="anchor" href="#_recommendations_2"></a>Recommendations</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Set the desktop background to a homogenous color.</p>
+</li>
+<li>
+<p>disable any screen locking mechanisms</p>
+</li>
+<li>
+<p>Run Sakuli with a dedicated user</p>
+</li>
+<li>
+<p>Sakuli needs a reliable and predictable desktop environment: make sure that there are no pop-up windows of services or applications</p>
+</li>
+<li>
+<p>If Sakuli is running within a VM, change the desktop resolution to a fixed value (e.g. 1024x768) and disable any auto-resizing mechanisms of the guest display. This ensures that the guest&#8217;s resolution does not change in case that you resize its window.</p>
+</li>
+<li>
+<p>Other optional steps see <a href="./troubleshooting-tuning-sakuli-client.md#desktop-tuning">"Desktop tuning"</a>.
+*</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>the client should not have more than one physical screen</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sakuli_installation_2"><a class="anchor" href="#_sakuli_installation_2"></a>Sakuli installation</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Download the <strong>Sakuli Installer</strong> from <a href="http://labs.consol.de/sakuli/install">http://labs.consol.de/sakuli/install</a></p>
+</li>
+<li>
+<p>current <strong>development</strong> snapshot = <code>sakuli-vX.X.X-SNAPSHOT-installer.jar</code></p>
+</li>
+<li>
+<p>current <strong>stable</strong> version = <code>sakuli-vX.X.X-installer.jar</code> (recommended)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Execute <code>java -jar sakuli-vX.X.X-installer.jar</code> to start the installer:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/installer_1.png" alt="inst_1"></span></p>
+</div>
+<div class="paragraph">
+<p>After you have accepted the licence and choose the installation folder, select the packages to install:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/installer_2.png" alt="inst_2"></span></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>will set/update the environment variable <code>$SAKULI_HOME</code> to the new version.</p>
+</li>
+<li>
+<p>will set/update environment settings which have proved as best practice for UI tests.</p>
+</li>
+<li>
+<p>will install one example test suite per OS which will help you to test and understand Sakuli.</p>
+</li>
+<li>
+<p>will install Firefox Portable, which can be used exclusively for Sakuli Tests.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>After the files have been copied, the installer updates the current user&#8217;s environment.</p>
+</div>
+<div class="paragraph">
+<p>If you have installed Sakuli on Windows, reboot now to take the registry changes effect (e.g. disabled Cleartype fonts).</p>
+</div>
+<div class="paragraph">
+<p>In the end you are offered to generate a automatic installation script to install Sakuli headless:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/installer_3.png" alt="inst_3"></span></p>
+</div>
+<div class="paragraph">
+<p>A headless installation (e.g. when building Docker images) can be executed with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>java -jar sakuli-vX.X.X-installer.jar auto-config.xml</code></pre>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_test_sahi_2"><a class="anchor" href="#_test_sahi_2"></a>Test Sahi</h7>
+<div class="paragraph">
+<p>Now is the right time to test if Sahi can start a Sahi-controlled browser. Execute <code>$SAKULI_HOME/sahi/userdata/bin/start_dashboard.(sh|bat)</code> to open the <strong>Sahi Dashboard</strong>. It should now list all available browsers on this system (on Windows: also Firefox Portable).</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/inst_dashboards.jpg" alt="dashboards"></span></p>
+</div>
+<div class="paragraph">
+<p>Click on any browser icon, it should start and present you the start page of Sahi:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/sahi_startpage.jpg" alt="sahi_start"></span></p>
+</div>
+<div class="paragraph">
+<p>At last, test the <strong>Sahi Controller</strong>:
+* on <strong>Linux</strong> press the ALT+CTRL key</p>
+</div>
+<div class="paragraph">
+<p>and double-click on any white space. If you are getting a new window showing the "Sahi Controller", you&#8217;re done. Close all browser windows and Sahi.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/installer_4_l.png" alt="controller_linux"></span></p>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_additional_documentation_2"><a class="anchor" href="#_additional_documentation_2"></a>Additional documentation:</h7>
+<div class="ulist">
+<ul>
+<li>
+<p>If you are sitting behing a company proxy, refer to <a href="./sakuli-additional-settings.md#sahi-behind-a-proxy">Proxy settings</a>.</p>
+</li>
+<li>
+<p>Refer to <a href="./additional-settings.md#browser-configuration">Browser configuration</a>) for instructions how to register other browsers.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_additional_software_2"><a class="anchor" href="#_additional_software_2"></a>Additional software</h6>
+<div class="sect6">
+<h7 id="_additional_packages_on_linux_2"><a class="anchor" href="#_additional_packages_on_linux_2"></a>additional packages on Linux</h7>
+<div class="paragraph">
+<p>(required)</p>
+</div>
+<div class="paragraph">
+<p>Install the following packages if you are on Linux:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ubuntu: <code>sudo apt-get install tesseract-ocr wmctrl xdotool</code></p>
+</li>
+<li>
+<p>openSUSE <code>sudo zypper install tesseract wmctrl xdotool</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_phantomjs_2"><a class="anchor" href="#_phantomjs_2"></a>PhantomJS</h7>
+<div class="paragraph">
+<p>(optional)</p>
+</div>
+<div class="paragraph">
+<p>Currently, <em>each</em> Sakuli test requires to start a browser, which is not very handy for pure Sikuli GUI tests (=where no browser at all is needed). For that case, use a headless browser like <a href="http://phantomjs.org">PhantomJS</a>. Refer to <a href="./additional-settings.md#browser-configuration">Browser configuration</a> for more information.</p>
+</div>
+<div class="paragraph">
+<p>Attention: PhantomJS 2 is currently unsupported. Use version 1.9.x</p>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_screenshot_tool_2"><a class="anchor" href="#_screenshot_tool_2"></a>Screenshot tool</h7>
+<div class="paragraph">
+<p>(optional)</p>
+</div>
+<div class="paragraph">
+<p>Use a screenshot tool which is able to</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>capture areas of the screen</p>
+</li>
+<li>
+<p>delay the creation of screenshots for x seconds (important if Sikuli must navigate through menues)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A good choice is</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://shutter-project.org/">Shutter</a> on <strong>Linux</strong>.</p>
+</li>
+<li>
+<p><a href="https://wiki.ubuntuusers.de/Scrot/">Scrot</a> on <strong>Linux</strong> (lightweight, cli-based).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Always make sure that screenshots are saved without compression. Sikuli uses a default similarity of 0.99, which internally means that "more than 99%" =&gt; 100% pixels must conincide. Decreasing similarity should only be neccessary if the pattern images are of poor quality or the region compared to always slightly differs from the pattern image.</p>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_editor_2"><a class="anchor" href="#_editor_2"></a>Editor</h7>
+<div class="paragraph">
+<p>(optional)</p>
+</div>
+<div class="paragraph">
+<p>You&#8217;re doing better if you do <em>not</em> use gEdit or Windows Notepad to edit Sakuli files. It is recommended to use an Editor with JavaScript support, e. g.:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>on <strong>Linux</strong> use <a href="https://atom.io">Atom</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It also possible to use professional programming IDEs like <a href="https://www.jetbrains.com/idea/">IntelliJ</a>, <a href="https://netbeans.org/">Netbeans</a> or <a href="https://eclipse.org">Eclipse</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_test_2"><a class="anchor" href="#_test_2"></a>Test</h6>
+<div class="paragraph">
+<p>You are now ready to run the <strong>first minimal Sakuli test</strong> to see if Sakuli and its components are working well together. Open a new terminal to start a test:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Ubuntu</strong>: <code>sakuli run <em>INST_DIR</em>/example_test_suites/example_ubuntu/</code></p>
+</li>
+<li>
+<p><strong>openSUSE</strong>: <code>sakuli run <em>INST_DIR</em>/example_test_suites/example_opensuse/</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Sakuli should now</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>open <strong>Firefox</strong> with the Sakuli welcome page, highlight some page elements</p>
+</li>
+<li>
+<p>open the <strong>calculator</strong> and calculate <em>525+100=625</em></p>
+</li>
+<li>
+<p>open an <strong>editor</strong> and write a <strong>status message</strong></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/u_vnc_test.png" alt="vnc test example"></span></p>
+</div>
+<div class="paragraph">
+<p><strong>Congratulations - you have installed Sakuli!</strong></p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_next_steps_2"><a class="anchor" href="#_next_steps_2"></a>Next steps</h6>
+<div class="paragraph">
+<p>What next? Well, it depends…</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Read our <a href="first-steps.md">first-steps tutorial</a> and learn to handle Sakuli</p>
+</li>
+<li>
+<p>Integrate Sakuli results in monitoring systems:</p>
+</li>
+<li>
+<p><a href="installation-omd.md">Open Monitoring Distribution (OMD)</a>.</p>
+</li>
+<li>
+<p><a href="forwarder-icinga2.md">Icinga2</a></p>
+</li>
+<li>
+<p>Sakuli can also be integrated in <strong>continuous integration environments like Jenkins</strong>. Documentation is coming in the next time (…have one?)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_headless_sakuli_checks_on_linux"><a class="anchor" href="#_headless_sakuli_checks_on_linux"></a>Headless Sakuli checks on Linux</h6>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/execution/native/linux-native-headless.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/execution/native/linux-native-headless.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>Running Sakuli on the user desktop is nice, but has the drawback that the session gets highjacked on each Sakuli run. Moving the mouse e.g. can have negative effects on the test execution.</p>
+</div>
+<div class="paragraph">
+<p>For that reason we advise to run Linux based Sakuli checks in in one of the following modes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>in a virtual display (="headless"), which is straightforward in Linux (documented on this page)</p>
+</li>
+<li>
+<p>in a <a href="docker-images.md">Docker container</a> (more scalable)</p>
+</li>
+</ul>
+</div>
+<div class="sect6">
+<h7 id="_installing_and_configuring_the_vnc_server"><a class="anchor" href="#_installing_and_configuring_the_vnc_server"></a>Installing and configuring the VNC server</h7>
+<div class="paragraph">
+<p>On <strong>Ubuntu</strong>, first <strong>install</strong> vnc4server:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">sudo apt-get install vnc4server</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Start vncserver for the first time to create a <strong>session password</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">~$ vncserver
+
+You will require a password to access your desktops.
+Password:
+Verify:
+
+New 'sakulidemo:1 (sakuli)' desktop is sakulidemo:1
+
+Creating default startup script __HOME__/.vnc/xstartup
+Starting applications specified in __HOME__/.vnc/xstartup
+Log file is __HOME__/.vnc/sakulidemo:1.log</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>.vnc/xstartup</code> controls what to start within a xvnc session. Do not touch this file on OpenSUSE; on <strong>Ubuntu</strong> you have to replace its content with the following lines (because you are using <strong>gnome-session-fallback</strong>, aren&#8217;t you…?):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">~$ vim .vnc/xstartup
+
+#!/bin/sh
+export XKL_XMODMAP_DISABLE=1
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+
+gnome-panel &amp;
+gnome-settings-daemon &amp;
+metacity &amp;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Restart the current vnc sesssion:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">~$ vncserver -kill :1 &amp;&amp; vncserver</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now open a RDP client (on Ubuntu: <em>Applications - Internet - Remmina Remote Desktop Client</em>) and enter the connection data:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Protocol: VNC</p>
+</li>
+<li>
+<p>Server: localhost:5901</p>
+</li>
+<li>
+<p>Password: <code><em>VNC_SESSION_PASSWORD</em></code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You should see now an empty GNOME/KDE desktop - started headless!</p>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_test_3"><a class="anchor" href="#_test_3"></a>Test</h7>
+<div class="paragraph">
+<p>You are now ready to run the <strong>minimal Sakuli check</strong> in <strong>headless (=VNC)</strong> mode. Sakuli provides for this task a pre- and postHook script, which can be used like follow:</p>
+</div>
+<div class="paragraph">
+<p>On the <strong>Ubuntu</strong> desktop, open a terminal window and execute</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>on <strong>Ubuntu</strong>: <code>sakuli run <em>INST_DIR</em>/example_test_suites/example_ubuntu/ --vnc</code></p>
+</li>
+<li>
+<p>on <strong>openSUSE</strong>: <code><em>SAKULI_HOME</em>/bin/sakuli.sh --run <em>INST_DIR</em>/example_test_suites/example_opensuse/ --vnc</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You should see that Sakuli</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>opens <strong>Firefox</strong></p>
+</li>
+<li>
+<p>opens the <strong>calculator</strong> and calculates <em>525+100=625</em></p>
+</li>
+<li>
+<p>opens an <strong>editor</strong> and writes a <strong>status message</strong></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/u_vnc_test.png" alt="vnc test example"></span></p>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_scheduling_by_cron"><a class="anchor" href="#_scheduling_by_cron"></a>Scheduling by cron</h7>
+<div class="paragraph">
+<p>Add the following line to Sakuli&#8217;s crontab:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">SAKULI_HOME=__SAKULI_HOME__
+DISPLAY=:1
+
+*/2 * * * * $SAKULI_HOME/bin/sakuli run $SAKULI_HOME/../example_test_suites/example_ubuntu -preHook $SAKULI_HOME/bin/helper/vnc.sh -postHook '$SAKULI_HOME/bin/helper/vnc.sh -kill' 2&gt;&amp;1 &gt; /dev/null</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_linux_troubleshooting"><a class="anchor" href="#_linux_troubleshooting"></a>Linux Troubleshooting</h6>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/execution/native/linux-troubleshooting.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/execution/native/linux-troubleshooting.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>If you have some errors with your Linux installation, you can check the following points:</p>
+</div>
+<div class="sect6">
+<h7 id="_install_gnome_session_fallback_theme"><a class="anchor" href="#_install_gnome_session_fallback_theme"></a>Install GNOME session fallback theme</h7>
+<div class="paragraph">
+<p>Sakuli can test on Unity, of course - but <a href="https://apps.ubuntu.com/cat/applications/gnome-session-fallback/">gnome-session-fallback</a> is more than sufficient…</p>
+</div>
+<div class="paragraph">
+<p><code>sudo apt-get install gnome-session-fallback</code></p>
+</div>
+<div class="paragraph">
+<p>After the installation, relogin and select the desktop environment <strong>GNOME Flashback (Metacity)</strong>:
+<span class="image"><img src="images/u_theme_select.jpg" alt="fallback"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/u_flashback.jpg" alt="flashback"></span></p>
+</div>
+<div class="paragraph">
+<p>The Ubuntu menu bar should have changed now to the "classical" one:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/u_menu.jpg" alt="menu"></span></p>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_restore_gsettings_key_bindings"><a class="anchor" href="#_restore_gsettings_key_bindings"></a>Restore gsettings key bindings</h7>
+<div class="paragraph">
+<p>In headless checks you will encounter problems using the <code>TAB</code> key as well as <code>s</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The TAB key will switch applications (like <code>ALT + TAB</code>)</p>
+</li>
+<li>
+<p><code>s</code> will open the applications menu</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For some reason (?), gsettings binds <code>s</code> and <code>TAB</code> to the <code>Super key</code> by default. Open a terminal as the Sakuli user and execute the following commands to restore that to the default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>gsettings set org.gnome.desktop.wm.keybindings switch-applications "['&lt;Alt&gt;Tab']"
+gsettings set org.gnome.desktop.wm.keybindings panel-main-menu "['&lt;Alt&gt;F1']"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_upgrade_process"><a class="anchor" href="#_upgrade_process"></a>1.2.1.3. Upgrade process</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/execution/native/upgrade-process.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/execution/native/upgrade-process.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>Before you upgrade your current Sakuli installation, please ensure that you have read the <a href="#changelog">Change Log</a>.</p>
+</div>
+<div class="paragraph">
+<p>Execute <code><em>SAKULI_HOME</em>/../Uninstaller/uninstaller.jar</code> to remove the current installed version. This will only affect the files in <code><em>SAKULI_HOME</em></code>. The uninstaller removes all installed files, and resets the environment configuration.</p>
+</div>
+<div class="paragraph">
+<p>After that just install the new version.</p>
 </div>
 </div>
 </div>
@@ -2495,7 +3054,7 @@ The Sakuli team members are reachable on the email address <strong><a href="mail
 <div id="footer">
 <div id="footer-text">
 Version v1.0.2<br>
-Last updated 2017-05-18 18:35:04 CEST
+Last updated 2017-05-19 16:36:48 CEST
 </div>
 </div>
 <!--

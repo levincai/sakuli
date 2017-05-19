@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Publications</title>
+<title>Headless Sakuli checks on Linux</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -510,51 +510,165 @@ table.CodeRay td.code>pre{padding:0}
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Publications</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-
+<ul class="sectlevel4">
+<li><a href="#_headless_sakuli_checks_on_linux">Headless Sakuli checks on Linux</a></li>
+</ul>
 </div>
 </div>
 <div id="content">
+<div class="sect4">
+<h5 id="_headless_sakuli_checks_on_linux">Headless Sakuli checks on Linux</h5>
 <div id="git-edit-section" class="paragraph">
-<p>git-link:docs/publications.adoc{git-view} | git-link:docs/publications.adoc{git-edit}</p>
+<p>git-link:docs/manual/execution/native/linux-native-headless.adoc{git-view} | git-link:docs/manual/execution/native/linux-native-headless.adoc{git-edit}</p>
 </div>
 <div class="paragraph">
-<p>01/2017: <a href="https://www.consol.de/fileadmin/pdf/news/news-events/01_2017-Java_aktuell-Magazin-Christoph-Deppisch-und-Tobias-Schneck_Automatisiertes-Testen-in-Zeiten-von-Microservices.pdf">Java aktuell: Automatisiertes Testen in Zeiten von Microservices</a> (Christoph Deppisch / Tobias Schneck)</p>
+<p>Running Sakuli on the user desktop is nice, but has the drawback that the session gets highjacked on each Sakuli run. Moving the mouse e.g. can have negative effects on the test execution.</p>
 </div>
 <div class="paragraph">
-<p>10/2016: <a href="https://www.informatik-aktuell.de/entwicklung/methoden/graphical-user-interface-gui-in-containern-testen.html">Informatik Aktuell: Software-Test im Container: So können Sie Graphical User Interfaces mit Docker und Sakuli testen</a> (Tobias Schneck)</p>
+<p>For that reason we advise to run Linux based Sakuli checks in in one of the following modes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>in a virtual display (="headless"), which is straightforward in Linux (documented on this page)</p>
+</li>
+<li>
+<p>in a <a href="docker-images.md">Docker container</a> (more scalable)</p>
+</li>
+</ul>
+</div>
+<div class="sect5">
+<h6 id="_installing_and_configuring_the_vnc_server">Installing and configuring the VNC server</h6>
+<div class="paragraph">
+<p>On <strong>Ubuntu</strong>, first <strong>install</strong> vnc4server:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">sudo apt-get install vnc4server</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>10/2016: <a href="https://labs.consol.de/sakuli/development/2016/10/14/sakuli-java-dsl.html">ConSol Labs: Containerized UI-Tests in Java with Sakuli and Docker</a> (Tobias Schneck)</p>
+<p>Start vncserver for the first time to create a <strong>session password</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">~$ vncserver
+
+You will require a password to access your desktops.
+Password:
+Verify:
+
+New 'sakulidemo:1 (sakuli)' desktop is sakulidemo:1
+
+Creating default startup script __HOME__/.vnc/xstartup
+Starting applications specified in __HOME__/.vnc/xstartup
+Log file is __HOME__/.vnc/sakulidemo:1.log</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>10/2016: <a href="https://labs.consol.de/android/monitoring/sakuli/2016/10/10/android-sakuli.html">ConSol Labs: Sakuli EndToEnd Tests mit Android</a> (Philip Griesbacher)</p>
+<p><code>.vnc/xstartup</code> controls what to start within a xvnc session. Do not touch this file on OpenSUSE; on <strong>Ubuntu</strong> you have to replace its content with the following lines (because you are using <strong>gnome-session-fallback</strong>, aren&#8217;t you…?):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">~$ vim .vnc/xstartup
+
+#!/bin/sh
+export XKL_XMODMAP_DISABLE=1
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+
+gnome-panel &amp;
+gnome-settings-daemon &amp;
+metacity &amp;</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>8/2016: <a href="http://www.heise.de/developer/artikel/Testautomatisierung-in-Zeiten-von-Continuous-Delivery-3300566.html">heise Developer: Testautomatisierung in Zeiten von Continuous Delivery</a> (Christoph Deppisch / Tobias Schneck)</p>
+<p>Restart the current vnc sesssion:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">~$ vncserver -kill :1 &amp;&amp; vncserver</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>8/2016: <a href="https://www.consol.de/it-services/news/details/testautomatisierung-darf-nicht-bei-unit-tests-halt-machen-1/">Pressemitteilung:
-Testautomatisierung darf nicht bei Unit-Tests Halt machen </a></p>
+<p>Now open a RDP client (on Ubuntu: <em>Applications - Internet - Remmina Remote Desktop Client</em>) and enter the connection data:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Protocol: VNC</p>
+</li>
+<li>
+<p>Server: localhost:5901</p>
+</li>
+<li>
+<p>Password: <code><em>VNC_SESSION_PASSWORD</em></code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>2/2016: <a href="https://www.consol.com/fileadmin/pdf/news/success_stories/ConSol_SuccessStory_Monitoring-Sakuli_Pfandbriefbank_eng.pdf">Success Story: pbb Deutsche Pfandbriefbank: Monitoring with Sakuli</a></p>
+<p>You should see now an empty GNOME/KDE desktop - started headless!</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_test">Test</h6>
+<div class="paragraph">
+<p>You are now ready to run the <strong>minimal Sakuli check</strong> in <strong>headless (=VNC)</strong> mode. Sakuli provides for this task a pre- and postHook script, which can be used like follow:</p>
 </div>
 <div class="paragraph">
-<p>2/2016: <a href="http://www.it-administrator.de">IT Administrator</a>: <a href="http://shop.heinemann-verlag.de/it-administrator/einzelhefte/139/ausgabe-februar-2016-it-support-und-troubleshooting">"Den Anwender simuliert"</a> (Simon Meggle)</p>
+<p>On the <strong>Ubuntu</strong> desktop, open a terminal window and execute</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>on <strong>Ubuntu</strong>: <code>sakuli run <em>INST_DIR</em>/example_test_suites/example_ubuntu/ --vnc</code></p>
+</li>
+<li>
+<p>on <strong>openSUSE</strong>: <code><em>SAKULI_HOME</em>/bin/sakuli.sh --run <em>INST_DIR</em>/example_test_suites/example_opensuse/ --vnc</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>5/2015: <a href="http://www.heise.de/developer/meldung/End-to-End-Application-Monitoring-mit-Sakuli-2729493.html">heise Developer: End-to-End Application Monitoring mit Sakuli</a></p>
+<p>You should see that Sakuli</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>opens <strong>Firefox</strong></p>
+</li>
+<li>
+<p>opens the <strong>calculator</strong> and calculates <em>525+100=625</em></p>
+</li>
+<li>
+<p>opens an <strong>editor</strong> and writes a <strong>status message</strong></p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>2/2015: <a href="http://www.it-administrator.de">IT Administrator</a>: <a href="http://www.it-administrator.de/themen/netzwerkmanagement/fachartikel/179023.html">End2End-Monitoring mit dem Open Source-Tool Sakuli</a> (Simon Meggle)</p>
+<p><span class="image"><img src="images/u_vnc_test.png" alt="vnc test example"></span></p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_scheduling_by_cron">Scheduling by cron</h6>
+<div class="paragraph">
+<p>Add the following line to Sakuli&#8217;s crontab:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">SAKULI_HOME=__SAKULI_HOME__
+DISPLAY=:1
+
+*/2 * * * * $SAKULI_HOME/bin/sakuli run $SAKULI_HOME/../example_test_suites/example_ubuntu -preHook $SAKULI_HOME/bin/helper/vnc.sh -postHook '$SAKULI_HOME/bin/helper/vnc.sh -kill' 2&gt;&amp;1 &gt; /dev/null</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-19 16:36:46 CEST
+Last updated 2017-05-19 16:36:48 CEST
 </div>
 </div>
 </body>

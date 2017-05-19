@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Publications</title>
+<title>Linux Troubleshooting</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -510,51 +510,74 @@ table.CodeRay td.code>pre{padding:0}
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Publications</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-
+<ul class="sectlevel4">
+<li><a href="#_linux_troubleshooting">Linux Troubleshooting</a></li>
+</ul>
 </div>
 </div>
 <div id="content">
+<div class="sect4">
+<h5 id="_linux_troubleshooting">Linux Troubleshooting</h5>
 <div id="git-edit-section" class="paragraph">
-<p>git-link:docs/publications.adoc{git-view} | git-link:docs/publications.adoc{git-edit}</p>
+<p>git-link:docs/manual/execution/native/linux-troubleshooting.adoc{git-view} | git-link:docs/manual/execution/native/linux-troubleshooting.adoc{git-edit}</p>
 </div>
 <div class="paragraph">
-<p>01/2017: <a href="https://www.consol.de/fileadmin/pdf/news/news-events/01_2017-Java_aktuell-Magazin-Christoph-Deppisch-und-Tobias-Schneck_Automatisiertes-Testen-in-Zeiten-von-Microservices.pdf">Java aktuell: Automatisiertes Testen in Zeiten von Microservices</a> (Christoph Deppisch / Tobias Schneck)</p>
+<p>If you have some errors with your Linux installation, you can check the following points:</p>
+</div>
+<div class="sect5">
+<h6 id="_install_gnome_session_fallback_theme">Install GNOME session fallback theme</h6>
+<div class="paragraph">
+<p>Sakuli can test on Unity, of course - but <a href="https://apps.ubuntu.com/cat/applications/gnome-session-fallback/">gnome-session-fallback</a> is more than sufficient…</p>
 </div>
 <div class="paragraph">
-<p>10/2016: <a href="https://www.informatik-aktuell.de/entwicklung/methoden/graphical-user-interface-gui-in-containern-testen.html">Informatik Aktuell: Software-Test im Container: So können Sie Graphical User Interfaces mit Docker und Sakuli testen</a> (Tobias Schneck)</p>
+<p><code>sudo apt-get install gnome-session-fallback</code></p>
 </div>
 <div class="paragraph">
-<p>10/2016: <a href="https://labs.consol.de/sakuli/development/2016/10/14/sakuli-java-dsl.html">ConSol Labs: Containerized UI-Tests in Java with Sakuli and Docker</a> (Tobias Schneck)</p>
+<p>After the installation, relogin and select the desktop environment <strong>GNOME Flashback (Metacity)</strong>:
+<span class="image"><img src="images/u_theme_select.jpg" alt="fallback"></span></p>
 </div>
 <div class="paragraph">
-<p>10/2016: <a href="https://labs.consol.de/android/monitoring/sakuli/2016/10/10/android-sakuli.html">ConSol Labs: Sakuli EndToEnd Tests mit Android</a> (Philip Griesbacher)</p>
+<p><span class="image"><img src="images/u_flashback.jpg" alt="flashback"></span></p>
 </div>
 <div class="paragraph">
-<p>8/2016: <a href="http://www.heise.de/developer/artikel/Testautomatisierung-in-Zeiten-von-Continuous-Delivery-3300566.html">heise Developer: Testautomatisierung in Zeiten von Continuous Delivery</a> (Christoph Deppisch / Tobias Schneck)</p>
+<p>The Ubuntu menu bar should have changed now to the "classical" one:</p>
 </div>
 <div class="paragraph">
-<p>8/2016: <a href="https://www.consol.de/it-services/news/details/testautomatisierung-darf-nicht-bei-unit-tests-halt-machen-1/">Pressemitteilung:
-Testautomatisierung darf nicht bei Unit-Tests Halt machen </a></p>
+<p><span class="image"><img src="images/u_menu.jpg" alt="menu"></span></p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_restore_gsettings_key_bindings">Restore gsettings key bindings</h6>
+<div class="paragraph">
+<p>In headless checks you will encounter problems using the <code>TAB</code> key as well as <code>s</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The TAB key will switch applications (like <code>ALT + TAB</code>)</p>
+</li>
+<li>
+<p><code>s</code> will open the applications menu</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>2/2016: <a href="https://www.consol.com/fileadmin/pdf/news/success_stories/ConSol_SuccessStory_Monitoring-Sakuli_Pfandbriefbank_eng.pdf">Success Story: pbb Deutsche Pfandbriefbank: Monitoring with Sakuli</a></p>
+<p>For some reason (?), gsettings binds <code>s</code> and <code>TAB</code> to the <code>Super key</code> by default. Open a terminal as the Sakuli user and execute the following commands to restore that to the default:</p>
 </div>
-<div class="paragraph">
-<p>2/2016: <a href="http://www.it-administrator.de">IT Administrator</a>: <a href="http://shop.heinemann-verlag.de/it-administrator/einzelhefte/139/ausgabe-februar-2016-it-support-und-troubleshooting">"Den Anwender simuliert"</a> (Simon Meggle)</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>gsettings set org.gnome.desktop.wm.keybindings switch-applications "['&lt;Alt&gt;Tab']"
+gsettings set org.gnome.desktop.wm.keybindings panel-main-menu "['&lt;Alt&gt;F1']"</code></pre>
 </div>
-<div class="paragraph">
-<p>5/2015: <a href="http://www.heise.de/developer/meldung/End-to-End-Application-Monitoring-mit-Sakuli-2729493.html">heise Developer: End-to-End Application Monitoring mit Sakuli</a></p>
 </div>
-<div class="paragraph">
-<p>2/2015: <a href="http://www.it-administrator.de">IT Administrator</a>: <a href="http://www.it-administrator.de/themen/netzwerkmanagement/fachartikel/179023.html">End2End-Monitoring mit dem Open Source-Tool Sakuli</a> (Simon Meggle)</p>
+</div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-19 16:36:46 CEST
+Last updated 2017-05-19 16:36:48 CEST
 </div>
 </div>
 </body>
