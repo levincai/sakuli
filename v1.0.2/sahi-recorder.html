@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Sakuli Docker Images</title>
+<title>Sahi Recorder</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -513,167 +513,21 @@ table.CodeRay td.code>pre{padding:0}
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel3">
-<li><a href="#docker-images">Sakuli Docker Images</a></li>
+<li><a href="#sahi-recorder">Sahi Recorder</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect3">
-<h4 id="docker-images">Sakuli Docker Images</h4>
+<h4 id="sahi-recorder">Sahi Recorder</h4>
 <div id="git-edit-section" class="paragraph">
-<p>git-link:docs/manual/execution/containerized/docker-images.adoc{git-view} | git-link:docs/manual/execution/containerized/docker-images.adoc{git-edit}</p>
+<p>git-link:docs/manual/testdefinition/advanced-topics/sahi-recorder.adoc{git-view} | git-link:docs/manual/testdefinition/advanced-topics/sahi-recorder.adoc{git-edit}</p>
 </div>
 <div class="paragraph">
-<p>Docker allows you to run a Sakuli test in an isolated environment, called "container", which is always started off from the same base image. This ensures that tests always run under equal conditions.</p>
-</div>
-<div class="sect4">
-<h5 id="docker-image-os-types">Image OS types</h5>
-<div class="paragraph">
-<p>The repository&#8217;s subfolder <a href="https://github.com/ConSol/sakuli/tree/master/docker"><code>./docker</code></a> contains all source files Sakuli docker images are made of. Currently we provide images on <a href="https://hub.docker.com">DockerHub</a> for:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>CentOS 7 (<a href="https://hub.docker.com/r/consol/sakuli-centos-xfce/">consol/sakuli-centos-xfce</a>, <a href="https://hub.docker.com/r/consol/sakuli-centos-xfce-java/">consol/sakuli-centos-xfce-java</a>)</p>
-</li>
-<li>
-<p>Ubuntu 14.04 LTS (<a href="https://hub.docker.com/r/consol/sakuli-ubuntu-xfce/">consol/sakuli-ubuntu-xfce</a>, <a href="https://hub.docker.com/r/consol/sakuli-ubuntu-xfce-java/">consol/sakuli-ubuntu-xfce-java</a>)</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="docker-image-tags">Image tags</h5>
-<div class="paragraph">
-<p>The build process on DockerHub is triggered by Github hooks; that means that you are always getting the current version for the two branches</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>master</strong> -&gt; image tag "<strong>latest</strong>": contains the latest stable release of Sakuli</p>
-</li>
-<li>
-<p><strong>dev</strong> -&gt; image tag "<strong>dev</strong>": contains the latest snapshot version of Sakuli</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="docker-image-architecture">Architecture of Sakuli Containers</h5>
-<div class="paragraph">
-<p>Each Sakuli docker image is installed with the following components:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Desktop environment (<a href="http://www.xfce.org"><strong>Xfce4</strong></a>)</p>
-</li>
-<li>
-<p>VNC-Server (default VNC port <code>5901</code>)</p>
-</li>
-<li>
-<p><a href="https://github.com/kanaka/noVNC"><strong>noVNC</strong></a> - HTML5 VNC client (default http port <code>6901</code>)</p>
-</li>
-<li>
-<p>Java JRE 8</p>
-</li>
-<li>
-<p>Browsers:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Mozilla Firefox + Java Plugin</p>
-</li>
-<li>
-<p>Google Chrome (Java-Plugin is no longer supported)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><a href="http://sahi.co.in"><strong>Sahi OS 5</strong></a></p>
-</li>
-<li>
-<p><a href="https://github.com/ConSol/sakuli"><strong>Sakuli</strong></a> in the latest stable version</p>
-</li>
-</ul>
+<p>Another method to <a href="#sahi-controller-copy-paste">[sahi-controller-copy-paste]</a> is to record all steps into a file. For this, open the Sahi controller (<a href="#sahi-open-controller">[sahi-open-controller]</a>), enter a filename and click on "record":</p>
 </div>
 <div class="paragraph">
-<p>The running containers are accessible with VNC (default password: <em>sakuli</em>) by:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>VNC viewer</strong>: <code>DOCKER_HOST:5901</code></p>
-</li>
-<li>
-<p><strong>noVNC HTML5 client</strong>: link: <a href="http://localhost:6901/vnc_auto.html?password=sakuli" class="bare">http://localhost:6901/vnc_auto.html?password=sakuli</a></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="docker-images-get-images">Get Sakuli Docker Images</h5>
-<div class="paragraph">
-<p>The following example command pulls the CentOS7 image from <a href="https://hub.docker.com/r/consol/sakuli-centos-xfce/">DockerHub</a>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">docker pull consol/sakuli-centos-xfce</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Alternatively, you can build this image from the sources:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">git clone https://github.com/ConSol/sakuli.git
-docker build -t consol/sakuli-centos-xfce docker/sakuli-centos-xfce .</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<div class="title">Start/test a Sakuli container</div>
-<p>Once you have pulled/built the image, you can start a container on top of it which binds port <code>5901/tcp</code> and <code>6901/tcp</code> to localhost (on native docker installations; $DOCKER_IP on boot2docker):</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash"># default tag &quot;latest&quot; = Sakuli stable
-docker run -it -p 5901:5901 -p 6901:6901 consol/sakuli-centos-xfce
-# tag &quot;dev&quot; = Sakuli Snapshot version of dev branch
-docker run -it -p 5901:5901 -p 6901:6901 consol/sakuli-centos-xfce:dev</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The container will execute a small headless self-test and exit afterwards. Read on to learn how to execute your own JavaScript or Java based tests within this containers.</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="docker-javascript-based-test">Run JavaScript based Test</h5>
-<div class="paragraph">
-<p>There are three important lines in the <code>Dockerfile</code> of each Sakuli image which define what has to be done on a container start:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="Dockerfile">ENV SAKULI_TEST_SUITE /root/sakuli/example_test_suites/example_xfce
-ENTRYPOINT [&quot;/root/scripts/sakuli_startup.sh&quot;]
-CMD [&quot;run $SAKULI_TEST_SUITE&quot;]</code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>ENTRYPOINT</code> is the command which is executed once the container is started with <code>docker run</code>.</p>
-</li>
-<li>
-<p><code>CMD</code> is the default argument for <code>ENTRYPOINT</code>, that is, to run a test suite set by a variable.</p>
-</li>
-<li>
-<p><code>ENV SAKULI_TEST_SUITE</code> is set to the path of a test suite which has to run when the container starts. By default, this is set to the built-in folder <code>/root/sakuli/example_test_suites/example_xfce</code>.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>There is more than one way to integrate a custom testsuite in a container, discussed in the following.</p>
+<p><span class="image"><img src="images/tutorial_record.png" alt="sahi_recorder"></span></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -682,213 +536,13 @@ CMD [&quot;run $SAKULI_TEST_SUITE&quot;]</code></pre>
 <div class="title">Note</div>
 </td>
 <td class="content">
-Assume you want to run a suite called <code>suite_1</code> located on your host at the path <code>/home/myuser/my-sakuli-testsuites</code> - use one of the following ways:
+actions like clicks are written to file automatically. All other actions like assertions can be written to file by clicking the button "Append to Script": <span class="image"><img src="images/tutorial_append.png" alt="sahi_recorder_append_to_script"></span>
 </td>
 </tr>
 </table>
 </div>
-<div class="sect5">
-<h6 id="docker-run-command">docker run command</h6>
 <div class="paragraph">
-<p>Mount the suite folder on your host into the container and override <code>CMD</code> from Dockerfile (=argument for <code>ENTRYPOINT</code>) with custom parameters for the Sakuli starter <code>sakuli</code>. In this way you can also give further parameters to Sakuli e.g. to use another browser (<code>-browser chrome</code>).</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash"># running tests in chrome
-~$ docker run -it -p 5901:5901 -p 6901:6901 consol/sakuli-centos-xfce 'run &quot;$SAKULI_TEST_SUITE&quot; -browser chrome'</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To get all possible command line parameters call <code>docker run consol/sakuli-ubuntu-xfce -help</code>.</p>
-</div>
-<div class="paragraph">
-<p>CMD can be overwritten in two ways:</p>
-</div>
-<div class="listingblock">
-<div class="title">1) Using the command line</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">~$ docker run -it -p 5901:5901 -p 6901:6901 -v &quot;/home/myuser/my-sakuli-testsuites:/my-sakuli-testsuites&quot; consol/sakuli-centos-xfce 'run /my-sakuli-testsuites/suite_1'</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This command will
- * mount the test suites folder to <code>/my-sakuli-testsuites</code> within the container
- * execute the suite <code>suite_1</code></p>
-</div>
-<div class="paragraph">
-<div class="title">2) Using docker-compose</div>
-<p>See <a href="#docker-compose-run-command">[docker-compose-run-command]</a>.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="docker-environmen-variable">Environment variable SAKULI_TEST_SUITE`</h6>
-<div class="paragraph">
-<p>Mount a folder on your host into the container and override the environment variable <code>SAKULI_TEST_SUITE</code>.</p>
-</div>
-<div class="listingblock">
-<div class="title">1) Using the command line</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">~$ docker run -it -p 5901:5901 -p 6901:6901   \\
-     -v &quot;/home/myuser/my-sakuli-testsuites:/my-sakuli-testsuites&quot;   \\
-     -e &quot;SAKULI_TEST_SUITE=/my-sakuli-testsuites/suite_1&quot;   \\
-     consol/sakuli-ubuntu-xfce</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<div class="title">2) Using docker-compose</div>
-<p>See <a href="#docker-compose-environmen-variable">[docker-compose-environmen-variable]</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="docker-java-based-test">Run Java based test</h5>
-<div class="paragraph">
-<p>Also for Sakuli test writen in Java and executed through <a href="https://maven.apache.org">Maven</a>, we provide to preconfigured docker images:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://hub.docker.com/r/consol/sakuli-centos-xfce-java/">consol/sakuli-centos-xfce-java</a></p>
-</li>
-<li>
-<p><a href="https://hub.docker.com/r/consol/sakuli-ubuntu-xfce-java/">consol/sakuli-ubuntu-xfce-java</a>.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>More information about how to write a Java based Sakuli test, see <a href="#sakuli_java_dsl">[sakuli_java_dsl]</a>. Now take a look at the important lines in the <em>Dockerfile</em> which define how the container will start:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="Dockerfile">WORKDIR /opt/maven
-ENTRYPOINT [&quot;/root/scripts/start_hook.sh&quot;]
-CMD [&quot;mvn clean test&quot;]</code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>WORKDIR</code> is set to the path, where the maven build will be executed. By default, this is set to the built-in example folder <code>/opt/maven</code>.</p>
-</li>
-<li>
-<p><code>ENTRYPOINT</code> is the command which is executed once the container is started with <code>docker run</code>.</p>
-</li>
-<li>
-<p><code>CMD</code> is the default argument for <code>ENTRYPOINT</code>, what will trigger the Maven build, which contains the Java based Sakuli tests.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Assume you want to run the Sakuli end-2-end test from your Maven project located at the path <code>/home/myuser/my-sakuli-maven-project</code> you can executed the Maven build in the inside of the Sakuli container like follow:</p>
-</div>
-<div class="listingblock">
-<div class="title">1) Using the command line</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">~$ docker run -it -p 5901:5901 -p 6901:6901 -v &quot;/home/myuser/my-sakuli-maven-project:/opt/maven&quot; consol/sakuli-ubuntu-xfce-java</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This command will</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>mount the test suites folder to <code>/home/myuser/my-sakuli-maven-project</code> within the container</p>
-</li>
-<li>
-<p>execute the maven build with default command <code>mvn clean test</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>If you want to for example also build youre maven artifacts over <code>mvn install</code> override the default command like follow:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">~$ docker run -it -p 5901:5901 -p 6901:6901 -v &quot;/home/myuser/my-sakuli-maven-project:/opt/maven&quot; consol/sakuli-ubuntu-xfce-java 'mvn clean install'</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<div class="title">2) Using docker-compose</div>
-<p>See <a href="#docker-compose-java-based-test">[docker-compose-java-based-test]</a>.</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="docker-vnc-env-variables">Override VNC environment variables</h5>
-<div class="paragraph">
-<p>The following VNC environment variables can be overwritten at the <code>docker run</code> phase to customize your desktop environment inside the container:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>VNC_COL_DEPTH</code>, default: <code>24</code></p>
-</li>
-<li>
-<p><code>VNC_RESOLUTION</code>, default: <code>1280x1024</code></p>
-</li>
-<li>
-<p><code>VNC_PW</code>, default: <code>sakuli</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>For example, the password for VNC could be set like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">~$ docker run -it -p 5901:5901 -p 6901:6901 -e &quot;VNC_PW=my-new-password&quot;  \\
-     consol/sakuli-ubuntu-xfce</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="docker-further-information">Further Information</h5>
-<div class="paragraph">
-<p>Further information about the usage of Sakuli docker containers can be found at:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Publications:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong><a href="https://labs.consol.de/sakuli/development/2016/10/14/sakuli-java-dsl.html">Containerized UI-Tests in Java with Sakuli and Docker</a></strong></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Presentations:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong><a href="https://speakerdeck.com/toschneck/containerized-end-2-end-testing-containerdays-2016-in-hamburg">Containerized End-2-End-Testing - ContainerDays 2016 Hamburg</a></strong></p>
-</li>
-<li>
-<p><strong><a href="https://rawgit.com/toschneck/presentation/sakuli-testautomation-day/index.html#/">Containerized End-2-End-Testing - ConSol CM Testing</a></strong></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Example projects on GitHub:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong><a href="https://github.com/ConSol/sakuli-examples">ConSol/sakuli-examples</a></strong></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/toschneck/sakuli-example-bakery-testing">toschneck/sakuli-example-bakery-testing</a></strong></p>
-</li>
-<li>
-<p><strong><a href="https://github.com/ConSol/sakuli-example-testautomation-day">ConSol/sakuli-example-testautomation-day</a></strong></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
+<p>After you have clicked on "stop", open the recorded file, copy everything and paste the lines in to the Sakuli testcase <code>your-testcase.js</code> file.</p>
 </div>
 </div>
 </div>

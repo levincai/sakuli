@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.0.2,</span>
-<span id="revdate">22.05.2017 @ 16:14:51 CEST</span>
+<span id="revdate">22.05.2017 @ 18:36:02 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -682,6 +682,35 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel5">
 <li><a href="#docker-compose-javascripte-based-test">Run JavaScript based test</a></li>
 <li><a href="#docker-compose-java-based-test">Run Java based test</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sakuli-testdefintion">1.3. Sakuli Testdefinition</a>
+<ul class="sectlevel3">
+<li><a href="#_additional_topics">1.3.1. Additional Topics</a>
+<ul class="sectlevel4">
+<li><a href="#property-loading-mechanism">1.3.1.1. Property loading mechanism</a></li>
+<li><a href="#_exception_handling">1.3.1.2. Exception handling</a></li>
+<li><a href="#_logging">1.3.1.3. Logging</a></li>
+<li><a href="#_secret_de_encryption">1.3.1.4. Secret De-/Encryption</a></li>
+<li><a href="#_screenshot_settings">1.3.1.5. Screenshot settings</a></li>
+<li><a href="#_gui_only_tests">1.3.1.6. GUI-only tests</a></li>
+<li><a href="#sahi-controller">1.3.1.7. Sahi Controller</a></li>
+<li><a href="#sahi-recorder">1.3.1.8. Sahi Recorder</a></li>
+<li><a href="#_sahi_settings">1.3.1.9. Sahi settings</a>
+<ul class="sectlevel5">
+<li><a href="#_browser_selection">Browser selection</a></li>
+<li><a href="#_browser_configuration">Browser configuration</a></li>
+<li><a href="#_sahi_behind_a_proxy">Sahi behind a proxy</a></li>
+<li><a href="#_https_support_in_sahi">HTTPS support in Sahi</a></li>
+</ul>
+</li>
+<li><a href="#_sikuli_settings">1.3.1.10. Sikuli settings</a>
+<ul class="sectlevel5">
+<li><a href="#_highlighting_regions">Highlighting Regions</a></li>
 </ul>
 </li>
 </ul>
@@ -958,7 +987,7 @@ table.CodeRay td.code>pre{padding:0}
 <div class="sect2">
 <h3 id="execution-types"><a class="anchor" href="#execution-types"></a>1.2. Execution Types</h3>
 <div id="git-edit-section" class="paragraph">
-<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/manual.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/manual.adoc" target="_blank">edit</a></p>
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/execution/execution-types.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/execution/execution-types.adoc" target="_blank">edit</a></p>
 </div>
 <div class="sect3">
 <h4 id="_native_execution"><a class="anchor" href="#_native_execution"></a>1.2.1. Native Execution</h4>
@@ -2867,6 +2896,779 @@ Intentionally, <code>docker-compose</code> is made to bring up environments with
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="sakuli-testdefintion"><a class="anchor" href="#sakuli-testdefintion"></a>1.3. Sakuli Testdefinition</h3>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/testdefinition.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/testdefinition.adoc" target="_blank">edit</a></p>
+</div>
+<div class="sect3">
+<h4 id="_additional_topics"><a class="anchor" href="#_additional_topics"></a>1.3.1. Additional Topics</h4>
+<div class="paragraph">
+<p>This page contains different topics regarding the configuration of both <strong>Sakuli</strong> and its components: <strong>Sahi</strong> and <strong>Sikuli</strong>.</p>
+</div>
+<div class="sect4">
+<h5 id="property-loading-mechanism"><a class="anchor" href="#property-loading-mechanism"></a>1.3.1.1. Property loading mechanism</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-property-loading.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-property-loading.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Sakuli properties</strong> are predefined in <code><em>SAKULI_HOME</em>/config/sakuli-default.properties</code>; these values should/can be <strong>overridden</strong> in the following order (last match wins):</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>as a <strong>global testsuite property</strong> in <code>test-suites-folder/sakuli.properties</code>
+-&gt; valid for <strong>all test suites</strong> within this folder</p>
+</li>
+<li>
+<p>as a <strong>testsuite property</strong> in <code>test-suites-folder/test-suite/testsuite.properties</code>
+-&gt; valid for <strong>all test cases</strong> within a test suite</p>
+</li>
+<li>
+<p>as a <strong>Java VM option</strong> like <code>-D log.level.sakuli=DEBUG</code>, as option of the Sakuli starter
+-&gt; valid for only one run</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>We do not recommend to change any values in <code><em>SAKULI_HOME</em>/config/sakuli-default.properties</code> as a new version of Sakuli will have its own default property file; your changes will not be preserved.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_exception_handling"><a class="anchor" href="#_exception_handling"></a>1.3.1.2. Exception handling</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-exception-handling.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-exception-handling.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>Some objects (<strong>Region, Application, Environment</strong>) allow on their creation to specify the optional boolean argument <code>resumeOnException</code>, which controls whether the script should resume on an exception which is related to the object or one of its method (default: false).</p>
+</div>
+<div class="paragraph">
+<p>Setting this to <em>true</em> can be useful if you want to raise a custom exception or no exception at all.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Property values of <code>sakuli.exception.suppressResumedExceptions</code></caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the exception will be logged and appear in the test result</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the exception will NEITHER be logged NOR appear in the test result.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="title">Example:</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="comment">// create region &quot;foo&quot;</span>
+<span class="keyword">var</span> foo = <span class="keyword">new</span> Region(<span class="string"><span class="delimiter">&quot;</span><span class="content">bar.png</span><span class="delimiter">&quot;</span></span>,<span class="predefined-constant">true</span>);
+<span class="comment">// if &quot;image&quot; is not found, the script will resume</span>
+<span class="keyword">var</span> baz = foo.find(<span class="string"><span class="delimiter">&quot;</span><span class="content">image</span><span class="delimiter">&quot;</span></span>);
+<span class="comment">// throw your &quot;own&quot; exception.</span>
+<span class="comment">// If you do not, and suppressResumedExceptions=true, the exception will be suppressed.</span>
+<span class="keyword">if</span> (baz == <span class="predefined-constant">null</span>){
+    <span class="keyword">throw</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Sorry, I could not find image 'image'.</span><span class="delimiter">&quot;</span></span>;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_logging"><a class="anchor" href="#_logging"></a>1.3.1.3. Logging</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-logging.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-logging.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<div class="title">Verbosity</div>
+<p>The logging verbosity of all compoments <em>Sakuli, Sahi, Sikuli, Spring</em> - and <em>Java</em> in general can be changed individually.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+"Verbosity" means one of the levels <code>DEBUG - INFO - WARN - ERROR</code>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 2. Log level verbosity properties</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.sakuli=<em>LEVEL</em></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for <strong>Sakuli</strong> output</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.sikuli=<em>LEVEL</em></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for <strong>Sikuli</strong> output</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.sahi=<em>LEVEL</em></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for <strong>Sahi</strong> output</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.spring=<em>LEVEL</em></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for the <strong>Spring</strong> framework (only used internally)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.root=<em>LEVEL</em></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for all other <strong>Java classes and libraries</strong></p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 3. Log file folder / pattern</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.log.pattern=%-5level [%d{YYYY-MM-dd HH:mm:ss.SSS}] - %msg%n</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Format string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.log.folder=${sakuli.testsuite.folder}/_logs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Log folder</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>In general it is also possible to add your own Logback configuration under <code><em>SAKULI_HOME</em>/config/sakuli-log-config.xml</code>. For more information about the Logback syntax please refer to the <a href="http://logback.qos.ch/manual/configuration.html">Logback manual</a>.</p>
+</div>
+<div class="paragraph">
+<div class="title">Log file rotation</div>
+<p>Control the age of your log-files in the <code>sakuli.properties</code>, to prevent disk space erros.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.log.maxAge=14</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes all files that are older than (default) 14 days in the defined <code>sakuli.log.folder</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>On Linux you can additional configure <strong>logrotate</strong> to tidy up old log files:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">vim /etc/logrotate.d/sakuli
+
+__SUITE_FOLDER__/*/_logs/* __SUITE_FOLDER__/*/_logs/_screenshots/* {
+    size 1k
+    missingok
+    maxage 2
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_secret_de_encryption"><a class="anchor" href="#_secret_de_encryption"></a>1.3.1.4. Secret De-/Encryption</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-encryption.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-encryption.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<div class="title">Interface selection</div>
+<p>Neither Sahi nor Sikuli have a way to prevent <strong>sensible data</strong> (passwords, PINs, etc.) from being logged and stored in the script in <strong>clear text</strong>.</p>
+</div>
+<div class="paragraph">
+<p>That&#8217;s the reason why Sakuli is able to <strong>encrypt</strong> them on the command line, and to <strong>decrypt</strong> them again on runtime just for the moment when they are needed. There is no (quick) way to decrypt those secrets again on the command line, so this is rather a way to obscure things not everybody should see than high-secure a encryption mechanism.</p>
+</div>
+<div class="paragraph">
+<p>Among other parameters, Sakuli uses the MAC address of a local network interface card as a encryption salt. Hence no virtual adapters can be choosen.</p>
+</div>
+<div class="paragraph">
+<p>You can decide whether Sakuli should automatically select an adapter…</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="properties">sakuli.encryption.interface.autodetect=true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>..or a specific one should be used:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="properties">sakuli.encryption.interface.autodetect=false
+sakuli.encryption.interface=eth0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Encrypt a secret</div>
+<p>To encrypt secrets on the command line, Sakuli uses the MAC address of a NIC on the local machine (Windows/Linux). The following command lets Sakuli decide which NIC will be used:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">sakuli encrypt foo
+=========== Calling Sakuli JAR: java -classpath C:\Program Files (x86)\sakuli\sakuli-v0.9.3-SNAPSHOT\libs\jav\sakuli.jar;C:\Program Files (x86)\sakuli\sakuli-v0.9.3-SNAPSHOT\libs\java\* org.sakuli.starter.SakuliStarter --sakuli_home C:\Program Files (x86)\sakuli\sakuli-v0.9.3-SNAPSHOT --encrypt foo ===========
+
+String to Encrypt: foo
+...
+Encrypted secret with interface 'eth3': CKXIAZmO7rSoBVMGgJZPDQ==
+
+... now copy the secret to your testcase!</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add <code>-interface eth0</code> to select eth0 as salt interface. Add <code>-interface list</code> to get a list of all available adapters.</p>
+</div>
+<div class="paragraph">
+<div class="title">Decrypt a secret</div>
+<p>To decrypt and use a secret in Sakuli test cases, use one of the following methods:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="./api/sakuli_Environment.md#pasteanddecrypttext">pasteAndDecrypt</a></p>
+</li>
+<li>
+<p><a href="./api/sakuli_Environment.md#typeanddecrypttext-optmodifiers">typeAndDecrypt</a></p>
+</li>
+<li>
+<p><a href="./api/sakuli_Environment.md#decryptsecretsecret">decryptSecret</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_screenshot_settings"><a class="anchor" href="#_screenshot_settings"></a>1.3.1.5. Screenshot settings</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-screenshot-settings.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-screenshot-settings.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>To set the format and destination folder for screenshots taken by Sakuli:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.screenshot.onError=true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">take a screenshot in case of an exception</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.screenshot.dir=${sakuli.log.folder}/_screenshots</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folder for screenshot files (if activated)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.screenshot.format=jpg</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">screenshot file format (Possible values: jpg, png)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.forwarder.gearman.nagios.template.screenshotDivWidth=640px</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Screenshot dimensions for results sent to Gearmand</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_gui_only_tests"><a class="anchor" href="#_gui_only_tests"></a>1.3.1.6. GUI-only tests</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-gui-only.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-gui-only.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>If you want to run tests which do not include any web technology, you can use phantomJS instead of firefox/chrome/IE and use the Sahi default start URL:</p>
+</div>
+<div class="listingblock">
+<div class="title">testsuite.suite</div>
+<div class="content">
+<pre class="CodeRay highlight"><code>case1/sakuli_demo.js http://sahi.example.com/_s_/dyn/Driver_initialized</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Sakuli depends on Sahi running, which in turn needs a running browser instance. Using PhantomJS for this, hides the browser window completely.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="sahi-controller"><a class="anchor" href="#sahi-controller"></a>1.3.1.7. Sahi Controller</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-controller.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-controller.adoc" target="_blank">edit</a></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Use the Sahi Controller to identify elements on the page to write and test Sahi methods!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>There are two ways to get Sahi instructions into your testcase <code>your-testcase.js</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>identify, copy &amp; paste from the Sahi Controller</p>
+</li>
+<li>
+<p>record by the Sahi Controller, copy &amp; paste from the file, see <a href="#sahi-recorder">Sahi Recorder</a></p>
+</li>
+</ul>
+</div>
+<div id="sahi-open-controller" class="paragraph">
+<div class="title">Open the Sahi Controller</div>
+<p>Add to your testcase the following line, at position where you want to identify your HTML object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="comment">//.... your testcode</span>
+env.sleep(<span class="integer">9999</span>);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then start your test suite and the Sakuli test should appear and stop at that position for 9999 seconds. The "sleep" statement is a nice trick when writing long tests; wherever you put a 9999s sleep in, the test will execute until this position and wait. Think of it like a breakpoint when debugging a program.</p>
+</div>
+<div class="paragraph">
+<p>Now open the Sahi Controller (hold the <code>ALT</code> key on Windows or <code>CTRL + ALT</code> on Linux and doubleclick anywhere on the page) to open this window:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/tutorial_contoller.png" alt="sahi_controller"></span></p>
+</div>
+<div id="sahi-controller-copy-paste" class="paragraph">
+<div class="title">copy/paste code</div>
+<p>First, we want Sahi to check if there is for example the Sakuli Logo on the page. Hold the <code>CTRL</code> key and move the mouse pointer on the logo. Watch the Sahi Controller: it detects the HTML elements below the mouse pointer and generates the <a href="http://sahipro.com/docs/sahi-apis/accessor-apis.html#_image">accessor method for "image"</a> automatically:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/tutorial_logo_accessor.png" alt="logo_accessor"></span></p>
+</div>
+<div class="paragraph">
+<p>Click on "Assert" to let Sahi autogenerate <a href="http://sahipro.com/docs/sahi-apis/assertions.html">assertion methods</a>:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/tutorial_assert2.png" alt="assert"></span></p>
+</div>
+<div class="paragraph">
+<p>Just copy the second line (which checks the visibility of an element) into the clipboard and paste it into your testcase <code>your-testcase.js</code> before the <code>env.sleep(9999)</code> statement.</p>
+</div>
+<div class="paragraph">
+<p>Further, we want for example to assure that the contact form of the web page os displayed correctly. Move the mouse pointer down to the "Kontakt" link; Sahi should display the accessor <code>_image(&quot;Kontakt zu ConSol&quot;)</code></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>This time use the "click" button on the controller</p>
+</li>
+<li>
+<p>To execute a click; this also generates the complete <a href="http://sahipro.com/docs/sahi-apis/action-apis.html">browser action</a> statement</p>
+</li>
+<li>
+<p>copy/paste also into the test case</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/tutorial_click_action.png" alt="click"></span></p>
+</div>
+<div class="paragraph">
+<p>In the end, Sahi should check that the appeared popup window contains the text "Schreiben Sie uns!". You guessed it - move the mouse pointer over this text and click the "Assert" button again. The fourth assertion is the right one, which we also paste into the test script:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/tutorial_contains_text.png" alt="contains_text"></span></p>
+</div>
+<div class="paragraph">
+<p>Now remove the "sleep" statement from the script file; it should look now like that:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js">_dynamicInclude(<span class="predefined">$includeFolder</span>);
+<span class="keyword">var</span> testCase = <span class="keyword">new</span> TestCase(<span class="integer">60</span>, <span class="integer">70</span>);
+<span class="keyword">var</span> env = <span class="keyword">new</span> Environment()
+
+<span class="keyword">try</span>{
+    <span class="comment">//your code</span>
+    _assert(_isVisible(_image(<span class="string"><span class="delimiter">&quot;</span><span class="content">sakuli.png</span><span class="delimiter">&quot;</span></span>)));
+    _click(_image(<span class="string"><span class="delimiter">&quot;</span><span class="content">Kontakt zu conSol</span><span class="delimiter">&quot;</span></span>));
+    _assertContainsText(<span class="string"><span class="delimiter">&quot;</span><span class="content">Schreiben Sie uns!</span><span class="delimiter">&quot;</span></span>, _heading3(<span class="string"><span class="delimiter">&quot;</span><span class="content">Schreiben Sie uns!</span><span class="delimiter">&quot;</span></span>));
+    <span class="comment">//env.sleep(9999);</span>
+
+} <span class="keyword">catch</span> (e) {
+    testCase.handleException(e);
+} <span class="keyword">finally</span> {
+    testCase.saveResult();
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Perhaps you want Sahi to highlight the items it is acting on: just use the <code>_highlight()</code> method from the <a href="http://sahipro.com/docs/sahi-apis/debug-helper-apis.html">debug helper API</a> to mark each element with a red border before accessing it: <code>_highlight(_image("sakuli.png"));</code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="sahi-recorder"><a class="anchor" href="#sahi-recorder"></a>1.3.1.8. Sahi Recorder</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-recorder.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-recorder.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>Another method to <a href="#sahi-controller-copy-paste">copy/paste code</a> is to record all steps into a file. For this, open the Sahi controller (<a href="#sahi-open-controller">Open the Sahi Controller</a>), enter a filename and click on "record":</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/tutorial_record.png" alt="sahi_recorder"></span></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+actions like clicks are written to file automatically. All other actions like assertions can be written to file by clicking the button "Append to Script": <span class="image"><img src="images/tutorial_append.png" alt="sahi_recorder_append_to_script"></span>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>After you have clicked on "stop", open the recorded file, copy everything and paste the lines in to the Sakuli testcase <code>your-testcase.js</code> file.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sahi_settings"><a class="anchor" href="#_sahi_settings"></a>1.3.1.9. Sahi settings</h5>
+<div class="sect5">
+<h6 id="_browser_selection"><a class="anchor" href="#_browser_selection"></a>Browser selection</h6>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-settings-browser-selection.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-settings-browser-selection.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>You may want to change the browser due to the following reasons:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>to check if a web test (made with Sahi methods) for browser A is also running properly on browser B</p>
+</li>
+<li>
+<p>to run a headless browser</p>
+<div class="ulist">
+<ul>
+<li>
+<p>just for curiosity :-)</p>
+</li>
+<li>
+<p>to keep the browser in background while Sakuli tests a non-web application (e.g. fat client)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In addition to the possibilities described property <code>testsuite.browser</code>, see <a href="#property-loading-mechanism">Property loading mechanism</a>, the generic Sakuli starter <code>sakuli/sakuli.exe</code> can also be given the parameter <code>-browser</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">sakuli run /path/to/suite -browser chrome</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_browser_configuration"><a class="anchor" href="#_browser_configuration"></a>Browser configuration</h6>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-settings-browser-config.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-settings-browser-config.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>If the Sahi dashboard does not show any browser or if you want to add another browser to the dashboard …</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/w_sahi_no_browser.jpg" alt="nobrowser"></span></p>
+</div>
+<div class="paragraph">
+<p>… you have to edit <code><em>SAHI_DIR</em>/userdata/config/browser_types.xml</code>. Each browser is defined within a <strong>browserType</strong> block. Please refer to the <a href="https://sahipro.com/docs/using-sahi/sahi-configuration-basic.html">Sahi Documentation, "Configure Browsers"</a> to see the <em>browserType</em> Nodes for popular browsers.</p>
+</div>
+<div class="paragraph">
+<p>For <strong>PhantomJS</strong> please save <a href="http://labs.consol.de/sakuli/install/3rd-party/phantom/sahi.js">sahi.js</a> into the folder <code><em>SAHI_DIR</em>\phantomjs\</code> and use this option line:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>        &lt;options&gt;--proxy=localhost:9999 __SAHI_DIR__\phantomjs\sahi.js&lt;/options&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Attention: PhantomJS 2 is currently unsupported. Use version 1.9.x</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sahi_behind_a_proxy"><a class="anchor" href="#_sahi_behind_a_proxy"></a>Sahi behind a proxy</h6>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-settings-proxy.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-settings-proxy.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>Set the following properties (as global in the <code>sakuli.properties</code>) to define a proxy Sahi should connect to.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="properties">### HTTP/HTTPS proxy Settings
+### Set these properties, to enable the test execution behind company proxies
+# Use external proxy server for HTTP*
+ext.http.proxy.enable=true
+ext.http.proxy.host=proxy.yourcompany.com
+ext.http.proxy.port=8080
+ext.http.proxy.auth.enable=false
+ext.http.proxy.auth.name=user
+ext.http.proxy.auth.password=password
+
+# Use external proxy server for HTTPS
+ext.https.proxy.enable=true
+ext.https.proxy.host=proxy.server.com
+ext.https.proxy.port=8080
+ext.https.proxy.auth.enable=false
+ext.https.proxy.auth.name=user
+ext.https.proxy.auth.password=password
+
+# There is only one bypass list for both secure and insecure.
+ext.http.both.proxy.bypass_hosts=localhost|127.0.0.1|*.internaldomain.com|www.verisign.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_https_support_in_sahi"><a class="anchor" href="#_https_support_in_sahi"></a>HTTPS support in Sahi</h6>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-https.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-https.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>This documentation is not complete yet. Any help is appreciated.</p>
+</div>
+<div class="sect6">
+<h7 id="_solution_1_accept_self_signed_certificates"><a class="anchor" href="#_solution_1_accept_self_signed_certificates"></a>Solution 1: accept self-signed certificates</h7>
+<div class="paragraph">
+<p>This will work on most systems, especially the ones you have full control over.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open Sahi Dashboard, start the browser.</p>
+</li>
+<li>
+<p>On the Sahi start page, navigate to the https site you want Sahi to trust (e.g. <a href="https://github.com">https://github.com</a>)</p>
+</li>
+<li>
+<p>You will be presented a message that this page "connection is not secure/trusted".</p>
+</li>
+<li>
+<p>On <strong>Firefox</strong>, click <strong>"I understand the risks."</strong></p>
+</li>
+<li>
+<p>On <strong>Chrome</strong>, click <strong>"Proceed anyway (unsecure)"</strong></p>
+</li>
+<li>
+<p>On <strong>IE</strong>, click <strong>"Continue to the website (not recommended)"</strong>.</p>
+</li>
+<li>
+<p>Once the page has loaded, click <strong>"SSL Manager"</strong> from the Sahi start page</p>
+</li>
+<li>
+<p>You should be presented a green check mark right of the https URL, indicating that Chrome accepted the site&#8217;s certificate, signed by Sahi:</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/https_ok.png" alt="https_ok"></span></p>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_solution_2_manual_certificate_import"><a class="anchor" href="#_solution_2_manual_certificate_import"></a>Solution 2: manual certificate import</h7>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+This is a browser-specific solution and can be different in newer Browser versions or other operating systems!
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Google Chrome (Windows)</div>
+<ol class="arabic">
+<li>
+<p>Open Sahi Dashboard, start <em>Chrome</em></p>
+</li>
+<li>
+<p>On the Sahi start page, navigate to the https site you want Sahi to trust (e.g. <a href="https://github.com">https://github.com</a> )</p>
+</li>
+<li>
+<p>You will be presented a message that this page "connection is not secure". Click on the <strong>red-crossed locker symbol</strong> left of the URL in the address bar and then <strong>"Certificate information"</strong></p>
+</li>
+<li>
+<p>Change to tab <strong>"Details"</strong> and press <strong>"Copy to File…"</strong></p>
+</li>
+<li>
+<p>In the following export assistent, save the certificate as <strong>"Cryptographic Message Syntax Standard PKCS #7 Certificates (.P7B)"&quot;</strong></p>
+</li>
+<li>
+<p>Go to Chrome preferences, <strong>"Manage certificates"</strong></p>
+</li>
+<li>
+<p><strong>"Import…"</strong> -&gt; select the exported <strong>.p7b</strong> certificate (in the "Open" dialogue, chnange the filename extension filter to <strong>"PKCS#1"</strong> )</p>
+</li>
+<li>
+<p>Choose <strong>"Trusted Root Certification Authorities"</strong> as certificate store</p>
+</li>
+<li>
+<p>Accept the Import confirmation.</p>
+</li>
+<li>
+<p>Restart Chrome from the Sahi dashboard.</p>
+</li>
+<li>
+<p>From the Sahi start page (step #2), click <strong>"SSL Manager"</strong></p>
+</li>
+<li>
+<p>You should be presented a green check mark right of the https URL, indicating that Chrome accepted the site&#8217;s certificate, signed by Sahi:</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/https_ok.png" alt="https_ok"></span></p>
+</div>
+<div class="olist arabic">
+<div class="title">Mozilla Firefox</div>
+<ol class="arabic">
+<li>
+<p>Open Sahi Dashboard, start <em>Firefox/Firefox portable</em></p>
+</li>
+<li>
+<p>On the Sahi start page, navigate to the https site you want Sahi to trust (e.g. <a href="https://github.com">https://github.com</a> )</p>
+</li>
+<li>
+<p>You will be presented a message that this page "connection is not secure". Click on I understand the risks" and add the certificate exception. Now navigate back to the sahi start page and click on the Link "SSL Manager&quot;:</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/tutorial_ssl_manager.png" alt="ssl manager"></span></p>
+</div>
+<div class="paragraph">
+<p>You will be promptet again a security warning for connecting to "sahi.example.com" (a local dummy domain), add the certificate here also as an exception.</p>
+</div>
+<div class="paragraph">
+<p>The following page contains a list of all so far trusted and untrusted domains and their certificates. To import the red marked into the browser&#8217;s certificate store, open the links by clicking them with the middle mouse key. This opens the page within a new tab; only in this way you are allowed to add the certificate exception.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/tutorial_certs.png" alt="certs"></span></p>
+</div>
+<div class="paragraph">
+<p>You can close every opened tab when it is displaying "Successfully connected" for the domain:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/tutorial_connected.png" alt="connected"></span></p>
+</div>
+<div class="paragraph">
+<p>Now go back to the SSL Manager overview and click the "refresh" button. Every previously untrusted domain should now be marked as OK:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/tutorial_refresh.png" alt="refresh"></span></p>
+</div>
+<div class="paragraph">
+<div class="title">Internet Explorer</div>
+<p>See Sahi description <a href="http://sahipro.com/docs/using-sahi/sahi-configuration-basic.html#Configure%20SSL">Configer SSL in Sahi</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sikuli_settings"><a class="anchor" href="#_sikuli_settings"></a>1.3.1.10. Sikuli settings</h5>
+<div class="sect5">
+<h6 id="_highlighting_regions"><a class="anchor" href="#_highlighting_regions"></a>Highlighting Regions</h6>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sikuli-settings-highlighting.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sikuli-settings-highlighting.adoc" target="_blank">edit</a></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.highlight.seconds=1.1f</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">duration for auto-highlighting and <code>highlight()</code> method</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.autoHighlight.enabled=false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true, every region gets highlighted automatically for <code>sakuli.highlight.seconds</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -3950,7 +4752,7 @@ The Sakuli team members are reachable on the email address <strong><a href="mail
 <div id="footer">
 <div id="footer-text">
 Version v1.0.2<br>
-Last updated 2017-05-22 16:14:54 CEST
+Last updated 2017-05-22 18:36:03 CEST
 </div>
 </div>
 <!--
