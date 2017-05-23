@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Execution Types</title>
+<title>Key</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -512,18 +512,53 @@ table.CodeRay td.code>pre{padding:0}
 <div id="header">
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#execution-types">Execution Types</a></li>
+<ul class="sectlevel3">
+<li><a href="#Key">Key</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="execution-types">Execution Types</h2>
-<div class="sectionbody">
+<div class="sect3">
+<h4 id="Key">Key</h4>
 <div id="git-edit-section" class="paragraph">
-<p>git-link:docs/manual/execution/execution-types.adoc{git-view} | git-link:docs/manual/execution/execution-types.adoc{git-edit}</p>
+<p>git-link:docs/manual/testdefinition/sakuli-api-key.adoc{git-view} | git-link:docs/manual/testdefinition/sakuli-api-key.adoc{git-edit}</p>
 </div>
+<div class="paragraph">
+<p>Key - representing some Key constants which can be used in type functions as input text and as modifier keys.</p>
+</div>
+<div class="paragraph">
+<p>The following <strong>Key</strong> values are possible:</p>
+</div>
+<div class="paragraph">
+<p><code>SPACE</code>, <code>ENTER</code>, <code>BACKSPACE</code>, <code>TAB</code>, <code>ESC</code>, <code>UP</code>, <code>RIGHT</code>, <code>DOWN</code>, <code>LEFT</code>, <code>PAGE_UP</code>, <code>PAGE_DOWN</code>, <code>DELETE</code>, <code>END</code>,
+<code>HOME</code>, <code>INSERT</code>, <code>F1</code>, <code>F2</code>, <code>F3</code>, <code>F4</code>, <code>F5</code>, <code>F6</code>, <code>F7</code>, <code>F8</code>, <code>F9</code>, <code>F10</code>, <code>F11</code>, <code>F12</code>, <code>F13</code>, <code>F14</code>, <code>F15</code>,
+<code>SHIFT</code>, <code>CTRL</code>, <code>ALT</code>, <code>ALTGR</code>, <code>META</code>, <code>CMD</code>, <code>WIN</code>, <code>PRINTSCREEN</code>, <code>SCROLL_LOCK</code>, <code>PAUSE</code>, <code>CAPS_LOCK</code>, <code>NUM0</code>,
+<code>NUM1</code>, <code>NUM2</code>, <code>NUM3</code>, <code>NUM4</code>, <code>NUM5</code>, <code>NUM6</code>, <code>NUM7</code>, <code>NUM8</code>, <code>NUM9</code>, <code>SEPARATOR</code>, <code>NUM_LOCK</code>, <code>ADD</code>, <code>MINUS</code>,
+<code>MULTIPLY</code>, <code>DIVIDE</code>, <code>DECIMAL</code>, <code>CONTEXT</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Using <code>Key.ALTGR</code> on Unix:</strong>
+To enable the key command <code>ALTGR</code> for unix systems please bind it to <code>CTRL + ALT</code>, for more information
+see <a href="http://unix.stackexchange.com/questions/157834/how-to-bind-altgr-to-ctrl-alt">stackexchange.com - how-to-bind-altgr-to-ctrl-alt</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>
+Closing an window over typing the short cut <code>ALT + F4</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js">env.type(Key.F4, Key.ALT);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Members</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Key">Key</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>

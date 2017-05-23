@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Execution Types</title>
+<title>MouseButton</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -512,18 +512,45 @@ table.CodeRay td.code>pre{padding:0}
 <div id="header">
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#execution-types">Execution Types</a></li>
+<ul class="sectlevel3">
+<li><a href="#MouseButton">MouseButton</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="execution-types">Execution Types</h2>
-<div class="sectionbody">
+<div class="sect3">
+<h4 id="MouseButton">MouseButton</h4>
 <div id="git-edit-section" class="paragraph">
-<p>git-link:docs/manual/execution/execution-types.adoc{git-view} | git-link:docs/manual/execution/execution-types.adoc{git-edit}</p>
+<p>git-link:docs/manual/testdefinition/sakuli-api-mouse-button.adoc{git-view} | git-link:docs/manual/testdefinition/sakuli-api-mouse-button.adoc{git-edit}</p>
 </div>
+<div class="paragraph">
+<p>MouseButton - representing the possible mouse action button.</p>
+</div>
+<div class="paragraph">
+<p>The following <strong>MouseButton</strong> values are possible:</p>
+</div>
+<div class="paragraph">
+<p><code>LEFT</code>, <code>RIGHT</code>, <code>MIDDLE</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>
+Press and release the right mouse button vor 3 seconds on a specified region:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="keyword">var</span> region = <span class="keyword">new</span> Region().find(<span class="string"><span class="delimiter">&quot;</span><span class="content">your-pattern.png</span><span class="delimiter">&quot;</span></span>);
+region.mouseDown(MouseButton.RIGHT).sleep(<span class="integer">3</span>).mouseUp(MouseButton.RIGHT);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Members</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#MouseButton">MouseButton</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>

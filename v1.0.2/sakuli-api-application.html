@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Execution Types</title>
+<title>Application</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -512,18 +512,196 @@ table.CodeRay td.code>pre{padding:0}
 <div id="header">
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#execution-types">Execution Types</a></li>
+<ul class="sectlevel3">
+<li><a href="#Application">Application</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="execution-types">Execution Types</h2>
-<div class="sectionbody">
+<div class="sect3">
+<h4 id="Application">Application</h4>
 <div id="git-edit-section" class="paragraph">
-<p>git-link:docs/manual/execution/execution-types.adoc{git-view} | git-link:docs/manual/execution/execution-types.adoc{git-edit}</p>
+<p>git-link:docs/manual/testdefinition/sakuli-api-application.adoc{git-view} | git-link:docs/manual/testdefinition/sakuli-api-application.adoc{git-edit}</p>
 </div>
+<div class="paragraph">
+<p>Application Class - Represents an application.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>applicationNameOrPath <code>String</code> - Path to the application file. <strong>Example:</strong> <code>C:\Windows\system32\notepad.exe</code></p>
+</li>
+<li>
+<p>optResumeOnException <code>Boolean</code> - Determines whether to ignore exceptions from this class. If this parameter is
+undefined, it will be false.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: <a href="#Application">Application</a> - an initialized object.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="comment">//windows</span>
+<span class="keyword">var</span> editor = <span class="keyword">new</span> Application(<span class="string"><span class="delimiter">&quot;</span><span class="content">notepad.exe</span><span class="delimiter">&quot;</span></span>);
+<span class="comment">//linux</span>
+<span class="keyword">var</span> editor = <span class="keyword">new</span> Application(<span class="string"><span class="delimiter">&quot;</span><span class="content">gedit</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Members</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Application">Application</a></p>
+</li>
+<li>
+<p><a href="#Application.open">Application.open()</a></p>
+</li>
+<li>
+<p><a href="#Application.focus">Application.focus()</a></p>
+</li>
+<li>
+<p><a href="#Application.focusWindow">Application.focusWindow(windowNumber)</a></p>
+</li>
+<li>
+<p><a href="#Application.close">Application.close(optSilent)</a></p>
+</li>
+<li>
+<p><a href="#Application.kill">Application.kill(optSilent)</a></p>
+</li>
+<li>
+<p><a href="#Application.setSleepTime">Application.setSleepTime(seconds)</a></p>
+</li>
+<li>
+<p><a href="#Application.getRegion">Application.getRegion()</a></p>
+</li>
+<li>
+<p><a href="#Application.getRegionForWindow">Application.getRegionForWindow(windowNumber)</a></p>
+</li>
+<li>
+<p><a href="#Application.getName">Application.getName()</a></p>
+</li>
+</ul>
+</div>
+<div id="Application.open" class="paragraph">
+<div class="title">Application.open()</div>
+<p>Opens the created application.
+For application with a long load time you may need to change the default sleep time with setSleepTime(…).</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Application object.</p>
+</div>
+<div id="Application.focus" class="paragraph">
+<div class="title">Application.focus()</div>
+<p>Focuses the current application, if the application is in the background.</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Application object.</p>
+</div>
+<div id="Application.focusWindow" class="paragraph">
+<div class="title">Application.focusWindow(windowNumber)</div>
+<p>Focuses a specific window of the application.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>windowNumber <code>number</code> - identifies the window</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Application object.</p>
+</div>
+<div id="Application.close" class="paragraph">
+<div class="title">Application.close(optSilent)</div>
+<p>Closes the already existing application.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>optSilent <code>boolean</code> - (optional) if true, no exception will be thrown on errors and stop the test execution.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Application object.</p>
+</div>
+<div id="Application.kill" class="paragraph">
+<div class="title">Application.kill(optSilent)</div>
+<p>Kill the already existing application hardly.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>optSilent <code>boolean</code> - (optional) if true, no exception will be thrown on errors.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Application object.</p>
+</div>
+<div id="Application.setSleepTime" class="paragraph">
+<div class="title">Application.setSleepTime(seconds)</div>
+<p>Sets the sleep time in seconds of the application actions to handle with long loading times.
+The default sleep time is set to 1 seconds.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>seconds <code>number</code> - sleep time in seconds</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Application object.</p>
+</div>
+<div id="Application.getRegion" class="paragraph">
+<div class="title">Application.getRegion()</div>
+<p>Creates and returns a Region object from the application.</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - a Region object.</p>
+</div>
+<div id="Application.getRegionForWindow" class="paragraph">
+<div class="title">Application.getRegionForWindow(windowNumber)</div>
+<p>Creates and returns a Region object from a specific window of the application.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>windowNumber <code>number</code> - identifies the window</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - a Region object.</p>
+</div>
+<div id="Application.getName" class="paragraph">
+<div class="title">Application.getName()</div>
+<p><strong>Returns</strong>: - the name of the current application.</p>
 </div>
 </div>
 </div>

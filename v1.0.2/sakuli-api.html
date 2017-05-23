@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Execution Types</title>
+<title>Sakuli API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -512,17 +512,390 @@ table.CodeRay td.code>pre{padding:0}
 <div id="header">
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#execution-types">Execution Types</a></li>
+<ul class="sectlevel2">
+<li><a href="#sakuli-api">Sakuli API</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="execution-types">Execution Types</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="sakuli-api">Sakuli API</h3>
 <div id="git-edit-section" class="paragraph">
-<p>git-link:docs/manual/execution/execution-types.adoc{git-view} | git-link:docs/manual/execution/execution-types.adoc{git-edit}</p>
+<p>git-link:docs/manual/testdefinition/sakuli-api.adoc{git-view} | git-link:docs/manual/testdefinition/sakuli-api.adoc{git-edit}</p>
+</div>
+<div class="paragraph">
+<p>Sakuli provides methods of three different types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>JS/Java methods of <strong><a href="http://sahi.co.in/w/all-apis">Sahi</a></strong>, which can be used 100% <em>natively</em></p>
+</li>
+<li>
+<p>JS/Java methods which encapsulate a subset of the <strong>Sikuli</strong> Java API</p>
+</li>
+<li>
+<p>JS/Java methods of <strong>Sakuli</strong> framework itself (testcase stuff, exception handling, …)</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+All classes and methods are implemented identical for Java and JavaScript
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>For the detailed documentation see:</strong></p>
+</div>
+<div class="sect4">
+<h5 id="sakuli-api-index">Index</h5>
+<div class="paragraph">
+<p><strong>Namespaces</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Sahi-API">Sahi-API</a></p>
+</li>
+<li>
+<p><a href="#TestCase">TestCase</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#TestCase.addImagePaths">TestCase.addImagePaths(imagePaths)</a></p>
+</li>
+<li>
+<p><a href="#TestCase.endOfStep">TestCase.endOfStep(stepName, optWarningTime)</a></p>
+</li>
+<li>
+<p><a href="#TestCase.handleException">TestCase.handleException(e)</a></p>
+</li>
+<li>
+<p><a href="#TestCase.saveResult">TestCase.saveResult()</a></p>
+</li>
+<li>
+<p><a href="#TestCase.getID">TestCase.getID()</a></p>
+</li>
+<li>
+<p><a href="#TestCase.getLastURL">TestCase.getLastURL()</a></p>
+</li>
+<li>
+<p><a href="#TestCase.getTestCaseFolderPath">TestCase.getTestCaseFolderPath()</a></p>
+</li>
+<li>
+<p><a href="#TestCase.getTestSuiteFolderPath">TestCase.getTestSuiteFolderPath()</a></p>
+</li>
+<li>
+<p><a href="#TestCase.throwException">TestCase.throwException(message, screenshot)</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="#Application">Application</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Application.open">Application.open()</a></p>
+</li>
+<li>
+<p><a href="#Application.focus">Application.focus()</a></p>
+</li>
+<li>
+<p><a href="#Application.focusWindow">Application.focusWindow(windowNumber)</a></p>
+</li>
+<li>
+<p><a href="#Application.close">Application.close(optSilent)</a></p>
+</li>
+<li>
+<p><a href="#Application.kill">Application.kill(optSilent)</a></p>
+</li>
+<li>
+<p><a href="#Application.setSleepTime">Application.setSleepTime(seconds)</a></p>
+</li>
+<li>
+<p><a href="#Application.getRegion">Application.getRegion()</a></p>
+</li>
+<li>
+<p><a href="#Application.getRegionForWindow">Application.getRegionForWindow(windowNumber)</a></p>
+</li>
+<li>
+<p><a href="#Application.getName">Application.getName()</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="#Environment">Environment</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Environment.setSimilarity">Environment.setSimilarity(similarity)</a></p>
+</li>
+<li>
+<p><a href="#Environment.resetSimilarity">Environment.resetSimilarity()</a></p>
+</li>
+<li>
+<p><a href="#Environment.getRegionFromFocusedWindow">Environment.getRegionFromFocusedWindow()</a></p>
+</li>
+<li>
+<p><a href="#Environment.takeScreenshot">Environment.takeScreenshot(pathName)</a></p>
+</li>
+<li>
+<p><a href="#Environment.sleep">Environment.sleep(seconds)</a></p>
+</li>
+<li>
+<p><a href="#Environment.getClipboard">Environment.getClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.setClipboard">Environment.setClipboard(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.pasteClipboard">Environment.pasteClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.copyIntoClipboard">Environment.copyIntoClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.cleanClipboard">Environment.cleanClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.paste">Environment.paste(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.pasteMasked">Environment.pasteMasked(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.pasteAndDecrypt">Environment.pasteAndDecrypt(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.type">Environment.type(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Environment.typeMasked">Environment.typeMasked(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Environment.typeAndDecrypt">Environment.typeAndDecrypt(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Environment.decryptSecret">Environment.decryptSecret(secret)</a></p>
+</li>
+<li>
+<p><a href="#Environment.keyDown">Environment.keyDown(keys)</a></p>
+</li>
+<li>
+<p><a href="#Environment.keyUp">Environment.keyUp(keys)</a></p>
+</li>
+<li>
+<p><a href="#Environment.write">Environment.write(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.mouseWheelDown">Environment.mouseWheelDown(steps)</a></p>
+</li>
+<li>
+<p><a href="#Environment.mouseWheelUp">Environment.mouseWheelUp(steps)</a></p>
+</li>
+<li>
+<p><a href="#Environment.isWindows">Environment.isWindows()</a></p>
+</li>
+<li>
+<p><a href="#Environment.isLinux">Environment.isLinux()</a></p>
+</li>
+<li>
+<p><a href="#Environment.getOsIdentifier">Environment.getOsIdentifier()</a></p>
+</li>
+<li>
+<p><a href="#Environment.runCommand">Environment.runCommand(command, optThrowException)</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="#Key">Key</a></p>
+</li>
+<li>
+<p><a href="#Logger">Logger</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Logger.logError">Logger.logError(message)</a></p>
+</li>
+<li>
+<p><a href="#Logger.logWarning">Logger.logWarning(message)</a></p>
+</li>
+<li>
+<p><a href="#Logger.logInfo">Logger.logInfo(message)</a></p>
+</li>
+<li>
+<p><a href="#Logger.logDebug">Logger.logDebug(message)</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="#MouseButton">MouseButton</a></p>
+</li>
+<li>
+<p><a href="#Region">Region</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Region.find">Region.find(imageName)</a></p>
+</li>
+<li>
+<p><a href="#Region.findRegion">Region.findRegion()</a></p>
+</li>
+<li>
+<p><a href="#Region.exists">Region.exists(imageName, optWaitSeconds)</a></p>
+</li>
+<li>
+<p><a href="#Region.click">Region.click()</a></p>
+</li>
+<li>
+<p><a href="#Region.doubleClick">Region.doubleClick()</a></p>
+</li>
+<li>
+<p><a href="#Region.rightClick">Region.rightClick()</a></p>
+</li>
+<li>
+<p><a href="#Region.mouseMove">Region.mouseMove()</a></p>
+</li>
+<li>
+<p><a href="#Region.mouseDown">Region.mouseDown(mouseButton)</a></p>
+</li>
+<li>
+<p><a href="#Region.mouseUp">Region.mouseUp(mouseButton)</a></p>
+</li>
+<li>
+<p><a href="#Region.dragAndDropTo">Region.dragAndDropTo(targetRegion)</a></p>
+</li>
+<li>
+<p><a href="#Region.waitForImage">Region.waitForImage(imageName, seconds)</a></p>
+</li>
+<li>
+<p><a href="#Region.paste">Region.paste(text)</a></p>
+</li>
+<li>
+<p><a href="#Region.pasteMasked">Region.pasteMasked(text)</a></p>
+</li>
+<li>
+<p><a href="#Region.pasteAndDecrypt">Region.pasteAndDecrypt(text)</a></p>
+</li>
+<li>
+<p><a href="#Region.type">Region.type(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Region.typeMasked">Region.typeMasked(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Region.typeAndDecrypt">Region.typeAndDecrypt(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Region.keyDown">Region.keyDown(keys)</a></p>
+</li>
+<li>
+<p><a href="#Region.keyUp">Region.keyUp(keys)</a></p>
+</li>
+<li>
+<p><a href="#Region.write">Region.write(text)</a></p>
+</li>
+<li>
+<p><a href="#Region.deleteChars">Region.deleteChars(amountOfChars)</a></p>
+</li>
+<li>
+<p><a href="#Region.mouseWheelDown">Region.mouseWheelDown(steps)</a></p>
+</li>
+<li>
+<p><a href="#Region.mouseWheelUp">Region.mouseWheelUp(steps)</a></p>
+</li>
+<li>
+<p><a href="#Region.move">Region.move(offsetX, offsetY)</a></p>
+</li>
+<li>
+<p><a href="#Region.grow">Region.grow(range)</a></p>
+</li>
+<li>
+<p><a href="#Region.grow">Region.grow(width, height)</a></p>
+</li>
+<li>
+<p><a href="#Region.above">Region.above(range)</a></p>
+</li>
+<li>
+<p><a href="#Region.below">Region.below(range)</a></p>
+</li>
+<li>
+<p><a href="#Region.left">Region.left(range)</a></p>
+</li>
+<li>
+<p><a href="#Region.right">Region.right(range)</a></p>
+</li>
+<li>
+<p><a href="#Region.setH">Region.setH(height)</a></p>
+</li>
+<li>
+<p><a href="#Region.getH">Region.getH()</a></p>
+</li>
+<li>
+<p><a href="#Region.setW">Region.setW(width)</a></p>
+</li>
+<li>
+<p><a href="#Region.getW">Region.getW()</a></p>
+</li>
+<li>
+<p><a href="#Region.setX">Region.setX(x)</a></p>
+</li>
+<li>
+<p><a href="#Region.getX">Region.getX()</a></p>
+</li>
+<li>
+<p><a href="#Region.setY">Region.setY(y)</a></p>
+</li>
+<li>
+<p><a href="#Region.getY">Region.getY()</a></p>
+</li>
+<li>
+<p><a href="#Region.highlight">Region.highlight(seconds)</a></p>
+</li>
+<li>
+<p><a href="#Region.takeScreenshot">Region.takeScreenshot(filename)</a></p>
+</li>
+<li>
+<p><a href="#Region.sleep">Region.sleep(seconds)</a></p>
+</li>
+<li>
+<p><a href="#Region.extractText">Region.extractText()</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="#RegionRectangle">RegionRectangle</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Sahi-API">Sahi-API</h4>
+<div class="paragraph">
+<p><strong>All Sahi-API</strong> functions are natively usable in Sakuli. For a complete documentation, see
+<a href="http://sahi.co.in/w/all-apis">Sahi-API</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Members</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Sahi-API">Sahi-API</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>

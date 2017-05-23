@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Execution Types</title>
+<title>Logger</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -512,18 +512,98 @@ table.CodeRay td.code>pre{padding:0}
 <div id="header">
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#execution-types">Execution Types</a></li>
+<ul class="sectlevel3">
+<li><a href="#Logger">Logger</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="execution-types">Execution Types</h2>
-<div class="sectionbody">
+<div class="sect3">
+<h4 id="Logger">Logger</h4>
 <div id="git-edit-section" class="paragraph">
-<p>git-link:docs/manual/execution/execution-types.adoc{git-view} | git-link:docs/manual/execution/execution-types.adoc{git-edit}</p>
+<p>git-link:docs/manual/testdefinition/sakuli-api-logger.adoc{git-view} | git-link:docs/manual/testdefinition/sakuli-api-logger.adoc{git-edit}</p>
 </div>
+<div class="paragraph">
+<p>Logger - Logging functions to do 'debug, 'info', 'warning' and 'error' log entries.</p>
+</div>
+<div class="paragraph">
+<p><strong>Members</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Logger">Logger</a></p>
+</li>
+<li>
+<p><a href="#Logger.logError">Logger.logError(message)</a></p>
+</li>
+<li>
+<p><a href="#Logger.logWarning">Logger.logWarning(message)</a></p>
+</li>
+<li>
+<p><a href="#Logger.logInfo">Logger.logInfo(message)</a></p>
+</li>
+<li>
+<p><a href="#Logger.logDebug">Logger.logDebug(message)</a></p>
+</li>
+</ul>
+</div>
+<div id="Logger.logError" class="paragraph">
+<div class="title">Logger.logError(message)</div>
+<p>make a error-log over Java backend into the log file.
+This won&#8217;t stop the execution of the test case.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>message <code>String</code> - as a String</p>
+</li>
+</ul>
+</div>
+<div id="Logger.logWarning" class="paragraph">
+<div class="title">Logger.logWarning(message)</div>
+<p>make a debug-log over Java backend into the log file.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>message <code>String</code> - as a String</p>
+</li>
+</ul>
+</div>
+<div id="Logger.logInfo" class="paragraph">
+<div class="title">Logger.logInfo(message)</div>
+<p>make a info-log over Java backend into the log file.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>message <code>String</code> - as a String</p>
+</li>
+</ul>
+</div>
+<div id="Logger.logDebug" class="paragraph">
+<div class="title">Logger.logDebug(message)</div>
+<p>make a debug-log over Java backend into the log file.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>message <code>String</code> - as a String</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

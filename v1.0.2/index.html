@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.0.2,</span>
-<span id="revdate">22.05.2017 @ 18:36:02 CEST</span>
+<span id="revdate">23.05.2017 @ 17:31:23 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -690,17 +690,34 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 <li><a href="#sakuli-testdefintion">1.3. Sakuli Testdefinition</a>
 <ul class="sectlevel3">
-<li><a href="#_additional_topics">1.3.1. Additional Topics</a>
+<li><a href="#sakuli-api">1.3.1. Sakuli API</a>
+<ul class="sectlevel5">
+<li><a href="#sakuli-api-index">Index</a></li>
+<li><a href="#Sahi-API">1.3.1.2. Sahi-API</a></li>
+<li><a href="#TestCase">1.3.1.3. TestCase</a></li>
+<li><a href="#Application">1.3.1.4. Application</a></li>
+<li><a href="#Environment">1.3.1.5. Environment</a></li>
+<li><a href="#Key">1.3.1.6. Key</a></li>
+<li><a href="#Logger">1.3.1.7. Logger</a></li>
+<li><a href="#MouseButton">1.3.1.8. MouseButton</a></li>
+<li><a href="#Region">1.3.1.9. Region</a>
+<ul class="sectlevel5">
+<li><a href="#RegionRectangle">RegionRectangle</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_additional_topics">1.3.2. Additional Topics</a>
 <ul class="sectlevel4">
-<li><a href="#property-loading-mechanism">1.3.1.1. Property loading mechanism</a></li>
-<li><a href="#_exception_handling">1.3.1.2. Exception handling</a></li>
-<li><a href="#_logging">1.3.1.3. Logging</a></li>
-<li><a href="#_secret_de_encryption">1.3.1.4. Secret De-/Encryption</a></li>
-<li><a href="#_screenshot_settings">1.3.1.5. Screenshot settings</a></li>
-<li><a href="#_gui_only_tests">1.3.1.6. GUI-only tests</a></li>
-<li><a href="#sahi-controller">1.3.1.7. Sahi Controller</a></li>
-<li><a href="#sahi-recorder">1.3.1.8. Sahi Recorder</a></li>
-<li><a href="#_sahi_settings">1.3.1.9. Sahi settings</a>
+<li><a href="#property-loading-mechanism">1.3.2.1. Property loading mechanism</a></li>
+<li><a href="#_exception_handling">1.3.2.2. Exception handling</a></li>
+<li><a href="#_logging">1.3.2.3. Logging</a></li>
+<li><a href="#_secret_de_encryption">1.3.2.4. Secret De-/Encryption</a></li>
+<li><a href="#_screenshot_settings">1.3.2.5. Screenshot settings</a></li>
+<li><a href="#_gui_only_tests">1.3.2.6. GUI-only tests</a></li>
+<li><a href="#sahi-controller">1.3.2.7. Sahi Controller</a></li>
+<li><a href="#sahi-recorder">1.3.2.8. Sahi Recorder</a></li>
+<li><a href="#_sahi_settings">1.3.2.9. Sahi settings</a>
 <ul class="sectlevel5">
 <li><a href="#_browser_selection">Browser selection</a></li>
 <li><a href="#_browser_configuration">Browser configuration</a></li>
@@ -708,7 +725,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_https_support_in_sahi">HTTPS support in Sahi</a></li>
 </ul>
 </li>
-<li><a href="#_sikuli_settings">1.3.1.10. Sikuli settings</a>
+<li><a href="#_sikuli_settings">1.3.2.10. Sikuli settings</a>
 <ul class="sectlevel5">
 <li><a href="#_highlighting_regions">Highlighting Regions</a></li>
 </ul>
@@ -2902,12 +2919,2343 @@ Intentionally, <code>docker-compose</code> is made to bring up environments with
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/testdefinition.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/testdefinition.adoc" target="_blank">edit</a></p>
 </div>
 <div class="sect3">
-<h4 id="_additional_topics"><a class="anchor" href="#_additional_topics"></a>1.3.1. Additional Topics</h4>
+<h4 id="sakuli-api"><a class="anchor" href="#sakuli-api"></a>1.3.1. Sakuli API</h4>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>Sakuli provides methods of three different types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>JS/Java methods of <strong><a href="http://sahi.co.in/w/all-apis">Sahi</a></strong>, which can be used 100% <em>natively</em></p>
+</li>
+<li>
+<p>JS/Java methods which encapsulate a subset of the <strong>Sikuli</strong> Java API</p>
+</li>
+<li>
+<p>JS/Java methods of <strong>Sakuli</strong> framework itself (testcase stuff, exception handling, …)</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+All classes and methods are implemented identical for Java and JavaScript
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>For the detailed documentation see:</strong></p>
+</div>
+<div class="sect5">
+<h6 id="sakuli-api-index"><a class="anchor" href="#sakuli-api-index"></a>Index</h6>
+<div class="paragraph">
+<p><strong>Namespaces</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Sahi-API">Sahi-API</a></p>
+</li>
+<li>
+<p><a href="#TestCase">TestCase</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#TestCase.addImagePaths">TestCase.addImagePaths(imagePaths)</a></p>
+</li>
+<li>
+<p><a href="#TestCase.endOfStep">TestCase.endOfStep(stepName, optWarningTime)</a></p>
+</li>
+<li>
+<p><a href="#TestCase.handleException">TestCase.handleException(e)</a></p>
+</li>
+<li>
+<p><a href="#TestCase.saveResult">TestCase.saveResult()</a></p>
+</li>
+<li>
+<p><a href="#TestCase.getID">TestCase.getID()</a></p>
+</li>
+<li>
+<p><a href="#TestCase.getLastURL">TestCase.getLastURL()</a></p>
+</li>
+<li>
+<p><a href="#TestCase.getTestCaseFolderPath">TestCase.getTestCaseFolderPath()</a></p>
+</li>
+<li>
+<p><a href="#TestCase.getTestSuiteFolderPath">TestCase.getTestSuiteFolderPath()</a></p>
+</li>
+<li>
+<p><a href="#TestCase.throwException">TestCase.throwException(message, screenshot)</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="#Application">Application</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Application.open">Application.open()</a></p>
+</li>
+<li>
+<p><a href="#Application.focus">Application.focus()</a></p>
+</li>
+<li>
+<p><a href="#Application.focusWindow">Application.focusWindow(windowNumber)</a></p>
+</li>
+<li>
+<p><a href="#Application.close">Application.close(optSilent)</a></p>
+</li>
+<li>
+<p><a href="#Application.kill">Application.kill(optSilent)</a></p>
+</li>
+<li>
+<p><a href="#Application.setSleepTime">Application.setSleepTime(seconds)</a></p>
+</li>
+<li>
+<p><a href="#Application.getRegion">Application.getRegion()</a></p>
+</li>
+<li>
+<p><a href="#Application.getRegionForWindow">Application.getRegionForWindow(windowNumber)</a></p>
+</li>
+<li>
+<p><a href="#Application.getName">Application.getName()</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="#Environment">Environment</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Environment.setSimilarity">Environment.setSimilarity(similarity)</a></p>
+</li>
+<li>
+<p><a href="#Environment.resetSimilarity">Environment.resetSimilarity()</a></p>
+</li>
+<li>
+<p><a href="#Environment.getRegionFromFocusedWindow">Environment.getRegionFromFocusedWindow()</a></p>
+</li>
+<li>
+<p><a href="#Environment.takeScreenshot">Environment.takeScreenshot(pathName)</a></p>
+</li>
+<li>
+<p><a href="#Environment.sleep">Environment.sleep(seconds)</a></p>
+</li>
+<li>
+<p><a href="#Environment.getClipboard">Environment.getClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.setClipboard">Environment.setClipboard(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.pasteClipboard">Environment.pasteClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.copyIntoClipboard">Environment.copyIntoClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.cleanClipboard">Environment.cleanClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.paste">Environment.paste(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.pasteMasked">Environment.pasteMasked(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.pasteAndDecrypt">Environment.pasteAndDecrypt(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.type">Environment.type(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Environment.typeMasked">Environment.typeMasked(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Environment.typeAndDecrypt">Environment.typeAndDecrypt(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Environment.decryptSecret">Environment.decryptSecret(secret)</a></p>
+</li>
+<li>
+<p><a href="#Environment.keyDown">Environment.keyDown(keys)</a></p>
+</li>
+<li>
+<p><a href="#Environment.keyUp">Environment.keyUp(keys)</a></p>
+</li>
+<li>
+<p><a href="#Environment.write">Environment.write(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.mouseWheelDown">Environment.mouseWheelDown(steps)</a></p>
+</li>
+<li>
+<p><a href="#Environment.mouseWheelUp">Environment.mouseWheelUp(steps)</a></p>
+</li>
+<li>
+<p><a href="#Environment.isWindows">Environment.isWindows()</a></p>
+</li>
+<li>
+<p><a href="#Environment.isLinux">Environment.isLinux()</a></p>
+</li>
+<li>
+<p><a href="#Environment.getOsIdentifier">Environment.getOsIdentifier()</a></p>
+</li>
+<li>
+<p><a href="#Environment.runCommand">Environment.runCommand(command, optThrowException)</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="#Key">Key</a></p>
+</li>
+<li>
+<p><a href="#Logger">Logger</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Logger.logError">Logger.logError(message)</a></p>
+</li>
+<li>
+<p><a href="#Logger.logWarning">Logger.logWarning(message)</a></p>
+</li>
+<li>
+<p><a href="#Logger.logInfo">Logger.logInfo(message)</a></p>
+</li>
+<li>
+<p><a href="#Logger.logDebug">Logger.logDebug(message)</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="#MouseButton">MouseButton</a></p>
+</li>
+<li>
+<p><a href="#Region">Region</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Region.find">Region.find(imageName)</a></p>
+</li>
+<li>
+<p><a href="#Region.findRegion">Region.findRegion()</a></p>
+</li>
+<li>
+<p><a href="#Region.exists">Region.exists(imageName, optWaitSeconds)</a></p>
+</li>
+<li>
+<p><a href="#Region.click">Region.click()</a></p>
+</li>
+<li>
+<p><a href="#Region.doubleClick">Region.doubleClick()</a></p>
+</li>
+<li>
+<p><a href="#Region.rightClick">Region.rightClick()</a></p>
+</li>
+<li>
+<p><a href="#Region.mouseMove">Region.mouseMove()</a></p>
+</li>
+<li>
+<p><a href="#Region.mouseDown">Region.mouseDown(mouseButton)</a></p>
+</li>
+<li>
+<p><a href="#Region.mouseUp">Region.mouseUp(mouseButton)</a></p>
+</li>
+<li>
+<p><a href="#Region.dragAndDropTo">Region.dragAndDropTo(targetRegion)</a></p>
+</li>
+<li>
+<p><a href="#Region.waitForImage">Region.waitForImage(imageName, seconds)</a></p>
+</li>
+<li>
+<p><a href="#Region.paste">Region.paste(text)</a></p>
+</li>
+<li>
+<p><a href="#Region.pasteMasked">Region.pasteMasked(text)</a></p>
+</li>
+<li>
+<p><a href="#Region.pasteAndDecrypt">Region.pasteAndDecrypt(text)</a></p>
+</li>
+<li>
+<p><a href="#Region.type">Region.type(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Region.typeMasked">Region.typeMasked(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Region.typeAndDecrypt">Region.typeAndDecrypt(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Region.keyDown">Region.keyDown(keys)</a></p>
+</li>
+<li>
+<p><a href="#Region.keyUp">Region.keyUp(keys)</a></p>
+</li>
+<li>
+<p><a href="#Region.write">Region.write(text)</a></p>
+</li>
+<li>
+<p><a href="#Region.deleteChars">Region.deleteChars(amountOfChars)</a></p>
+</li>
+<li>
+<p><a href="#Region.mouseWheelDown">Region.mouseWheelDown(steps)</a></p>
+</li>
+<li>
+<p><a href="#Region.mouseWheelUp">Region.mouseWheelUp(steps)</a></p>
+</li>
+<li>
+<p><a href="#Region.move">Region.move(offsetX, offsetY)</a></p>
+</li>
+<li>
+<p><a href="#Region.grow">Region.grow(range)</a></p>
+</li>
+<li>
+<p><a href="#Region.grow">Region.grow(width, height)</a></p>
+</li>
+<li>
+<p><a href="#Region.above">Region.above(range)</a></p>
+</li>
+<li>
+<p><a href="#Region.below">Region.below(range)</a></p>
+</li>
+<li>
+<p><a href="#Region.left">Region.left(range)</a></p>
+</li>
+<li>
+<p><a href="#Region.right">Region.right(range)</a></p>
+</li>
+<li>
+<p><a href="#Region.setH">Region.setH(height)</a></p>
+</li>
+<li>
+<p><a href="#Region.getH">Region.getH()</a></p>
+</li>
+<li>
+<p><a href="#Region.setW">Region.setW(width)</a></p>
+</li>
+<li>
+<p><a href="#Region.getW">Region.getW()</a></p>
+</li>
+<li>
+<p><a href="#Region.setX">Region.setX(x)</a></p>
+</li>
+<li>
+<p><a href="#Region.getX">Region.getX()</a></p>
+</li>
+<li>
+<p><a href="#Region.setY">Region.setY(y)</a></p>
+</li>
+<li>
+<p><a href="#Region.getY">Region.getY()</a></p>
+</li>
+<li>
+<p><a href="#Region.highlight">Region.highlight(seconds)</a></p>
+</li>
+<li>
+<p><a href="#Region.takeScreenshot">Region.takeScreenshot(filename)</a></p>
+</li>
+<li>
+<p><a href="#Region.sleep">Region.sleep(seconds)</a></p>
+</li>
+<li>
+<p><a href="#Region.extractText">Region.extractText()</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="#RegionRectangle">RegionRectangle</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="Sahi-API"><a class="anchor" href="#Sahi-API"></a>1.3.1.2. Sahi-API</h5>
+<div class="paragraph">
+<p><strong>All Sahi-API</strong> functions are natively usable in Sakuli. For a complete documentation, see
+<a href="http://sahi.co.in/w/all-apis">Sahi-API</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Members</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Sahi-API">Sahi-API</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="TestCase"><a class="anchor" href="#TestCase"></a>1.3.1.3. TestCase</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api-testcase.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api-testcase.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>TestCase - initializes the Sakuli object and sets the warning and critical time for this test case.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>warningTime <code>number</code> - threshold in seconds. If the threshold is set to 0,
+the execution time will never exceed, so the state will be always OK!</p>
+</li>
+<li>
+<p>criticalTime <code>number</code> - threshold in seconds. If the threshold is set to 0,
+the execution time will never exceed, so the state will be always OK!</p>
+</li>
+<li>
+<p>optImagePathArray <code>Array.&lt;String&gt;</code> - (optional) Path or Array of Paths to the folder containing the image patterns
+for these test cases.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - an initialized Sakuli object.
+<strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="keyword">var</span> testCase = <span class="keyword">new</span> TestCase(<span class="integer">20</span>,<span class="integer">30</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">path-to/image-folder-name</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Members</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#TestCase">TestCase</a></p>
+</li>
+<li>
+<p><a href="#TestCase.addImagePaths">TestCase.addImagePaths(imagePaths)</a></p>
+</li>
+<li>
+<p><a href="#TestCase.endOfStep">TestCase.endOfStep(stepName, optWarningTime)</a></p>
+</li>
+<li>
+<p><a href="#TestCase.handleException">TestCase.handleException(e)</a></p>
+</li>
+<li>
+<p><a href="#TestCase.saveResult">TestCase.saveResult()</a></p>
+</li>
+<li>
+<p><a href="#TestCase.getID">TestCase.getID()</a></p>
+</li>
+<li>
+<p><a href="#TestCase.getLastURL">TestCase.getLastURL()</a></p>
+</li>
+<li>
+<p><a href="#TestCase.getTestCaseFolderPath">TestCase.getTestCaseFolderPath()</a></p>
+</li>
+<li>
+<p><a href="#TestCase.getTestSuiteFolderPath">TestCase.getTestSuiteFolderPath()</a></p>
+</li>
+<li>
+<p><a href="#TestCase.throwException">TestCase.throwException(message, screenshot)</a></p>
+</li>
+</ul>
+</div>
+<div id="TestCase.addImagePaths" class="paragraph">
+<div class="title">TestCase.addImagePaths(imagePaths)</div>
+<p>Adds the additional paths to the current image library of the TestCase.
+If a relative path is assigned, the current testcase folder will be used as current directory.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>imagePaths <code>string</code> - one or more path strings</p>
+</li>
+</ul>
+</div>
+<div id="TestCase.endOfStep" class="paragraph">
+<div class="title">TestCase.endOfStep(stepName, optWarningTime)</div>
+<p>A step allows to sub-divide a case to measure logical units, such as "login", "load report" etc. in its
+particular runtime. When a case starts, Sakuli starts a "step" timer. It gets read out, stored with the
+step name, and resetted each time endOfStep() is called.
+If the step runtime exceeds the step threshold (second parameter, optional), the step is saved with state
+"WARNING" (there is no CRITICAL state).</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>stepName <code>String</code></p>
+</li>
+<li>
+<p>optWarningTime <code>number</code> - (optional) threshold in seconds, default = 0. If the threshold is set to 0,
+the execution time will never exceed, so the state will be always OK!</p>
+</li>
+</ul>
+</div>
+<div id="TestCase.handleException" class="paragraph">
+<div class="title">TestCase.handleException(e)</div>
+<p>Handles any Exception or Error. The handleException function calls the Java backend and stores the Exception
+for further processing.</p>
+</div>
+<div class="paragraph">
+<p>Use it at the end of a catch-block.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>e <code>Error</code> - any Exception or Error</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="keyword">try</span> {
+  ... <span class="keyword">do</span> something
+} <span class="keyword">catch</span> (e) {
+    sakuli.handleException(e);
+}</code></pre>
+</div>
+</div>
+<div id="TestCase.saveResult" class="paragraph">
+<div class="title">TestCase.saveResult()</div>
+<p>Saves the results of the current test case for further processing.</p>
+</div>
+<div class="paragraph">
+<p>Should be called in finally-block of the test case:</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="keyword">try</span> {
+    ... <span class="keyword">do</span> something
+} <span class="keyword">catch</span> (e) {
+    sakuli.handleException(e);
+} <span class="keyword">finally</span> {
+    sakuli.saveResult();
+}</code></pre>
+</div>
+</div>
+<div id="TestCase.getID" class="paragraph">
+<div class="title">TestCase.getID()</div>
+<p>Returns the <strong>current</strong> id of this test case.</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: <code>String</code> - id</p>
+</div>
+<div id="TestCase.getLastURL" class="paragraph">
+<div class="title">TestCase.getLastURL()</div>
+<p>Updates and returns the URL of the last visited URL</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: <code>String</code> - last visited URL</p>
+</div>
+<div id="TestCase.getTestCaseFolderPath" class="paragraph">
+<div class="title">TestCase.getTestCaseFolderPath()</div>
+<p><strong>Returns</strong>: <code>String</code> - the folder path of the current testcase.</p>
+</div>
+<div id="TestCase.getTestSuiteFolderPath" class="paragraph">
+<div class="title">TestCase.getTestSuiteFolderPath()</div>
+<p><strong>Returns</strong>: <code>String</code> - the folder path of the current testcase.</p>
+</div>
+<div id="TestCase.throwException" class="paragraph">
+<div class="title">TestCase.throwException(message, screenshot)</div>
+<p>Creates a new test case based exception with an optional screenshot at the calling time.
+Will be called from sakuli.js or in side of 'org.sakuli.javaDSL.AbstractSakuliTest'.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>message <code>String</code> - error message</p>
+</li>
+<li>
+<p>screenshot <code>Boolean</code> - enable / disable screenshot functionality</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="Application"><a class="anchor" href="#Application"></a>1.3.1.4. Application</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api-application.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api-application.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>Application Class - Represents an application.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>applicationNameOrPath <code>String</code> - Path to the application file. <strong>Example:</strong> <code>C:\Windows\system32\notepad.exe</code></p>
+</li>
+<li>
+<p>optResumeOnException <code>Boolean</code> - Determines whether to ignore exceptions from this class. If this parameter is
+undefined, it will be false.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: <a href="#Application">Application</a> - an initialized object.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="comment">//windows</span>
+<span class="keyword">var</span> editor = <span class="keyword">new</span> Application(<span class="string"><span class="delimiter">&quot;</span><span class="content">notepad.exe</span><span class="delimiter">&quot;</span></span>);
+<span class="comment">//linux</span>
+<span class="keyword">var</span> editor = <span class="keyword">new</span> Application(<span class="string"><span class="delimiter">&quot;</span><span class="content">gedit</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Members</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Application">Application</a></p>
+</li>
+<li>
+<p><a href="#Application.open">Application.open()</a></p>
+</li>
+<li>
+<p><a href="#Application.focus">Application.focus()</a></p>
+</li>
+<li>
+<p><a href="#Application.focusWindow">Application.focusWindow(windowNumber)</a></p>
+</li>
+<li>
+<p><a href="#Application.close">Application.close(optSilent)</a></p>
+</li>
+<li>
+<p><a href="#Application.kill">Application.kill(optSilent)</a></p>
+</li>
+<li>
+<p><a href="#Application.setSleepTime">Application.setSleepTime(seconds)</a></p>
+</li>
+<li>
+<p><a href="#Application.getRegion">Application.getRegion()</a></p>
+</li>
+<li>
+<p><a href="#Application.getRegionForWindow">Application.getRegionForWindow(windowNumber)</a></p>
+</li>
+<li>
+<p><a href="#Application.getName">Application.getName()</a></p>
+</li>
+</ul>
+</div>
+<div id="Application.open" class="paragraph">
+<div class="title">Application.open()</div>
+<p>Opens the created application.
+For application with a long load time you may need to change the default sleep time with setSleepTime(…).</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Application object.</p>
+</div>
+<div id="Application.focus" class="paragraph">
+<div class="title">Application.focus()</div>
+<p>Focuses the current application, if the application is in the background.</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Application object.</p>
+</div>
+<div id="Application.focusWindow" class="paragraph">
+<div class="title">Application.focusWindow(windowNumber)</div>
+<p>Focuses a specific window of the application.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>windowNumber <code>number</code> - identifies the window</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Application object.</p>
+</div>
+<div id="Application.close" class="paragraph">
+<div class="title">Application.close(optSilent)</div>
+<p>Closes the already existing application.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>optSilent <code>boolean</code> - (optional) if true, no exception will be thrown on errors and stop the test execution.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Application object.</p>
+</div>
+<div id="Application.kill" class="paragraph">
+<div class="title">Application.kill(optSilent)</div>
+<p>Kill the already existing application hardly.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>optSilent <code>boolean</code> - (optional) if true, no exception will be thrown on errors.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Application object.</p>
+</div>
+<div id="Application.setSleepTime" class="paragraph">
+<div class="title">Application.setSleepTime(seconds)</div>
+<p>Sets the sleep time in seconds of the application actions to handle with long loading times.
+The default sleep time is set to 1 seconds.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>seconds <code>number</code> - sleep time in seconds</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Application object.</p>
+</div>
+<div id="Application.getRegion" class="paragraph">
+<div class="title">Application.getRegion()</div>
+<p>Creates and returns a Region object from the application.</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - a Region object.</p>
+</div>
+<div id="Application.getRegionForWindow" class="paragraph">
+<div class="title">Application.getRegionForWindow(windowNumber)</div>
+<p>Creates and returns a Region object from a specific window of the application.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>windowNumber <code>number</code> - identifies the window</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - a Region object.</p>
+</div>
+<div id="Application.getName" class="paragraph">
+<div class="title">Application.getName()</div>
+<p><strong>Returns</strong>: - the name of the current application.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="Environment"><a class="anchor" href="#Environment"></a>1.3.1.5. Environment</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api-environment.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api-environment.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>Environment - Represents the environment of the current test host.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>optResumeOnException <code>Boolean</code> - (optional) if this parameter is undefined, it will be false.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Members</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Environment">Environment</a></p>
+</li>
+<li>
+<p><a href="#Environment.setSimilarity">Environment.setSimilarity(similarity)</a></p>
+</li>
+<li>
+<p><a href="#Environment.resetSimilarity">Environment.resetSimilarity()</a></p>
+</li>
+<li>
+<p><a href="#Environment.getRegionFromFocusedWindow">Environment.getRegionFromFocusedWindow()</a></p>
+</li>
+<li>
+<p><a href="#Environment.takeScreenshot">Environment.takeScreenshot(pathName)</a></p>
+</li>
+<li>
+<p><a href="#Environment.sleep">Environment.sleep(seconds)</a></p>
+</li>
+<li>
+<p><a href="#Environment.getClipboard">Environment.getClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.setClipboard">Environment.setClipboard(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.pasteClipboard">Environment.pasteClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.copyIntoClipboard">Environment.copyIntoClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.cleanClipboard">Environment.cleanClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.paste">Environment.paste(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.pasteMasked">Environment.pasteMasked(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.pasteAndDecrypt">Environment.pasteAndDecrypt(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.type">Environment.type(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Environment.typeMasked">Environment.typeMasked(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Environment.typeAndDecrypt">Environment.typeAndDecrypt(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Environment.decryptSecret">Environment.decryptSecret(secret)</a></p>
+</li>
+<li>
+<p><a href="#Environment.keyDown">Environment.keyDown(keys)</a></p>
+</li>
+<li>
+<p><a href="#Environment.keyUp">Environment.keyUp(keys)</a></p>
+</li>
+<li>
+<p><a href="#Environment.write">Environment.write(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.mouseWheelDown">Environment.mouseWheelDown(steps)</a></p>
+</li>
+<li>
+<p><a href="#Environment.mouseWheelUp">Environment.mouseWheelUp(steps)</a></p>
+</li>
+<li>
+<p><a href="#Environment.isWindows">Environment.isWindows()</a></p>
+</li>
+<li>
+<p><a href="#Environment.isLinux">Environment.isLinux()</a></p>
+</li>
+<li>
+<p><a href="#Environment.getOsIdentifier">Environment.getOsIdentifier()</a></p>
+</li>
+<li>
+<p><a href="#Environment.runCommand">Environment.runCommand(command, optThrowException)</a></p>
+</li>
+</ul>
+</div>
+<div id="Environment.setSimilarity" class="paragraph">
+<div class="title">Environment.setSimilarity(similarity)</div>
+<p>Set a new default similarity for the screen capturing methods.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>similarity <code>number</code> - value between 0 and 1, default = 0.8</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.resetSimilarity" class="paragraph">
+<div class="title">Environment.resetSimilarity()</div>
+<p>Resets the current similarty of the screen capturing methods to the original default value of 0.8.</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this <a href="#Environment">Environment</a> or NULL on errors.</p>
+</div>
+<div id="Environment.getRegionFromFocusedWindow" class="paragraph">
+<div class="title">Environment.getRegionFromFocusedWindow()</div>
+<p>Get a Region object from the current focused window</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - a Region object from the current focused window
+ or NULL on errors.</p>
+</div>
+<div id="Environment.takeScreenshot" class="paragraph">
+<div class="title">Environment.takeScreenshot(pathName)</div>
+<p>Takes a screenshot of the current screen and saves it to the overgiven path.
+If there ist just a file name, the screenshot will be saved in your testsuite log folder.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>pathName <code>String</code> - <code>pathname/filname.format</code> or just <code>filename.format</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js">environment.takeScreenshot(<span class="string"><span class="delimiter">&quot;</span><span class="content">test.jpg</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+<div id="Environment.sleep" class="paragraph">
+<div class="title">Environment.sleep(seconds)</div>
+<p>Blocks the current testcase execution for x seconds</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>seconds <code>number</code> - to sleep</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.getClipboard" class="paragraph">
+<div class="title">Environment.getClipboard()</div>
+<p><strong>Returns</strong>: - the current content of the clipboard as String or NULL on errors</p>
+</div>
+<div id="Environment.setClipboard" class="paragraph">
+<div class="title">Environment.setClipboard(text)</div>
+<p>sets the String paramter to the system clipboard</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - text as string</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment.</p>
+</div>
+<div id="Environment.pasteClipboard" class="paragraph">
+<div class="title">Environment.pasteClipboard()</div>
+<p>pastes the current clipboard content into the focused area.
+Will do the same as "STRG + V".</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment.</p>
+</div>
+<div id="Environment.copyIntoClipboard" class="paragraph">
+<div class="title">Environment.copyIntoClipboard()</div>
+<p>copy the current selected item or text to the clipboard.
+Will do the same as "STRG + C".</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment.</p>
+</div>
+<div id="Environment.cleanClipboard" class="paragraph">
+<div class="title">Environment.cleanClipboard()</div>
+<p>Clean the content of the clipboard.</p>
+</div>
+<div id="Environment.paste" class="paragraph">
+<div class="title">Environment.paste(text)</div>
+<p>pastes the text at the current position of the focus/carret &lt;br/&gt;using the
+clipboard and strg/ctrl/cmd-v (paste keyboard shortcut)</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - a string, which might contain unicode characters</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.pasteMasked" class="paragraph">
+<div class="title">Environment.pasteMasked(text)</div>
+<p>makes a masked paste(String) without any logging.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - a string, which might contain unicode characters</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.pasteAndDecrypt" class="paragraph">
+<div class="title">Environment.pasteAndDecrypt(text)</div>
+<p>combines pasteMasked(String) and decryptSecret(String).</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - encrypted secret</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.type" class="paragraph">
+<div class="title">Environment.type(text, optModifiers)</div>
+<p>Enters the given text one character/key after another using keyDown/keyUp.
+&lt;p/&gt;
+About the usable Key constants see documentation of Key.
+The function could also type UTF-8 unicode characters, if the OS supports it.
+The text is entered at the current position of the focus.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - containing characters and/or Key constants</p>
+</li>
+<li>
+<p>optModifiers <code>String</code> - (optional) an String with only Key constants.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.typeMasked" class="paragraph">
+<div class="title">Environment.typeMasked(text, optModifiers)</div>
+<p>Enters the given text one character/key after another using keyDown/keyUp.
+The entered text will be masked at the logging.
+&lt;p/&gt;
+About the usable Key constants see documentation of Key.
+The function could also type UTF-8 unicode characters, if the OS supports it.
+The text is entered at the current position of the focus.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - containing characters and/or Key constants</p>
+</li>
+<li>
+<p>optModifiers <code>String</code> - (optional) an String with only Key constants.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.typeAndDecrypt" class="paragraph">
+<div class="title">Environment.typeAndDecrypt(text, optModifiers)</div>
+<p>Decrypt and enters the given text one character/key after another using keyDown/keyUp.
+The entered text will be masked at the logging. For the details of the decryption see decryptSecret(String).
+&lt;p/&gt;
+About the usable Key constants see documentation of Key.
+The function could also type UTF-8 unicode characters, if the OS supports it.
+The text is entered at the current position of the focus.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - containing characters and/or Key constants</p>
+</li>
+<li>
+<p>optModifiers <code>String</code> - (optional) an String with only Key constants.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.decryptSecret" class="paragraph">
+<div class="title">Environment.decryptSecret(secret)</div>
+<p>Decrypt a encrypted secret and returns the value at runtime.
+The decryption will only work if the encryption and decryption happen on the same physical machine.
+There will be no logging with the decrypted secret during this step.
+&lt;p/&gt;
+To create a encrypted secret see "sakuli-manual.md".</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>secret <code>String</code> - encrypted secret as String</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - decrypted String</p>
+</div>
+<div id="Environment.keyDown" class="paragraph">
+<div class="title">Environment.keyDown(keys)</div>
+<p>Press and hold the given keys including modifier keys &lt;br/&gt;
+use the key constants defined in class Key, &lt;br/&gt;
+which only provides a subset of a US-QWERTY PC keyboard layout &lt;br/&gt;
+might be mixed with simple characters&lt;br/&gt;
+use + to concatenate Key constants</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>keys <code>String</code> - valid keys</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.keyUp" class="paragraph">
+<div class="title">Environment.keyUp(keys)</div>
+<p>release the given keys (see Environment.keyDown(…)).</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>keys <code>String</code> - valid keys</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.write" class="paragraph">
+<div class="title">Environment.write(text)</div>
+<p>Compact alternative for type() with more options</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>special keys and options are coded as #XN. or #X+ or #X- where X is a reference for a special key and N is an optional repeat factor<br>
+A modifier key as #X. modifies the next following key the trailing . ends the special key, the + (press and hold) or - (release) does the same, but signals press-and-hold or release additionally.<br>
+except #W / #w all special keys are not case-sensitive<br>
+a #wn. inserts a wait of n millisecs or n secs if n less than 60<br>
+a #Wn. sets the type delay for the following keys (must be &gt; 60 and denotes millisecs)</p>
+</li>
+<li>
+<p>otherwise taken as normal wait<br>
+<strong>Example:</strong> wait 2 secs then type CMD/CTRL - N then wait 1 sec then type DOWN 3 times<br>
+<strong>Windows/Linux:</strong> write("#w2.#C.n#W1.#d3.")<br>
+<strong>Mac:</strong> write("#w2.#M.n#W1.#D3.")<br>
+for more details about the special key codes and examples consult the sikuliX docs.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - a coded text interpreted as a series of key actions (press/hold/release)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.mouseWheelDown" class="paragraph">
+<div class="title">Environment.mouseWheelDown(steps)</div>
+<p>move the mouse pointer to the given target location and move the
+wheel the given steps down.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>steps <code>number</code> - the number of steps</p>
+</li>
+</ul>
+</div>
+<div id="Environment.mouseWheelUp" class="paragraph">
+<div class="title">Environment.mouseWheelUp(steps)</div>
+<p>move the mouse pointer to the given target location and move the
+wheel the given steps up.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>steps <code>number</code> - the number of steps</p>
+</li>
+</ul>
+</div>
+<div id="Environment.isWindows" class="paragraph">
+<div class="title">Environment.isWindows()</div>
+<p><strong>Returns</strong>: <code>boolean</code> - true, if the OS is any instance of an Windows based OS</p>
+</div>
+<div id="Environment.isLinux" class="paragraph">
+<div class="title">Environment.isLinux()</div>
+<p><strong>Returns</strong>: <code>boolean</code> - true, if the OS is any instance of an Linux based OS</p>
+</div>
+<div id="Environment.getOsIdentifier" class="paragraph">
+<div class="title">Environment.getOsIdentifier()</div>
+<p><strong>Returns</strong>: <code>string</code> - identifier of the current OS</p>
+</div>
+<div id="Environment.runCommand" class="paragraph">
+<div class="title">Environment.runCommand(command, optThrowException)</div>
+<p>Runs the assigned command on the host and returns the result. <strong>Attention:</strong> this is OS depended feature! So be
+aware which os you are running, maybe us to check <code>Environment#isLinux()</code> or <code>Environment#isWindows()</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>command <code>string</code> - OS depended command as <code>String</code></p>
+</li>
+<li>
+<p>optThrowException <code>boolean</code> - defines if an exception should be thrown, if the exit code != 0</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - the result as <code>CommandLineResult</code> object, you can use the methods <code>result.getOutput()</code> and <code>result.getExitCode()</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="keyword">var</span> app;
+<span class="keyword">if</span>(environmen.runCommand(<span class="string"><span class="delimiter">'</span><span class="content">uname --machine</span><span class="delimiter">'</span></span>) == <span class="string"><span class="delimiter">'</span><span class="content">x86_64</span><span class="delimiter">'</span></span>){
+    <span class="comment">//open app from other path</span>
+    app = <span class="keyword">new</span> Application(<span class="string"><span class="delimiter">'</span><span class="content">/lib64/appname</span><span class="delimiter">'</span></span>);
+} <span class="keyword">else</span> {
+    app = <span class="keyword">new</span> Application(<span class="string"><span class="delimiter">'</span><span class="content">/lib/appname</span><span class="delimiter">'</span></span>);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="Key"><a class="anchor" href="#Key"></a>1.3.1.6. Key</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api-key.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api-key.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>Key - representing some Key constants which can be used in type functions as input text and as modifier keys.</p>
+</div>
+<div class="paragraph">
+<p>The following <strong>Key</strong> values are possible:</p>
+</div>
+<div class="paragraph">
+<p><code>SPACE</code>, <code>ENTER</code>, <code>BACKSPACE</code>, <code>TAB</code>, <code>ESC</code>, <code>UP</code>, <code>RIGHT</code>, <code>DOWN</code>, <code>LEFT</code>, <code>PAGE_UP</code>, <code>PAGE_DOWN</code>, <code>DELETE</code>, <code>END</code>,
+<code>HOME</code>, <code>INSERT</code>, <code>F1</code>, <code>F2</code>, <code>F3</code>, <code>F4</code>, <code>F5</code>, <code>F6</code>, <code>F7</code>, <code>F8</code>, <code>F9</code>, <code>F10</code>, <code>F11</code>, <code>F12</code>, <code>F13</code>, <code>F14</code>, <code>F15</code>,
+<code>SHIFT</code>, <code>CTRL</code>, <code>ALT</code>, <code>ALTGR</code>, <code>META</code>, <code>CMD</code>, <code>WIN</code>, <code>PRINTSCREEN</code>, <code>SCROLL_LOCK</code>, <code>PAUSE</code>, <code>CAPS_LOCK</code>, <code>NUM0</code>,
+<code>NUM1</code>, <code>NUM2</code>, <code>NUM3</code>, <code>NUM4</code>, <code>NUM5</code>, <code>NUM6</code>, <code>NUM7</code>, <code>NUM8</code>, <code>NUM9</code>, <code>SEPARATOR</code>, <code>NUM_LOCK</code>, <code>ADD</code>, <code>MINUS</code>,
+<code>MULTIPLY</code>, <code>DIVIDE</code>, <code>DECIMAL</code>, <code>CONTEXT</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Using <code>Key.ALTGR</code> on Unix:</strong>
+To enable the key command <code>ALTGR</code> for unix systems please bind it to <code>CTRL + ALT</code>, for more information
+see <a href="http://unix.stackexchange.com/questions/157834/how-to-bind-altgr-to-ctrl-alt">stackexchange.com - how-to-bind-altgr-to-ctrl-alt</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>
+Closing an window over typing the short cut <code>ALT + F4</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js">env.type(Key.F4, Key.ALT);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Members</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Key">Key</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="Logger"><a class="anchor" href="#Logger"></a>1.3.1.7. Logger</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api-logger.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api-logger.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>Logger - Logging functions to do 'debug, 'info', 'warning' and 'error' log entries.</p>
+</div>
+<div class="paragraph">
+<p><strong>Members</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Logger">Logger</a></p>
+</li>
+<li>
+<p><a href="#Logger.logError">Logger.logError(message)</a></p>
+</li>
+<li>
+<p><a href="#Logger.logWarning">Logger.logWarning(message)</a></p>
+</li>
+<li>
+<p><a href="#Logger.logInfo">Logger.logInfo(message)</a></p>
+</li>
+<li>
+<p><a href="#Logger.logDebug">Logger.logDebug(message)</a></p>
+</li>
+</ul>
+</div>
+<div id="Logger.logError" class="paragraph">
+<div class="title">Logger.logError(message)</div>
+<p>make a error-log over Java backend into the log file.
+This won&#8217;t stop the execution of the test case.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>message <code>String</code> - as a String</p>
+</li>
+</ul>
+</div>
+<div id="Logger.logWarning" class="paragraph">
+<div class="title">Logger.logWarning(message)</div>
+<p>make a debug-log over Java backend into the log file.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>message <code>String</code> - as a String</p>
+</li>
+</ul>
+</div>
+<div id="Logger.logInfo" class="paragraph">
+<div class="title">Logger.logInfo(message)</div>
+<p>make a info-log over Java backend into the log file.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>message <code>String</code> - as a String</p>
+</li>
+</ul>
+</div>
+<div id="Logger.logDebug" class="paragraph">
+<div class="title">Logger.logDebug(message)</div>
+<p>make a debug-log over Java backend into the log file.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>message <code>String</code> - as a String</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="MouseButton"><a class="anchor" href="#MouseButton"></a>1.3.1.8. MouseButton</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api-mouse-button.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api-mouse-button.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>MouseButton - representing the possible mouse action button.</p>
+</div>
+<div class="paragraph">
+<p>The following <strong>MouseButton</strong> values are possible:</p>
+</div>
+<div class="paragraph">
+<p><code>LEFT</code>, <code>RIGHT</code>, <code>MIDDLE</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>
+Press and release the right mouse button vor 3 seconds on a specified region:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="keyword">var</span> region = <span class="keyword">new</span> Region().find(<span class="string"><span class="delimiter">&quot;</span><span class="content">your-pattern.png</span><span class="delimiter">&quot;</span></span>);
+region.mouseDown(MouseButton.RIGHT).sleep(<span class="integer">3</span>).mouseUp(MouseButton.RIGHT);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Members</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#MouseButton">MouseButton</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="Region"><a class="anchor" href="#Region"></a>1.3.1.9. Region</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api-region.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api-region.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>Region - Represents a region as a part of or the hole screen.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>optResumeOnException <code>Boolean</code> - if true, the test execution won&#8217;t stop on an occurring error. Default: false.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="keyword">var</span> screen = <span class="keyword">new</span> Region();   <span class="comment">//represents the hole screen`</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Members</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Region">Region</a></p>
+</li>
+<li>
+<p><a href="#Region.find">Region.find(imageName)</a></p>
+</li>
+<li>
+<p><a href="#Region.findRegion">Region.findRegion()</a></p>
+</li>
+<li>
+<p><a href="#Region.exists">Region.exists(imageName, optWaitSeconds)</a></p>
+</li>
+<li>
+<p><a href="#Region.click">Region.click()</a></p>
+</li>
+<li>
+<p><a href="#Region.doubleClick">Region.doubleClick()</a></p>
+</li>
+<li>
+<p><a href="#Region.rightClick">Region.rightClick()</a></p>
+</li>
+<li>
+<p><a href="#Region.mouseMove">Region.mouseMove()</a></p>
+</li>
+<li>
+<p><a href="#Region.mouseDown">Region.mouseDown(mouseButton)</a></p>
+</li>
+<li>
+<p><a href="#Region.mouseUp">Region.mouseUp(mouseButton)</a></p>
+</li>
+<li>
+<p><a href="#Region.dragAndDropTo">Region.dragAndDropTo(targetRegion)</a></p>
+</li>
+<li>
+<p><a href="#Region.waitForImage">Region.waitForImage(imageName, seconds)</a></p>
+</li>
+<li>
+<p><a href="#Region.paste">Region.paste(text)</a></p>
+</li>
+<li>
+<p><a href="#Region.pasteMasked">Region.pasteMasked(text)</a></p>
+</li>
+<li>
+<p><a href="#Region.pasteAndDecrypt">Region.pasteAndDecrypt(text)</a></p>
+</li>
+<li>
+<p><a href="#Region.type">Region.type(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Region.typeMasked">Region.typeMasked(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Region.typeAndDecrypt">Region.typeAndDecrypt(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Region.keyDown">Region.keyDown(keys)</a></p>
+</li>
+<li>
+<p><a href="#Region.keyUp">Region.keyUp(keys)</a></p>
+</li>
+<li>
+<p><a href="#Region.write">Region.write(text)</a></p>
+</li>
+<li>
+<p><a href="#Region.deleteChars">Region.deleteChars(amountOfChars)</a></p>
+</li>
+<li>
+<p><a href="#Region.mouseWheelDown">Region.mouseWheelDown(steps)</a></p>
+</li>
+<li>
+<p><a href="#Region.mouseWheelUp">Region.mouseWheelUp(steps)</a></p>
+</li>
+<li>
+<p><a href="#Region.move">Region.move(offsetX, offsetY)</a></p>
+</li>
+<li>
+<p><a href="#Region.grow">Region.grow(range)</a></p>
+</li>
+<li>
+<p><a href="#Region.grow">Region.grow(width, height)</a></p>
+</li>
+<li>
+<p><a href="#Region.above">Region.above(range)</a></p>
+</li>
+<li>
+<p><a href="#Region.below">Region.below(range)</a></p>
+</li>
+<li>
+<p><a href="#Region.left">Region.left(range)</a></p>
+</li>
+<li>
+<p><a href="#Region.right">Region.right(range)</a></p>
+</li>
+<li>
+<p><a href="#Region.setH">Region.setH(height)</a></p>
+</li>
+<li>
+<p><a href="#Region.getH">Region.getH()</a></p>
+</li>
+<li>
+<p><a href="#Region.setW">Region.setW(width)</a></p>
+</li>
+<li>
+<p><a href="#Region.getW">Region.getW()</a></p>
+</li>
+<li>
+<p><a href="#Region.setX">Region.setX(x)</a></p>
+</li>
+<li>
+<p><a href="#Region.getX">Region.getX()</a></p>
+</li>
+<li>
+<p><a href="#Region.setY">Region.setY(y)</a></p>
+</li>
+<li>
+<p><a href="#Region.getY">Region.getY()</a></p>
+</li>
+<li>
+<p><a href="#Region.highlight">Region.highlight(seconds)</a></p>
+</li>
+<li>
+<p><a href="#Region.takeScreenshot">Region.takeScreenshot(filename)</a></p>
+</li>
+<li>
+<p><a href="#Region.sleep">Region.sleep(seconds)</a></p>
+</li>
+<li>
+<p><a href="#Region.extractText">Region.extractText()</a></p>
+</li>
+</ul>
+</div>
+<div id="Region.find" class="paragraph">
+<div class="title">Region.find(imageName)</div>
+<p>Finds an image inside this region immediately.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>imageName <code>String</code> - name of the preloaded picture
+(if not set, the find operation will take place on the predefined region object.)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - the found Region or if the target can&#8217;t be found null.</p>
+</div>
+<div id="Region.findRegion" class="paragraph">
+<div class="title">Region.findRegion()</div>
+<p>Finds a target in this Region immediately;</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - the found Region or if the target can&#8217;t be found null.</p>
+</div>
+<div id="Region.exists" class="paragraph">
+<div class="title">Region.exists(imageName, optWaitSeconds)</div>
+<p>Check whether the give pattern is visible on the screen.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>imageName <code>String</code> - if set, the function search inside the given region for the image</p>
+</li>
+<li>
+<p>optWaitSeconds <code>number</code> - if set, the function search for x seconds for the pattern.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Region or null</p>
+</div>
+<div id="Region.click" class="paragraph">
+<div class="title">Region.click()</div>
+<p>makes a mouse click on the center of the Region.</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - the Region or NULL on errors.</p>
+</div>
+<div id="Region.doubleClick" class="paragraph">
+<div class="title">Region.doubleClick()</div>
+<p>makes a double click on the center of the Region.</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - the Region or NULL on errors.</p>
+</div>
+<div id="Region.rightClick" class="paragraph">
+<div class="title">Region.rightClick()</div>
+<p>makes a right click on the center of the Region.</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - the Region or NULL on errors.</p>
+</div>
+<div id="Region.mouseMove" class="paragraph">
+<div class="title">Region.mouseMove()</div>
+<p>Move the mouse pointer to the center of the <a href="#Region">Region</a> and "hovers" it.</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - the <a href="#Region">Region</a> or NULL on errors.</p>
+</div>
+<div id="Region.mouseDown" class="paragraph">
+<div class="title">Region.mouseDown(mouseButton)</div>
+<p>Low-level mouse action to press the assigned <a href="#MouseButton">MouseButton</a> on the current position.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>mouseButton - on of <a href="#MouseButton">MouseButton</a> values</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - the <a href="#Region">Region</a> or NULL on errors.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>
+Press and release the right mouse button vor 3 seconds on a specified region:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="keyword">var</span> region = <span class="keyword">new</span> Region().find(<span class="string"><span class="delimiter">&quot;</span><span class="content">your-pattern.png</span><span class="delimiter">&quot;</span></span>);
+region.mouseDown(MouseButton.RIGHT).sleep(<span class="integer">3</span>).mouseUp(MouseButton.RIGHT);</code></pre>
+</div>
+</div>
+<div id="Region.mouseUp" class="paragraph">
+<div class="title">Region.mouseUp(mouseButton)</div>
+<p>Low-level mouse action to release the assigned <a href="#MouseButton">MouseButton</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>mouseButton - on of <a href="#MouseButton">MouseButton</a> values</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - the <a href="#Region">Region</a> or NULL on errors.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="paragraph">
+<p>Press and release the right mouse button vor 3 seconds on a specified region:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="keyword">var</span> region = <span class="keyword">new</span> Region().find(<span class="string"><span class="delimiter">&quot;</span><span class="content">your-pattern.png</span><span class="delimiter">&quot;</span></span>);
+region.mouseDown(MouseButton.RIGHT).sleep(<span class="integer">3</span>).mouseUp(MouseButton.RIGHT);</code></pre>
+</div>
+</div>
+<div id="Region.dragAndDropTo" class="paragraph">
+<div class="title">Region.dragAndDropTo(targetRegion)</div>
+<p>Drag from region&#8217;s current position and drop at given targetRegion and using the left mouse.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>targetRegion &lt;code&gt;<a href="#Region">Region</a>&lt;/code&gt; - target where to drop</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - the Region or NULL on failure</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>
+move the bubble button 20px to the rigth:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="keyword">var</span> bubble = screen.find(<span class="string"><span class="delimiter">&quot;</span><span class="content">bubble.png</span><span class="delimiter">&quot;</span></span>);
+bubble.dragAndDropTo(bubble.right(<span class="integer">20</span>));</code></pre>
+</div>
+</div>
+<div id="Region.waitForImage" class="paragraph">
+<div class="title">Region.waitForImage(imageName, seconds)</div>
+<p>Blocks and waits until a target which is specified by the optImageName is found in the hole
+Screen within a given time period in seconds.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>imageName <code>String</code> - name of the image pattern</p>
+</li>
+<li>
+<p>seconds <code>number</code> - the maximum time to waitFor in seconds</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - a Region object representing the region occupied by the found target,
+ or null if the target can not be found within the given time.</p>
+</div>
+<div id="Region.paste" class="paragraph">
+<div class="title">Region.paste(text)</div>
+<p>pastes the text at the current position of the focus/carret &lt;br/&gt;using the
+clipboard and strg/ctrl/cmd-v (paste keyboard shortcut)</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - as a string, which might contain unicode characters</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Region or NULL on errors.</p>
+</div>
+<div id="Region.pasteMasked" class="paragraph">
+<div class="title">Region.pasteMasked(text)</div>
+<p>makes a masked paste(String) without any logging.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - a string, which might contain unicode characters</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Region or NULL on errors.</p>
+</div>
+<div id="Region.pasteAndDecrypt" class="paragraph">
+<div class="title">Region.pasteAndDecrypt(text)</div>
+<p>combines pasteMasked(String) and decryptSecret(String).</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - encrypted secret</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Region or NULL on errors.</p>
+</div>
+<div id="Region.type" class="paragraph">
+<div class="title">Region.type(text, optModifiers)</div>
+<p>Enters the given text one character/key after another using keyDown/keyUp.
+&lt;p/&gt;
+About the usable Key constants see documentation of Key.
+The function could also type UTF-8 unicode characters, if the OS supports it.
+The text is entered at the current position of the focus.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - containing characters and/or Key constants</p>
+</li>
+<li>
+<p>optModifiers <code>String</code> - (optional) an String with only Key constants.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Region or NULL on errors.</p>
+</div>
+<div id="Region.typeMasked" class="paragraph">
+<div class="title">Region.typeMasked(text, optModifiers)</div>
+<p>Enters the given text one character/key after another using keyDown/keyUp.
+The entered text will be masked at the logging.
+&lt;p/&gt;
+About the usable Key constants see documentation of Key.
+The function could also type UTF-8 unicode characters, if the OS supports it.
+The text is entered at the current position of the focus.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - containing characters and/or Key constants</p>
+</li>
+<li>
+<p>optModifiers <code>String</code> - (optional) an String with only Key constants.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Region or NULL on errors.</p>
+</div>
+<div id="Region.typeAndDecrypt" class="paragraph">
+<div class="title">Region.typeAndDecrypt(text, optModifiers)</div>
+<p>Decrypt and enters the given text one character/key after another using keyDown/keyUp.
+The entered text will be masked at the logging. For the deatails of the decryption see decryptSecret(String).
+&lt;p/&gt;
+About the usable Key constants see documentation of Key.
+The function could also type UTF-8 unicode characters, if the OS supports it.
+The text is entered at the current position of the focus.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - containing characters and/or Key constants</p>
+</li>
+<li>
+<p>optModifiers <code>String</code> - (optional) an String with only Key constants.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Region or NULL on errors.</p>
+</div>
+<div id="Region.keyDown" class="paragraph">
+<div class="title">Region.keyDown(keys)</div>
+<p>Press and hold the given keys including modifier keys &lt;br/&gt;
+use the key constants defined in class Key, &lt;br/&gt;
+which only provides a subset of a US-QWERTY PC keyboard layout &lt;br/&gt;
+might be mixed with simple characters&lt;br/&gt;
+use + to concatenate Key constants</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>keys <code>String</code> - valid keys</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Region or NULL on errors.</p>
+</div>
+<div id="Region.keyUp" class="paragraph">
+<div class="title">Region.keyUp(keys)</div>
+<p>release the given keys (see Region.keyDown(…)).</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>keys <code>String</code> - valid keys</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Region or NULL on errors.</p>
+</div>
+<div id="Region.write" class="paragraph">
+<div class="title">Region.write(text)</div>
+<p>Compact alternative for type() with more options</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>special keys and options are coded as #XN. or #X+ or #X- where X is a reference for a special key and N is an optional repeat factor<br>
+A modifier key as #X. modifies the next following key the trailing . ends the special key, the + (press and hold) or - (release) does the same, but signals press-and-hold or release additionally.<br>
+except #W / #w all special keys are not case-sensitive<br>
+a #wn. inserts a wait of n millisecs or n secs if n less than 60<br>
+a #Wn. sets the type delay for the following keys (must be &gt; 60 and denotes millisecs)</p>
+</li>
+<li>
+<p>otherwise taken as normal wait<br>
+<strong>Example:</strong> wait 2 secs then type CMD/CTRL - N then wait 1 sec then type DOWN 3 times<br>
+<strong>Windows/Linux:</strong> write("#w2.#C.n#W1.#d3.")<br>
+<strong>Mac:</strong> write("#w2.#M.n#W1.#D3.")<br>
+for more details about the special key codes and examples consult the sikuliX docs.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - a coded text interpreted as a series of key actions (press/hold/release)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Region or NULL on errors.</p>
+</div>
+<div id="Region.deleteChars" class="paragraph">
+<div class="title">Region.deleteChars(amountOfChars)</div>
+<p>delete a amount of chars in a field</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>amountOfChars <code>number</code> - number of chars to delete</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Region or null on errors</p>
+</div>
+<div id="Region.mouseWheelDown" class="paragraph">
+<div class="title">Region.mouseWheelDown(steps)</div>
+<p>move the mouse pointer to the given target location and move the
+wheel the given steps down.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>steps <code>number</code> - the number of steps</p>
+</li>
+</ul>
+</div>
+<div id="Region.mouseWheelUp" class="paragraph">
+<div class="title">Region.mouseWheelUp(steps)</div>
+<p>move the mouse pointer to the given target location and move the
+wheel the given steps up.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>steps <code>number</code> - the number of steps</p>
+</li>
+</ul>
+</div>
+<div id="Region.move" class="paragraph">
+<div class="title">Region.move(offsetX, offsetY)</div>
+<p>Set a offset to a specific Region and returns the new Region object.
+The offset function will move the Region&#8217;s rectangle x pixels to the right and y pixels down.
+The size of the rectangle will be the same.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>offsetX <code>number</code> - x-value for the offset action</p>
+</li>
+<li>
+<p>offsetY <code>number</code> - y-value for the offset action</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - a Region with the new coordinates</p>
+</div>
+<div id="Region.grow" class="paragraph">
+<div class="title">Region.grow(range)</div>
+<p>create a region enlarged range pixels on each side</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>range <code>number</code> - of pixels</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - a new Region</p>
+</div>
+<div id="Region.grow" class="paragraph">
+<div class="title">Region.grow(width, height)</div>
+<p>create a region with enlarged range pixels</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>width <code>number</code> - in pixels to grow in both directions</p>
+</li>
+<li>
+<p>height <code>number</code> - in pixels to grow in both directions</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - a new Region</p>
+</div>
+<div id="Region.above" class="paragraph">
+<div class="title">Region.above(range)</div>
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>range <code>number</code> - of pixels</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - a new Region that is defined above the current region’s top border
+with a height of range number of pixels.</p>
+</div>
+<div id="Region.below" class="paragraph">
+<div class="title">Region.below(range)</div>
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>range <code>number</code> - of pixels</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - a new Region that is defined below the current region’s bottom border
+with a height of range number of pixels.</p>
+</div>
+<div id="Region.left" class="paragraph">
+<div class="title">Region.left(range)</div>
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>range <code>number</code> - of pixels</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - a new Region that is defined on the left the current region’s left border
+with a width of range number of pixels.</p>
+</div>
+<div id="Region.right" class="paragraph">
+<div class="title">Region.right(range)</div>
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>range <code>number</code> - of pixels</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - a new Region that is defined on the right the current region’s right border
+with a width of range number of pixels.</p>
+</div>
+<div id="Region.setH" class="paragraph">
+<div class="title">Region.setH(height)</div>
+<p>set the height, based form the upper left corner downsides</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>height <code>number</code> - in pixels</p>
+</li>
+</ul>
+</div>
+<div id="Region.getH" class="paragraph">
+<div class="title">Region.getH()</div>
+<p><strong>Returns</strong>: - height as int value</p>
+</div>
+<div id="Region.setW" class="paragraph">
+<div class="title">Region.setW(width)</div>
+<p>set the width, based form the upper left corner to the right</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>width <code>number</code></p>
+</li>
+</ul>
+</div>
+<div id="Region.getW" class="paragraph">
+<div class="title">Region.getW()</div>
+<p><strong>Returns</strong>: - width as int value</p>
+</div>
+<div id="Region.setX" class="paragraph">
+<div class="title">Region.setX(x)</div>
+<p>set the X coordinate of the upper left corner.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>x <code>number</code></p>
+</li>
+</ul>
+</div>
+<div id="Region.getX" class="paragraph">
+<div class="title">Region.getX()</div>
+<p><strong>Returns</strong>: - width as int value</p>
+</div>
+<div id="Region.setY" class="paragraph">
+<div class="title">Region.setY(y)</div>
+<p>set the Y coordinate of the upper left corner.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>y <code>number</code></p>
+</li>
+</ul>
+</div>
+<div id="Region.getY" class="paragraph">
+<div class="title">Region.getY()</div>
+<p><strong>Returns</strong>: - Y coordinate of the upper left corner</p>
+</div>
+<div id="Region.highlight" class="paragraph">
+<div class="title">Region.highlight(seconds)</div>
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>seconds <code>number</code> - highlights this Region for x seconds
+or the default time</p>
+</li>
+</ul>
+</div>
+<div id="Region.takeScreenshot" class="paragraph">
+<div class="title">Region.takeScreenshot(filename)</div>
+<p>Takes a screenshot of the current Region in the screen and saves it the current testcase folder with the assigned
+filename. If an absolute Path is assigned like e.g. <code>/home/user/test.jpg</code>, the screenshot will be saved at that place.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>filename <code>String</code> - name of the screenshot, e.g. <code>region_screenshot</code>.
+Default: screenshot</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: <code>String</code> - file path to the created screenshot OR null on errors</p>
+</div>
+<div id="Region.sleep" class="paragraph">
+<div class="title">Region.sleep(seconds)</div>
+<p>Blocks the current testcase execution for x seconds</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>seconds <code>number</code> - to sleep</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Region or NULL on errors.</p>
+</div>
+<div id="Region.extractText" class="paragraph">
+<div class="title">Region.extractText()</div>
+<p><strong>Returns</strong>: - from this region a extracted Text as String</p>
+</div>
+<div class="sect5">
+<h6 id="RegionRectangle"><a class="anchor" href="#RegionRectangle"></a>RegionRectangle</h6>
+<div class="paragraph">
+<p>RegionRectangle (extends <a href="#Region">Region</a>) - Represents a region specified by the x and y coordinates, width and
+height as a part of the screen.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>x <code>number</code> - – x position of a rectangle on the screen.</p>
+</li>
+<li>
+<p>y <code>number</code> - – y position of a rectangle on the screen.</p>
+</li>
+<li>
+<p>w <code>number</code> - – width of a rectangle in pixel.</p>
+</li>
+<li>
+<p>h <code>number</code> - – height of a rectangle in pixel.</p>
+</li>
+<li>
+<p>optResumeOnException <code>Boolean</code> - (optional) if true, the test execution won&#8217;t stop on an occurring error.
+Default: false.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="keyword">var</span> notepadRegion = <span class="keyword">new</span> RegionRectangle(<span class="integer">0</span>,<span class="integer">0</span>,<span class="integer">100</span>,<span class="integer">100</span>);
+<span class="comment">//represents a region which start at x=0, y=o (left upper corner) and have a size of 100px * 100px.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Members</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#RegionRectangle">RegionRectangle</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_additional_topics"><a class="anchor" href="#_additional_topics"></a>1.3.2. Additional Topics</h4>
 <div class="paragraph">
 <p>This page contains different topics regarding the configuration of both <strong>Sakuli</strong> and its components: <strong>Sahi</strong> and <strong>Sikuli</strong>.</p>
 </div>
 <div class="sect4">
-<h5 id="property-loading-mechanism"><a class="anchor" href="#property-loading-mechanism"></a>1.3.1.1. Property loading mechanism</h5>
+<h5 id="property-loading-mechanism"><a class="anchor" href="#property-loading-mechanism"></a>1.3.2.1. Property loading mechanism</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-property-loading.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-property-loading.adoc" target="_blank">edit</a></p>
 </div>
@@ -2935,7 +5283,7 @@ Intentionally, <code>docker-compose</code> is made to bring up environments with
 </div>
 </div>
 <div class="sect4">
-<h5 id="_exception_handling"><a class="anchor" href="#_exception_handling"></a>1.3.1.2. Exception handling</h5>
+<h5 id="_exception_handling"><a class="anchor" href="#_exception_handling"></a>1.3.2.2. Exception handling</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-exception-handling.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-exception-handling.adoc" target="_blank">edit</a></p>
 </div>
@@ -2984,7 +5332,7 @@ Intentionally, <code>docker-compose</code> is made to bring up environments with
 </div>
 </div>
 <div class="sect4">
-<h5 id="_logging"><a class="anchor" href="#_logging"></a>1.3.1.3. Logging</h5>
+<h5 id="_logging"><a class="anchor" href="#_logging"></a>1.3.2.3. Logging</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-logging.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-logging.adoc" target="_blank">edit</a></p>
 </div>
@@ -3103,7 +5451,7 @@ __SUITE_FOLDER__/*/_logs/* __SUITE_FOLDER__/*/_logs/_screenshots/* {
 </div>
 </div>
 <div class="sect4">
-<h5 id="_secret_de_encryption"><a class="anchor" href="#_secret_de_encryption"></a>1.3.1.4. Secret De-/Encryption</h5>
+<h5 id="_secret_de_encryption"><a class="anchor" href="#_secret_de_encryption"></a>1.3.2.4. Secret De-/Encryption</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-encryption.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-encryption.adoc" target="_blank">edit</a></p>
 </div>
@@ -3172,7 +5520,7 @@ Encrypted secret with interface 'eth3': CKXIAZmO7rSoBVMGgJZPDQ==
 </div>
 </div>
 <div class="sect4">
-<h5 id="_screenshot_settings"><a class="anchor" href="#_screenshot_settings"></a>1.3.1.5. Screenshot settings</h5>
+<h5 id="_screenshot_settings"><a class="anchor" href="#_screenshot_settings"></a>1.3.2.5. Screenshot settings</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-screenshot-settings.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-screenshot-settings.adoc" target="_blank">edit</a></p>
 </div>
@@ -3211,7 +5559,7 @@ Encrypted secret with interface 'eth3': CKXIAZmO7rSoBVMGgJZPDQ==
 </table>
 </div>
 <div class="sect4">
-<h5 id="_gui_only_tests"><a class="anchor" href="#_gui_only_tests"></a>1.3.1.6. GUI-only tests</h5>
+<h5 id="_gui_only_tests"><a class="anchor" href="#_gui_only_tests"></a>1.3.2.6. GUI-only tests</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-gui-only.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-gui-only.adoc" target="_blank">edit</a></p>
 </div>
@@ -3238,7 +5586,7 @@ Sakuli depends on Sahi running, which in turn needs a running browser instance. 
 </div>
 </div>
 <div class="sect4">
-<h5 id="sahi-controller"><a class="anchor" href="#sahi-controller"></a>1.3.1.7. Sahi Controller</h5>
+<h5 id="sahi-controller"><a class="anchor" href="#sahi-controller"></a>1.3.2.7. Sahi Controller</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-controller.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-controller.adoc" target="_blank">edit</a></p>
 </div>
@@ -3364,7 +5712,7 @@ Perhaps you want Sahi to highlight the items it is acting on: just use the <code
 </div>
 </div>
 <div class="sect4">
-<h5 id="sahi-recorder"><a class="anchor" href="#sahi-recorder"></a>1.3.1.8. Sahi Recorder</h5>
+<h5 id="sahi-recorder"><a class="anchor" href="#sahi-recorder"></a>1.3.2.8. Sahi Recorder</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-recorder.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sahi-recorder.adoc" target="_blank">edit</a></p>
 </div>
@@ -3391,7 +5739,7 @@ actions like clicks are written to file automatically. All other actions like as
 </div>
 </div>
 <div class="sect4">
-<h5 id="_sahi_settings"><a class="anchor" href="#_sahi_settings"></a>1.3.1.9. Sahi settings</h5>
+<h5 id="_sahi_settings"><a class="anchor" href="#_sahi_settings"></a>1.3.2.9. Sahi settings</h5>
 <div class="sect5">
 <h6 id="_browser_selection"><a class="anchor" href="#_browser_selection"></a>Browser selection</h6>
 <div id="git-edit-section" class="paragraph">
@@ -3637,7 +5985,7 @@ This is a browser-specific solution and can be different in newer Browser versio
 </div>
 </div>
 <div class="sect4">
-<h5 id="_sikuli_settings"><a class="anchor" href="#_sikuli_settings"></a>1.3.1.10. Sikuli settings</h5>
+<h5 id="_sikuli_settings"><a class="anchor" href="#_sikuli_settings"></a>1.3.2.10. Sikuli settings</h5>
 <div class="sect5">
 <h6 id="_highlighting_regions"><a class="anchor" href="#_highlighting_regions"></a>Highlighting Regions</h6>
 <div id="git-edit-section" class="paragraph">
@@ -4752,7 +7100,7 @@ The Sakuli team members are reachable on the email address <strong><a href="mail
 <div id="footer">
 <div id="footer-text">
 Version v1.0.2<br>
-Last updated 2017-05-22 18:36:03 CEST
+Last updated 2017-05-23 17:31:26 CEST
 </div>
 </div>
 <!--

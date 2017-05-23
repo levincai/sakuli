@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Execution Types</title>
+<title>Environment</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -512,17 +512,526 @@ table.CodeRay td.code>pre{padding:0}
 <div id="header">
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#execution-types">Execution Types</a></li>
+<ul class="sectlevel3">
+<li><a href="#Environment">Environment</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="execution-types">Execution Types</h2>
-<div class="sectionbody">
+<div class="sect3">
+<h4 id="Environment">Environment</h4>
 <div id="git-edit-section" class="paragraph">
-<p>git-link:docs/manual/execution/execution-types.adoc{git-view} | git-link:docs/manual/execution/execution-types.adoc{git-edit}</p>
+<p>git-link:docs/manual/testdefinition/sakuli-api-environment.adoc{git-view} | git-link:docs/manual/testdefinition/sakuli-api-environment.adoc{git-edit}</p>
+</div>
+<div class="paragraph">
+<p>Environment - Represents the environment of the current test host.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>optResumeOnException <code>Boolean</code> - (optional) if this parameter is undefined, it will be false.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Members</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Environment">Environment</a></p>
+</li>
+<li>
+<p><a href="#Environment.setSimilarity">Environment.setSimilarity(similarity)</a></p>
+</li>
+<li>
+<p><a href="#Environment.resetSimilarity">Environment.resetSimilarity()</a></p>
+</li>
+<li>
+<p><a href="#Environment.getRegionFromFocusedWindow">Environment.getRegionFromFocusedWindow()</a></p>
+</li>
+<li>
+<p><a href="#Environment.takeScreenshot">Environment.takeScreenshot(pathName)</a></p>
+</li>
+<li>
+<p><a href="#Environment.sleep">Environment.sleep(seconds)</a></p>
+</li>
+<li>
+<p><a href="#Environment.getClipboard">Environment.getClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.setClipboard">Environment.setClipboard(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.pasteClipboard">Environment.pasteClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.copyIntoClipboard">Environment.copyIntoClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.cleanClipboard">Environment.cleanClipboard()</a></p>
+</li>
+<li>
+<p><a href="#Environment.paste">Environment.paste(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.pasteMasked">Environment.pasteMasked(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.pasteAndDecrypt">Environment.pasteAndDecrypt(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.type">Environment.type(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Environment.typeMasked">Environment.typeMasked(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Environment.typeAndDecrypt">Environment.typeAndDecrypt(text, optModifiers)</a></p>
+</li>
+<li>
+<p><a href="#Environment.decryptSecret">Environment.decryptSecret(secret)</a></p>
+</li>
+<li>
+<p><a href="#Environment.keyDown">Environment.keyDown(keys)</a></p>
+</li>
+<li>
+<p><a href="#Environment.keyUp">Environment.keyUp(keys)</a></p>
+</li>
+<li>
+<p><a href="#Environment.write">Environment.write(text)</a></p>
+</li>
+<li>
+<p><a href="#Environment.mouseWheelDown">Environment.mouseWheelDown(steps)</a></p>
+</li>
+<li>
+<p><a href="#Environment.mouseWheelUp">Environment.mouseWheelUp(steps)</a></p>
+</li>
+<li>
+<p><a href="#Environment.isWindows">Environment.isWindows()</a></p>
+</li>
+<li>
+<p><a href="#Environment.isLinux">Environment.isLinux()</a></p>
+</li>
+<li>
+<p><a href="#Environment.getOsIdentifier">Environment.getOsIdentifier()</a></p>
+</li>
+<li>
+<p><a href="#Environment.runCommand">Environment.runCommand(command, optThrowException)</a></p>
+</li>
+</ul>
+</div>
+<div id="Environment.setSimilarity" class="paragraph">
+<div class="title">Environment.setSimilarity(similarity)</div>
+<p>Set a new default similarity for the screen capturing methods.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>similarity <code>number</code> - value between 0 and 1, default = 0.8</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.resetSimilarity" class="paragraph">
+<div class="title">Environment.resetSimilarity()</div>
+<p>Resets the current similarty of the screen capturing methods to the original default value of 0.8.</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this <a href="#Environment">Environment</a> or NULL on errors.</p>
+</div>
+<div id="Environment.getRegionFromFocusedWindow" class="paragraph">
+<div class="title">Environment.getRegionFromFocusedWindow()</div>
+<p>Get a Region object from the current focused window</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - a Region object from the current focused window
+ or NULL on errors.</p>
+</div>
+<div id="Environment.takeScreenshot" class="paragraph">
+<div class="title">Environment.takeScreenshot(pathName)</div>
+<p>Takes a screenshot of the current screen and saves it to the overgiven path.
+If there ist just a file name, the screenshot will be saved in your testsuite log folder.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>pathName <code>String</code> - <code>pathname/filname.format</code> or just <code>filename.format</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js">environment.takeScreenshot(<span class="string"><span class="delimiter">&quot;</span><span class="content">test.jpg</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+<div id="Environment.sleep" class="paragraph">
+<div class="title">Environment.sleep(seconds)</div>
+<p>Blocks the current testcase execution for x seconds</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>seconds <code>number</code> - to sleep</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.getClipboard" class="paragraph">
+<div class="title">Environment.getClipboard()</div>
+<p><strong>Returns</strong>: - the current content of the clipboard as String or NULL on errors</p>
+</div>
+<div id="Environment.setClipboard" class="paragraph">
+<div class="title">Environment.setClipboard(text)</div>
+<p>sets the String paramter to the system clipboard</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - text as string</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment.</p>
+</div>
+<div id="Environment.pasteClipboard" class="paragraph">
+<div class="title">Environment.pasteClipboard()</div>
+<p>pastes the current clipboard content into the focused area.
+Will do the same as "STRG + V".</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment.</p>
+</div>
+<div id="Environment.copyIntoClipboard" class="paragraph">
+<div class="title">Environment.copyIntoClipboard()</div>
+<p>copy the current selected item or text to the clipboard.
+Will do the same as "STRG + C".</p>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment.</p>
+</div>
+<div id="Environment.cleanClipboard" class="paragraph">
+<div class="title">Environment.cleanClipboard()</div>
+<p>Clean the content of the clipboard.</p>
+</div>
+<div id="Environment.paste" class="paragraph">
+<div class="title">Environment.paste(text)</div>
+<p>pastes the text at the current position of the focus/carret &lt;br/&gt;using the
+clipboard and strg/ctrl/cmd-v (paste keyboard shortcut)</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - a string, which might contain unicode characters</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.pasteMasked" class="paragraph">
+<div class="title">Environment.pasteMasked(text)</div>
+<p>makes a masked paste(String) without any logging.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - a string, which might contain unicode characters</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.pasteAndDecrypt" class="paragraph">
+<div class="title">Environment.pasteAndDecrypt(text)</div>
+<p>combines pasteMasked(String) and decryptSecret(String).</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - encrypted secret</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.type" class="paragraph">
+<div class="title">Environment.type(text, optModifiers)</div>
+<p>Enters the given text one character/key after another using keyDown/keyUp.
+&lt;p/&gt;
+About the usable Key constants see documentation of Key.
+The function could also type UTF-8 unicode characters, if the OS supports it.
+The text is entered at the current position of the focus.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - containing characters and/or Key constants</p>
+</li>
+<li>
+<p>optModifiers <code>String</code> - (optional) an String with only Key constants.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.typeMasked" class="paragraph">
+<div class="title">Environment.typeMasked(text, optModifiers)</div>
+<p>Enters the given text one character/key after another using keyDown/keyUp.
+The entered text will be masked at the logging.
+&lt;p/&gt;
+About the usable Key constants see documentation of Key.
+The function could also type UTF-8 unicode characters, if the OS supports it.
+The text is entered at the current position of the focus.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - containing characters and/or Key constants</p>
+</li>
+<li>
+<p>optModifiers <code>String</code> - (optional) an String with only Key constants.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.typeAndDecrypt" class="paragraph">
+<div class="title">Environment.typeAndDecrypt(text, optModifiers)</div>
+<p>Decrypt and enters the given text one character/key after another using keyDown/keyUp.
+The entered text will be masked at the logging. For the details of the decryption see decryptSecret(String).
+&lt;p/&gt;
+About the usable Key constants see documentation of Key.
+The function could also type UTF-8 unicode characters, if the OS supports it.
+The text is entered at the current position of the focus.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - containing characters and/or Key constants</p>
+</li>
+<li>
+<p>optModifiers <code>String</code> - (optional) an String with only Key constants.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.decryptSecret" class="paragraph">
+<div class="title">Environment.decryptSecret(secret)</div>
+<p>Decrypt a encrypted secret and returns the value at runtime.
+The decryption will only work if the encryption and decryption happen on the same physical machine.
+There will be no logging with the decrypted secret during this step.
+&lt;p/&gt;
+To create a encrypted secret see "sakuli-manual.md".</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>secret <code>String</code> - encrypted secret as String</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - decrypted String</p>
+</div>
+<div id="Environment.keyDown" class="paragraph">
+<div class="title">Environment.keyDown(keys)</div>
+<p>Press and hold the given keys including modifier keys &lt;br/&gt;
+use the key constants defined in class Key, &lt;br/&gt;
+which only provides a subset of a US-QWERTY PC keyboard layout &lt;br/&gt;
+might be mixed with simple characters&lt;br/&gt;
+use + to concatenate Key constants</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>keys <code>String</code> - valid keys</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.keyUp" class="paragraph">
+<div class="title">Environment.keyUp(keys)</div>
+<p>release the given keys (see Environment.keyDown(…)).</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>keys <code>String</code> - valid keys</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.write" class="paragraph">
+<div class="title">Environment.write(text)</div>
+<p>Compact alternative for type() with more options</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>special keys and options are coded as #XN. or #X+ or #X- where X is a reference for a special key and N is an optional repeat factor<br>
+A modifier key as #X. modifies the next following key the trailing . ends the special key, the + (press and hold) or - (release) does the same, but signals press-and-hold or release additionally.<br>
+except #W / #w all special keys are not case-sensitive<br>
+a #wn. inserts a wait of n millisecs or n secs if n less than 60<br>
+a #Wn. sets the type delay for the following keys (must be &gt; 60 and denotes millisecs)</p>
+</li>
+<li>
+<p>otherwise taken as normal wait<br>
+<strong>Example:</strong> wait 2 secs then type CMD/CTRL - N then wait 1 sec then type DOWN 3 times<br>
+<strong>Windows/Linux:</strong> write("#w2.#C.n#W1.#d3.")<br>
+<strong>Mac:</strong> write("#w2.#M.n#W1.#D3.")<br>
+for more details about the special key codes and examples consult the sikuliX docs.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>text <code>String</code> - a coded text interpreted as a series of key actions (press/hold/release)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - this Environment or NULL on errors.</p>
+</div>
+<div id="Environment.mouseWheelDown" class="paragraph">
+<div class="title">Environment.mouseWheelDown(steps)</div>
+<p>move the mouse pointer to the given target location and move the
+wheel the given steps down.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>steps <code>number</code> - the number of steps</p>
+</li>
+</ul>
+</div>
+<div id="Environment.mouseWheelUp" class="paragraph">
+<div class="title">Environment.mouseWheelUp(steps)</div>
+<p>move the mouse pointer to the given target location and move the
+wheel the given steps up.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>steps <code>number</code> - the number of steps</p>
+</li>
+</ul>
+</div>
+<div id="Environment.isWindows" class="paragraph">
+<div class="title">Environment.isWindows()</div>
+<p><strong>Returns</strong>: <code>boolean</code> - true, if the OS is any instance of an Windows based OS</p>
+</div>
+<div id="Environment.isLinux" class="paragraph">
+<div class="title">Environment.isLinux()</div>
+<p><strong>Returns</strong>: <code>boolean</code> - true, if the OS is any instance of an Linux based OS</p>
+</div>
+<div id="Environment.getOsIdentifier" class="paragraph">
+<div class="title">Environment.getOsIdentifier()</div>
+<p><strong>Returns</strong>: <code>string</code> - identifier of the current OS</p>
+</div>
+<div id="Environment.runCommand" class="paragraph">
+<div class="title">Environment.runCommand(command, optThrowException)</div>
+<p>Runs the assigned command on the host and returns the result. <strong>Attention:</strong> this is OS depended feature! So be
+aware which os you are running, maybe us to check <code>Environment#isLinux()</code> or <code>Environment#isWindows()</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Params</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>command <code>string</code> - OS depended command as <code>String</code></p>
+</li>
+<li>
+<p>optThrowException <code>boolean</code> - defines if an exception should be thrown, if the exit code != 0</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Returns</strong>: - the result as <code>CommandLineResult</code> object, you can use the methods <code>result.getOutput()</code> and <code>result.getExitCode()</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="keyword">var</span> app;
+<span class="keyword">if</span>(environmen.runCommand(<span class="string"><span class="delimiter">'</span><span class="content">uname --machine</span><span class="delimiter">'</span></span>) == <span class="string"><span class="delimiter">'</span><span class="content">x86_64</span><span class="delimiter">'</span></span>){
+    <span class="comment">//open app from other path</span>
+    app = <span class="keyword">new</span> Application(<span class="string"><span class="delimiter">'</span><span class="content">/lib64/appname</span><span class="delimiter">'</span></span>);
+} <span class="keyword">else</span> {
+    app = <span class="keyword">new</span> Application(<span class="string"><span class="delimiter">'</span><span class="content">/lib/appname</span><span class="delimiter">'</span></span>);
+}</code></pre>
 </div>
 </div>
 </div>
