@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Upgrade process</title>
+<title>Troubleshooting</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -512,25 +512,103 @@ table.CodeRay td.code>pre{padding:0}
 <div id="header">
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel3">
-<li><a href="#_upgrade_process">Upgrade process</a></li>
+<ul class="sectlevel2">
+<li><a href="#_troubleshooting">Troubleshooting</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect3">
-<h4 id="_upgrade_process">Upgrade process</h4>
+<div class="sect2">
+<h3 id="_troubleshooting">Troubleshooting</h3>
 <div id="git-edit-section" class="paragraph">
-<p>git-link:docs/manual/execution/native/upgrade-process.adoc{git-view} | git-link:docs/manual/execution/native/upgrade-process.adoc{git-edit}</p>
+<p>git-link:docs/manual/testdefinition/troubleshooting.adoc{git-view} | git-link:docs/manual/testdefinition/troubleshooting.adoc{git-edit}</p>
+</div>
+<div class="sect3">
+<h4 id="_growing_firefox_profile_folder">Growing Firefox profile folder</h4>
+<div class="paragraph">
+<p>If you experience that the Sahi profile folders <code>sahi0-9</code> of Mozilla Firefox (located in <code>sahi\userdata\browser\ff\profiles</code>) are getting bigger and bigger: this is caused by two bugs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=85788">https://bugzilla.mozilla.org/show_bug.cgi?id=85788</a></p>
+</li>
+<li>
+<p><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=686237">https://bugzilla.mozilla.org/show_bug.cgi?id=686237</a></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Before you upgrade your current Sakuli installation, please ensure that you have read the <a href="#changelog">[changelog]</a>.</p>
+<p>We do not know any Firefox settings which can prevent the creation of SQLITE writeahead-logs (if <em>you</em> do, please let us know). The only pragmatic solution at the moment is to delete all SQLITE files periodically or before each Sakuli run (e.g. by running as a preHook). <code>%SAKULI_HOME%\bin\helper\ff_purge_profile.bat</code> contains an example for windows.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_hanging_applications">Hanging applications</h4>
+<div class="paragraph">
+<p>If you are testing applications which tend to hang/freeze, you can run a "tidy-up"-Script by using the <code>-pre-Hook</code> option of Sakuli:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>sakuli run __INST_DIR__/example_test_suites/example_ubuntu/ -preHook 'cscript.exe %SAKULI_HOME%\bin\helper\killproc.vbs -f %SAKULI_HOME%\bin\helper\procs_to_kill.txt'</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Execute <code><em>SAKULI_HOME</em>/../Uninstaller/uninstaller.jar</code> to remove the current installed version. This will only affect the files in <code><em>SAKULI_HOME</em></code>. The uninstaller removes all installed files, and resets the environment configuration.</p>
+<p>In <code>procs_to_kill.txt</code> you can define which processes should be killed before Sakuli starts a new check:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code># Full path:
+C:\Program Files\Mozilla Firefox\firefox.exe
+C:\Program Files\Internet Explorer\iexplore.exe
+# Using wildcards (%):
+java%sakuli.jar</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sikuli_does_not_recognize_images">Sikuli does not recognize images</h4>
+<div class="paragraph">
+<p>If Sikuli does not recognize regions on the screen or does recognize the wrong ones, check the following list of possible reasons:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Run the client&#8217;s OS on a fixed resolution:</strong> Some applications/OS scale window elements slightly depending on the resolution. for example, if you are running Sakuli within Virtualbox, the guest OS changes its resolution as soon as you resize the VM window. The dimensions of window elements can then slightly diverge by 1-2 pixels from the screenshots taken before. This difference is small for human&#8217;s eyes, but a big one for Sikuli. Make sure to disable features like "Auto-Adjust Guest Display" and set the Client&#8217;s desktop to a common resolution (e.g. 1024x768). Side note: the smaller you set the resolution, the less work has to be done by Sikuli.</p>
+</li>
+<li>
+<p><strong>Disable any image compression algorithms</strong> in your screenshot capturing program (Greenshot, Shutter, …). Otherwise Sikuli will compare <em>compressed</em> pattern images with <em>umcompressed</em> image data on the screen, which will fail for sure.</p>
+</li>
+<li>
+<p>Sikuli uses a <strong><a href="http://doc.sikuli.org/region.html">similarity</a></strong> value of <strong>0.99 by default</strong>. That value (range: 0-0.99) determines that more than (X * 100) % of the region pixels have to match. If Sikuli does not recognize anything or the wrong regions, try to <strong>slightly</strong> decrease the similarity** by changing 'sakuli.region.similarity.default' globally or inside a test e.g. with <code>env.setSimilarity(0.8)</code>. This should only be neccessary if the pattern images are of poor quality or the screen always differs slightly from the pattern images (e.g. due to compression of remote sessions like vnc). Please note that a similarity of "1" would mean that "more than 100%" of the region pixels would have to match - which is completely wrong.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_missing_keystrokes_on_type_or_failing_paste">Missing keystrokes on type or failing paste</h4>
+<div class="paragraph">
+<p>Sikuli keyboard events (<code>type()`and `paste()</code>) on a Sahi-controlled browser instance can get lost if they are executed at the same time when Sahi internal status requests are sent from the browser to the Sahi proxy (default: 10x per sec).</p>
 </div>
 <div class="paragraph">
-<p>After that just install the new version.</p>
+<p>For this reason, Sikuli type/paste methods first extend the Sahi status interval to the value of <code>sahi.proxy.onSikuliInput.delayPerKey</code> (in ms) which is long enough to execute <em>one</em> keyboard action. For the method <code>type</code> (which is "press/release character by character"&quot;), a multiple if this value is chosen. Before leaving the paste/type method, the interval gets reset by Sakuli to the default Sahi status interval.</p>
+</div>
+<div class="paragraph">
+<p>This setting is not needed if Sikuli does keyboard actions on GUIs not controlled by Sahi.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_application_getregion_returns_null">Application.getRegion() returns NULL</h4>
+<div class="paragraph">
+<p>If the execution of <code>new Application("&#8230;&#8203;").open().getRegion()</code> throws a <code>NullPointerException</code> or retruns <code>null</code>, firstly turn on debug logging, see <a href="#logging">[logging]</a>. Then you mostly will see at the log output that an OS based library  is missing.</p>
+</div>
+<div class="paragraph">
+<p>On <strong>Ubuntu</strong> or other <strong>Linux</strong> based OS check if the packe <code>wmctrl</code> is installed. If not install it via:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>sudo apt-get install wmctrl</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
