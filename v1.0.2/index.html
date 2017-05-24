@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.0.2,</span>
-<span id="revdate">24.05.2017 @ 11:49:57 CEST</span>
+<span id="revdate">24.05.2017 @ 16:47:08 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -784,12 +784,21 @@ table.CodeRay td.code>pre{padding:0}
 </ul>
 </li>
 <li><a href="#sql-database">1.4.3. SQL Database</a>
-<ul class="sectlevel4">
-<li><a href="#sql-database-create-db">1.4.3.1. Create Sakuli DB</a></li>
-<li><a href="#sql-database-enable-forwarder">1.4.3.2. Enable database forwarder</a></li>
-<li><a href="#sql-database-optional-cleanup">1.4.3.3. Database cleanup (optional)</a></li>
+<ul class="sectlevel5">
+<li><a href="#sql-database-create-db">Create Sakuli DB</a></li>
+<li><a href="#sql-database-enable-forwarder">Enable database forwarder</a></li>
+<li><a href="#sql-database-optional-cleanup">Database cleanup (optional)</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#_developer_documentation">1.5. Developer Documentation</a>
+<ul class="sectlevel3">
+<li><a href="#dev-installation">1.5.1. Installation Guide for Sakuli-Developers</a></li>
+<li><a href="#dev-new-release">1.5.2. How to create a new release</a></li>
+<li><a href="#dev-maven-aspects">1.5.3. Maven aspects</a></li>
+<li><a href="#dev-ascii-doc">1.5.4. AsciiDoc documentation aspects</a></li>
+<li><a href="#dev-sikuli-supplemental-pack">1.5.5. sikulix-supplemental package</a></li>
 </ul>
 </li>
 </ul>
@@ -824,16 +833,19 @@ table.CodeRay td.code>pre{padding:0}
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/index.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/index.adoc" target="_blank">edit</a></p>
 </div>
+<div class="paragraph">
+<p><strong>All different versions of our documentation you will find under:</strong></p>
+</div>
+<div class="paragraph">
+<p><strong><a href="http://consol.github.io/sakuli">consol.github.io/sakuli</a></strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Stable version (latest tagged <code>vX.X.X</code> documentation) <span class="image"><a class="image" href="http://sakuli.readthedocs.org/en/stable/"><img src="https://readthedocs.org/projects/sakuli/badge/?version=stable" alt="Documentation Status"></a></span></p>
+<p><strong><em>Stable/Latest version:</em></strong> latest tagged <code>vX.X.X</code> documentation</p>
 </li>
 <li>
-<p>Latest verison (documentation on <code>master</code> branch, with corrections) <span class="image"><a class="image" href="http://sakuli.readthedocs.org/en/latest/"><img src="https://readthedocs.org/projects/sakuli/badge/?version=latest" alt="Documentation Status"></a></span></p>
-</li>
-<li>
-<p>Dev version (current development version on <code>dev</code> branch) <span class="image"><a class="image" href="http://sakuli.readthedocs.org/en/dev/"><img src="https://readthedocs.org/projects/sakuli/badge/?version=dev" alt="Documentation Status"></a></span></p>
+<p><strong><em>Dev version:</em></strong> latest <code>vX.X.X-SNAPSHOT</code> version</p>
 </li>
 </ul>
 </div>
@@ -888,8 +900,7 @@ table.CodeRay td.code>pre{padding:0}
 <p>Deutsche Pfandbriefbank AG</p>
 </li>
 <li>
-<p>Siemens AG, Global Services Information Technology
-'''</p>
+<p>Siemens AG, Global Services Information Technology</p>
 </li>
 </ul>
 </div>
@@ -7365,8 +7376,8 @@ The Sakui graph should now contain also CPU/Memory values.</p>
 <div class="paragraph">
 <p>This page describes how the results of the Sakuli tests <strong>example_windows7/ubuntu/opensuse</strong> can be written into a <strong>MySQL database</strong> which can be read by other 3rd party systems.</p>
 </div>
-<div class="sect4">
-<h5 id="sql-database-create-db"><a class="anchor" href="#sql-database-create-db"></a>1.4.3.1. Create Sakuli DB</h5>
+<div class="sect5">
+<h6 id="sql-database-create-db"><a class="anchor" href="#sql-database-create-db"></a>Create Sakuli DB</h6>
 <div class="paragraph">
 <p>Create the <strong>Sakuli database</strong> and the DB user:</p>
 </div>
@@ -7390,8 +7401,8 @@ The Sakui graph should now contain also CPU/Memory values.</p>
 <p>Check the connection with your favorit SQL tool:</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="sql-database-enable-forwarder"><a class="anchor" href="#sql-database-enable-forwarder"></a>1.4.3.2. Enable database forwarder</h5>
+<div class="sect5">
+<h6 id="sql-database-enable-forwarder"><a class="anchor" href="#sql-database-enable-forwarder"></a>Enable database forwarder</h6>
 <div class="paragraph">
 <p>On the Sakuli client you must set the global properties for the database receiver. For this, edit <code>sakuli.properties</code> in the folder containing the test suites (you can copy the lines from <code><em>SAKULI_HOME</em>/conf/sakuli-default.properties</code>):</p>
 </div>
@@ -7435,8 +7446,8 @@ sakuli.forwarder.database.password=__DB_PW__</code></pre>
 <p>The database should now contain the results.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="sql-database-optional-cleanup"><a class="anchor" href="#sql-database-optional-cleanup"></a>1.4.3.3. Database cleanup (optional)</h5>
+<div class="sect5">
+<h6 id="sql-database-optional-cleanup"><a class="anchor" href="#sql-database-optional-cleanup"></a>Database cleanup (optional)</h6>
 <div class="paragraph">
 <p>Sakuli&#8217;s database can get very large over time. Use the following database maintenance script to keep only the most recent data.</p>
 </div>
@@ -7452,6 +7463,798 @@ sakuli.forwarder.database.password=__DB_PW__</code></pre>
 <div class="paragraph">
 <p>After that, the crontab should be active.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_developer_documentation"><a class="anchor" href="#_developer_documentation"></a>1.5. Developer Documentation</h3>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/development/README.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/development/README.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>In this section you will find a few helpful documentation for developers who want to contribute.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Basic: <a href="#dev-installation">Installation Guide for Sakuli-Developers</a></p>
+</li>
+<li>
+<p>Jenkins-CI <a href="http://labs-build.consol.de/view/Sakuli/">labs-build.consol.de/view/Sakuli</a></p>
+</li>
+<li>
+<p><a href="https://waffle.io/ConSol/sakuli?source=ConSol%2Fdocker-headless-vnc-container,ConSol%2Fsakuli,ConSol%2Fsakuli-examples,ConSol%2Fsakuli-go-wrapper">Waffel GitHub Issue Board</a></p>
+</li>
+<li>
+<p><a href="#dev-new-release">How to create a new release</a></p>
+</li>
+<li>
+<p>Some additional <a href="maven-aspects.md">Maven aspects</a></p>
+</li>
+<li>
+<p><a href="#dev-ascii-doc">AsciiDoc documentation aspects</a></p>
+</li>
+<li>
+<p>(only for Linux) <a href="#dev-sikuli-supplemental-pack">sikulix-supplemental package</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="dev-installation"><a class="anchor" href="#dev-installation"></a>1.5.1. Installation Guide for Sakuli-Developers</h4>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/development/how-to-release.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/development/how-to-release.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<div class="title">Requirements</div>
+<p>For the following guide you need</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access to the issue-tracker tool (currently GitHub-Issues and internal GitLab)</p>
+</li>
+<li>
+<p>Git</p>
+</li>
+<li>
+<p>Development environment (we advise IntelliJ IDEA)</p>
+</li>
+<li>
+<p>Maven 3 (check version <code>mvn -version</code>)</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<strong>For Ubuntu users!!!</strong> - check the maven version over ` apt show maven` )
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Java JDK 1.8</p>
+</li>
+<li>
+<p>Please use the original Oracle JDK - OpenJDK unfortunately won&#8217;t work for the JavaFX based integration test, until <a href="https://github.com/ConSol/sakuli/issues/245">#245</a> is not closed. Also see <a href="#dev-java-fx">Install JavaFX</a></p>
+</li>
+<li>
+<p>Ensure that your <code>JAVA_HOME</code> system variable links to the correct jdk-version</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<div class="title">Sakuli Setup</div>
+<p><strong>Import</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Check out the project via git</p>
+</li>
+<li>
+<p>Import the project as a maven-project</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Maven Settings</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ensure that you have at least installed maven 3, run <code>mvn -version</code></p>
+</li>
+<li>
+<p>Config the local maven settings <code>~/.m2/settings.xml</code> for your environment as follows:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;settings</span> <span class="attribute-name">xmlns</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://maven.apache.org/SETTINGS/1.0.0</span><span class="delimiter">&quot;</span></span>
+  <span class="attribute-name">xmlns:xsi</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.w3.org/2001/XMLSchema-instance</span><span class="delimiter">&quot;</span></span>
+  <span class="attribute-name">xsi:schemaLocation</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://maven.apache.org/SETTINGS/1.0.0</span>
+                      <span class="content">http://maven.apache.org/xsd/settings-1.0.0.xsd</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+
+<span class="tag">&lt;server&gt;</span>
+ <span class="tag">&lt;id&gt;</span>labs-consol-sakuli-install<span class="tag">&lt;/id&gt;</span>
+ <span class="tag">&lt;username&gt;</span>sakuli<span class="tag">&lt;/username&gt;</span>
+ <span class="tag">&lt;privateKey&gt;</span>${user.home}/.ssh/your-key-file<span class="tag">&lt;/privateKey&gt;</span>
+ <span class="tag">&lt;/server&gt;</span>
+
+<span class="tag">&lt;server&gt;</span>
+ <span class="tag">&lt;id&gt;</span>labs-consol-sakuli-repository<span class="tag">&lt;/id&gt;</span>
+ <span class="tag">&lt;username&gt;</span>maven-repository<span class="tag">&lt;/username&gt;</span>
+ <span class="tag">&lt;privateKey&gt;</span>${user.home}/.ssh/your-key-file<span class="tag">&lt;/privateKey&gt;</span>
+ <span class="tag">&lt;/server&gt;</span>
+
+<span class="tag">&lt;/settings&gt;</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<div class="title">Install Sahi</div>
+<ul>
+<li>
+<p>Download Sahi5 from <a href="https://labs.consol.de/sakuli/install/3rd-party">https://labs.consol.de/sakuli/install/3rd-party</a> and execute the sahi installation:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>java -jar install_sahi_v50_20141105.jar.jar</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Install Sahi into <code>&lt;project-dir&gt;/sahi</code>. Ensure that this path is set in <code>sahi.proxy.homePath</code> in file <code>sakuli.properties</code>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You only need to install the components: Sahi Core, Tools Userdata
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<div class="title">Database Setup (optional, only needed for <a href="#sql-database">SQL Database</a> integration)</div>
+<p>Setup a local MySQL database to save the results of test case executions. The database won&#8217;t be needed for running <code>mvn install</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>User:</strong> <code>sakuli</code></p>
+</li>
+<li>
+<p><strong>Password:</strong> <code>sakuli</code></p>
+</li>
+<li>
+<p><strong>Database:</strong> <code>sakuli</code></p>
+</li>
+<li>
+<p><strong>SQL-Script:</strong> <a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/src/common/src/main/resources/org/sakuli/common/setup/database/create_sakuli_database.sql" target="_blank">create_sakuli_database.sql</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you want to use a Docker-Container, you can build and run it with the following commands:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">cd src/common/src/main/resources/org/sakuli/common/setup/database/create_sakuli_database
+docker build -t=your-user/mysql-sakuli .
+docker run --name mysql-sakuli -p 3306:3306 your-user/mysql-sakuli</code></pre>
+</div>
+</div>
+<div class="ulist">
+<div class="title">IDE configuration</div>
+<ul>
+<li>
+<p>Execute <code>mvn clean verify</code> to ensure that the setup is correct</p>
+</li>
+<li>
+<p>Include the license header to your IDE</p>
+</li>
+<li>
+<p>For IntelliJ see <a href="http://www.jetbrains.com/idea/webhelp/generating-and-updating-copyright-notice.html">Help</a> or our predefined copyright configuration:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="intellij/copyright/profiles_settings.xml" class="bare">intellij/copyright/profiles_settings.xml</a></p>
+</li>
+<li>
+<p><a href="intellij/copyright/sakuli_copyright" class="bare">intellij/copyright/sakuli_copyright</a></p>
+</li>
+<li>
+<p>License Header</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Sakuli - Testing and Monitoring-Tool for Websites and common UIs.
+
+Copyright 2013 - $today.year the original author or authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In order to run Sakuli test cases directly from the IDE, you need to build up a run configuration. For IntelliJ see the predefined run configurations under
+<a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/development/intellij/runConfigurations" target="_blank">intellij/runConfigurations</a></p>
+</li>
+<li>
+<p><strong>classpath of module:</strong> <code>sakuli-core</code></p>
+</li>
+<li>
+<p><strong>working directory:</strong> <code>$MODULE_DIR$</code></p>
+</li>
+<li>
+<p><strong>main class:</strong> <code>org.sakuli.starter.SakuliStarter</code></p>
+</li>
+<li>
+<p><strong>program arguments:</strong>
+[[source]</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>-run &lt;path to your Sakuli test suite folder&gt; --sakuli_home &lt;path to your "main" folder&gt; --sahi_home &lt;path to your sahi folder&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>e.g. for the provided Win7 example use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>-run ../sakuli_test_suites/example src/main/_include ../sahi</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>To run the testng tests correctly and prevent wrong file paths, set the default TestNG config like follow: <span class="image"><img src="images/intellij_testng_run_config.png" alt="intellij testng config"></span></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<strong>Startup error</strong>: If you run your Sakuli test the first time, you might get a native library error, caused by Sikuli, saying that it could not find the correct native library to work with. At the same time, Sikuli already tried to fix the problem by modyfing PATH. <strong>Solution</strong>: Just log out and in again, so that the modified PATH-Variable will be read. Sakuli should start now without any error.
+</td>
+</tr>
+</table>
+</div>
+<div id="dev-java-fx" class="olist arabic">
+<div class="title">Install JavaFX</div>
+<ol class="arabic">
+<li>
+<p>Ensure that you have installed the latest JDK-8 version with included JavaFX</p>
+</li>
+<li>
+<p>Ensure that the system variable <code>java.home</code> points to your JDK directory and includes the file <code>${java.home}/lib/ext/jfxrt.jar</code></p>
+</li>
+<li>
+<p><em>(optional)</em> Download the JavaFX SceneBuilder for development from <a href="http://www.oracle.com/technetwork/java/javase/downloads/javafxscenebuilder-download-2157683.html">Oracle</a></p>
+</li>
+<li>
+<p><em>(optional)</em> Install the SceneBuilder to your IDE:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Intellij see <a href="http://docs.oracle.com/javafx/scenebuilder/1/use_java_ides/sb-with-intellij.htm">Oracle-Help-Page</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="dev-new-release"><a class="anchor" href="#dev-new-release"></a>1.5.2. How to create a new release</h4>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/development/how-to-release.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/development/how-to-release.adoc" target="_blank">edit</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Check if all features are merged in dev</p>
+</li>
+<li>
+<p>Check if <code>changelog.adoc</code> is correct</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">(Jenkins CI) Perform a new official release</div>
+<ol class="arabic">
+<li>
+<p>Go to <a href="http://labs-build.consol.de/job/Sakuli_perform_release/">Jenkins - Sakuli_perform_release</a> and execute the job and set the parameters <code>REL_VERSION</code> and <code>DEV_VERSION</code></p>
+</li>
+<li>
+<p>Check if maven artifacts have been deployed at <a href="https://labs.consol.de/maven/repository/org/sakuli/">https://labs.consol.de/maven/repository/org/sakuli/</a></p>
+</li>
+<li>
+<p>Check the new taged verison on <a href="https://hub.docker.com/">DockerHub</a> with same <code>REL_VERSION</code> for the following images:
+<a href="https://hub.docker.com/search/?isAutomated=0&amp;isOfficial=0&amp;page=1&amp;pullCount=0&amp;q=sakuli&amp;starCount=0">DockerHub - Sakuli</a></p>
+</li>
+<li>
+<p>Test the new docker images as long the <a href="https://github.com/ConSol/sakuli-examples">sakuli-exampels</a> are not in the automated build</p>
+</li>
+<li>
+<p>Check te latest documentation is updated at <a href="http://consol.github.io/sakuli/" class="bare">http://consol.github.io/sakuli/</a>.</p>
+</li>
+<li>
+<p>Make a new <a href="https://github.com/ConSol/sakuli/releases">GitHub Release</a>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Add <code>sakuli-vXXX-installer.jar</code> and <code>sakuli-vXXX.zip</code> from <a href="https://labs.consol.de/sakuli/install/">https://labs.consol.de/sakuli/install/</a> to a new release XXX</p>
+</li>
+<li>
+<p>Copy the latest changelog to the new release page</p>
+</li>
+<li>
+<p>Check and publish new release</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<div class="title">(local) Process a new release with maven</div>
+<p><strong>1. Dry-run (if needed)</strong></p>
+</div>
+<div class="paragraph">
+<p>Generate a new relase over <strong>jgitflow-maven-plugin</strong> (branch: <code>release/xxx</code>):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>    mvn jgitflow:release-start -DnoDeploy=true -DpushReleases=false -DlocalOnly=true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Do a dry-run <em>without</em> deploying and pushing any new files:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>    mvn jgitflow:release-finish -DnoDeploy=true -DpushReleases=false -DlocalOnly=true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Delete all local git changes and branches</p>
+</div>
+<div class="paragraph">
+<p><strong>2. Release</strong></p>
+</div>
+<div class="paragraph">
+<p>Generate a new relase over <strong>jgitflow-maven-plugin</strong> (branch: <code>release/xxx</code>):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>    mvn jgitflow:release-start</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Execute the following commands, to update the Dockerfiles to the new release version at the branch <code>release/xxx</code> .</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>    docker/update_sakuli_version.sh --new-version $REL_VERSION
+    git commit -am "update Dockerfiles to REL-Version v$REL_VERS"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Start the release deploying and pushing any new branches and tags if needed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>    mvn jgitflow:release-finish</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Go to the <code>dev</code> branch and adjust the version of the Dockerfiles:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>    docker/update_sakuli_version.sh --new-version $DEV_VERS
+    git commit -am "update Dockerfiles to DEV-Version v$DEV_VERS"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Push your changes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>git push --all</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally delete the no longer needed remote feature branch and do the manual release steps from above (after Jenkins job):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>git branch -d &lt;branchName&gt;
+git push origin --delete &lt;branchName&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Troubleshooting</div>
+<p><strong>Re-use a tag</strong></p>
+</div>
+<div class="paragraph">
+<p>To re-use an already set tag, remove it from git (local and remote):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code># delete the tag locally:
+git tag -d sakuli-X.X.X`
+# push to remote:
+git push --delete origin sakuli-X.X.X`</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>General</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Check your maven settings in <code>~/.m2/settings.xml</code>:</p>
+</li>
+<li>
+<p>Ensure that your private key has access rights for user '<a href="mailto:&#115;a&#107;&#x75;&#x6c;&#x69;&#x40;&#108;&#x61;&#x62;s&#46;&#x63;&#111;n&#115;&#111;&#108;.&#100;e">&#115;a&#107;&#x75;&#x6c;&#x69;&#x40;&#108;&#x61;&#x62;s&#46;&#x63;&#111;n&#115;&#111;&#108;.&#100;e</a>'</p>
+</li>
+<li>
+<p>Ensure that your private key is added to ssh-agent:
+ `
+ ssh-add &lt;path-to-key&gt;
+`</p>
+</li>
+<li>
+<p>Check proxy settings - the server <code>labs.consol.de</code> must be reachable'</p>
+</li>
+<li>
+<p>Ensure that the ConSol-Labs server is configured correctly, see <a href="installation-developers.md#database-setup">Installation Developers</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="dev-maven-aspects"><a class="anchor" href="#dev-maven-aspects"></a>1.5.3. Maven aspects</h4>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/development/maven-aspects.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/development/maven-aspects.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>Following default lifecycle actions are currently used:</p>
+</div>
+<div class="olist arabic">
+<div class="title">Complete build process <code>mvn clean deploy</code></div>
+<ol class="arabic">
+<li>
+<p>Compiles the sources with the <code>aspectj-maven-plugin</code> to weave the source code and the dependencies</p>
+</li>
+<li>
+<p>Executes all unit tests</p>
+</li>
+<li>
+<p>Executes all <strong>integration tests</strong> (without UI-Tests)</p>
+</li>
+<li>
+<p>Adds the built maven artifacts to the local workspace</p>
+</li>
+<li>
+<p>Builds the <code>sakuli-vX.X.X.zip`and `sakuli-vX.X.X-installer.jar</code> file locally</p>
+</li>
+<li>
+<p>Deploys the maven artifacts to the local repository</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<div class="title">Run unit tests <code>mvn test</code></div>
+<p>Runs all steps until step <strong>2.</strong></p>
+</div>
+<div class="paragraph">
+<div class="title">Run integration tests <code>mvn verify</code></div>
+<p>Runs all steps until step <strong>3</strong></p>
+</div>
+<div class="paragraph">
+<div class="title">Install locally <code>mvn install</code></div>
+<p>Runs all steps until step <strong>6</strong></p>
+</div>
+<div class="paragraph">
+<div class="title">Build a new release</div>
+<p>See the instruction: <a href="#dev-new-release">How to create a new release</a></p>
+</div>
+<div class="paragraph">
+<div class="title">Special maven profiles</div>
+<p>Profiles can be added with option <code>-P</code>, followed by a parameter, e.g.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>mvn install -P upload-release</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>upload-release</code> Copies the generated <code>sakuli-zipped-release-vX.X.X.zip</code>, <code>sakuli-vX.X.X-installer.jar</code> file and maven artifacts to the <a href="http://labs.consol.de/sakuli/">ConSol Labs</a> server. Your private key for the ssh connection have to be configured in maven config file <code>.m2/settings.xml</code>:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Example of Maven config file <code>.m2/settings.xml</code></div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml">    <span class="tag">&lt;servers&gt;</span>
+        <span class="tag">&lt;server&gt;</span>
+            <span class="tag">&lt;id&gt;</span>labs-consol-sakuli-install<span class="tag">&lt;/id&gt;</span>
+            <span class="tag">&lt;username&gt;</span>sakuli<span class="tag">&lt;/username&gt;</span>
+            <span class="tag">&lt;privateKey&gt;</span>${user.home}/.ssh/id_rsa<span class="tag">&lt;/privateKey&gt;</span>
+        <span class="tag">&lt;/server&gt;</span>
+
+        <span class="tag">&lt;server&gt;</span>
+            <span class="tag">&lt;id&gt;</span>labs-consol-sakuli-repository<span class="tag">&lt;/id&gt;</span>
+            <span class="tag">&lt;username&gt;</span>maven-repository<span class="tag">&lt;/username&gt;</span>
+            <span class="tag">&lt;privateKey&gt;</span>${user.home}/.ssh/id_rsa<span class="tag">&lt;/privateKey&gt;</span>
+        <span class="tag">&lt;/server&gt;</span>
+    <span class="tag">&lt;/servers&gt;</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ui-tests</code> Enables the UI based test in phase <strong>integration-test</strong> in the modul <code>integration-test</code> and <code>java-dsl</code>.</p>
+</li>
+<li>
+<p><code>generate-manual</code> This profile will generate the AsciiDoc documentation in the module <strong>docs-manual</strong>, see <a href="#dev-ascii-doc">AsciiDoc documentation aspects</a>.</p>
+</li>
+<li>
+<p><code>generate-markdown</code> This profile will generate Markdown file in the module <strong>docs</strong> the file <a href="../testdefintion/sakuli-api.md">Sakuli-API</a>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To use the profile behind a <strong>HTTP/HTTPS</strong> proxy, be aware that the following things are configured:
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>1) include in your <code>$M2_HOME/settings.xml</code> the proxy tag (if needed):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml">  <span class="tag">&lt;proxies&gt;</span>
+  <span class="tag">&lt;proxy&gt;</span>
+      <span class="tag">&lt;id&gt;</span>my-proxy-config<span class="tag">&lt;/id&gt;</span>
+      <span class="tag">&lt;active&gt;</span>true<span class="tag">&lt;/active&gt;</span>
+      <span class="tag">&lt;protocol&gt;</span>http<span class="tag">&lt;/protocol&gt;</span>
+      <span class="tag">&lt;host&gt;</span>proxy.company.com<span class="tag">&lt;/host&gt;</span>
+      <span class="tag">&lt;port&gt;</span>8888<span class="tag">&lt;/port&gt;</span>
+  <span class="tag">&lt;/proxy&gt;</span>
+  <span class="tag">&lt;/proxies&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>2) configure your system <strong>HTTP</strong> and <strong>HTTPS</strong> proxy over Environment (for Ubuntu). Set in <code>bash.rc</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>  export http_proxy=http://proxy.company.com:8888/
+  export https_proxy=http://proxy.company.com:8888/
+  export ftp_proxy=http://proxy.company.com:8888/</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>cl</code> (internal use)
+This profile will be only to build a custom installer for CL.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<div class="title">Add new artifacts to remote repo</div>
+<p>for example for the sahi JARs, more information see: <a href="https://maven.apache.org/guides/mini/guide-3rd-party-jars-remote.html">guide-3rd-party-jars-remote</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>install to local repo</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>mvn install:install-file -DgroupId=net.sf.sahi -DartifactId=sahi -Dversion=5.1 -Dpackaging=jar -Dfile=sahi-5.1.jar
+
+mvn install:install-file -DgroupId=net.sf.sahi -DartifactId=ant-sahi -Dversion=5.1 -Dpackaging=jar -Dfile=ant-sahi-5.1.jar
+
+mvn install:install-file -DgroupId=net.sf.sahi -DartifactId=sahi-install -Dversion=5.1 -Dpackaging=zip -Dfile=sahi-install-5.1.zip</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>install to remote repo</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>mvn deploy:deploy-file -DgroupId=net.sf.sahi -DartifactId=sahi -Dversion=5.1 -Dpackaging jar -Dfile=sahi-5.1.jar -Drepository=labs-consol-sakuli-repository -Durl=scpexe://labs.consol.de/home/maven-repository/www/htdocs/repository</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or copy the local artifacts via SCP:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>scp -r ~.m2/repository/net/sf/sahi/sahi/5.1 maven-repository@labs.consol.de:/home/maven-repository/www/htdocs/repository/net/sf/sahi/sahi/5.1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="dev-ascii-doc"><a class="anchor" href="#dev-ascii-doc"></a>1.5.4. AsciiDoc documentation aspects</h4>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/development/ascii-doc-aspects.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/development/ascii-doc-aspects.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<div class="title">Sakuli API generation</div>
+<p>Currently there is no fully automated way between the documented Sakuli API in <a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api.md">docs/manual/testdefinition/sakuli-api.md</a> and the final <a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/sakuli-api.adoc">docs/manual/testdefinition/sakuli-api.adoc</a> .</p>
+</div>
+<div class="paragraph">
+<p><strong>Following Steps have to be executed:</strong></p>
+</div>
+<div class="paragraph">
+<p>1) Generate the <code>sakuli-api.md</code> file
+Run the maven markdown generation build:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>mvn install -f src/docs-sakuli-api/pom.xml -P generate-markdown</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The markdown file will be generated under: <code>docs/manual/testdefinition/sakuli-api.md</code></p>
+</div>
+<div class="paragraph">
+<p>2) Convert to AsciiDoc</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://plugins.jetbrains.com/plugin/7391-asciidoc">IntelliJ AsciiDoc Plugin</a>
+<span class="image"><img src="images/asciidoc-intellij-plugin.png" alt="asciidoc intellij plugin"></span></p>
+</li>
+<li>
+<p><a href="http://pandoc.org/MANUAL.html#using-pandoc">Pandoc</a></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>pandoc -s -S sakuli-api.md -t asciidoc -o sakuli-api.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>3) Copy &amp; paste the changed content to one of matching the files and maybe adjust heading level to <code>.Class.method()</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>$ ls docs/manual/testdefinition/sakuli-api*.adoc
+docs/manual/testdefinition/sakuli-api.adoc
+docs/manual/testdefinition/sakuli-api-application.adoc
+docs/manual/testdefinition/sakuli-api-environment.adoc
+docs/manual/testdefinition/sakuli-api-key.adoc
+docs/manual/testdefinition/sakuli-api-logger.adoc
+docs/manual/testdefinition/sakuli-api-mouse-button.adoc
+docs/manual/testdefinition/sakuli-api-region.adoc
+docs/manual/testdefinition/sakuli-api-testcase.adoc</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="dev-sikuli-supplemental-pack"><a class="anchor" href="#dev-sikuli-supplemental-pack"></a>1.5.5. sikulix-supplemental package</h4>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/development/linux-native-libs/linux-sikuli-supplemental-pack.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/development/linux-native-libs/linux-sikuli-supplemental-pack.adoc" target="_blank">edit</a></p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Only for Linux Operating Systems!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The current build <code>libVisionProxy.so</code> is already included in the fork <a href="https://github.com/toschneck/SikuliX-2014">toschneck/SikuliX-2014</a> and the following maven dependency:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code> &lt;dependency&gt;
+     &lt;groupId&gt;com.sikulix&lt;/groupId&gt;
+     &lt;artifactId&gt;sikulixapi-complete&lt;/artifactId&gt;
+     &lt;version&gt;1.1.990/version&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+ &lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Version can be newer, but with prefix <code>1.1.99</code></td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<div class="title">Build sikulix-supplemental package (Ubuntu)</div>
+<ul>
+<li>
+<p>Download under <a href="https://github.com/RaiMan/SikuliX-2014/blob/master/Setup/src/main/resources/SikuliX-1.1.0-Beta-Supplemental-Linux.zip">SikuliX-2014/Setup/SikuliX-1.1.0-Beta-Supplemental-Linux.zip</a></p>
+</li>
+<li>
+<p>Unzip and read included README</p>
+</li>
+<li>
+<p>Do the following steps.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>sudo apt-get install libcv-dev
+
+sudo apt-get install libtesseract-dev
+
+./ubuntu14_openCV_symbolic_links.sh
+
+./makeVisionProxy</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>replace the <code>libVisionProxy.so</code> file</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -8538,7 +9341,7 @@ The Sakuli team members are reachable on the email address <strong><a href="mail
 <div id="footer">
 <div id="footer-text">
 Version v1.0.2<br>
-Last updated 2017-05-24 11:50:00 CEST
+Last updated 2017-05-24 16:47:09 CEST
 </div>
 </div>
 <!--

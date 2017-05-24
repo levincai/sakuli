@@ -526,8 +526,8 @@ table.CodeRay td.code>pre{padding:0}
 <div class="paragraph">
 <p>This page describes how the results of the Sakuli tests <strong>example_windows7/ubuntu/opensuse</strong> can be written into a <strong>MySQL database</strong> which can be read by other 3rd party systems.</p>
 </div>
-<div class="sect3">
-<h4 id="sql-database-create-db">Create Sakuli DB</h4>
+<div class="sect4">
+<h5 id="sql-database-create-db">Create Sakuli DB</h5>
 <div class="paragraph">
 <p>Create the <strong>Sakuli database</strong> and the DB user:</p>
 </div>
@@ -551,8 +551,8 @@ table.CodeRay td.code>pre{padding:0}
 <p>Check the connection with your favorit SQL tool:</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="sql-database-enable-forwarder">Enable database forwarder</h4>
+<div class="sect4">
+<h5 id="sql-database-enable-forwarder">Enable database forwarder</h5>
 <div class="paragraph">
 <p>On the Sakuli client you must set the global properties for the database receiver. For this, edit <code>sakuli.properties</code> in the folder containing the test suites (you can copy the lines from <code><em>SAKULI_HOME</em>/conf/sakuli-default.properties</code>):</p>
 </div>
@@ -596,8 +596,8 @@ sakuli.forwarder.database.password=__DB_PW__</code></pre>
 <p>The database should now contain the results.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="sql-database-optional-cleanup">Database cleanup (optional)</h4>
+<div class="sect4">
+<h5 id="sql-database-optional-cleanup">Database cleanup (optional)</h5>
 <div class="paragraph">
 <p>Sakuli&#8217;s database can get very large over time. Use the following database maintenance script to keep only the most recent data.</p>
 </div>
@@ -618,7 +618,7 @@ sakuli.forwarder.database.password=__DB_PW__</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-24 11:50:00 CEST
+Last updated 2017-05-24 16:47:09 CEST
 </div>
 </div>
 </body>
