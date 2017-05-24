@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.0.2,</span>
-<span id="revdate">23.05.2017 @ 20:34:57 CEST</span>
+<span id="revdate">24.05.2017 @ 11:49:57 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -747,18 +747,33 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel3">
 <li><a href="#_monitoring">1.4.1. Monitoring</a>
 <ul class="sectlevel4">
-<li><a href="#_omd_gearman_daemon">1.4.1.1. OMD - Gearman Daemon</a>
+<li><a href="#omd-gearman">1.4.1.1. OMD - Gearman Daemon</a>
 <ul class="sectlevel5">
 <li><a href="#_omd_configuration">OMD Configuration</a></li>
 <li><a href="#_sakuli_client_configuration">Sakuli Client Configuration</a></li>
 <li><a href="#_using_aes_encryption_optional">Using AES encryption (optional)</a></li>
 </ul>
 </li>
-<li><a href="#_omd_sql_database">1.4.1.2. OMD - SQL Database</a>
+<li><a href="#omd-sql-database">1.4.1.2. OMD - SQL Database</a>
 <ul class="sectlevel5">
 <li><a href="#_omd_configuration_2">OMD Configuration</a></li>
 <li><a href="#_sakuli_client_configuration_2">Sakuli Client Configuration</a></li>
 <li><a href="#_database_cleanup_optional">Database cleanup (optional)</a></li>
+<li><a href="#_troubleshooting_2">Troubleshooting</a></li>
+</ul>
+</li>
+<li><a href="#_icinga2_rest_api">1.4.1.3. Icinga2 REST API</a>
+<ul class="sectlevel5">
+<li><a href="#_icinga2_configuration">Icinga2 Configuration</a></li>
+<li><a href="#_sakuli_client_configuration_3">Sakuli Client Configuration</a></li>
+<li><a href="#_graph_settings">Graph settings</a></li>
+</ul>
+</li>
+<li><a href="#_advanced_topics">1.4.1.4. Advanced Topics</a>
+<ul class="sectlevel5">
+<li><a href="#_native_omd_integration">Native OMD Integration</a></li>
+<li><a href="#_pnp4nagios_2">PNP4Nagios</a></li>
+<li><a href="#_grafana_2">Grafana</a></li>
 </ul>
 </li>
 </ul>
@@ -6161,7 +6176,7 @@ java%sakuli.jar</code></pre>
 <div class="sect3">
 <h4 id="_monitoring"><a class="anchor" href="#_monitoring"></a>1.4.1. Monitoring</h4>
 <div class="sect4">
-<h5 id="_omd_gearman_daemon"><a class="anchor" href="#_omd_gearman_daemon"></a>1.4.1.1. OMD - Gearman Daemon</h5>
+<h5 id="omd-gearman"><a class="anchor" href="#omd-gearman"></a>1.4.1.1. OMD - Gearman Daemon</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/integration/monitoring/omd-gearman.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/integration/monitoring/omd-gearman.adoc" target="_blank">edit</a></p>
 </div>
@@ -6435,7 +6450,7 @@ accept_clear_results=yes</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_omd_sql_database"><a class="anchor" href="#_omd_sql_database"></a>1.4.1.2. OMD - SQL Database</h5>
+<h5 id="omd-sql-database"><a class="anchor" href="#omd-sql-database"></a>1.4.1.2. OMD - SQL Database</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/integration/monitoring/omd-sql-database.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/integration/monitoring/omd-sql-database.adoc" target="_blank">edit</a></p>
 </div>
@@ -6698,6 +6713,637 @@ define service {
 Removing Crontab...OK
 Initializing Crontab...OK</code></pre>
 </div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_troubleshooting_2"><a class="anchor" href="#_troubleshooting_2"></a>Troubleshooting</h6>
+<div class="sect6">
+<h7 id="_apparmor_prevention_on_mysql"><a class="anchor" href="#_apparmor_prevention_on_mysql"></a>Apparmor prevention on MySQL</h7>
+<div class="paragraph">
+<p><strong>Possible error 1:</strong> mysql_install_db fails:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>141021 16:40:03 [Warning] Can't create test file /omd/sites/sakuli/var/mysql/omd2.lower-test
+ERROR: 1005  Can't create table 'db' (errno: 13)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Possible error 2:</strong> MySQL startup fails:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ omd start
+Starting gearmand...OK
+Starting MySQL... ..........ERROR.
+Starting rrdcached...OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Solution:</strong></p>
+</div>
+<div class="paragraph">
+<p>Check <code>/var/log/syslog</code> or <code>/var/log/messages</code> for apparmor messages:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>…
+Oct 21 17:08:21 omd2 kernel: [116300.215520] type=1400 audit(1413904101.323:27): apparmor="DENIED" operation="open" profile="/usr/sbin/mysqld" name="/opt/omd/sites/sakuli/.my.cnf" pid=13136 comm="mysqld" requested_mask="r" denied_mask="r" fsuid=999 ouid=999
+…</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Apparmor has prevented you from using a non-default config file for MySQL. If you know how to create a apparmor profile for MySQL on OMD, let us know :-)</p>
+</div>
+<div class="paragraph">
+<p>The quick solution is to completely disable apparmor. Check if unloading apparmor profiles solves the problem:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>root@omd:~# service apparmor teardown
+ * Unloading AppArmor profiles</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If so, execute the following command to uninstall apparmor:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>root@omd2:~# apt-get remove apparmor</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_icinga2_rest_api"><a class="anchor" href="#_icinga2_rest_api"></a>1.4.1.3. Icinga2 REST API</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/integration/monitoring/icinga2api.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/integration/monitoring/icinga2api.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>This page describes how the results of Sakuli tests can be sent to the <a href="http://docs.icinga.org/icinga2/snapshot/doc/module/icinga2/chapter/icinga2-api">REST API</a> of an <a href="https://www.icinga.org/">Icinga2</a> monitoring instance.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/sakuli-icinga2.png" alt="sakuli-icinga2"></span></p>
+</div>
+<div class="sect5">
+<h6 id="_icinga2_configuration"><a class="anchor" href="#_icinga2_configuration"></a>Icinga2 Configuration</h6>
+<div class="sect6">
+<h7 id="_enable_the_icinga2_api"><a class="anchor" href="#_enable_the_icinga2_api"></a>Enable the Icinga2 API</h7>
+<div class="paragraph">
+<p>The steps to enable the Icinga2 API are described in the <a href="http://docs.icinga.org/icinga2/snapshot/doc/module/icinga2/chapter/icinga2-api">REST API documentation</a>.</p>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_create_a_icinga2_service"><a class="anchor" href="#_create_a_icinga2_service"></a>Create a Icinga2 service</h7>
+<div class="paragraph">
+<p>Create a <strong>check_command</strong>, which will be executed only if Icinga did not receive a Sakuli result within a certain time. This ensures that you get a notification even if no passive check results arrive in Icinga at all:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>vim /etc/icinga2/conf.d/commands.conf
+
+object CheckCommand "check_dummy" {
+   import "plugin-check-command"
+   command = [
+     PluginDir + "/check_dummy","$dummy_state$","$dummy_text$"
+   ]
+   vars.dummy_state = 0
+   vars.dummy_text = "Check was successful."
+}
+
+object CheckCommand "check_sakuli" {
+   import "check_dummy"
+   vars.dummy_state = 3
+   vars.dummy_text = "No passive Sakuli check result received."
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create a <strong>host</strong> object for the Sakuli client:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>vim /etc/icinga2/conf.d/hosts.conf
+
+object Host "sakuliclient01" {
+   import "generic-host"
+   address = [IP]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create the following <strong>service</strong> object for the first test case. <em>freshness_threshold</em> should be slightly higher than the interval Sakuli tests are planned (if you are using PNP4Nagios, see also <a href="advanced-topics/installation-omd.md#rrd-heartbeat">RRD heartbeat</a> )</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>object Service "sakuli_demo" {
+  import "generic-service"
+  host_name = "sakuliclient01"
+  check_command = "check_sakuli"
+  enable_active_checks = 0
+  enable_passive_checks = 1
+  enable_flapping = 0
+  volatile = 1
+  enable_perfdata = 1
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Reload Icinga2:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>service icinga2 reload</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now open Icingaweb2; you should see the Sakuli host with the service <em>"sakuli_demo"</em> attached:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/icingaweb2-pending2.png" alt="icingaweb2-pending2"></span></p>
+</div>
+<div class="paragraph">
+<p>The check is waiting now for check results from a Sakuli client.</p>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sakuli_client_configuration_3"><a class="anchor" href="#_sakuli_client_configuration_3"></a>Sakuli Client Configuration</h6>
+<div class="paragraph">
+<div class="title">Sakuli Icinga2 forwarder parameter</div>
+<p>On the Sakuli client you must set the global properties for the Icinga2 receiver. For this, edit <code>sakuli.properties</code> in the folder containing the test suites (you can copy the lines from <code><em>SAKULI_HOME</em>/conf/sakuli-default.properties</code>):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="properties">sakuli.forwarder.icinga2.enabled=true
+sakuli.forwarder.icinga2.api.host=__ICINGA_IP__
+sakuli.forwarder.icinga2.api.port=5665
+sakuli.forwarder.icinga2.api.username=icingasakuli
+sakuli.forwarder.icinga2.api.password=icingasakuli
+sakuli.forwarder.icinga2.hostname=sakuliclient01</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Test result transmission to Icinga2</div>
+<p>Execute one of the example test case:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Ubuntu</strong>: <code>sakuli run <em>INST_DIR</em>/example_test_suites/example_ubuntu/</code></p>
+</li>
+<li>
+<p><strong>openSUSE</strong>: <code>sakuli run <em>INST_DIR</em>/example_test_suites/example_opensuse/</code></p>
+</li>
+<li>
+<p><strong>Windows 7</strong>: <code>sakuli run <em>INST_DIR</em>\example_test_suites\example_windows7\</code></p>
+</li>
+<li>
+<p><strong>Windows 8</strong>: <code>sakuli run <em>INST_DIR</em>\example_test_suites\example_windows8\</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The service in Icnga2 should change its status to:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/icinga_ok.png" alt="icinga_ok"></span></p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_graph_settings"><a class="anchor" href="#_graph_settings"></a>Graph settings</h6>
+<div class="paragraph">
+<p>Icinga2 integration is very new; we did not yet dive into the configuration of Graphite or Grafana graphs. The only supported graphing solution is PNP4Nagios. Nevertheless you are welcome to contribute graph templates for Grafana and/or Graphite!</p>
+</div>
+<div class="sect6">
+<h7 id="_pnp4nagios"><a class="anchor" href="#_pnp4nagios"></a>PNP4Nagios</h7>
+<div class="paragraph">
+<p>Set the RRD storage type of PNP to MULTIPLE, which creates one RRD file per perfdata label:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>echo "RRD_STORAGE_TYPE = MULTIPLE" &gt; /etc/pnp4nagios/check_commands/check_sakuli.cfg</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Copy the PNP graph template <code>check_sakuli.php</code> from <code>%SAKULI_HOME%/setup/nagios/</code> on the client to <code>/usr/share/nagios/html/pnp4nagios/templates/</code> on the Icinga2 server.</p>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_grafana"><a class="anchor" href="#_grafana"></a>Grafana</h7>
+<div class="paragraph">
+<p>tbd</p>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_graphite"><a class="anchor" href="#_graphite"></a>Graphite</h7>
+<div class="paragraph">
+<p>tbd</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_advanced_topics"><a class="anchor" href="#_advanced_topics"></a>1.4.1.4. Advanced Topics</h5>
+<div class="sect5">
+<h6 id="_native_omd_integration"><a class="anchor" href="#_native_omd_integration"></a>Native OMD Integration</h6>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/integration/monitoring/advanced-topics/omd-native.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/integration/monitoring/advanced-topics/omd-native.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>This chapter describes all necessary steps to configure a <strong>Nagios</strong> compatible monitoring system to receive Sakuli test results. OMD with Thruk as web frontend is highly recommended, but any other Nagios based system will do also.</p>
+</div>
+<div class="sect6">
+<h7 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h7>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a href="http://www.omdistro.org">OMD</a> 1.x</strong> installed on a Linux operating system</p>
+</li>
+<li>
+<p>a running <strong>OMD site</strong> (here: <strong>sakuli</strong>)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_download"><a class="anchor" href="#_download"></a>Download</h7>
+<div class="paragraph">
+<p>General note: you should download the <strong>same package version of Sakuli</strong> as you did on the clients. <strong>Do not mix versions</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Download <strong>Sakuli</strong> from <a href="http://labs.consol.de/sakuli/install">http://labs.consol.de/sakuli/install</a> into a temporary folder <code><em>TEMP</em></code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>cd __TEMP__
+wget http://labs.consol.de/sakuli/install/sakuli-vx.x.x-SNAPSHOT.zip</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Decompress it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>unzip sakuli-vx.x.x-SNAPSHOT.zip</code></pre>
+</div>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_general_preparations"><a class="anchor" href="#_general_preparations"></a>General preparations</h7>
+<div class="paragraph">
+<p>All following steps should be done as the <strong>OMD site user</strong> (here: "sakuli"):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>su - sakuli</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Nagios</strong></p>
+</div>
+<div class="paragraph">
+<p>Sakuli will produce HTML formatted output. <strong>HTML escaping</strong> in Nagios must be turned off:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ vim etc/nagios/cgi.cfg
+    escape_html_tags=0</code></pre>
+</div>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_choose_a_forwarder"><a class="anchor" href="#_choose_a_forwarder"></a>Choose a forwarder</h7>
+<div class="paragraph">
+<p>Depending on your environment, you can set up on of these two possible forwarder types. Each of them is documented on a single page.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#omd-gearman">Setting up Nagios to <strong>receive Gearman results</strong> from Sakuli clients</a> (<strong>recommended</strong>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>passive check (via Gearmand result queue)</p>
+</li>
+<li>
+<p>+ get results immediately</p>
+</li>
+<li>
+<p>+ PNP graphs</p>
+</li>
+<li>
+<p>- no performance value history to do further reporting (despite reading the RRDs again; not recommended)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="#omd-sql-database">Setting up the Sakuli <strong>result database</strong> in OMD</a> and let Nagios check the database</p>
+<div class="ulist">
+<ul>
+<li>
+<p>active check (against MySQL result database)</p>
+</li>
+<li>
+<p>- results in Nagios always lag behind</p>
+</li>
+<li>
+<p>+ PNP graphs</p>
+</li>
+<li>
+<p>+ all suite/case/step performance values are stored in database and can be used for further reporting</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_pnp4nagios_2"><a class="anchor" href="#_pnp4nagios_2"></a>PNP4Nagios</h6>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/integration/monitoring/advanced-topics/pnp4nagios.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/integration/monitoring/advanced-topics/pnp4nagios.adoc" target="_blank">edit</a></p>
+</div>
+<div class="sect6">
+<h7 id="_rrd_storage_type"><a class="anchor" href="#_rrd_storage_type"></a>RRD Storage Type</h7>
+<div class="paragraph">
+<p>In PNP4Nagios RRD Storage type "MULTIPLE" is of great importance for Sakuli checks, because the number of steps can change by time (=if you are adding/deleting some).</p>
+</div>
+<div class="paragraph">
+<p>Verify <code>RRD_STORAGE_TYPE</code> in <code>process_perfdata.cfg</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ vim ~/etc/pnp4nagios/process_perfdata.cfg
+  RRD_STORAGE_TYPE = MULTIPLE</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If this value is <em>"SINGLE"</em> on your system and you do not want to change it globally, use the <em>custom check_command</em> cfg file. PNP4Nagios will then use storage type <em>"MULTIPLE"</em> only for this check_command then:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ cp __TEMP__/sakuli-vx.x.x-SNAPSHOT/setup/nagios/check_sakuli.cfg ~/etc/pnp4nagios/check_commands/</code></pre>
+</div>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_rrd_heartbeat"><a class="anchor" href="#_rrd_heartbeat"></a>RRD heartbeat</h7>
+<div class="paragraph">
+<p>Each RRD file contains a heartbeat value, which determines how much time must pass without any new update, before RRDtool writes an UNKNOWN value (nan) into the data slot (the graph will have a gap then). In PNP4nagios heartbeat is defined at approx. 2 1/2 hours. If your Sakuli check runs only every 2 hours, this value will be fine. But for a 5 minute interval, this is way too long. As a consequence, the graph line will be continuously drawed even Sakuli did no check for two hours. Hence, always make sure to adapt the heartbeat to a value which is slightly higher than the interval of Sakuli checks (and indeally the same as <a href="integration/monitoring/forwarder-gearman.md#create-a-nagios-service">freshness_threshold</a>, if you use the gearman receiver):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ cd ~/var/pnp4nagios/perfdata/sakulihost/
+# Sakuli check interval: 2 minutes --&gt; RRD heartbeat 3 minutes
+OMD[sakuli]:~$ for file in sakuli_e2e_webshop*.rrd; do rrdtool tune $file --heartbeat 1:180; done</code></pre>
+</div>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_install_pnp_graph_template"><a class="anchor" href="#_install_pnp_graph_template"></a>install PNP graph template</h7>
+<div class="paragraph">
+<p>Copy the PNP4nagios graph template into the templates folder:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ cp __TEMP__/sakuli-vx.x.x-SNAPSHOT/setup/nagios/check_sakuli.php ~/etc/pnp4nagios/templates/</code></pre>
+</div>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_include_cpu_memory_metrics_in_sakuli_graphs_optional"><a class="anchor" href="#_include_cpu_memory_metrics_in_sakuli_graphs_optional"></a>Include CPU/Memory metrics in Sakuli graphs (optional)</h7>
+<div class="paragraph">
+<p>If Sakuli reports a long check runtime, it is good to know the CPU/Memory metrics on the Sakuli client machine, because CPU/IO bottlenecks affect Sakuli tests, too.</p>
+</div>
+<div class="paragraph">
+<p>The following optional enhancement displays the <strong>CPU/Memory graph</strong> lines of the Sakuli test client in the suite/case graph. By setting <strong>custom host macros</strong>, the graph template knows where to fetch these data from.</p>
+</div>
+<div class="paragraph">
+<div class="title">Linux client with CPU check, displayed by a yellow line</div>
+<p><span class="image"><img src="images/pnp_graph.png" alt="PNP graph"></span></p>
+</div>
+<div class="paragraph">
+<div class="title">add CPU load check (for Linux Sakuli clients)</div>
+<p>Add this <strong>command</strong> to <code>commands.cfg</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>define command{
+    command_name    check_local_load
+    command_line    $USER1$/check_load -w $ARG1$ -c $ARG2$
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add this <strong>service</strong> to <code>services.cfg</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>define service {
+  service_description            CPU_Load
+  host_name                 sakuli_client
+  use                            generic-service,srv-pnp
+  # if Sakuli checks are running on the same machine (as in the demo VM)
+  check_command                  check_local_load!2.5,1.5,1!5,3.5,2
+  # if Sakuli checks are running on another host than OMD
+  check_command                  check_by_ssh!check_load!2.5,1.5,1!5,3.5,2
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add this <strong>custom host macros</strong> to every Sakuli host in <code>hosts.cfg</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>define host {
+    …
+    _E2E_CPU_HOST                  sakuli_client
+    _E2E_CPU_SVC                   CPU_Load_load5
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now reload OMD:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>omd reload</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see now the following service on <code>sakuli_client</code>:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/svc_cpu.png" alt="PNP graph"></span></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The value of <code>_E2E_CPU_SVC</code> and <code>_E2E_MEM_SVC</code> refer to the file name of the corresponding RRD file. <code>CPU_Usage_5</code> for example means to get the the CPU usage data from <code>$OMD_ROOT/var/pnp4nagios/perfdata/[_E2E_CPU_HOST]/CPU_Usage_5.rrd</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<div class="title">add CPU/Memory usage check (for Windows Sakuli clients)</div>
+<p>Install <strong>NSClient++</strong> on the Windows client. Then add this <strong>command check_nrpe_arg:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>    vim ~/etc/nagios/conf.d/commands.cfg
+
+    define command {
+      command_name                   check_nrpe_arg
+      command_line                   $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$ -a $ARG2$
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then add these <strong>services</strong> to Nagios:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>    define service {
+      service_description          CPU_Usage
+      host_name                    win7sakuli
+      use                          generic-service,srv-pnp
+      check_command                check_nrpe_arg!CheckCPU!warn=80% crit=90% time=15 time=5 time=1 ShowAll
+    }
+
+    define service {
+      service_description          Mem_Usage
+      host_name                    win7sakuli
+      use                          generic-service,srv-pnp
+      check_command                check_nrpe_arg!CheckMem!MaxWarn=80% MaxCrit=90% ShowAll type=page type=paged type=physical type=virtual
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add these host macros to every Nagios host where Sakuli checks are defined:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>    _E2E_CPU_HOST                  win7sakuli
+    _E2E_CPU_SVC                   CPU_Usage_5
+    _E2E_MEM_HOST                  win7sakuli
+    _E2E_MEM_SVC                   Mem_Usage</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now reload OMD:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>omd reload</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The value of <code>_E2E_CPU_SVC</code> and <code>_E2E_MEM_SVC</code> refer to the file name of the corresponding RRD file. <code>CPU_Usage_5</code> for example means to get the the CPU usage data from <code>$OMD_ROOT/var/pnp4nagios/perfdata/[_E2E_CPU_HOST]/CPU_Usage_5.rrd</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<div class="title">XML update delay</div>
+<p>As soon as the created services produce perfdata for the first time, their XML file created by PNP4Nagios will also contain the host macros created in the step before. If not, check if <code>XML_UPDATE_DELAY</code> in <code>etc/pnp4nagios/process_perfdata.cfg</code> is set too high.</p>
+</div>
+<div class="paragraph">
+<div class="title">Change PNP working mode</div>
+<p>OMD runs PNP by default in <strong><a href="http://docs.pnp4nagios.org/pnp-0.6/modes#bulk_mode_with_npcdmod">Bulk Mode with NPCD and npcdmod.o</a></strong>. In this mode the Nagios broker module <code>npcdmod.o</code> reads the performance directly from the monitoring core and writes them in <em>var/spool/perfdata</em>. This data are not expandable with <strong>custom macros</strong> - therefore the mode has to be changed to <strong><a href="http://docs.pnp4nagios.org/pnp-0.6/modes#bulk_mode_with_npcd">Bulk Mode with NPCD</a></strong>. (the performance of both modes will be equal).</p>
+</div>
+<div class="paragraph">
+<p>In this mode the monitoring core itself writes perfdata to the spool directory (instead of <em>npcdmod.o</em>). The format of this data can be freely defined by adapting <code>service_perfdata_file_template</code>. In the following code block you can see that the four <strong>custom host macros</strong> were added to this template string. Perfdata files are then moved to <em>var/spool/perfdata</em> every 15 seconds by the monitoring core.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Make sure to replace the OMD site name placeholder <code><em>OMD_SITE</em></code> with your site name! (in <em>vim</em> type <code>:%s/<em>OMD_SITE</em>/yoursitename/g</code>)
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>vim ~/etc/nagios/nagios.d/pnp4nagios.cfg
+
+process_performance_data=1
+
+# COMMENT THE LINE BELOW
+# broker_module=/omd/sites/__OMD_SITE__/lib/npcdmod.o config_file=/omd/sites/__OMD_SITE__/etc/pnp4nagios/npcd.cfg
+
+# services
+service_perfdata_file=/omd/sites/__OMD_SITE__/var/pnp4nagios/service-perfdata
+service_perfdata_file_template=DATATYPE::SERVICEPERFDATA\tTIMET::$TIMET$\tHOSTNAME::$HOSTNAME$\tSERVICEDESC::$SERVICEDESC$\tSERVICEPERFDATA::$SERVICEPERFDATA$\tSERVICECHECKCOMMAND::$SERVICECHECKCOMMAND$\tHOSTSTATE::$HOSTSTATE$\tHOSTSTATETYPE::$HOSTSTATETYPE$\tSERVICESTATE::$SERVICESTATE$\tSERVICESTATETYPE::$SERVICESTATETYPE$\tE2ECPUHOST::$_HOSTE2E_CPU_HOST$\tE2ECPUSVC::$_HOSTE2E_CPU_SVC$\tE2EMEMHOST::$_HOSTE2E_MEM_HOST$\tE2EMEMSVC::$_HOSTE2E_MEM_SVC$
+service_perfdata_file_mode=a
+service_perfdata_file_processing_interval=15
+service_perfdata_file_processing_command=omd-process-service-perfdata-file
+
+# hosts
+host_perfdata_file=/omd/sites/__OMD_SITE__/var/pnp4nagios/host-perfdata
+host_perfdata_file_template=DATATYPE::HOSTPERFDATA\tTIMET::$TIMET$\tHOSTNAME::$HOSTNAME$\tHOSTPERFDATA::$HOSTPERFDATA$\tHOSTCHECKCOMMAND::$HOSTCHECKCOMMAND$\tHOSTSTATE::$HOSTSTATE$\tHOSTSTATETYPE::$HOSTSTATETYPE$
+host_perfdata_file_mode=a
+host_perfdata_file_processing_interval=15
+host_perfdata_file_processing_command=omd-process-host-perfdata-file</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Check if the perfdata processing commands are present:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>vim ~/etc/nagios/conf.d/pnp4nagios.cfg
+
+define command{
+    command_name    omd-process-service-perfdata-file
+    command_line    /bin/mv /omd/sites/__OMD_SITE__/var/pnp4nagios/service-perfdata /omd/sites/__OMD_SITE__/var/pnp4nagios/spool/service-perfdata.$TIMET$
+}
+
+define command{
+    command_name    omd-process-host-perfdata-file
+    command_line    /bin/mv /omd/sites/__OMD_SITE__/var/pnp4nagios/host-perfdata /omd/sites/__OMD_SITE__/var/pnp4nagios/spool/host-perfdata.$TIMET$
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Restart the OMD site to unload the <em>npcdmod.o</em> module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>omd restart</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Test</div>
+<p>First reschedule the CPU/Mem check on the sakuli client. It can take several minutes to store the values in the RRD database. As soon as you can see "real" values in the PNP4Nagios graph of "CPU Load" (instead of &#8220;-nan&#8221;), restart the Sakuli check.
+The Sakui graph should now contain also CPU/Memory values.</p>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_grafana_2"><a class="anchor" href="#_grafana_2"></a>Grafana</h6>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/integration/monitoring/advanced-topics/grafana.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/integration/monitoring/advanced-topics/grafana.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>tbd</p>
 </div>
 </div>
 </div>
@@ -7892,7 +8538,7 @@ The Sakuli team members are reachable on the email address <strong><a href="mail
 <div id="footer">
 <div id="footer-text">
 Version v1.0.2<br>
-Last updated 2017-05-23 20:34:58 CEST
+Last updated 2017-05-24 11:50:00 CEST
 </div>
 </div>
 <!--

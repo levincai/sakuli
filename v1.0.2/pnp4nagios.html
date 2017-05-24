@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Logging</title>
+<title>PNP4Nagios</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -512,20 +512,217 @@ table.CodeRay td.code>pre{padding:0}
 <div id="header">
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel3">
-<li><a href="#_logging">Logging</a></li>
+<ul class="sectlevel4">
+<li><a href="#_pnp4nagios">PNP4Nagios</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect3">
-<h4 id="_logging">Logging</h4>
+<div class="sect4">
+<h5 id="_pnp4nagios">PNP4Nagios</h5>
 <div id="git-edit-section" class="paragraph">
-<p>git-link:docs/manual/testdefinition/advanced-topics/sakuli-logging.adoc{git-view} | git-link:docs/manual/testdefinition/advanced-topics/sakuli-logging.adoc{git-edit}</p>
+<p>git-link:docs/manual/integration/monitoring/advanced-topics/pnp4nagios.adoc{git-view} | git-link:docs/manual/integration/monitoring/advanced-topics/pnp4nagios.adoc{git-edit}</p>
+</div>
+<div class="sect5">
+<h6 id="_rrd_storage_type">RRD Storage Type</h6>
+<div class="paragraph">
+<p>In PNP4Nagios RRD Storage type "MULTIPLE" is of great importance for Sakuli checks, because the number of steps can change by time (=if you are adding/deleting some).</p>
 </div>
 <div class="paragraph">
-<div class="title">Verbosity</div>
-<p>The logging verbosity of all compoments <em>Sakuli, Sahi, Sikuli, Spring</em> - and <em>Java</em> in general can be changed individually.</p>
+<p>Verify <code>RRD_STORAGE_TYPE</code> in <code>process_perfdata.cfg</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ vim ~/etc/pnp4nagios/process_perfdata.cfg
+  RRD_STORAGE_TYPE = MULTIPLE</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If this value is <em>"SINGLE"</em> on your system and you do not want to change it globally, use the <em>custom check_command</em> cfg file. PNP4Nagios will then use storage type <em>"MULTIPLE"</em> only for this check_command then:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ cp __TEMP__/sakuli-vx.x.x-SNAPSHOT/setup/nagios/check_sakuli.cfg ~/etc/pnp4nagios/check_commands/</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_rrd_heartbeat">RRD heartbeat</h6>
+<div class="paragraph">
+<p>Each RRD file contains a heartbeat value, which determines how much time must pass without any new update, before RRDtool writes an UNKNOWN value (nan) into the data slot (the graph will have a gap then). In PNP4nagios heartbeat is defined at approx. 2 1/2 hours. If your Sakuli check runs only every 2 hours, this value will be fine. But for a 5 minute interval, this is way too long. As a consequence, the graph line will be continuously drawed even Sakuli did no check for two hours. Hence, always make sure to adapt the heartbeat to a value which is slightly higher than the interval of Sakuli checks (and indeally the same as <a href="integration/monitoring/forwarder-gearman.md#create-a-nagios-service">freshness_threshold</a>, if you use the gearman receiver):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ cd ~/var/pnp4nagios/perfdata/sakulihost/
+# Sakuli check interval: 2 minutes --&gt; RRD heartbeat 3 minutes
+OMD[sakuli]:~$ for file in sakuli_e2e_webshop*.rrd; do rrdtool tune $file --heartbeat 1:180; done</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_install_pnp_graph_template">install PNP graph template</h6>
+<div class="paragraph">
+<p>Copy the PNP4nagios graph template into the templates folder:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ cp __TEMP__/sakuli-vx.x.x-SNAPSHOT/setup/nagios/check_sakuli.php ~/etc/pnp4nagios/templates/</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_include_cpu_memory_metrics_in_sakuli_graphs_optional">Include CPU/Memory metrics in Sakuli graphs (optional)</h6>
+<div class="paragraph">
+<p>If Sakuli reports a long check runtime, it is good to know the CPU/Memory metrics on the Sakuli client machine, because CPU/IO bottlenecks affect Sakuli tests, too.</p>
+</div>
+<div class="paragraph">
+<p>The following optional enhancement displays the <strong>CPU/Memory graph</strong> lines of the Sakuli test client in the suite/case graph. By setting <strong>custom host macros</strong>, the graph template knows where to fetch these data from.</p>
+</div>
+<div class="paragraph">
+<div class="title">Linux client with CPU check, displayed by a yellow line</div>
+<p><span class="image"><img src="images/pnp_graph.png" alt="PNP graph"></span></p>
+</div>
+<div class="paragraph">
+<div class="title">add CPU load check (for Linux Sakuli clients)</div>
+<p>Add this <strong>command</strong> to <code>commands.cfg</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>define command{
+    command_name    check_local_load
+    command_line    $USER1$/check_load -w $ARG1$ -c $ARG2$
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add this <strong>service</strong> to <code>services.cfg</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>define service {
+  service_description            CPU_Load
+  host_name                 sakuli_client
+  use                            generic-service,srv-pnp
+  # if Sakuli checks are running on the same machine (as in the demo VM)
+  check_command                  check_local_load!2.5,1.5,1!5,3.5,2
+  # if Sakuli checks are running on another host than OMD
+  check_command                  check_by_ssh!check_load!2.5,1.5,1!5,3.5,2
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add this <strong>custom host macros</strong> to every Sakuli host in <code>hosts.cfg</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>define host {
+    …
+    _E2E_CPU_HOST                  sakuli_client
+    _E2E_CPU_SVC                   CPU_Load_load5
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now reload OMD:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>omd reload</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see now the following service on <code>sakuli_client</code>:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/svc_cpu.png" alt="PNP graph"></span></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The value of <code>_E2E_CPU_SVC</code> and <code>_E2E_MEM_SVC</code> refer to the file name of the corresponding RRD file. <code>CPU_Usage_5</code> for example means to get the the CPU usage data from <code>$OMD_ROOT/var/pnp4nagios/perfdata/[_E2E_CPU_HOST]/CPU_Usage_5.rrd</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<div class="title">add CPU/Memory usage check (for Windows Sakuli clients)</div>
+<p>Install <strong>NSClient++</strong> on the Windows client. Then add this <strong>command check_nrpe_arg:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>    vim ~/etc/nagios/conf.d/commands.cfg
+
+    define command {
+      command_name                   check_nrpe_arg
+      command_line                   $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$ -a $ARG2$
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then add these <strong>services</strong> to Nagios:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>    define service {
+      service_description          CPU_Usage
+      host_name                    win7sakuli
+      use                          generic-service,srv-pnp
+      check_command                check_nrpe_arg!CheckCPU!warn=80% crit=90% time=15 time=5 time=1 ShowAll
+    }
+
+    define service {
+      service_description          Mem_Usage
+      host_name                    win7sakuli
+      use                          generic-service,srv-pnp
+      check_command                check_nrpe_arg!CheckMem!MaxWarn=80% MaxCrit=90% ShowAll type=page type=paged type=physical type=virtual
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add these host macros to every Nagios host where Sakuli checks are defined:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>    _E2E_CPU_HOST                  win7sakuli
+    _E2E_CPU_SVC                   CPU_Usage_5
+    _E2E_MEM_HOST                  win7sakuli
+    _E2E_MEM_SVC                   Mem_Usage</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now reload OMD:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>omd reload</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The value of <code>_E2E_CPU_SVC</code> and <code>_E2E_MEM_SVC</code> refer to the file name of the corresponding RRD file. <code>CPU_Usage_5</code> for example means to get the the CPU usage data from <code>$OMD_ROOT/var/pnp4nagios/perfdata/[_E2E_CPU_HOST]/CPU_Usage_5.rrd</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<div class="title">XML update delay</div>
+<p>As soon as the created services produce perfdata for the first time, their XML file created by PNP4Nagios will also contain the host macros created in the step before. If not, check if <code>XML_UPDATE_DELAY</code> in <code>etc/pnp4nagios/process_perfdata.cfg</code> is set too high.</p>
+</div>
+<div class="paragraph">
+<div class="title">Change PNP working mode</div>
+<p>OMD runs PNP by default in <strong><a href="http://docs.pnp4nagios.org/pnp-0.6/modes#bulk_mode_with_npcdmod">Bulk Mode with NPCD and npcdmod.o</a></strong>. In this mode the Nagios broker module <code>npcdmod.o</code> reads the performance directly from the monitoring core and writes them in <em>var/spool/perfdata</em>. This data are not expandable with <strong>custom macros</strong> - therefore the mode has to be changed to <strong><a href="http://docs.pnp4nagios.org/pnp-0.6/modes#bulk_mode_with_npcd">Bulk Mode with NPCD</a></strong>. (the performance of both modes will be equal).</p>
+</div>
+<div class="paragraph">
+<p>In this mode the monitoring core itself writes perfdata to the spool directory (instead of <em>npcdmod.o</em>). The format of this data can be freely defined by adapting <code>service_perfdata_file_template</code>. In the following code block you can see that the four <strong>custom host macros</strong> were added to this template string. Perfdata files are then moved to <em>var/spool/perfdata</em> every 15 seconds by the monitoring core.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -534,106 +731,65 @@ table.CodeRay td.code>pre{padding:0}
 <div class="title">Important</div>
 </td>
 <td class="content">
-"Verbosity" means one of the levels <code>DEBUG - INFO - WARN - ERROR</code>
+Make sure to replace the OMD site name placeholder <code><em>OMD_SITE</em></code> with your site name! (in <em>vim</em> type <code>:%s/<em>OMD_SITE</em>/yoursitename/g</code>)
 </td>
 </tr>
 </table>
 </div>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Log level verbosity properties</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.sakuli=<em>LEVEL</em></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for <strong>Sakuli</strong> output</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.sikuli=<em>LEVEL</em></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for <strong>Sikuli</strong> output</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.sahi=<em>LEVEL</em></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for <strong>Sahi</strong> output</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.spring=<em>LEVEL</em></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for the <strong>Spring</strong> framework (only used internally)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.root=<em>LEVEL</em></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for all other <strong>Java classes and libraries</strong></p></td>
-</tr>
-</tbody>
-</table>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 2. Log file folder / pattern</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.log.pattern=%-5level [%d{YYYY-MM-dd HH:mm:ss.SSS}] - %msg%n</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Format string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.log.folder=${sakuli.testsuite.folder}/_logs</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Log folder</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>In general it is also possible to add your own Logback configuration under <code><em>SAKULI_HOME</em>/config/sakuli-log-config.xml</code>. For more information about the Logback syntax please refer to the <a href="http://logback.qos.ch/manual/configuration.html">Logback manual</a>.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>vim ~/etc/nagios/nagios.d/pnp4nagios.cfg
+
+process_performance_data=1
+
+# COMMENT THE LINE BELOW
+# broker_module=/omd/sites/__OMD_SITE__/lib/npcdmod.o config_file=/omd/sites/__OMD_SITE__/etc/pnp4nagios/npcd.cfg
+
+# services
+service_perfdata_file=/omd/sites/__OMD_SITE__/var/pnp4nagios/service-perfdata
+service_perfdata_file_template=DATATYPE::SERVICEPERFDATA\tTIMET::$TIMET$\tHOSTNAME::$HOSTNAME$\tSERVICEDESC::$SERVICEDESC$\tSERVICEPERFDATA::$SERVICEPERFDATA$\tSERVICECHECKCOMMAND::$SERVICECHECKCOMMAND$\tHOSTSTATE::$HOSTSTATE$\tHOSTSTATETYPE::$HOSTSTATETYPE$\tSERVICESTATE::$SERVICESTATE$\tSERVICESTATETYPE::$SERVICESTATETYPE$\tE2ECPUHOST::$_HOSTE2E_CPU_HOST$\tE2ECPUSVC::$_HOSTE2E_CPU_SVC$\tE2EMEMHOST::$_HOSTE2E_MEM_HOST$\tE2EMEMSVC::$_HOSTE2E_MEM_SVC$
+service_perfdata_file_mode=a
+service_perfdata_file_processing_interval=15
+service_perfdata_file_processing_command=omd-process-service-perfdata-file
+
+# hosts
+host_perfdata_file=/omd/sites/__OMD_SITE__/var/pnp4nagios/host-perfdata
+host_perfdata_file_template=DATATYPE::HOSTPERFDATA\tTIMET::$TIMET$\tHOSTNAME::$HOSTNAME$\tHOSTPERFDATA::$HOSTPERFDATA$\tHOSTCHECKCOMMAND::$HOSTCHECKCOMMAND$\tHOSTSTATE::$HOSTSTATE$\tHOSTSTATETYPE::$HOSTSTATETYPE$
+host_perfdata_file_mode=a
+host_perfdata_file_processing_interval=15
+host_perfdata_file_processing_command=omd-process-host-perfdata-file</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<div class="title">Log file rotation</div>
-<p>Control the age of your log-files in the <code>sakuli.properties</code>, to prevent disk space erros.</p>
-</div>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.log.maxAge=14</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes all files that are older than (default) 14 days in the defined <code>sakuli.log.folder</code>.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>On Linux you can additional configure <strong>logrotate</strong> to tidy up old log files:</p>
+<p>Check if the perfdata processing commands are present:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">vim /etc/logrotate.d/sakuli
+<pre class="CodeRay highlight"><code>vim ~/etc/nagios/conf.d/pnp4nagios.cfg
 
-__SUITE_FOLDER__/*/_logs/* __SUITE_FOLDER__/*/_logs/_screenshots/* {
-    size 1k
-    missingok
-    maxage 2
+define command{
+    command_name    omd-process-service-perfdata-file
+    command_line    /bin/mv /omd/sites/__OMD_SITE__/var/pnp4nagios/service-perfdata /omd/sites/__OMD_SITE__/var/pnp4nagios/spool/service-perfdata.$TIMET$
+}
+
+define command{
+    command_name    omd-process-host-perfdata-file
+    command_line    /bin/mv /omd/sites/__OMD_SITE__/var/pnp4nagios/host-perfdata /omd/sites/__OMD_SITE__/var/pnp4nagios/spool/host-perfdata.$TIMET$
 }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Restart the OMD site to unload the <em>npcdmod.o</em> module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>omd restart</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Test</div>
+<p>First reschedule the CPU/Mem check on the sakuli client. It can take several minutes to store the values in the RRD database. As soon as you can see "real" values in the PNP4Nagios graph of "CPU Load" (instead of &#8220;-nan&#8221;), restart the Sakuli check.
+The Sakui graph should now contain also CPU/Memory values.</p>
 </div>
 </div>
 </div>

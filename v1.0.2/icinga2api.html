@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Logging</title>
+<title>Icinga2 REST API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -513,127 +513,177 @@ table.CodeRay td.code>pre{padding:0}
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel3">
-<li><a href="#_logging">Logging</a></li>
+<li><a href="#_icinga2_rest_api">Icinga2 REST API</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect3">
-<h4 id="_logging">Logging</h4>
+<h4 id="_icinga2_rest_api">Icinga2 REST API</h4>
 <div id="git-edit-section" class="paragraph">
-<p>git-link:docs/manual/testdefinition/advanced-topics/sakuli-logging.adoc{git-view} | git-link:docs/manual/testdefinition/advanced-topics/sakuli-logging.adoc{git-edit}</p>
+<p>git-link:docs/manual/integration/monitoring/icinga2api.adoc{git-view} | git-link:docs/manual/integration/monitoring/icinga2api.adoc{git-edit}</p>
 </div>
 <div class="paragraph">
-<div class="title">Verbosity</div>
-<p>The logging verbosity of all compoments <em>Sakuli, Sahi, Sikuli, Spring</em> - and <em>Java</em> in general can be changed individually.</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Important</div>
-</td>
-<td class="content">
-"Verbosity" means one of the levels <code>DEBUG - INFO - WARN - ERROR</code>
-</td>
-</tr>
-</table>
-</div>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Log level verbosity properties</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.sakuli=<em>LEVEL</em></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for <strong>Sakuli</strong> output</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.sikuli=<em>LEVEL</em></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for <strong>Sikuli</strong> output</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.sahi=<em>LEVEL</em></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for <strong>Sahi</strong> output</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.spring=<em>LEVEL</em></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for the <strong>Spring</strong> framework (only used internally)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.root=<em>LEVEL</em></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for all other <strong>Java classes and libraries</strong></p></td>
-</tr>
-</tbody>
-</table>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 2. Log file folder / pattern</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.log.pattern=%-5level [%d{YYYY-MM-dd HH:mm:ss.SSS}] - %msg%n</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Format string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.log.folder=${sakuli.testsuite.folder}/_logs</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Log folder</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>In general it is also possible to add your own Logback configuration under <code><em>SAKULI_HOME</em>/config/sakuli-log-config.xml</code>. For more information about the Logback syntax please refer to the <a href="http://logback.qos.ch/manual/configuration.html">Logback manual</a>.</p>
+<p>This page describes how the results of Sakuli tests can be sent to the <a href="http://docs.icinga.org/icinga2/snapshot/doc/module/icinga2/chapter/icinga2-api">REST API</a> of an <a href="https://www.icinga.org/">Icinga2</a> monitoring instance.</p>
 </div>
 <div class="paragraph">
-<div class="title">Log file rotation</div>
-<p>Control the age of your log-files in the <code>sakuli.properties</code>, to prevent disk space erros.</p>
+<p><span class="image"><img src="images/sakuli-icinga2.png" alt="sakuli-icinga2"></span></p>
 </div>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.log.maxAge=14</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes all files that are older than (default) 14 days in the defined <code>sakuli.log.folder</code>.</p></td>
-</tr>
-</tbody>
-</table>
+<div class="sect4">
+<h5 id="_icinga2_configuration">Icinga2 Configuration</h5>
+<div class="sect5">
+<h6 id="_enable_the_icinga2_api">Enable the Icinga2 API</h6>
 <div class="paragraph">
-<p>On Linux you can additional configure <strong>logrotate</strong> to tidy up old log files:</p>
+<p>The steps to enable the Icinga2 API are described in the <a href="http://docs.icinga.org/icinga2/snapshot/doc/module/icinga2/chapter/icinga2-api">REST API documentation</a>.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_create_a_icinga2_service">Create a Icinga2 service</h6>
+<div class="paragraph">
+<p>Create a <strong>check_command</strong>, which will be executed only if Icinga did not receive a Sakuli result within a certain time. This ensures that you get a notification even if no passive check results arrive in Icinga at all:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">vim /etc/logrotate.d/sakuli
+<pre class="CodeRay highlight"><code>vim /etc/icinga2/conf.d/commands.conf
 
-__SUITE_FOLDER__/*/_logs/* __SUITE_FOLDER__/*/_logs/_screenshots/* {
-    size 1k
-    missingok
-    maxage 2
+object CheckCommand "check_dummy" {
+   import "plugin-check-command"
+   command = [
+     PluginDir + "/check_dummy","$dummy_state$","$dummy_text$"
+   ]
+   vars.dummy_state = 0
+   vars.dummy_text = "Check was successful."
+}
+
+object CheckCommand "check_sakuli" {
+   import "check_dummy"
+   vars.dummy_state = 3
+   vars.dummy_text = "No passive Sakuli check result received."
 }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create a <strong>host</strong> object for the Sakuli client:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>vim /etc/icinga2/conf.d/hosts.conf
+
+object Host "sakuliclient01" {
+   import "generic-host"
+   address = [IP]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create the following <strong>service</strong> object for the first test case. <em>freshness_threshold</em> should be slightly higher than the interval Sakuli tests are planned (if you are using PNP4Nagios, see also <a href="advanced-topics/installation-omd.md#rrd-heartbeat">RRD heartbeat</a> )</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>object Service "sakuli_demo" {
+  import "generic-service"
+  host_name = "sakuliclient01"
+  check_command = "check_sakuli"
+  enable_active_checks = 0
+  enable_passive_checks = 1
+  enable_flapping = 0
+  volatile = 1
+  enable_perfdata = 1
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Reload Icinga2:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>service icinga2 reload</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now open Icingaweb2; you should see the Sakuli host with the service <em>"sakuli_demo"</em> attached:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/icingaweb2-pending2.png" alt="icingaweb2-pending2"></span></p>
+</div>
+<div class="paragraph">
+<p>The check is waiting now for check results from a Sakuli client.</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sakuli_client_configuration">Sakuli Client Configuration</h5>
+<div class="paragraph">
+<div class="title">Sakuli Icinga2 forwarder parameter</div>
+<p>On the Sakuli client you must set the global properties for the Icinga2 receiver. For this, edit <code>sakuli.properties</code> in the folder containing the test suites (you can copy the lines from <code><em>SAKULI_HOME</em>/conf/sakuli-default.properties</code>):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="properties">sakuli.forwarder.icinga2.enabled=true
+sakuli.forwarder.icinga2.api.host=__ICINGA_IP__
+sakuli.forwarder.icinga2.api.port=5665
+sakuli.forwarder.icinga2.api.username=icingasakuli
+sakuli.forwarder.icinga2.api.password=icingasakuli
+sakuli.forwarder.icinga2.hostname=sakuliclient01</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Test result transmission to Icinga2</div>
+<p>Execute one of the example test case:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Ubuntu</strong>: <code>sakuli run <em>INST_DIR</em>/example_test_suites/example_ubuntu/</code></p>
+</li>
+<li>
+<p><strong>openSUSE</strong>: <code>sakuli run <em>INST_DIR</em>/example_test_suites/example_opensuse/</code></p>
+</li>
+<li>
+<p><strong>Windows 7</strong>: <code>sakuli run <em>INST_DIR</em>\example_test_suites\example_windows7\</code></p>
+</li>
+<li>
+<p><strong>Windows 8</strong>: <code>sakuli run <em>INST_DIR</em>\example_test_suites\example_windows8\</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The service in Icnga2 should change its status to:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/icinga_ok.png" alt="icinga_ok"></span></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_graph_settings">Graph settings</h5>
+<div class="paragraph">
+<p>Icinga2 integration is very new; we did not yet dive into the configuration of Graphite or Grafana graphs. The only supported graphing solution is PNP4Nagios. Nevertheless you are welcome to contribute graph templates for Grafana and/or Graphite!</p>
+</div>
+<div class="sect5">
+<h6 id="_pnp4nagios">PNP4Nagios</h6>
+<div class="paragraph">
+<p>Set the RRD storage type of PNP to MULTIPLE, which creates one RRD file per perfdata label:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>echo "RRD_STORAGE_TYPE = MULTIPLE" &gt; /etc/pnp4nagios/check_commands/check_sakuli.cfg</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Copy the PNP graph template <code>check_sakuli.php</code> from <code>%SAKULI_HOME%/setup/nagios/</code> on the client to <code>/usr/share/nagios/html/pnp4nagios/templates/</code> on the Icinga2 server.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_grafana">Grafana</h6>
+<div class="paragraph">
+<p>tbd</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_graphite">Graphite</h6>
+<div class="paragraph">
+<p>tbd</p>
+</div>
 </div>
 </div>
 </div>

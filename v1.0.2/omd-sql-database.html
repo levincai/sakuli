@@ -513,13 +513,13 @@ table.CodeRay td.code>pre{padding:0}
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel3">
-<li><a href="#_omd_sql_database">OMD - SQL Database</a></li>
+<li><a href="#omd-sql-database">OMD - SQL Database</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect3">
-<h4 id="_omd_sql_database">OMD - SQL Database</h4>
+<h4 id="omd-sql-database">OMD - SQL Database</h4>
 <div id="git-edit-section" class="paragraph">
 <p>git-link:docs/manual/integration/monitoring/omd-sql-database.adoc{git-view} | git-link:docs/manual/integration/monitoring/omd-sql-database.adoc{git-edit}</p>
 </div>
@@ -784,11 +784,70 @@ Initializing Crontab...OK</code></pre>
 </div>
 </div>
 </div>
+<div class="sect4">
+<h5 id="_troubleshooting">Troubleshooting</h5>
+<div class="sect5">
+<h6 id="_apparmor_prevention_on_mysql">Apparmor prevention on MySQL</h6>
+<div class="paragraph">
+<p><strong>Possible error 1:</strong> mysql_install_db fails:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>141021 16:40:03 [Warning] Can't create test file /omd/sites/sakuli/var/mysql/omd2.lower-test
+ERROR: 1005  Can't create table 'db' (errno: 13)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Possible error 2:</strong> MySQL startup fails:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ omd start
+Starting gearmand...OK
+Starting MySQL... ..........ERROR.
+Starting rrdcached...OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Solution:</strong></p>
+</div>
+<div class="paragraph">
+<p>Check <code>/var/log/syslog</code> or <code>/var/log/messages</code> for apparmor messages:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>…
+Oct 21 17:08:21 omd2 kernel: [116300.215520] type=1400 audit(1413904101.323:27): apparmor="DENIED" operation="open" profile="/usr/sbin/mysqld" name="/opt/omd/sites/sakuli/.my.cnf" pid=13136 comm="mysqld" requested_mask="r" denied_mask="r" fsuid=999 ouid=999
+…</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Apparmor has prevented you from using a non-default config file for MySQL. If you know how to create a apparmor profile for MySQL on OMD, let us know :-)</p>
+</div>
+<div class="paragraph">
+<p>The quick solution is to completely disable apparmor. Check if unloading apparmor profiles solves the problem:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>root@omd:~# service apparmor teardown
+ * Unloading AppArmor profiles</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If so, execute the following command to uninstall apparmor:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>root@omd2:~# apt-get remove apparmor</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-23 20:34:58 CEST
+Last updated 2017-05-24 11:50:00 CEST
 </div>
 </div>
 </body>

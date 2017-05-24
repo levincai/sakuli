@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Logging</title>
+<title>Grafana</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -512,129 +512,19 @@ table.CodeRay td.code>pre{padding:0}
 <div id="header">
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel3">
-<li><a href="#_logging">Logging</a></li>
+<ul class="sectlevel4">
+<li><a href="#_grafana">Grafana</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect3">
-<h4 id="_logging">Logging</h4>
+<div class="sect4">
+<h5 id="_grafana">Grafana</h5>
 <div id="git-edit-section" class="paragraph">
-<p>git-link:docs/manual/testdefinition/advanced-topics/sakuli-logging.adoc{git-view} | git-link:docs/manual/testdefinition/advanced-topics/sakuli-logging.adoc{git-edit}</p>
+<p>git-link:docs/manual/integration/monitoring/advanced-topics/grafana.adoc{git-view} | git-link:docs/manual/integration/monitoring/advanced-topics/grafana.adoc{git-edit}</p>
 </div>
 <div class="paragraph">
-<div class="title">Verbosity</div>
-<p>The logging verbosity of all compoments <em>Sakuli, Sahi, Sikuli, Spring</em> - and <em>Java</em> in general can be changed individually.</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Important</div>
-</td>
-<td class="content">
-"Verbosity" means one of the levels <code>DEBUG - INFO - WARN - ERROR</code>
-</td>
-</tr>
-</table>
-</div>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Log level verbosity properties</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.sakuli=<em>LEVEL</em></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for <strong>Sakuli</strong> output</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.sikuli=<em>LEVEL</em></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for <strong>Sikuli</strong> output</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.sahi=<em>LEVEL</em></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for <strong>Sahi</strong> output</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.spring=<em>LEVEL</em></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for the <strong>Spring</strong> framework (only used internally)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>log.level.root=<em>LEVEL</em></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">logging level for all other <strong>Java classes and libraries</strong></p></td>
-</tr>
-</tbody>
-</table>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 2. Log file folder / pattern</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.log.pattern=%-5level [%d{YYYY-MM-dd HH:mm:ss.SSS}] - %msg%n</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Format string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.log.folder=${sakuli.testsuite.folder}/_logs</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Log folder</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>In general it is also possible to add your own Logback configuration under <code><em>SAKULI_HOME</em>/config/sakuli-log-config.xml</code>. For more information about the Logback syntax please refer to the <a href="http://logback.qos.ch/manual/configuration.html">Logback manual</a>.</p>
-</div>
-<div class="paragraph">
-<div class="title">Log file rotation</div>
-<p>Control the age of your log-files in the <code>sakuli.properties</code>, to prevent disk space erros.</p>
-</div>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sakuli.log.maxAge=14</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes all files that are older than (default) 14 days in the defined <code>sakuli.log.folder</code>.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>On Linux you can additional configure <strong>logrotate</strong> to tidy up old log files:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">vim /etc/logrotate.d/sakuli
-
-__SUITE_FOLDER__/*/_logs/* __SUITE_FOLDER__/*/_logs/_screenshots/* {
-    size 1k
-    missingok
-    maxage 2
-}</code></pre>
-</div>
+<p>tbd</p>
 </div>
 </div>
 </div>
