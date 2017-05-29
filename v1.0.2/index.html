@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.0.2,</span>
-<span id="revdate">26.05.2017 @ 22:59:05 CEST</span>
+<span id="revdate">29.05.2017 @ 11:14:15 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -913,26 +913,34 @@ table.CodeRay td.code>pre{padding:0}
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/download.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/download.adoc" target="_blank">edit</a></p>
 </div>
+<div class="paragraph">
+<div class="title">Installer</div>
+<p>Our Java based installer or the raw ZIP file can be downloaded form <a href="http://labs.consol.de/sakuli/install/" target="_blank">labs.consol.de/sakuli/install</a>:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Installer <strong>-&gt; <a href="http://labs.consol.de/sakuli/install/">Download</a></strong></p>
+<p><a href="https://labs.consol.de/sakuli/install/sakuli-v1.0.2-installer.jar">sakuli-v1.0.2-installer.jar</a></p>
 </li>
 <li>
-<p>Maven Decencies</p>
-</li>
-<li>
-<p>GH-Pages index.html</p>
-</li>
-<li>
-<p>PDF-Documentation: <strong><a href="pdf/sakuli_documentation_v1.0.2.pdf">Download PDF</a></strong></p>
-</li>
-<li>
-<p>REMOVE Readthedocs state</p>
+<p><a href="https://labs.consol.de/sakuli/install/sakuli-v1.0.2.zip">sakuli-v1.0.2.zip</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<div class="title">Maven Dependencies</div>
+<p>See <a href="#_maven_execution">Maven Execution</a>.</p>
+</div>
+<div class="paragraph">
+<div class="title">Docker images</div>
+<p>See <a href="#_containerized_execution">Containerized Execution</a></p>
+</div>
+<div class="paragraph">
+<div class="title">PDF-Documentation</div>
+<p><strong><a href="pdf/sakuli_documentation_v1.0.2.pdf">Download PDF</a></strong></p>
+</div>
 <table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. branches &amp; builds</caption>
 <colgroup>
 <col style="width: 33%;">
 <col style="width: 33%;">
@@ -949,14 +957,34 @@ table.CodeRay td.code>pre{padding:0}
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>master</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><a class="image" href="http://labs-build.consol.de/view/Sakuli/job/Sakuli_perform_release/"><img src="http://labs-build.consol.de/buildStatus/icon?job=Sakuli_perform_release" alt="Build Status"></a></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>consol/sakuli-ubuntu-xfce</code>&lt;br/&gt; <a href="https://images.microbadger.com/badges/version/consol/sakuli-ubuntu-xfce.svg">![</a>](<a href="https://hub.docker.com/r/consol/sakuli-ubuntu-xfce/">https://hub.docker.com/r/consol/sakuli-ubuntu-xfce/</a>) <a href="https://images.microbadger.com/badges/image/consol/sakuli-ubuntu-xfce.svg">![</a>](<a href="http://microbadger.com/images/consol/sakuli-ubuntu-xfce">http://microbadger.com/images/consol/sakuli-ubuntu-xfce</a>) &lt;br/&gt; <code>consol/sakuli-centos-xfce</code>&lt;br/&gt; <a href="https://images.microbadger.com/badges/version/consol/sakuli-centos-xfce.svg">![</a>](<a href="https://hub.docker.com/r/consol/sakuli-centos-xfce/">https://hub.docker.com/r/consol/sakuli-centos-xfce/</a>) <a href="https://images.microbadger.com/badges/image/consol/sakuli-centos-xfce.svg">![</a>](<a href="http://microbadger.com/images/consol/sakuli-centos-xfce">http://microbadger.com/images/consol/sakuli-centos-xfce</a>) &lt;br/&gt; <code>consol/sakuli-ubuntu-xfce-java</code>&lt;br/&gt; <a href="https://images.microbadger.com/badges/version/consol/sakuli-ubuntu-xfce-java.svg">![</a>](<a href="https://hub.docker.com/r/consol/sakuli-ubuntu-xfce-java/">https://hub.docker.com/r/consol/sakuli-ubuntu-xfce-java/</a>) <a href="https://images.microbadger.com/badges/image/consol/sakuli-ubuntu-xfce-java.svg">![</a>](<a href="http://microbadger.com/images/consol/sakuli-ubuntu-xfce-java">http://microbadger.com/images/consol/sakuli-ubuntu-xfce-java</a>) &lt;br/&gt; <code>consol/sakuli-centos-xfce-java</code>&lt;br/&gt; <a href="https://images.microbadger.com/badges/version/consol/sakuli-centos-xfce-java.svg">![</a>](<a href="https://hub.docker.com/r/consol/sakuli-centos-xfce-java/">https://hub.docker.com/r/consol/sakuli-centos-xfce-java/</a>) <a href="https://images.microbadger.com/badges/image/consol/sakuli-centos-xfce-java.svg">![</a>](<a href="http://microbadger.com/images/consol/sakuli-centos-xfce-java" class="bare">http://microbadger.com/images/consol/sakuli-centos-xfce-java</a>)
-[<a href="http://microbadger.com/images/consol/sakuli-centos-xfce-java" class="bare">http://microbadger.com/images/consol/sakuli-centos-xfce-java</a>)
-]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>consol/sakuli-ubuntu-xfce</code>
+<span class="image"><a class="image" href="https://hub.docker.com/r/consol/sakuli-ubuntu-xfce"><img src="https://images.microbadger.com/badges/version/consol/sakuli-ubuntu-xfce.svg" alt="dockerhub state"></a></span>
+<span class="image"><a class="image" href="http://microbadger.com/images/consol/sakuli-ubuntu-xfce"><img src="https://images.microbadger.com/badges/image/consol/sakuli-ubuntu-xfce.svg" alt="microbadger profile"></a></span>
+</p><p class="tableblock"><code>consol/sakuli-centos-xfce</code>
+<span class="image"><a class="image" href="https://hub.docker.com/r/consol/sakuli-centos-xfce/"><img src="https://images.microbadger.com/badges/version/consol/sakuli-centos-xfce.svg" alt="dockerhub state"></a></span>
+<span class="image"><a class="image" href="http://microbadger.com/images/consol/sakuli-centos-xfce"><img src="https://images.microbadger.com/badges/image/consol/sakuli-centos-xfce.svg" alt="microbadger profile"></a></span>
+</p><p class="tableblock"><code>consol/sakuli-ubuntu-xfce-java</code>
+<span class="image"><img src="https://images.microbadger.com/badges/version/consol/sakuli-ubuntu-xfce-java.svg" alt="dockerhub state"></span>
+<span class="image"><a class="image" href="http://microbadger.com/images/consol/sakuli-ubuntu-xfce-java"><img src="https://images.microbadger.com/badges/image/consol/sakuli-ubuntu-xfce-java.svg" alt="microbadger profile"></a></span>
+</p><p class="tableblock"><code>consol/sakuli-centos-xfce-java</code>
+<span class="image"><img src="https://images.microbadger.com/badges/version/consol/sakuli-centos-xfce-java.svg" alt="dockerhub state"></span>
+<span class="image"><a class="image" href="http://microbadger.com/images/consol/sakuli-centos-xfce-java"><img src="https://images.microbadger.com/badges/image/consol/sakuli-centos-xfce-java.svg" alt="microbadger profile"></a></span></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>dev</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><a class="image" href="http://labs-build.consol.de/view/Sakuli/job/Sakuli_CI/"><img src="http://labs-build.consol.de/buildStatus/icon?job=Sakuli_CI" alt="Build Status"></a></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>consol/sakuli-ubuntu-xfce:dev</code>&lt;br/&gt; <a href="https://images.microbadger.com/badges/version/consol/sakuli-ubuntu-xfce:dev.svg">![</a>](<a href="https://hub.docker.com/r/consol/sakuli-ubuntu-xfce/">https://hub.docker.com/r/consol/sakuli-ubuntu-xfce/</a>) <a href="https://images.microbadger.com/badges/image/consol/sakuli-ubuntu-xfce:dev.svg">![</a>](<a href="http://microbadger.com/images/consol/sakuli-ubuntu-xfce">http://microbadger.com/images/consol/sakuli-ubuntu-xfce</a>) &lt;br/&gt; <code>consol/sakuli-centos-xfce:dev</code>&lt;br/&gt; <a href="https://images.microbadger.com/badges/version/consol/sakuli-centos-xfce:dev.svg">![</a>](<a href="https://hub.docker.com/r/consol/sakuli-centos-xfce/">https://hub.docker.com/r/consol/sakuli-centos-xfce/</a>) <a href="https://images.microbadger.com/badges/image/consol/sakuli-centos-xfce:dev.svg">![</a>](<a href="http://microbadger.com/images/consol/sakuli-centos-xfce">http://microbadger.com/images/consol/sakuli-centos-xfce</a>) &lt;br/&gt;`consol/sakuli-ubuntu-xfce-java:dev`&lt;br/&gt; <a href="https://images.microbadger.com/badges/version/consol/sakuli-ubuntu-xfce-java:dev.svg">![</a>](<a href="https://hub.docker.com/r/consol/sakuli-ubuntu-xfce-java/">https://hub.docker.com/r/consol/sakuli-ubuntu-xfce-java/</a>) <a href="https://images.microbadger.com/badges/image/consol/sakuli-ubuntu-xfce-java:dev.svg">![</a>](<a href="http://microbadger.com/images/consol/sakuli-ubuntu-xfce-java">http://microbadger.com/images/consol/sakuli-ubuntu-xfce-java</a>) &lt;br/&gt; <code>consol/sakuli-centos-xfce-java:dev</code>&lt;br/&gt; <a href="https://images.microbadger.com/badges/version/consol/sakuli-centos-xfce-java:dev.svg">![</a>](<a href="https://hub.docker.com/r/consol/sakuli-centos-xfce-java/">https://hub.docker.com/r/consol/sakuli-centos-xfce-java/</a>) <a href="https://images.microbadger.com/badges/image/consol/sakuli-centos-xfce-java:dev.svg">![</a>](<a href="http://microbadger.com/images/consol/sakuli-centos-xfce-java)">http://microbadger.com/images/consol/sakuli-centos-xfce-java)</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>consol/sakuli-ubuntu-xfce:dev</code>
+<span class="image"><a class="image" href="https://hub.docker.com/r/consol/sakuli-ubuntu-xfce"><img src="https://images.microbadger.com/badges/version/consol/sakuli-ubuntu-xfce:dev.svg" alt="dockerhub state"></a></span>
+<span class="image"><a class="image" href="http://microbadger.com/images/consol/sakuli-ubuntu-xfce"><img src="https://images.microbadger.com/badges/image/consol/sakuli-ubuntu-xfce:dev.svg" alt="microbadger profile"></a></span>
+</p><p class="tableblock"></p><p class="tableblock"><code>consol/sakuli-centos-xfce:dev</code>
+<span class="image"><a class="image" href="https://hub.docker.com/r/consol/sakuli-centos-xfce/"><img src="https://images.microbadger.com/badges/version/consol/sakuli-centos-xfce:dev.svg" alt="dockerhub state"></a></span>
+<span class="image"><a class="image" href="http://microbadger.com/images/consol/sakuli-centos-xfce"><img src="https://images.microbadger.com/badges/image/consol/sakuli-centos-xfce:dev.svg" alt="microbadger profile"></a></span>
+</p><p class="tableblock"><code>consol/sakuli-ubuntu-xfce-java:dev</code>
+<span class="image"><img src="https://images.microbadger.com/badges/version/consol/sakuli-ubuntu-xfce-java:dev.svg" alt="dockerhub state"></span>
+<span class="image"><a class="image" href="http://microbadger.com/images/consol/sakuli-ubuntu-xfce-java"><img src="https://images.microbadger.com/badges/image/consol/sakuli-ubuntu-xfce-java:dev.svg" alt="microbadger profile"></a></span>
+</p><p class="tableblock"><code>consol/sakuli-centos-xfce-java:dev</code>
+<span class="image"><img src="https://images.microbadger.com/badges/version/consol/sakuli-centos-xfce-java:dev.svg" alt="dockerhub state"></span>
+<span class="image"><a class="image" href="http://microbadger.com/images/consol/sakuli-centos-xfce-java"><img src="https://images.microbadger.com/badges/image/consol/sakuli-centos-xfce-java:dev.svg" alt="microbadger profile"></a></span></p></td>
 </tr>
 </tbody>
 </table>
@@ -5358,7 +5386,7 @@ Default: false.</p>
 <p>Setting this to <em>true</em> can be useful if you want to raise a custom exception or no exception at all.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Property values of <code>sakuli.exception.suppressResumedExceptions</code></caption>
+<caption class="title">Table 2. Property values of <code>sakuli.exception.suppressResumedExceptions</code></caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5417,7 +5445,7 @@ Default: false.</p>
 </table>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 2. Log level verbosity properties</caption>
+<caption class="title">Table 3. Log level verbosity properties</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5452,7 +5480,7 @@ Default: false.</p>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 3. Log file folder / pattern</caption>
+<caption class="title">Table 4. Log file folder / pattern</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9388,7 +9416,7 @@ The Sakuli team members are reachable on the email address <strong><a href="mail
 <div id="footer">
 <div id="footer-text">
 Version v1.0.2<br>
-Last updated 2017-05-26 22:59:06 CEST
+Last updated 2017-05-29 11:14:17 CEST
 </div>
 </div>
 <!--
