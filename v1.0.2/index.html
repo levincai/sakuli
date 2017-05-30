@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.0.2,</span>
-<span id="revdate">30.05.2017 @ 11:13:50 CEST</span>
+<span id="revdate">30.05.2017 @ 18:06:04 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -622,7 +622,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_introduction">1.1. Introduction</a></li>
 <li><a href="#execution-types">1.2. Execution Types</a>
 <ul class="sectlevel3">
-<li><a href="#_native_execution">1.2.1. Native Execution</a>
+<li><a href="#native-execution">1.2.1. Native Execution</a>
 <ul class="sectlevel4">
 <li><a href="#_windows_client">1.2.1.1. Windows Client</a>
 <ul class="sectlevel5">
@@ -653,7 +653,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#upgrade_process">1.2.1.3. Upgrade process</a></li>
 </ul>
 </li>
-<li><a href="#_maven_execution">1.2.2. Maven Execution</a>
+<li><a href="#maven-execution">1.2.2. Maven Execution</a>
 <ul class="sectlevel4">
 <li><a href="#_sakuli_java_dsl">1.2.2.1. Sakuli Java DSL</a>
 <ul class="sectlevel5">
@@ -664,7 +664,7 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 </ul>
 </li>
-<li><a href="#_containerized_execution">1.2.3. Containerized Execution</a>
+<li><a href="#containerized-execution">1.2.3. Containerized Execution</a>
 <ul class="sectlevel4">
 <li><a href="#docker-images">1.2.3.1. Sakuli Docker Images</a>
 <ul class="sectlevel5">
@@ -934,11 +934,11 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 <div class="paragraph">
 <div class="title">Maven Dependencies</div>
-<p>See <a href="#_maven_execution">Maven Execution</a>.</p>
+<p>See <a href="#_maven_execution">[_maven_execution]</a>.</p>
 </div>
 <div class="paragraph">
 <div class="title">Docker images</div>
-<p>See <a href="#_containerized_execution">Containerized Execution</a></p>
+<p>See <a href="#_containerized_execution">[_containerized_execution]</a></p>
 </div>
 <div class="paragraph">
 <div class="title">PDF-Documentation</div>
@@ -1151,8 +1151,44 @@ For more information see <a href="#integration_in_other_tools">Integration in ot
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/execution/execution-types.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/execution/execution-types.adoc" target="_blank">edit</a></p>
 </div>
+<div class="paragraph">
+<p>Due to the fact, that E2E testing or monitoring have to be as near as possible at the end user, Sakuli support different execution types. Each of the types have a special purpose:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 3. Overview Sakuli Execution Types</caption>
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#native-execution">Native Execution</a><br>
+(Windows, Linux, MacOS)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+ Supports all end user platforms<br>
++ Installable directly on the end user client<br>
++ Easy JavaScript based API syntax<br>
++ Direct execution of test scripts without compile process</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#maven-execution">Maven Execution</a><br>
+(Java DSL)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+ Easy integration in maven build cycle<br>
++ Well known test structure and execution context for Java developers<br>
++ Good writing and debug support through well known Java IDEs</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#containerized-execution">Containerized Execution</a><br>
+(Docker Images, Docker Compose)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+ Ready to use E2E environment without installation process<br>
++ Tests run in a real desktop and using a real browser or native client<br>
++ Easy integration in server environments for running headless UI tests<br>
++ Supports JavaScript and Java based tests<br>
++ Scalable environment with all advantages of the container technology</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sect3">
-<h4 id="_native_execution"><a class="anchor" href="#_native_execution"></a>1.2.1. Native Execution</h4>
+<h4 id="native-execution"><a class="anchor" href="#native-execution"></a>1.2.1. Native Execution</h4>
 <div class="sect4">
 <h5 id="_windows_client"><a class="anchor" href="#_windows_client"></a>1.2.1.1. Windows Client</h5>
 <div id="git-edit-section" class="paragraph">
@@ -2196,7 +2232,7 @@ gsettings set org.gnome.desktop.wm.keybindings panel-main-menu "['&lt;Alt&gt;F1'
 </div>
 </div>
 <div class="sect3">
-<h4 id="_maven_execution"><a class="anchor" href="#_maven_execution"></a>1.2.2. Maven Execution</h4>
+<h4 id="maven-execution"><a class="anchor" href="#maven-execution"></a>1.2.2. Maven Execution</h4>
 <div class="sect4">
 <h5 id="_sakuli_java_dsl"><a class="anchor" href="#_sakuli_java_dsl"></a>1.2.2.1. Sakuli Java DSL</h5>
 <div id="git-edit-section" class="paragraph">
@@ -2511,7 +2547,7 @@ If needed change the &lt;path&gt; for your own locations of each browser!
 </div>
 </div>
 <div class="sect3">
-<h4 id="_containerized_execution"><a class="anchor" href="#_containerized_execution"></a>1.2.3. Containerized Execution</h4>
+<h4 id="containerized-execution"><a class="anchor" href="#containerized-execution"></a>1.2.3. Containerized Execution</h4>
 <div class="sect4">
 <h5 id="docker-images"><a class="anchor" href="#docker-images"></a>1.2.3.1. Sakuli Docker Images</h5>
 <div id="git-edit-section" class="paragraph">
@@ -5447,7 +5483,7 @@ Default: false.</p>
 <p>Setting this to <em>true</em> can be useful if you want to raise a custom exception or no exception at all.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 3. Property values of <code>sakuli.exception.suppressResumedExceptions</code></caption>
+<caption class="title">Table 4. Property values of <code>sakuli.exception.suppressResumedExceptions</code></caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5506,7 +5542,7 @@ Default: false.</p>
 </table>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 4. Log level verbosity properties</caption>
+<caption class="title">Table 5. Log level verbosity properties</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5541,7 +5577,7 @@ Default: false.</p>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 5. Log file folder / pattern</caption>
+<caption class="title">Table 6. Log file folder / pattern</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6272,7 +6308,7 @@ java%sakuli.jar</code></pre>
 <p>Sakuli can hand over test result to "<strong>Forwarder</strong>", which can be currently feed different tools like Nagios based monitoring systems or continuous integration server. If no forwarder is defined, a result summary is printed out in the end of a suite.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 6. Sakuli forwarder modules</caption>
+<caption class="title">Table 7. Sakuli forwarder modules</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 25%;">
@@ -9583,7 +9619,7 @@ Website: <a href="http://www.consol.de">www.consol.de</a></p>
 <div id="footer">
 <div id="footer-text">
 Version v1.0.2<br>
-Last updated 2017-05-30 11:13:52 CEST
+Last updated 2017-05-30 18:06:05 CEST
 </div>
 </div>
 <!--
