@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.1.0-SNAPSHOT,</span>
-<span id="revdate">01.06.2017 @ 19:40:53 CEST</span>
+<span id="revdate">02.06.2017 @ 14:07:19 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -609,6 +609,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#contributors">Contributors</a></li>
 <li><a href="#supporters">Valued supporters</a></li>
 <li><a href="#download">Download</a></li>
+<li><a href="#_branches_build_status">Branches &amp; build status</a></li>
 <li><a href="#why-sakuli">Why Sakuli?</a>
 <ul class="sectlevel3">
 <li><a href="#why-sakuli.key-features">Key Features</a></li>
@@ -624,30 +625,24 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel3">
 <li><a href="#native-execution">1.2.1. Native Execution</a>
 <ul class="sectlevel4">
-<li><a href="#_windows_client">1.2.1.1. Windows Client</a>
+<li><a href="#windows">1.2.1.1. Windows Client</a>
 <ul class="sectlevel5">
-<li><a href="#_how_to_install_sakuli_natively_on_windows">How to install Sakuli natively on Windows</a></li>
-<li><a href="#_prerequisites">Prerequisites</a></li>
-<li><a href="#_recommendations">Recommendations</a></li>
-<li><a href="#_sakuli_installation">Sakuli installation</a></li>
-<li><a href="#_additional_software">Additional software</a></li>
-<li><a href="#_test">Test</a></li>
+<li><a href="#_installation">Installation</a></li>
+<li><a href="#_additional_documentation">Additional documentation:</a></li>
+<li><a href="#_optional_software">Optional software</a></li>
 <li><a href="#_next_steps">Next steps</a></li>
 <li><a href="#rdp-peculiarities">RDP peculiarities</a></li>
-<li><a href="#_windows_troubleshooting">Windows Troubleshooting</a></li>
+<li><a href="#_troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
-<li><a href="#_linux_client">1.2.1.2. Linux Client</a>
+<li><a href="#linux">1.2.1.2. Linux Client</a>
 <ul class="sectlevel5">
-<li><a href="#_how_to_install_sakuli_natively_on_linux">How to install Sakuli natively on Linux</a></li>
-<li><a href="#_prerequisites_2">Prerequisites</a></li>
-<li><a href="#_recommendations_2">Recommendations</a></li>
-<li><a href="#_sakuli_installation_2">Sakuli installation</a></li>
-<li><a href="#_additional_software_2">Additional software</a></li>
-<li><a href="#_test_2">Test</a></li>
+<li><a href="#_installation_2">Installation</a></li>
+<li><a href="#_additional_documentation_2">Additional documentation</a></li>
+<li><a href="#_optional_software_2">Optional software</a></li>
 <li><a href="#_next_steps_2">Next steps</a></li>
-<li><a href="#_headless_sakuli_checks_on_linux">Headless Sakuli checks on Linux</a></li>
-<li><a href="#_linux_troubleshooting">Linux Troubleshooting</a></li>
+<li><a href="#_headless_checks">Headless checks</a></li>
+<li><a href="#_troubleshooting_2">Troubleshooting</a></li>
 </ul>
 </li>
 <li><a href="#upgrade_process">1.2.1.3. Upgrade process</a></li>
@@ -659,7 +654,7 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel5">
 <li><a href="#_usage">Usage</a></li>
 <li><a href="#_sakuli_java_example">Sakuli Java Example</a></li>
-<li><a href="#_installation">Installation</a></li>
+<li><a href="#_installation_3">Installation</a></li>
 <li><a href="#_https_sites">HTTPS-Sites</a></li>
 </ul>
 </li>
@@ -749,7 +744,7 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 </ul>
 </li>
-<li><a href="#_troubleshooting">1.3.3. Troubleshooting</a>
+<li><a href="#_troubleshooting_3">1.3.3. Troubleshooting</a>
 <ul class="sectlevel4">
 <li><a href="#_growing_firefox_profile_folder">1.3.3.1. Growing Firefox profile folder</a></li>
 <li><a href="#_hanging_applications">1.3.3.2. Hanging applications</a></li>
@@ -762,9 +757,16 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 <li><a href="#integration_in_other_tools">1.4. Integration in other Tools</a>
 <ul class="sectlevel3">
-<li><a href="#_monitoring">1.4.1. Monitoring</a>
+<li><a href="#_monitoring_integration">1.4.1. Monitoring integration</a>
 <ul class="sectlevel4">
-<li><a href="#omd-gearman">1.4.1.1. OMD - Gearman Daemon</a>
+<li><a href="#omd-preparation">1.4.1.1. OMD preparation</a>
+<ul class="sectlevel5">
+<li><a href="#_requirements">Requirements</a></li>
+<li><a href="#_download_sakuli_sources">Download Sakuli sources</a></li>
+<li><a href="#_configuration_2">Configuration</a></li>
+</ul>
+</li>
+<li><a href="#omd-gearman">1.4.1.2. Gearman forwarder</a>
 <ul class="sectlevel5">
 <li><a href="#_omd_configuration">OMD Configuration</a></li>
 <li><a href="#_sakuli_client_configuration">Sakuli Client Configuration</a></li>
@@ -772,33 +774,46 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_adapt_perfdata_spooling_optional">Adapt perfdata spooling (optional)</a></li>
 </ul>
 </li>
-<li><a href="#omd-sql-database">1.4.1.2. OMD - SQL Database</a>
+<li><a href="#omd-sql-database">1.4.1.3. Database forwarder</a>
 <ul class="sectlevel5">
 <li><a href="#_omd_configuration_2">OMD Configuration</a></li>
 <li><a href="#_sakuli_client_configuration_2">Sakuli Client Configuration</a></li>
 <li><a href="#_database_cleanup_optional">Database cleanup (optional)</a></li>
-<li><a href="#_troubleshooting_2">Troubleshooting</a></li>
+<li><a href="#_troubleshooting_4">Troubleshooting</a></li>
 </ul>
 </li>
-<li><a href="#icinga2-integration">1.4.1.3. Icinga2 REST API</a>
+<li><a href="#icinga2-integration">1.4.1.4. Icinga2 forwarder</a>
 <ul class="sectlevel5">
 <li><a href="#_icinga2_configuration">Icinga2 Configuration</a></li>
 <li><a href="#_sakuli_client_configuration_3">Sakuli Client Configuration</a></li>
 <li><a href="#_graph_settings">Graph settings</a></li>
 </ul>
 </li>
-<li><a href="#check_mk-integration">1.4.1.4. Check_MK</a>
+<li><a href="#check_mk">1.4.1.5. Check_MK</a>
 <ul class="sectlevel5">
 <li><a href="#_sakuli_client_configuration_4">Sakuli Client Configuration</a></li>
 </ul>
 </li>
-<li><a href="#_advanced_topics">1.4.1.5. Advanced Topics</a>
+<li><a href="#_grafana_graphs">1.4.1.6. Grafana graphs</a></li>
+<li><a href="#_pnp4nagios_graphs">1.4.1.7. PNP4Nagios graphs</a>
 <ul class="sectlevel5">
-<li><a href="#omd-integration-native">Native OMD Integration</a></li>
-<li><a href="#omd-integration-containerized">Containerized OMD Integration</a></li>
-<li><a href="#forwarder-template">Forwarder Templates</a></li>
-<li><a href="#_pnp4nagios_2">PNP4Nagios</a></li>
-<li><a href="#_grafana_2">Grafana</a></li>
+<li><a href="#_rrd_storage_type">RRD Storage Type</a></li>
+<li><a href="#pnp4nagios-rrd-heartbeat">RRD heartbeat</a></li>
+<li><a href="#_install_pnp_graph_template">install PNP graph template</a></li>
+<li><a href="#_cpu_memory_metrics">CPU/Memory metrics</a></li>
+</ul>
+</li>
+<li><a href="#omd-containerized">1.4.1.8. OMD Containerized</a>
+<ul class="sectlevel5">
+<li><a href="#_usage_2">Usage</a></li>
+<li><a href="#_ansible_drop_ins">Ansible drop-ins</a></li>
+</ul>
+</li>
+<li><a href="#_omd_screenshot_history">1.4.1.9. OMD Screenshot History</a></li>
+<li><a href="#forwarder-template">1.4.1.10. Forwarder Templates</a>
+<ul class="sectlevel5">
+<li><a href="#_jtwig_template">JTwig template</a></li>
+<li><a href="#_customized_jtwig_functions">Customized Jtwig Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -812,6 +827,7 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel5">
 <li><a href="#sql-database-create-db">Create Sakuli DB</a></li>
 <li><a href="#sql-database-enable-forwarder">Enable database forwarder</a></li>
+<li><a href="#_integration_in_other_tools">Integration in other tools</a></li>
 <li><a href="#sql-database-optional-cleanup">Database cleanup (optional)</a></li>
 </ul>
 </li>
@@ -861,16 +877,10 @@ table.CodeRay td.code>pre{padding:0}
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/general.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/general.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<p><strong>Documentation for version: <code>v1.1.0-SNAPSHOT</code></strong></p>
+<p><strong>Documentation for version: <code>v1.1.0-SNAPSHOT</code></strong> (also available as a <strong><a href="pdf/sakuli_documentation_v1.1.0-SNAPSHOT.pdf" target="_blank">PDF document</a></strong>)</p>
 </div>
 <div class="paragraph">
-<p><strong><a href="pdf/sakuli_documentation_v1.1.0-SNAPSHOT.pdf" target="_blank">Download PDF</a></strong></p>
-</div>
-<div class="paragraph">
-<p><strong>All different versions of our documentation you will find under:</strong></p>
-</div>
-<div class="paragraph">
-<p><strong><a href="http://consol.github.io/sakuli">consol.github.io/sakuli</a></strong></p>
+<p>The documentation of all former Sakuli versions can be found on <a href="http://consol.github.io/sakuli">consol.github.io/sakuli</a></p>
 </div>
 <div class="ulist">
 <ul>
@@ -945,17 +955,7 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 <div class="paragraph">
 <div class="title">Installer</div>
-<p>Our Java based installer or the raw ZIP file can be downloaded form <a href="http://labs.consol.de/sakuli/install/" target="_blank">labs.consol.de/sakuli/install</a>:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://labs.consol.de/sakuli/install/sakuli-v1.1.0-SNAPSHOT-installer.jar" target="_blank">sakuli-v1.1.0-SNAPSHOT-installer.jar</a></p>
-</li>
-<li>
-<p><a href="https://labs.consol.de/sakuli/install/sakuli-v1.1.0-SNAPSHOT.zip" target="_blank">sakuli-v1.1.0-SNAPSHOT.zip</a></p>
-</li>
-</ul>
+<p><strong>Platform independent Java installer: <a href="https://labs.consol.de/sakuli/install/sakuli-v1.1.0-SNAPSHOT-installer.jar" target="_blank">sakuli-v1.1.0-SNAPSHOT-installer.jar</a></strong></p>
 </div>
 <div class="paragraph">
 <div class="title">Maven Dependencies</div>
@@ -966,11 +966,17 @@ table.CodeRay td.code>pre{padding:0}
 <p>See <a href="#containerized-execution">Containerized Execution</a></p>
 </div>
 <div class="paragraph">
-<div class="title">PDF-Documentation</div>
-<p><strong><a href="pdf/sakuli_documentation_v1.1.0-SNAPSHOT.pdf" target="_blank">Download PDF</a></strong></p>
+<div class="title">Raw ZIP</div>
+<p>Raw Sakuli installation directory, containing Sakuli, Sahi and examples: <a href="https://labs.consol.de/sakuli/install/sakuli-v1.1.0-SNAPSHOT.zip" target="_blank">sakuli-v1.1.0-SNAPSHOT.zip</a></p>
 </div>
+<div class="paragraph">
+<div class="title">PDF manual</div>
+<p>This manual as one PDF document: <a href="pdf/sakuli_documentation_v1.1.0-SNAPSHOT.pdf" target="_blank">Download PDF</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_branches_build_status"><a class="anchor" href="#_branches_build_status"></a>Branches &amp; build status</h3>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. branches &amp; builds</caption>
 <colgroup>
 <col style="width: 33%;">
 <col style="width: 33%;">
@@ -1055,24 +1061,32 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 <li>
 <p>Combines two automation technologies:</p>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p>DOM based web testing</p>
 </li>
 <li>
 <p>Image pattern based UI automation (for non-web content)</p>
 </li>
+</ul>
+</div>
+</li>
 <li>
 <p>Scalable from single-client up to multi-node container setup for parallel execution</p>
 </li>
 <li>
 <p>Integration of test results into</p>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p>Monitoring systems (e.g. Nagios/Icinga)</p>
 </li>
 <li>
 <p>CI builds (e.g. Jenkins)</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -1090,11 +1104,23 @@ table.CodeRay td.code>pre{padding:0}
 <p><strong>Sakuli simulates user actions</strong> on graphical user interfaces (web, fat client, citrix, …), and provides the obtained information (runtime, result, screenshots) to third party (e.g. Nagios compatible monitoring) systems.</p>
 </div>
 <div class="paragraph">
-<p><strong>Sakuli</strong> depends on <strong>Java</strong> and should run on most OS:
-* <strong>Windows</strong>
-* <strong>MacOS</strong>
-* <strong>Linux</strong>: Ubuntu Linux (14.04 + 16.04), CentOS 7 and OpenSUSE 13.2 are tested.
-* <strong>Docker Containers</strong>: see <a href="#containerized-execution">Containerized Execution</a></p>
+<p><strong>Sakuli</strong> is written in Java and runs on many platforms:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#windows">Windows</a></p>
+</li>
+<li>
+<p><a href="#linux">Linux</a></p>
+</li>
+<li>
+<p><a href="#containerized-execution">Docker containers</a></p>
+</li>
+<li>
+<p>MacOS</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>The <strong>Sakuli</strong> project brings together two Open-Source end-to-end testing tools which perfectly fit together: <a href="http://www.sahi.co.in/">Sahi</a> for <strong>web-based tests</strong> (by injecting JavaScript code into the browser), as well as the screenshot-based testing tool <a href="http://sikulix.com/">Sikuli</a>, which allows the execution of <strong>keyboard and mouse actions</strong> on screen areas that have been defined by previously recorded screenshots and are recognized using the OpenCV engine.</p>
@@ -1108,8 +1134,8 @@ table.CodeRay td.code>pre{padding:0}
 <div class="paragraph">
 <p>The integration of Sakuli in other tools can be done by different so called <strong>forwarder modules</strong>:</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 2. Sakuli forwarder modules</caption>
+<table id="forwarders" class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Sakuli forwarder modules</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 25%;">
@@ -1124,53 +1150,39 @@ table.CodeRay td.code>pre{padding:0}
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Standard</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">default</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Log-Files and screenshots<br>
 - Command line output</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- <a href="#continuous_integration">Continuous Integration</a> server<br>
 - Locale test runs</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sql-database">SQL Database</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sql-database">database</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- JDBC-SQL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">- Integration in Nagios through check_mysql_health, see <a href="#omd-sql-database">OMD - SQL Database</a><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Integration in <strong>Nagios</strong> based monitoring systems as <strong>active checks</strong> with  <a href="https://labs.consol.de/de/nagios/check_mysql_health/index.html">check_mysql_health</a><br>
 - Persistent storage of results<br>
-- Possibility to analyse or display results by own implementations<br>
+- Ready for own reporting implementations<br>
 - Interface to 3rd party systems</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#omd-gearman">OMD - Gearman Daemon</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">- Gearman Result Queuing</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">- Integration in Nagios through passive checks<br>
-- preconfigured graph- und screenshot templates for OMD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#omd-gearman">gearman</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- <a href="http://gearman.org/">Gearman</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Integration in <strong>Nagios</strong> based monitoring systems as <strong>passive checks</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#icinga2-integration">Icinga2 REST API</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">- REST Api<br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#icinga2-integration">icinga2</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- <a href="https://docs.icinga.com/icinga2/latest/doc/module/icinga2/chapter/icinga2-api">Icinga2 REST API</a><br>
 - JSON Data</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">- Integration in Icinga2 through passive checks<br>
-- preconfigured graph- templates for OMD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Integration in <strong>Icinga2</strong> as <strong>passive checks</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#check_mk-integration">Check_MK</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">- Agent Spool File</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#check_mk">check_mk</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Result spool file on check_mk agent</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Integration in CheckMK through customizable spool file<br>
 - preconfigured service templates</p></td>
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-For more information see <a href="#integration_in_other_tools">Integration in other Tools</a>
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 </div>
@@ -1187,10 +1199,10 @@ For more information see <a href="#integration_in_other_tools">Integration in ot
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/execution/execution-types.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/execution/execution-types.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<p>Due to the fact, that E2E testing or monitoring have to be as near as possible at the end user, Sakuli support different execution types. Each of the types have a special purpose:</p>
+<p>Sakuli supports different execution types. Each of the types have a special purpose:</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 3. Overview Sakuli Execution Types</caption>
+<caption class="title">Table 2. Overview Sakuli Execution Types</caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 70%;">
@@ -1198,7 +1210,7 @@ For more information see <a href="#integration_in_other_tools">Integration in ot
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#native-execution">Native Execution</a><br>
-(Windows, Linux, MacOS)</p></td>
+(<a href="#windows">Windows</a>, <a href="#linux">Linux</a>, , MacOS)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">+ Supports all end user platforms<br>
 + Installable directly on the end user client<br>
 + Easy JavaScript based API syntax<br>
@@ -1206,14 +1218,14 @@ For more information see <a href="#integration_in_other_tools">Integration in ot
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#maven-execution">Maven Execution</a><br>
-(Java DSL)</p></td>
+(<a href="#sakuli-java-dsl">Java DSL</a>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">+ Easy integration in maven build cycle<br>
 + Well known test structure and execution context for Java developers<br>
 + Good writing and debug support through well known Java IDEs</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#containerized-execution">Containerized Execution</a><br>
-(Docker Images, Docker Compose)</p></td>
+(<a href="#docker-images">Docker Images</a>, <a href="#docker-compose">Docker Compose</a>, <a href="#kubernetes">Kubernetes</a>, <a href="#openshift">OpenShift</a>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">+ Ready to use E2E environment without installation process<br>
 + Tests run in a real desktop and using a real browser or native client<br>
 + Easy integration in server environments for running headless UI tests<br>
@@ -1225,12 +1237,12 @@ For more information see <a href="#integration_in_other_tools">Integration in ot
 <div class="sect3">
 <h4 id="native-execution"><a class="anchor" href="#native-execution"></a>1.2.1. Native Execution</h4>
 <div class="sect4">
-<h5 id="_windows_client"><a class="anchor" href="#_windows_client"></a>1.2.1.1. Windows Client</h5>
+<h5 id="windows"><a class="anchor" href="#windows"></a>1.2.1.1. Windows Client</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/execution/native/windows.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/execution/native/windows.adoc" target="_blank">edit</a></p>
 </div>
 <div class="sect5">
-<h6 id="_how_to_install_sakuli_natively_on_windows"><a class="anchor" href="#_how_to_install_sakuli_natively_on_windows"></a>How to install Sakuli natively on Windows</h6>
+<h6 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h6>
 <div class="paragraph">
 <p>This page describes the steps to <strong>install and test</strong> Sakuli on <strong>Windows</strong>.
 If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.adoc">upgrade process</a> documentation.</p>
@@ -1247,9 +1259,8 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 <div class="paragraph">
 <p>Values surrounded by double underscores are have to be filled individually by you (e.g. <code><em>IP_ADDRESS</em></code>).</p>
 </div>
-</div>
-<div class="sect5">
-<h6 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h6>
+<div class="sect6">
+<h7 id="_machine_requirements"><a class="anchor" href="#_machine_requirements"></a>Machine requirements</h7>
 <div class="paragraph">
 <p>You can run Sakuli on physical as well as on virtual Linux machines.</p>
 </div>
@@ -1257,6 +1268,9 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 <ul>
 <li>
 <p><strong>OS</strong>: <strong>Microsoft Windows</strong> (version 7 and higher)</p>
+</li>
+<li>
+<p><strong>64 Bit</strong> (recommended)</p>
 </li>
 <li>
 <p><strong>RAM</strong>: 2GB or more</p>
@@ -1273,8 +1287,8 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 </ul>
 </div>
 </div>
-<div class="sect5">
-<h6 id="_recommendations"><a class="anchor" href="#_recommendations"></a>Recommendations</h6>
+<div class="sect6">
+<h7 id="_recommendations"><a class="anchor" href="#_recommendations"></a>Recommendations</h7>
 <div class="ulist">
 <ul>
 <li>
@@ -1293,16 +1307,13 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 <p>If Sakuli is running within a VM, change the desktop resolution to a fixed value (e.g. 1024x768) and disable any auto-resizing mechanisms of the guest display. This ensures that the guest&#8217;s resolution does not change in case that you resize its window.</p>
 </li>
 <li>
-<p>Other optional steps see <a href="./troubleshooting-tuning-sakuli-client.adoc#desktop-tuning">"Desktop tuning"</a>.</p>
-</li>
-<li>
-<p>the client should not have more than one physical screen</p>
+<p>the client should <strong>not</strong> have more than one physical screen</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect5">
-<h6 id="_sakuli_installation"><a class="anchor" href="#_sakuli_installation"></a>Sakuli installation</h6>
+<div class="sect6">
+<h7 id="_sakuli_installation"><a class="anchor" href="#_sakuli_installation"></a>Sakuli installation</h7>
 <div class="ulist">
 <ul>
 <li>
@@ -1317,13 +1328,13 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 </ul>
 </div>
 <div class="paragraph">
-<p>Double-click on the downloaded .jar file (Windows) to start the installer:</p>
+<p>Double-click on the downloaded .jar file to start the installer:</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="images/installer_1.png" alt="inst_1"></span></p>
 </div>
 <div class="paragraph">
-<p>After you have accepted the licence and choose the installation folder, select the packages to install:</p>
+<p>Read and accept the licence, choose the installation folder (any path the current user has <em>rw</em> permissions is ok) and select the packages to install:</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="images/installer_2.png" alt="inst_2"></span></p>
@@ -1331,115 +1342,113 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>will set/update the environment variable <code>%SAKULI_HOME%</code> to the new version.</p>
+<p>install Sakuli</p>
 </li>
 <li>
-<p>will set/update environment settings which have proved as best practice for UI tests.</p>
+<p>install Sahi</p>
 </li>
 <li>
-<p>will install one example test suite per OS which will help you to test and understand Sakuli.</p>
+<p>set/update the environment variable <code>%SAKULI_HOME%</code> to the new version.</p>
 </li>
 <li>
-<p>will install Firefox Portable, which can be used exclusively for Sakuli Tests.</p>
+<p>set/update environment settings which have proved as best practice for UI tests.</p>
 </li>
 <li>
-<p>will install <a href="http://sourceforge.net/projects/qres/">QRes</a>, a open source screen mode changer (Windows only)</p>
+<p>install one example test suite per OS which help you to test and understand Sakuli.</p>
+</li>
+<li>
+<p>install Firefox Portable, which can be used exclusively for Sakuli Tests.</p>
+</li>
+<li>
+<p>install <a href="http://sourceforge.net/projects/qres/">QRes</a>, a open source screen mode changer (Windows only)</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>After the files have been copied, the installer updates the current user&#8217;s environment.</p>
-</div>
-<div class="paragraph">
-<p>If you have installed Sakuli on Windows, reboot now to take the registry changes effect (e.g. disabled Cleartype fonts).</p>
-</div>
-<div class="paragraph">
-<p>In the end you are offered to generate a automatic installation script to install Sakuli headless:</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="images/installer_3.png" alt="inst_3"></span></p>
-</div>
-<div class="paragraph">
-<p>A headless installation (e.g. when building Docker images) can be executed with:</p>
+<p>In the end you are offered to generate a headless installation file which can be executed on other hosts with:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code>java -jar sakuli-vX.X.X-installer.jar auto-config.xml</code></pre>
 </div>
 </div>
-<div class="sect6">
-<h7 id="_test_sahi"><a class="anchor" href="#_test_sahi"></a>Test Sahi</h7>
 <div class="paragraph">
-<p>Now is the right time to test if Sahi can start a Sahi-controlled browser. Execute <code>%SAKULI_HOME%/sahi/userdata/bin/start_dashboard.(sh|bat)</code> to open the <strong>Sahi Dashboard</strong>. It should now list all available browsers on this system (on Windows: also Firefox Portable).</p>
+<p>Reboot now to take the registry changes effect.</p>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_test"><a class="anchor" href="#_test"></a>Test</h7>
+<div class="paragraph">
+<p>Now test if Sahi can start a Sahi-controlled browser.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="images/inst_dashboards.jpg" alt="dashboards"></span></p>
+<p>Execute <code>%SAKULI_HOME%\sahi\userdata\bin\start_dashboard.bat</code> to open the <strong>Sahi Dashboard</strong>. It should now list all available browsers on this system.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/inst_dashboard.png" alt="dashboards"></span></p>
 </div>
 <div class="paragraph">
 <p>Click on any browser icon: it should start and present you the start page of Sahi:</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="images/sahi_startpage.jpg" alt="sahi_start"></span></p>
+<p><span class="image"><img src="images/sahi_startpage.png" alt="sahi_start"></span></p>
 </div>
 <div class="paragraph">
-<p>At last, test the <strong>Sahi Controller</strong>:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>on <strong>Windows</strong> press the ALT key</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>and double-click on any white space. If you are getting a new window showing the "Sahi Controller", you&#8217;re done. Close all browser windows and Sahi.</p>
+<p>At last, test the <strong>Sahi Controller</strong> by holding the <strong>ALT key</strong> and double-clicking on any white space on the page. If you are getting a new window showing the "Sahi Controller", you&#8217;re done. Close all browser windows and Sahi.</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="images/installer_4_w.png" alt="controller_windows"></span></p>
 </div>
+<div class="paragraph">
+<p>You are now ready to run the <strong>first minimal Sakuli test</strong> to see if Sakuli and its components are working well together. Open a new terminal to start a test:</p>
 </div>
-<div class="sect6">
-<h7 id="_additional_documentation"><a class="anchor" href="#_additional_documentation"></a>Additional documentation:</h7>
 <div class="ulist">
 <ul>
 <li>
-<p>If you are sitting behing a company proxy, refer to <a href="./sakuli-additional-settings.adoc#sahi-behind-a-proxy">Proxy settings</a>.</p>
+<p><strong>Windows 7</strong>: <code>sakuli run <em>INST_DIR</em>\example_test_suites\example_windows7\</code></p>
 </li>
 <li>
-<p>Refer to <a href="./additional-settings.adoc#browser-configuration">Browser configuration</a> for instructions how to register other browsers.</p>
+<p><strong>Windows 8</strong>: <code>sakuli run <em>INST_DIR</em>\example_test_suites\example_windows8\</code></p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Sakuli should now</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>open <strong>Firefox</strong> with the Sakuli welcome page, highlight some page elements</p>
+</li>
+<li>
+<p>open the <strong>calculator</strong> and calculate <em>525+100=625</em></p>
+</li>
+<li>
+<p>open an <strong>editor</strong> and write a <strong>status message</strong></p>
+</li>
+</ol>
 </div>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_additional_software"><a class="anchor" href="#_additional_software"></a>Additional software</h6>
-<div class="sect6">
-<h7 id="_additional_packages_on_linux"><a class="anchor" href="#_additional_packages_on_linux"></a>additional packages on Linux</h7>
-<div class="paragraph">
-<p>(required)</p>
-</div>
-<div class="paragraph">
-<p>Install the following packages if you are on Linux:</p>
-</div>
+<h6 id="_additional_documentation"><a class="anchor" href="#_additional_documentation"></a>Additional documentation:</h6>
 <div class="ulist">
 <ul>
 <li>
-<p>Ubuntu: <code>sudo apt-get install tesseract-ocr wmctrl xdotool</code></p>
+<p>If you are sitting behing a company proxy, refer to <a href="#sahi_behind_a_proxy">Sahi behind a proxy</a>.</p>
 </li>
 <li>
-<p>openSUSE <code>sudo zypper install tesseract wmctrl xdotool</code></p>
+<p>Refer to <a href="#sahi-browser-configuration">Browser configuration</a> for instructions how to register other browsers.</p>
 </li>
 </ul>
 </div>
 </div>
+<div class="sect5">
+<h6 id="_optional_software"><a class="anchor" href="#_optional_software"></a>Optional software</h6>
 <div class="sect6">
 <h7 id="_phantomjs"><a class="anchor" href="#_phantomjs"></a>PhantomJS</h7>
 <div class="paragraph">
-<p>(optional)</p>
-</div>
-<div class="paragraph">
-<p>Currently, <em>each</em> Sakuli test requires to start a browser, which is not very handy for pure Sikuli GUI tests (=where no browser at all is needed). For that case, use a headless browser like <a href="http://phantomjs.org">PhantomJS</a>. Refer to <a href="./additional-settings.adoc#browser-configuration">Browser configuration</a> for more information.</p>
+<p>Currently, <em>each</em> Sakuli test requires to start a browser, which is not very handy for pure Sikuli GUI tests (=where no browser at all is needed). For that case, use a headless browser like <a href="http://phantomjs.org">PhantomJS</a>. Refer to <a href="#sahi-browser-configuration">Browser configuration</a> for more information.</p>
 </div>
 <div class="paragraph">
 <p>Attention: PhantomJS 2 is currently unsupported. Use version 1.9.x</p>
@@ -1447,9 +1456,6 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 </div>
 <div class="sect6">
 <h7 id="_screenshot_tool"><a class="anchor" href="#_screenshot_tool"></a>Screenshot tool</h7>
-<div class="paragraph">
-<p>(optional)</p>
-</div>
 <div class="paragraph">
 <p>Use a screenshot tool which is able to</p>
 </div>
@@ -1480,17 +1486,7 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 <div class="sect6">
 <h7 id="_editor"><a class="anchor" href="#_editor"></a>Editor</h7>
 <div class="paragraph">
-<p>(optional)</p>
-</div>
-<div class="paragraph">
-<p>You&#8217;re doing better if you do <em>not</em> use gEdit or Windows Notepad to edit Sakuli files. It is recommended to use an Editor with JavaScript support, e. g.:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>on <strong>Windows</strong> install for instance <a href="http://notepad-plus-plus.org/">Notepad++</a></p>
-</li>
-</ul>
+<p>It is recommended to use an Editor with JavaScript support, e. g. <a href="http://notepad-plus-plus.org/">Notepad++</a></p>
 </div>
 <div class="paragraph">
 <p>It also possible to use professional programming IDEs like <a href="https://www.jetbrains.com/idea/">IntelliJ</a>, <a href="https://netbeans.org/">Netbeans</a> or <a href="https://eclipse.org">Eclipse</a>.</p>
@@ -1498,62 +1494,27 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 </div>
 </div>
 <div class="sect5">
-<h6 id="_test"><a class="anchor" href="#_test"></a>Test</h6>
-<div class="paragraph">
-<p>You are now ready to run the <strong>first minimal Sakuli test</strong> to see if Sakuli and its components are working well together. Open a new terminal to start a test:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Windows 7</strong>: <code>sakuli run <em>INST_DIR</em>\example_test_suites\example_windows7\</code></p>
-</li>
-<li>
-<p><strong>Windows 8</strong>: <code>sakuli run <em>INST_DIR</em>\example_test_suites\example_windows8\</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Sakuli should now</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>open <strong>Firefox</strong> with the Sakuli welcome page, highlight some page elements</p>
-</li>
-<li>
-<p>open the <strong>calculator</strong> and calculate <em>525+100=625</em></p>
-</li>
-<li>
-<p>open an <strong>editor</strong> and write a <strong>status message</strong></p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="images/u_vnc_test.png" alt="vnc test example"></span></p>
-</div>
-<div class="paragraph">
-<p><strong>Congratulations - you have installed Sakuli!</strong></p>
-</div>
-</div>
-<div class="sect5">
 <h6 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h6>
-<div class="paragraph">
-<p>What next? Well, it depends…</p>
-</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Read our <a href="first-steps.adoc">first-steps tutorial</a> and learn to handle Sakuli</p>
+<p>Read our <a href="first-steps.md">first-steps tutorial</a> and learn to handle Sakuli</p>
 </li>
 <li>
 <p>Integrate Sakuli results in monitoring systems:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#omd-integration-native">Native OMD Integration</a></p>
+<p><a href="#omd-gearman">Gearman forwarder</a></p>
 </li>
 <li>
-<p><a href="#icinga2-integration">Icinga2 REST API</a></p>
+<p><a href="#omd-sql-database">Database forwarder</a></p>
+</li>
+<li>
+<p><a href="#icinga2-integration">Icinga2 forwarder</a></p>
+</li>
+<li>
+<p><a href="#check_mk">Check_MK</a></p>
 </li>
 </ul>
 </div>
@@ -1633,7 +1594,7 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 </div>
 </div>
 <div class="sect5">
-<h6 id="_windows_troubleshooting"><a class="anchor" href="#_windows_troubleshooting"></a>Windows Troubleshooting</h6>
+<h6 id="_troubleshooting"><a class="anchor" href="#_troubleshooting"></a>Troubleshooting</h6>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/execution/native/windows-troubleshooting.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/execution/native/windows-troubleshooting.adoc" target="_blank">edit</a></p>
 </div>
@@ -1705,15 +1666,15 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 </div>
 </div>
 <div class="sect4">
-<h5 id="_linux_client"><a class="anchor" href="#_linux_client"></a>1.2.1.2. Linux Client</h5>
+<h5 id="linux"><a class="anchor" href="#linux"></a>1.2.1.2. Linux Client</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/execution/native/linux.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/execution/native/linux.adoc" target="_blank">edit</a></p>
 </div>
 <div class="sect5">
-<h6 id="_how_to_install_sakuli_natively_on_linux"><a class="anchor" href="#_how_to_install_sakuli_natively_on_linux"></a>How to install Sakuli natively on Linux</h6>
+<h6 id="_installation_2"><a class="anchor" href="#_installation_2"></a>Installation</h6>
 <div class="paragraph">
-<p>This page describes the steps to <strong>install and test</strong> Sakuli on <strong>Linux</strong>.
-If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process">Upgrade process</a> documentation.</p>
+<p>This page describes the steps to <strong>install and test</strong> Sakuli on <strong>Ubuntu Linux 16.04 LTS</strong>.
+For other distributions (CentOS, OpenSuSE, &#8230;&#8203;) they be mostly identical. If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.adoc">upgrade process</a> documentation.</p>
 </div>
 <div class="paragraph">
 <p>The default installation path of a particular Sakuli version is referenced as <code>$SAKULI_HOME</code> (also called the "<em>version</em>" folder) which is inside of the folder "sakuli":</p>
@@ -1727,22 +1688,18 @@ If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process
 <div class="paragraph">
 <p>Values surrounded by double underscores are have to be filled individually by you (e.g. <code><em>IP_ADDRESS</em></code>).</p>
 </div>
-</div>
-<div class="sect5">
-<h6 id="_prerequisites_2"><a class="anchor" href="#_prerequisites_2"></a>Prerequisites</h6>
+<div class="sect6">
+<h7 id="_machine_requirements_2"><a class="anchor" href="#_machine_requirements_2"></a>Machine requirements</h7>
 <div class="paragraph">
 <p>You can run Sakuli on physical as well as on virtual Linux machines.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>one of the following <strong>Linux OS</strong> with any desktop environment:</p>
+<p><strong>Linux OS</strong> (here: Ubuntu 16.04 LTS Desktop)</p>
 </li>
 <li>
-<p><strong>Ubuntu 14/16</strong></p>
-</li>
-<li>
-<p><strong>CentOS 6/7</strong></p>
+<p><strong>64 Bit</strong> (recommended)</p>
 </li>
 <li>
 <p><strong>RAM</strong>: 2GB or more</p>
@@ -1750,17 +1707,17 @@ If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process
 <li>
 <p><strong>CPU</strong>: at least two CPU cores</p>
 </li>
-<li>
-<p><strong>Software:</strong></p>
-</li>
-<li>
-<p>Java JRE &gt;= 1.8</p>
-</li>
 </ul>
 </div>
 </div>
-<div class="sect5">
-<h6 id="_recommendations_2"><a class="anchor" href="#_recommendations_2"></a>Recommendations</h6>
+<div class="sect6">
+<h7 id="_software_requirements"><a class="anchor" href="#_software_requirements"></a>Software requirements</h7>
+<div class="paragraph">
+<p><code>sudo apt-get install openjdk-8-jre tesseract-ocr wmctrl xdotool</code></p>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_recommendations_2"><a class="anchor" href="#_recommendations_2"></a>Recommendations</h7>
 <div class="ulist">
 <ul>
 <li>
@@ -1787,8 +1744,8 @@ If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process
 </ul>
 </div>
 </div>
-<div class="sect5">
-<h6 id="_sakuli_installation_2"><a class="anchor" href="#_sakuli_installation_2"></a>Sakuli installation</h6>
+<div class="sect6">
+<h7 id="_sakuli_installation_2"><a class="anchor" href="#_sakuli_installation_2"></a>Sakuli installation</h7>
 <div class="ulist">
 <ul>
 <li>
@@ -1806,57 +1763,55 @@ If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process
 <p>Execute <code>java -jar sakuli-vX.X.X-installer.jar</code> to start the installer:</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="images/installer_1.png" alt="inst_1"></span></p>
+<p><span class="image"><img src="images/installer_1_linux.png" alt="inst_1"></span></p>
 </div>
 <div class="paragraph">
-<p>After you have accepted the licence and choose the installation folder, select the packages to install:</p>
+<p>Read and accept the licence, choose the installation folder (any path the current user has <em>rw</em> permissions is ok) and select the packages to install:</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="images/installer_2.png" alt="inst_2"></span></p>
+<p><span class="image"><img src="images/installer_2_linux.png" alt="inst_2"></span></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>will set/update the environment variable <code>$SAKULI_HOME</code> to the new version.</p>
+<p>install Sakuli</p>
 </li>
 <li>
-<p>will set/update environment settings which have proved as best practice for UI tests.</p>
+<p>install Sahi</p>
 </li>
 <li>
-<p>will install one example test suite per OS which will help you to test and understand Sakuli.</p>
+<p>set/update the environment variable <code>$SAKULI_HOME</code> which points to the new version.</p>
 </li>
 <li>
-<p>will install Firefox Portable, which can be used exclusively for Sakuli Tests.</p>
+<p>set/update <code>.bashc</code></p>
+</li>
+<li>
+<p>install one example test suite per OS which help you to test and understand Sakuli.</p>
+</li>
+<li>
+<p>install Firefox Portable, which can be used exclusively for Sakuli Tests</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>After the files have been copied, the installer updates the current user&#8217;s environment.</p>
-</div>
-<div class="paragraph">
-<p>If you have installed Sakuli on Windows, reboot now to take the registry changes effect (e.g. disabled Cleartype fonts).</p>
-</div>
-<div class="paragraph">
-<p>In the end you are offered to generate a automatic installation script to install Sakuli headless:</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="images/installer_3.png" alt="inst_3"></span></p>
-</div>
-<div class="paragraph">
-<p>A headless installation (e.g. when building Docker images) can be executed with:</p>
+<p>In the end you are offered to generate a headless installation file which can be executed on other hosts with:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code>java -jar sakuli-vX.X.X-installer.jar auto-config.xml</code></pre>
 </div>
 </div>
+</div>
 <div class="sect6">
-<h7 id="_test_sahi_2"><a class="anchor" href="#_test_sahi_2"></a>Test Sahi</h7>
+<h7 id="_test_2"><a class="anchor" href="#_test_2"></a>Test</h7>
 <div class="paragraph">
-<p>Now is the right time to test if Sahi can start a Sahi-controlled browser. Execute <code>$SAKULI_HOME/sahi/userdata/bin/start_dashboard.(sh|bat)</code> to open the <strong>Sahi Dashboard</strong>. It should now list all available browsers on this system (on Windows: also Firefox Portable).</p>
+<p>Now test if Sahi can start a Sahi-controlled browser.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="images/inst_dashboards.jpg" alt="dashboards"></span></p>
+<p>Execute <code>$SAKULI_HOME/sahi/userdata/bin/start_dashboard.sh</code> to open the <strong>Sahi Dashboard</strong>. It should now list all available browsers on this system.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/inst_dashboard_linux.png" alt="dashboards"></span></p>
 </div>
 <div class="paragraph">
 <p>Click on any browser icon, it should start and present you the start page of Sahi:</p>
@@ -1865,18 +1820,56 @@ If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process
 <p><span class="image"><img src="images/sahi_startpage.jpg" alt="sahi_start"></span></p>
 </div>
 <div class="paragraph">
-<p>At last, test the <strong>Sahi Controller</strong>:
-* on <strong>Linux</strong> press the ALT+CTRL key</p>
-</div>
-<div class="paragraph">
-<p>and double-click on any white space. If you are getting a new window showing the "Sahi Controller", you&#8217;re done. Close all browser windows and Sahi.</p>
+<p>At last, test the <strong>Sahi Controller</strong> by holding the <strong>ALT key</strong> and double-clicking on any white space on the page. If you are getting a new window showing the "Sahi Controller", you&#8217;re done. Close all browser windows and Sahi.</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="images/installer_4_l.png" alt="controller_linux"></span></p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+On Linux deskops the ALT key is often predefined to drag windows. In this case, open <code>$SAKULI_HOME/sahi/config/sahi.properties</code> and change the "hotkey" property:
+</td>
+</tr>
+</table>
 </div>
-<div class="sect6">
-<h7 id="_additional_documentation_2"><a class="anchor" href="#_additional_documentation_2"></a>Additional documentation:</h7>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>controller.hotkey=SHIFT</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You are now ready to run the <strong>first minimal Sakuli test</strong> to see if Sakuli and its components are working well together. Open a new terminal to start a test:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">sakuli run __INST_DIR__/example_test_suites/example_ubuntu/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sakuli should now</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>open <strong>Firefox</strong> with the Sakuli welcome page, highlight some page elements</p>
+</li>
+<li>
+<p>open the <strong>calculator</strong> and calculate <em>525+100=625</em></p>
+</li>
+<li>
+<p>open an <strong>editor</strong> and write a <strong>status message</strong></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_additional_documentation_2"><a class="anchor" href="#_additional_documentation_2"></a>Additional documentation</h6>
 <div class="ulist">
 <ul>
 <li>
@@ -1888,33 +1881,10 @@ If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process
 </ul>
 </div>
 </div>
-</div>
 <div class="sect5">
-<h6 id="_additional_software_2"><a class="anchor" href="#_additional_software_2"></a>Additional software</h6>
-<div class="sect6">
-<h7 id="_additional_packages_on_linux_2"><a class="anchor" href="#_additional_packages_on_linux_2"></a>additional packages on Linux</h7>
-<div class="paragraph">
-<p>(required)</p>
-</div>
-<div class="paragraph">
-<p>Install the following packages if you are on Linux:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Ubuntu: <code>sudo apt-get install tesseract-ocr wmctrl xdotool</code></p>
-</li>
-<li>
-<p>openSUSE <code>sudo zypper install tesseract wmctrl xdotool</code></p>
-</li>
-</ul>
-</div>
-</div>
+<h6 id="_optional_software_2"><a class="anchor" href="#_optional_software_2"></a>Optional software</h6>
 <div class="sect6">
 <h7 id="_phantomjs_2"><a class="anchor" href="#_phantomjs_2"></a>PhantomJS</h7>
-<div class="paragraph">
-<p>(optional)</p>
-</div>
 <div class="paragraph">
 <p>Currently, <em>each</em> Sakuli test requires to start a browser, which is not very handy for pure Sikuli GUI tests (=where no browser at all is needed). For that case, use a headless browser like <a href="http://phantomjs.org">PhantomJS</a>. Refer to <a href="#sahi-browser-configuration">Browser configuration</a> for more information.</p>
 </div>
@@ -1924,9 +1894,6 @@ If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process
 </div>
 <div class="sect6">
 <h7 id="_screenshot_tool_2"><a class="anchor" href="#_screenshot_tool_2"></a>Screenshot tool</h7>
-<div class="paragraph">
-<p>(optional)</p>
-</div>
 <div class="paragraph">
 <p>Use a screenshot tool which is able to</p>
 </div>
@@ -1960,17 +1927,7 @@ If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process
 <div class="sect6">
 <h7 id="_editor_2"><a class="anchor" href="#_editor_2"></a>Editor</h7>
 <div class="paragraph">
-<p>(optional)</p>
-</div>
-<div class="paragraph">
-<p>You&#8217;re doing better if you do <em>not</em> use gEdit or Windows Notepad to edit Sakuli files. It is recommended to use an Editor with JavaScript support, e. g.:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>on <strong>Linux</strong> use <a href="https://atom.io">Atom</a></p>
-</li>
-</ul>
+<p>It is recommended to use an Editor with JavaScript support, e.g. <a href="https://atom.io">Atom</a></p>
 </div>
 <div class="paragraph">
 <p>It also possible to use professional programming IDEs like <a href="https://www.jetbrains.com/idea/">IntelliJ</a>, <a href="https://netbeans.org/">Netbeans</a> or <a href="https://eclipse.org">Eclipse</a>.</p>
@@ -1978,48 +1935,7 @@ If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process
 </div>
 </div>
 <div class="sect5">
-<h6 id="_test_2"><a class="anchor" href="#_test_2"></a>Test</h6>
-<div class="paragraph">
-<p>You are now ready to run the <strong>first minimal Sakuli test</strong> to see if Sakuli and its components are working well together. Open a new terminal to start a test:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Ubuntu</strong>: <code>sakuli run <em>INST_DIR</em>/example_test_suites/example_ubuntu/</code></p>
-</li>
-<li>
-<p><strong>openSUSE</strong>: <code>sakuli run <em>INST_DIR</em>/example_test_suites/example_opensuse/</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Sakuli should now</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>open <strong>Firefox</strong> with the Sakuli welcome page, highlight some page elements</p>
-</li>
-<li>
-<p>open the <strong>calculator</strong> and calculate <em>525+100=625</em></p>
-</li>
-<li>
-<p>open an <strong>editor</strong> and write a <strong>status message</strong></p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="images/u_vnc_test.png" alt="vnc test example"></span></p>
-</div>
-<div class="paragraph">
-<p><strong>Congratulations - you have installed Sakuli!</strong></p>
-</div>
-</div>
-<div class="sect5">
 <h6 id="_next_steps_2"><a class="anchor" href="#_next_steps_2"></a>Next steps</h6>
-<div class="paragraph">
-<p>What next? Well, it depends…</p>
-</div>
 <div class="ulist">
 <ul>
 <li>
@@ -2030,10 +1946,16 @@ If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#omd-integration-native">Native OMD Integration</a></p>
+<p><a href="#omd-gearman">Gearman forwarder</a></p>
 </li>
 <li>
-<p><a href="#icinga2-integration">Icinga2 REST API</a></p>
+<p><a href="#omd-sql-database">Database forwarder</a></p>
+</li>
+<li>
+<p><a href="#icinga2-integration">Icinga2 forwarder</a></p>
+</li>
+<li>
+<p><a href="#check_mk">Check_MK</a></p>
 </li>
 </ul>
 </div>
@@ -2045,7 +1967,7 @@ If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process
 </div>
 </div>
 <div class="sect5">
-<h6 id="_headless_sakuli_checks_on_linux"><a class="anchor" href="#_headless_sakuli_checks_on_linux"></a>Headless Sakuli checks on Linux</h6>
+<h6 id="_headless_checks"><a class="anchor" href="#_headless_checks"></a>Headless checks</h6>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/execution/native/linux-native-headless.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/execution/native/linux-native-headless.adoc" target="_blank">edit</a></p>
 </div>
@@ -2061,7 +1983,7 @@ If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process
 <p>in a virtual display (="headless"), which is straightforward in Linux (documented on this page)</p>
 </li>
 <li>
-<p>in a <a href="#docker-images">Sakuli Docker Images</a> (more scalable)</p>
+<p>in <a href="#docker-images">Docker containers</a> (more scalable)</p>
 </li>
 </ul>
 </div>
@@ -2192,7 +2114,7 @@ DISPLAY=:1
 </div>
 </div>
 <div class="sect5">
-<h6 id="_linux_troubleshooting"><a class="anchor" href="#_linux_troubleshooting"></a>Linux Troubleshooting</h6>
+<h6 id="_troubleshooting_2"><a class="anchor" href="#_troubleshooting_2"></a>Troubleshooting</h6>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/execution/native/linux-troubleshooting.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/execution/native/linux-troubleshooting.adoc" target="_blank">edit</a></p>
 </div>
@@ -2435,7 +2357,7 @@ sample test case. So at the end of this chapter you should be able to start writ
 </div>
 </div>
 <div class="sect5">
-<h6 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h6>
+<h6 id="_installation_3"><a class="anchor" href="#_installation_3"></a>Installation</h6>
 <div class="sect6">
 <h7 id="_preparation"><a class="anchor" href="#_preparation"></a>Preparation</h7>
 <div class="olist arabic">
@@ -3012,7 +2934,7 @@ USER 1984</code></pre>
 <p><a href="#kubernetes">Kubernetes</a></p>
 </li>
 <li>
-<p><a href="#omd-integration-containerized">Containerized OMD Integration</a></p>
+<p><a href="#omd-containerized">OMD Containerized</a></p>
 </li>
 <li>
 <p>Publications:</p>
@@ -5880,7 +5802,7 @@ Default: false.</p>
 <p>Setting this to <em>true</em> can be useful if you want to raise a custom exception or no exception at all.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 4. Property values of <code>sakuli.exception.suppressResumedExceptions</code></caption>
+<caption class="title">Table 3. Property values of <code>sakuli.exception.suppressResumedExceptions</code></caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5924,7 +5846,7 @@ Default: false.</p>
 </div>
 <div class="paragraph">
 <div class="title">Verbosity</div>
-<p>The logging verbosity of all compoments <em>Sakuli, Sahi, Sikuli, Spring</em> - and <em>Java</em> in general can be changed individually.</p>
+<p>The logging verbosity of all compoments <em>Sakuli, Sahi, Sikuli, Spring</em> - and <em>Java</em> in general can be changed individually with <a href="#property-loading-mechanism">properties</a>.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -5939,7 +5861,7 @@ Default: false.</p>
 </table>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 5. Log level verbosity properties</caption>
+<caption class="title">Table 4. Log level verbosity properties</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5974,7 +5896,7 @@ Default: false.</p>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 6. Log file folder / pattern</caption>
+<caption class="title">Table 5. Log file folder / pattern</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6395,7 +6317,7 @@ actions like clicks are written to file automatically. All other actions like as
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/testdefinition/advanced-topics/sahi-settings-proxy.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/testdefinition/advanced-topics/sahi-settings-proxy.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<p>Set the following properties (as global in the <code>sakuli.properties</code>) to define a proxy Sahi should connect to.</p>
+<p>Set the following <a href="#property-loading-mechanism">properties</a> (globally in <code>sakuli.properties</code>) to define a proxy Sahi should connect to.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6603,7 +6525,7 @@ This is a browser-specific solution and can be different in newer Browser versio
 </div>
 </div>
 <div class="sect3">
-<h4 id="_troubleshooting"><a class="anchor" href="#_troubleshooting"></a>1.3.3. Troubleshooting</h4>
+<h4 id="_troubleshooting_3"><a class="anchor" href="#_troubleshooting_3"></a>1.3.3. Troubleshooting</h4>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/testdefinition/troubleshooting.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/testdefinition/troubleshooting.adoc" target="_blank">edit</a></p>
 </div>
@@ -6704,8 +6626,11 @@ java%sakuli.jar</code></pre>
 <div class="paragraph">
 <p>Sakuli can hand over test result to "<strong>Forwarder</strong>", which can be currently feed different tools like Nagios based monitoring systems or continuous integration server. If no forwarder is defined, a result summary is printed out in the end of a suite.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 7. Sakuli forwarder modules</caption>
+<div class="paragraph">
+<p>Feel free to develop another forwarder or ask us to do this.</p>
+</div>
+<table id="forwarders" class="tableblock frame-all grid-all spread">
+<caption class="title">Table 6. Sakuli forwarder modules</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 25%;">
@@ -6720,63 +6645,134 @@ java%sakuli.jar</code></pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Standard</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">default</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Log-Files and screenshots<br>
 - Command line output</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- <a href="#continuous_integration">Continuous Integration</a> server<br>
 - Locale test runs</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sql-database">SQL Database</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#sql-database">database</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- JDBC-SQL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">- Integration in Nagios through check_mysql_health, see <a href="#omd-sql-database">OMD - SQL Database</a><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Integration in <strong>Nagios</strong> based monitoring systems as <strong>active checks</strong> with  <a href="https://labs.consol.de/de/nagios/check_mysql_health/index.html">check_mysql_health</a><br>
 - Persistent storage of results<br>
-- Possibility to analyse or display results by own implementations<br>
+- Ready for own reporting implementations<br>
 - Interface to 3rd party systems</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#omd-gearman">OMD - Gearman Daemon</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">- Gearman Result Queuing</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">- Integration in Nagios through passive checks<br>
-- preconfigured graph- und screenshot templates for OMD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#omd-gearman">gearman</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- <a href="http://gearman.org/">Gearman</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Integration in <strong>Nagios</strong> based monitoring systems as <strong>passive checks</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#icinga2-integration">Icinga2 REST API</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">- REST Api<br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#icinga2-integration">icinga2</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- <a href="https://docs.icinga.com/icinga2/latest/doc/module/icinga2/chapter/icinga2-api">Icinga2 REST API</a><br>
 - JSON Data</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">- Integration in Icinga2 through passive checks<br>
-- preconfigured graph- templates for OMD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Integration in <strong>Icinga2</strong> as <strong>passive checks</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#check_mk-integration">Check_MK</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">- Agent Spool File</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#check_mk">check_mk</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- Result spool file on check_mk agent</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- Integration in CheckMK through customizable spool file<br>
 - preconfigured service templates</p></td>
 </tr>
 </tbody>
 </table>
 <div class="sect3">
-<h4 id="_monitoring"><a class="anchor" href="#_monitoring"></a>1.4.1. Monitoring</h4>
+<h4 id="_monitoring_integration"><a class="anchor" href="#_monitoring_integration"></a>1.4.1. Monitoring integration</h4>
 <div class="sect4">
-<h5 id="omd-gearman"><a class="anchor" href="#omd-gearman"></a>1.4.1.1. OMD - Gearman Daemon</h5>
+<h5 id="omd-preparation"><a class="anchor" href="#omd-preparation"></a>1.4.1.1. OMD preparation</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/omd-preparation.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/omd-preparation.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>This chapter describes all necessary steps to prepare a OMD site with a <strong>Nagios</strong> compatible monitoring system to receive Sakuli test results with one of the forwarders <a href="#omd-gearman">gearman</a>, <a href="#omd-sql-database">database</a> or <a href="#icinga2-integration">icinga2-api</a>. OMD with Thruk as web frontend is highly recommended, but any other Nagios based system will do also (the configuration steps may vary then). The steps described here refer to Nagios as monitoring core.</p>
+</div>
+<div class="sect5">
+<h6 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h6>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a href="https://labs.consol.de/OMD/">OMD</a></strong> installed on a Linux operating system</p>
+</li>
+<li>
+<p>a running <strong>OMD site</strong> (here: <strong>sakuli</strong>)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_download_sakuli_sources"><a class="anchor" href="#_download_sakuli_sources"></a>Download Sakuli sources</h6>
+<div class="paragraph">
+<p>General note: you should download the <strong>same package version of Sakuli</strong> as you did on the clients. <strong>Do not mix versions</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Download <strong>Sakuli</strong> from <a href="http://labs.consol.de/sakuli/install">http://labs.consol.de/sakuli/install</a> into a temporary folder <code><em>TEMP</em></code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>cd __TEMP__
+wget http://labs.consol.de/sakuli/install/sakuli-vx.x.x-SNAPSHOT.zip</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Decompress it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>unzip sakuli-vx.x.x-SNAPSHOT.zip</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_configuration_2"><a class="anchor" href="#_configuration_2"></a>Configuration</h6>
+<div class="paragraph">
+<p>All following steps should be done as the <strong>OMD site user</strong> (here: "sakuli"):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>su - sakuli</code></pre>
+</div>
+</div>
+<div class="sect6">
+<h7 id="_html_escaping"><a class="anchor" href="#_html_escaping"></a>HTML escaping</h7>
+<div class="paragraph">
+<p>Sakuli will produce HTML formatted output. <strong>HTML escaping</strong> in the monitoring core must be turned off:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ vim etc/nagios/cgi.cfg
+    escape_html_tags=0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now choose one of the <a href="#forwarders">Sakuli forwarder modules</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="omd-gearman"><a class="anchor" href="#omd-gearman"></a>1.4.1.2. Gearman forwarder</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/omd-gearman.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/omd-gearman.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<p>This page describes how the results of the Sakuli tests (e.g. example_windows7/ubuntu/opensuse) can be transmitted directly into the <strong>Gearman result queue</strong> of the OMD monitoring system.</p>
+<p>This page describes how the results of Sakuli tests can be transmitted directly into the <strong>Gearman result queue</strong> of a monitoring system.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you do not use a gearman-enabled monitoring system in a <a href="https://labs.consol.de/OMD/">OMD</a> environment, the procedure may vary.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="images/sakuli-gearman.png" alt="sakuli-db-forwarder"></span></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Nagios <strong>host</strong>: property <code>sakuli.forwarder.gearman.nagios.hostname</code> (define globally or per suite)</p>
-</li>
-<li>
-<p>Nagios <strong>service</strong>: property <code>testsuite.id</code> in <code>testsuite.properties</code></p>
-</li>
-</ul>
 </div>
 <div class="sect5">
 <h6 id="_omd_configuration"><a class="anchor" href="#_omd_configuration"></a>OMD Configuration</h6>
@@ -6841,24 +6837,6 @@ hosts=no
 do_hostchecks=no</code></pre>
 </div>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-At the time of the creation of this documents, Sakuli does not encrypt any gearman results by default. Therefore, set <code>accept_clear_results</code> in <code>server.cfg</code>:
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ vim ~/etc/mod-gearman/server.cfg
-accept_clear_results=yes</code></pre>
-</div>
-</div>
 <div class="paragraph">
 <p>Restart OMD:</p>
 </div>
@@ -6870,6 +6848,19 @@ accept_clear_results=yes</code></pre>
 </div>
 <div class="sect6">
 <h7 id="_create_a_nagios_service"><a class="anchor" href="#_create_a_nagios_service"></a>Create a Nagios service</h7>
+<div class="paragraph">
+<p>The receiving host/service in the monitoring system derives from the following <a href="#property-loading-mechanism">properties</a>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>host</strong>: <code>sakuli.forwarder.gearman.nagios.hostname</code> (defined globally or per suite)</p>
+</li>
+<li>
+<p><strong>service</strong>: <code>testsuite.id</code> (defined in <code>testsuite.properties</code>)</p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p>Create a check_command, which will be executed only if Nagios did not receive a Sakuli result within the last 30 minutes. This ensures that you get a notification even if no passive check results arrive in Nagios at all:</p>
 </div>
@@ -6944,7 +6935,7 @@ define service {
 <h6 id="_sakuli_client_configuration"><a class="anchor" href="#_sakuli_client_configuration"></a>Sakuli Client Configuration</h6>
 <div class="paragraph">
 <div class="title">Modify Sakuli gearman forwarder parameter</div>
-<p>On the Sakuli client you must set the global properties for the gearman receiver. For this, edit <code>sakuli.properties</code> in the folder containing the test suites (you can copy the lines from <code><em>SAKULI_HOME</em>/conf/sakuli-default.properties</code>):.</p>
+<p>On the Sakuli client you must set the global <a href="#property-loading-mechanism">properties</a> for the gearman receiver. For this, edit <code>sakuli.properties</code> in the folder containing the test suites (you can copy the lines from <code><em>SAKULI_HOME</em>/conf/sakuli-default.properties</code>):.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6993,7 +6984,7 @@ sakuli.forwarder.gearman.nagios.hostname=sakuli_client</code></pre>
 <h6 id="_using_aes_encryption_optional"><a class="anchor" href="#_using_aes_encryption_optional"></a>Using AES encryption (optional)</h6>
 <div class="paragraph">
 <p>The gearman forwarder supports AES encryption when sending checked results to the OMD server. The AES encryption uses a 32 byte (256 bit) secret key that
-has to be given in the properties.</p>
+has to be given in the <a href="#property-loading-mechanism">properties</a>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7071,12 +7062,24 @@ output=[OK] Cache-result 5 | foobar=112;333;444;;
 </div>
 </div>
 <div class="sect4">
-<h5 id="omd-sql-database"><a class="anchor" href="#omd-sql-database"></a>1.4.1.2. OMD - SQL Database</h5>
+<h5 id="omd-sql-database"><a class="anchor" href="#omd-sql-database"></a>1.4.1.3. Database forwarder</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/omd-sql-database.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/omd-sql-database.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
 <p>This page describes how the results of the Sakuli tests (e.g. example_windows7/ubuntu/opensuse) can be written into a <strong>MySQL database</strong> which is then checked asynchronously by the monitoring system with <code>check_mysql_health</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you do not use MySQL in a <a href="https://labs.consol.de/OMD/">OMD</a> environment, the procedure may vary.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="images/sakuli-db.png" alt="sakuli-db-forwarder"></span></p>
@@ -7136,7 +7139,7 @@ Initializing Crontab...</code></pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create the <strong>Sakuli database</strong> like described here: <a href="#sql-database-create-db">Create Sakuli DB</a></p>
+<p>Create the <strong>Sakuli database</strong> as described here: <a href="#sql-database-create-db">Create Sakuli DB</a></p>
 </li>
 <li>
 <p>Check the connection with <em>check_mysql_health</em>:</p>
@@ -7232,7 +7235,7 @@ define host {
 </div>
 </div>
 <div class="paragraph">
-<p>Create the following <strong>service object</strong> for the first test case. Note the ARG2 in check_command: the database check will only evaluate the last result if it is max. 180 seconds old. If older, the check will return UNKNOWN. (For comparison: this is equivalent to "freshness_threshold" if you would use the <a href="#omd-gearman">OMD - Gearman Daemon</a>. In any case, you should set the <a href="#pnp4nagios-rrd-heartbeat">RRD heartbeat</a> to the same value to get a gap in the graph if recent client results are missing. )</p>
+<p>Create the following <strong>service object</strong> for the first test case. Note the ARG2 in check_command: the database check will only evaluate the last result if it is max. 180 seconds old. If older, the check will return UNKNOWN. (For comparison: this is equivalent to "freshness_threshold" if you would use the <a href="#omd-gearman">Gearman forwarder</a>. In any case, you should set the <a href="#pnp4nagios-rrd-heartbeat">RRD heartbeat</a> to the same value to get a gap in the graph if recent client results are missing. )</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7274,7 +7277,7 @@ define service {
 <h6 id="_sakuli_client_configuration_2"><a class="anchor" href="#_sakuli_client_configuration_2"></a>Sakuli Client Configuration</h6>
 <div class="paragraph">
 <div class="title">Modify Sakuli database forwarder parameter</div>
-<p>On the Sakuli client you must set the global properties for the database receiver, like described here: <a href="#sql-database-enable-forwarder">Enable database forwarder</a></p>
+<p>On the Sakuli client you must set the global <a href="#property-loading-mechanism">properties</a> for the database receiver, as described here: <a href="#sql-database-enable-forwarder">Enable database forwarder</a></p>
 </div>
 <div class="paragraph">
 <div class="title">Test result transmission to OMD</div>
@@ -7337,7 +7340,7 @@ Initializing Crontab...OK</code></pre>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_troubleshooting_2"><a class="anchor" href="#_troubleshooting_2"></a>Troubleshooting</h6>
+<h6 id="_troubleshooting_4"><a class="anchor" href="#_troubleshooting_4"></a>Troubleshooting</h6>
 <div class="sect6">
 <h7 id="_apparmor_prevention_on_mysql"><a class="anchor" href="#_apparmor_prevention_on_mysql"></a>Apparmor prevention on MySQL</h7>
 <div class="paragraph">
@@ -7397,12 +7400,24 @@ Oct 21 17:08:21 omd2 kernel: [116300.215520] type=1400 audit(1413904101.323:27):
 </div>
 </div>
 <div class="sect4">
-<h5 id="icinga2-integration"><a class="anchor" href="#icinga2-integration"></a>1.4.1.3. Icinga2 REST API</h5>
+<h5 id="icinga2-integration"><a class="anchor" href="#icinga2-integration"></a>1.4.1.4. Icinga2 forwarder</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/icinga2api.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/icinga2api.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
 <p>This page describes how the results of Sakuli tests can be sent to the <a href="http://docs.icinga.org/icinga2/snapshot/doc/module/icinga2/chapter/icinga2-api">REST API</a> of an <a href="https://www.icinga.org/">Icinga2</a> monitoring instance.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This part of the documentation does <em>not</em> apply to OMD. Some steps may vary for Icinga2 on OMD.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="images/sakuli-icinga2.png" alt="sakuli-icinga2"></span></p>
@@ -7493,7 +7508,7 @@ object Host "sakuliclient01" {
 <h6 id="_sakuli_client_configuration_3"><a class="anchor" href="#_sakuli_client_configuration_3"></a>Sakuli Client Configuration</h6>
 <div class="paragraph">
 <div class="title">Sakuli Icinga2 forwarder parameter</div>
-<p>On the Sakuli client you must set the global properties for the Icinga2 receiver. For this, edit <code>sakuli.properties</code> in the folder containing the test suites (you can copy the lines from <code><em>SAKULI_HOME</em>/conf/sakuli-default.properties</code>):</p>
+<p>On the Sakuli client you must set the global <a href="#property-loading-mechanism">properties</a> for the Icinga2 receiver. For this, edit <code>sakuli.properties</code> in the folder containing the test suites (you can copy the lines from <code><em>SAKULI_HOME</em>/conf/sakuli-default.properties</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7570,7 +7585,7 @@ sakuli.forwarder.icinga2.hostname=sakuliclient01</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="check_mk-integration"><a class="anchor" href="#check_mk-integration"></a>1.4.1.4. Check_MK</h5>
+<h5 id="check_mk"><a class="anchor" href="#check_mk"></a>1.4.1.5. Check_MK</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/checkmk.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/checkmk.adoc" target="_blank">edit</a></p>
 </div>
@@ -7649,373 +7664,21 @@ sakuli.forwarder.check_mk.service_description=My_Custom_Service</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_advanced_topics"><a class="anchor" href="#_advanced_topics"></a>1.4.1.5. Advanced Topics</h5>
-<div class="sect5">
-<h6 id="omd-integration-native"><a class="anchor" href="#omd-integration-native"></a>Native OMD Integration</h6>
+<h5 id="_grafana_graphs"><a class="anchor" href="#_grafana_graphs"></a>1.4.1.6. Grafana graphs</h5>
 <div id="git-edit-section" class="paragraph">
-<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/omd-native.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/omd-native.adoc" target="_blank">edit</a></p>
+<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/graph_grafana.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/graph_grafana.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<p>This chapter describes all necessary steps to configure a <strong>Nagios</strong> compatible monitoring system to receive Sakuli test results. OMD with Thruk as web frontend is highly recommended, but any other Nagios based system will do also.</p>
-</div>
-<div class="sect6">
-<h7 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h7>
-<div class="ulist">
-<ul>
-<li>
-<p><strong><a href="http://www.omdistro.org">OMD</a> 1.x</strong> installed on a Linux operating system</p>
-</li>
-<li>
-<p>a running <strong>OMD site</strong> (here: <strong>sakuli</strong>)</p>
-</li>
-</ul>
+<p>tbd</p>
 </div>
 </div>
-<div class="sect6">
-<h7 id="_download"><a class="anchor" href="#_download"></a>Download</h7>
-<div class="paragraph">
-<p>General note: you should download the <strong>same package version of Sakuli</strong> as you did on the clients. <strong>Do not mix versions</strong>.</p>
-</div>
-<div class="paragraph">
-<p>Download <strong>Sakuli</strong> from <a href="http://labs.consol.de/sakuli/install">http://labs.consol.de/sakuli/install</a> into a temporary folder <code><em>TEMP</em></code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>cd __TEMP__
-wget http://labs.consol.de/sakuli/install/sakuli-vx.x.x-SNAPSHOT.zip</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Decompress it:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>unzip sakuli-vx.x.x-SNAPSHOT.zip</code></pre>
-</div>
-</div>
-</div>
-<div class="sect6">
-<h7 id="_general_preparations"><a class="anchor" href="#_general_preparations"></a>General preparations</h7>
-<div class="paragraph">
-<p>All following steps should be done as the <strong>OMD site user</strong> (here: "sakuli"):</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>su - sakuli</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Nagios</strong></p>
-</div>
-<div class="paragraph">
-<p>Sakuli will produce HTML formatted output. <strong>HTML escaping</strong> in Nagios must be turned off:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ vim etc/nagios/cgi.cfg
-    escape_html_tags=0</code></pre>
-</div>
-</div>
-</div>
-<div class="sect6">
-<h7 id="_choose_a_forwarder"><a class="anchor" href="#_choose_a_forwarder"></a>Choose a forwarder</h7>
-<div class="paragraph">
-<p>Depending on your environment, you can set up on of these two possible forwarder types. Each of them is documented on a single page.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#omd-gearman">Setting up Nagios to <strong>receive Gearman results</strong> from Sakuli clients</a> (<strong>recommended</strong>)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>passive check (via Gearmand result queue)</p>
-</li>
-<li>
-<p>+ get results immediately</p>
-</li>
-<li>
-<p>+ PNP graphs</p>
-</li>
-<li>
-<p>- no performance value history to do further reporting (despite reading the RRDs again; not recommended)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><a href="#omd-sql-database">Setting up the Sakuli <strong>result database</strong> in OMD</a> and let Nagios check the database</p>
-<div class="ulist">
-<ul>
-<li>
-<p>active check (against MySQL result database)</p>
-</li>
-<li>
-<p>- results in Nagios always lag behind</p>
-</li>
-<li>
-<p>+ PNP graphs</p>
-</li>
-<li>
-<p>+ all suite/case/step performance values are stored in database and can be used for further reporting</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
+<div class="sect4">
+<h5 id="_pnp4nagios_graphs"><a class="anchor" href="#_pnp4nagios_graphs"></a>1.4.1.7. PNP4Nagios graphs</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/graph_pnp4nagios.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/graph_pnp4nagios.adoc" target="_blank">edit</a></p>
 </div>
 <div class="sect5">
-<h6 id="omd-integration-containerized"><a class="anchor" href="#omd-integration-containerized"></a>Containerized OMD Integration</h6>
-<div id="git-edit-section" class="paragraph">
-<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/omd-containerized.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/omd-containerized.adoc" target="_blank">edit</a></p>
-</div>
-<div class="paragraph">
-<div class="title">OMD Labs Docker images with Sakuli extension</div>
-<p>These images provide a nightly build of OMD Labs (<a href="https://labs.consol.de/OMD/">https://labs.consol.de/OMD/</a>) with Sakuli extensions:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Sakuli PNP template</p>
-</li>
-<li>
-<p>Screenshot eventhandler which stores screenshots in the file system</p>
-</li>
-<li>
-<p>Thruk SSI to display screenshots in a lightbox</p>
-</li>
-<li>
-<p>check_mysql_health to check a Sakuli result database</p>
-</li>
-<li>
-<p>adapted version of gearman_proxy.pl to retrieve results in a separate result queue (e.g. for replacing message substrings)</p>
-</li>
-<li>
-<p>Nagios example config files</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Automated builds</div>
-<p>Each "omd-labs-sakuli" image build gets triggered by webhook when a new "omd-labs" image was created.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://hub.docker.com/r/consol/omd-labs-centos-sakuli/builds/">https://hub.docker.com/r/consol/omd-labs-centos-sakuli/builds/</a></p>
-</li>
-<li>
-<p><a href="https://hub.docker.com/r/consol/omd-labs-debian-sakuli/builds/">https://hub.docker.com/r/consol/omd-labs-debian-sakuli/builds/</a></p>
-</li>
-<li>
-<p><a href="https://hub.docker.com/r/consol/omd-labs-ubuntu-sakuli/builds/">https://hub.docker.com/r/consol/omd-labs-ubuntu-sakuli/builds/</a></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The image already contains a "demo" site.</p>
-</div>
-<div class="sect6">
-<h7 id="_usage_2"><a class="anchor" href="#_usage_2"></a>Usage</h7>
-<div class="listingblock">
-<div class="title">Run the "demo" site in OMD Labs Edition:</div>
-<div class="content">
-<pre class="CodeRay highlight"><code># Centos 7
-docker run -p 8443:443 consol/omd-labs-centos-sakuli
-# Ubuntu 16.04
-docker run -p 8443:443 consol/omd-labs-ubuntu-sakuli
-# Debian 8
-docker run -p 8443:443 consol/omd-labs-debian-sakuli</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Use the Makefile to work with <em>locally built</em> images:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code># run a local image
-make start
-# build a "local/" image without overwriting the consol/ image
-make build
-# start just the bash
-make bash</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<div class="title">Run a custom site</div>
-<p>If you want to create a custom site, you have to build an own image of OMD-labs <strong>and</strong> OMD-labs-sakuli.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>see the documentation of <a href="https://github.com/ConSol/omd-labs-docker">https://github.com/ConSol/omd-labs-docker</a>, section "run a custom site" how to build a local image of OMD-labs.</p>
-</li>
-<li>
-<p>then clone this repository, <code>cd</code> into the folder containg the Dockerfile, e.g. <code>omd-labs-centos-sakuli</code></p>
-</li>
-<li>
-<p>build a local image:</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>export NEW_SITENAME=mynewsite
-make build</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>run the image:</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>docker run -p 8443:443 local/omd-labs-centos-sakuli</pre>
-</div>
-</div>
-</div>
-<div class="sect6">
-<h7 id="_ansible_drop_ins"><a class="anchor" href="#_ansible_drop_ins"></a>Ansible drop-ins</h7>
-<div class="paragraph">
-<p>You can also configure this OMD labs container with Ansible playbooks. See <a href="https://github.com/ConSol/omd-labs-docker">https://github.com/ConSol/omd-labs-docker</a> for more information.</p>
-</div>
-</div>
-</div>
-<div class="sect5">
-<h6 id="forwarder-template"><a class="anchor" href="#forwarder-template"></a>Forwarder Templates</h6>
-<div id="git-edit-section" class="paragraph">
-<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/forwarder-templates.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/forwarder-templates.adoc" target="_blank">edit</a></p>
-</div>
-<div class="paragraph">
-<p>With release <code>1.1</code> Sakuli introduced the <a href="http://jtwig.org/">Jtwig</a> template engine, which is used for generating the output of the Sakuli test suite for certain forwarders. (Currently only the <a href="forwarder-checkmk.md">Check_MK forwarder</a> supports Jtwig templates.)</p>
-</div>
-<div class="paragraph">
-<p>Using templates for the forwarder output makes it possible to easily modify the output of Sakuli and adapt it without the need to release a new Sakuli version.</p>
-</div>
-<div class="paragraph">
-<p>Here we want to describe how Jtwig is working, how to use a customized template and what you have to pay attention to.</p>
-</div>
-<div class="sect6">
-<h7 id="_jtwig_template"><a class="anchor" href="#_jtwig_template"></a>JTwig template</h7>
-<div class="paragraph">
-<p><a href="http://jtwig.org/">Jtwig</a> is a template engine based on Java, which has a simple and understandable syntax und is easy to use. The following snippet shows an example of a Jtwig template used in Sakuli.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml">    {% for testStep in testCase.stepsAsSortedSet %}
-        , step &quot;{{ testStep.name }}&quot;$whitespace$
-        {% if (testStep.state.error) %}
-            EXCEPTION: {{ errorMessageCreator.exceptionMessage(testStep) }}
-        {% else %}
-            over runtime ({{ testStep.duration }}s/warn at {{ testStep.warningTime }}s)
-        {% endif %}
-    {% endfor %}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The input for this template is the <code>testCase</code> object, which has a set ot test steps. The template iterates over all the steps and prints certain step information based on the state of the test step.</p>
-</div>
-<div class="paragraph">
-<p>The whole <a href="http://jtwig.org/">Jtwig</a> feature set is supported and can be used within the Sakuli forwarder.
-For more detailed information about Jtwig templates, please refer to <a href="http://jtwig.org/">Jtwig</a>.</p>
-</div>
-</div>
-<div class="sect6">
-<h7 id="_customized_jtwig_functions"><a class="anchor" href="#_customized_jtwig_functions"></a>Customized Jtwig Functions</h7>
-<div class="paragraph">
-<p><a href="http://jtwig.org/">Jtwig</a> comes with a list of functions like <code>abs</code>, <code>concat</code> etc, which can be used within a template. In addition to the standard functions, Jtwig supports the implementation and injection of custom functions. Sakuli provides following custom functions:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/src/core/src/main/java/org/sakuli/services/forwarder/configuration/AbbreviateFunction.java" target="_blank">abbreviate</a></code> - The function abbreviates a certain string to a specified length. The implementation is based on the StringUtils.abbreviate method from the Apache commons library.</p>
-</li>
-<li>
-<p><code><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/src/core/src/main/java/org/sakuli/services/forwarder/configuration/ExtractScreenshotFunction.java" target="_blank">extractScreenshot</a></code> - The function extracts the screenshot from a specified test data entity, which contains an exception.</p>
-</li>
-<li>
-<p><code><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/src/core/src/main/java/org/sakuli/services/forwarder/configuration/GetOutputDurationFunction.java" target="_blank">getOutputDuration</a></code> - The function returns the formatted duration for a specified test entity.</p>
-</li>
-<li>
-<p><code><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/src/core/src/main/java/org/sakuli/services/forwarder/configuration/GetOutputStateFunction.java" target="_blank">getOutputState</a></code> - The function returns the <code><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/src/core/src/main/java/org/sakuli/datamodel/state/SakuliState.java" target="_blank">OutputState</a></code> for a specified SakuliState.</p>
-</li>
-<li>
-<p><code><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/src/core/src/main/java/org/sakuli/services/forwarder/configuration/IsBlankFunction.java" target="_blank">isBlank</a></code> - The function checks whether the specified string parameter is blank.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Please refer to the Sakuli <a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/src/common/src/main/resources/org/sakuli/common/config/templates" target="_blank">default Jtwig templates</a>, to see the custom functions in action.</p>
-</div>
-</div>
-<div class="sect6">
-<h7 id="_handling_of_white_spaces_and_new_lines"><a class="anchor" href="#_handling_of_white_spaces_and_new_lines"></a>Handling of white spaces and new lines</h7>
-<div class="paragraph">
-<p>The forwarder implementation provides a special handling of white spaces and new lines within the templates. For this feature the <code>jtwig-spaceless-extension</code> has been used, which comes with a SpaceRemover interface. This has been implemented by the <code>LeadingWhitespaceRemover</code>. The <code>LeadingWhitespaceRemover</code> is configured in the twig template engine and removes all leading whitespaces for every line and all line endings within the template. It can be activated by adding the text snippet or the whole template within the following tags <code>{% spaceless %}</code> and <code>{% endspaceless %}</code>.
-The <code>LeadingWhitespaceRemover</code> has been introduced, to make the implementation and maintaining of the templates easier.</p>
-</div>
-<div class="paragraph">
-<p>Since the leading white spaces and the new lines are removed, some special placeholder have been introduced, which are replaced by the real characters at the end of the template generation:
-* <code>$whitespace$</code> - the placeholder will be replaced by a real white space.
-* <code>$newline$</code> - the placeholder will be replaced by a new line <code>&#39;\n&#39;</code>.</p>
-</div>
-</div>
-<div class="sect6">
-<h7 id="_using_a_customized_templates"><a class="anchor" href="#_using_a_customized_templates"></a>Using a customized templates</h7>
-<div class="paragraph">
-<p>Sakuli provides a default template set, which is placed within the templates directory under <code><em>SAKULI_HOME</em>/config/templates</code> within the Sakuli home folder (e.g. the default Check_MK templates can be found in a subdirectory <code>check_mk</code>).</p>
-</div>
-<div class="paragraph">
-<p>The property <code>sakuli.forwarder.template.folder</code> defines the path to the main.twig template for the respective forwarder. The default value is set to <code>${sakuli.home.folder}/config/templates</code>.</p>
-</div>
-<div class="paragraph">
-<p>Before customizing a default template, it is essential to copy the templates to a new location and configure that location as the template location in Sakuli, otherwise installing a new Sakuli release would overwrite the modified templates within the config directory.</p>
-</div>
-</div>
-<div class="sect6">
-<h7 id="_structure_of_the_default_main_template"><a class="anchor" href="#_structure_of_the_default_main_template"></a>Structure of the default main template</h7>
-<div class="paragraph">
-<p>Generally the forwarder is expecting to find a certain template file named <code>main.twig</code> within the configured template directory. The default <code>main.twig</code> template doesn&#8217;t contain the whole output, but includes further templates to make the single templates more readable. Since the templates are fully customizable, the user can decide how the templates are structured, whether to use nested templates or to define everything within a single file.</p>
-</div>
-<div class="paragraph">
-<p>The following snippet shows the default <code>main.twig</code> template provided by Sakuli for the Check_MK forwarder. This template is also showing the use of the spaceless extension and the special character for a new line.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml">    {% spaceless %}
-    {% import 'error_message_creator.twig' as errorMessageCreator %}
-        <span class="error">&lt;</span><span class="error">&lt;</span><span class="tag">&lt;local&gt;</span><span class="error">&gt;</span><span class="error">&gt;</span>$newline$
-        {% include 'performance_data.twig' %}
-        {% include 'short_summary.twig' %}
-        {% include 'detailed_summary.twig' %}
-        $newline$
-    {% endspaceless %}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect6">
-<h7 id="_supported_forwarder"><a class="anchor" href="#_supported_forwarder"></a>Supported Forwarder</h7>
-<div class="ulist">
-<ul>
-<li>
-<p>Check_MK: see <a href="#check_mk-integration">Check_MK</a></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_pnp4nagios_2"><a class="anchor" href="#_pnp4nagios_2"></a>PNP4Nagios</h6>
-<div id="git-edit-section" class="paragraph">
-<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/pnp4nagios.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/pnp4nagios.adoc" target="_blank">edit</a></p>
-</div>
-<div class="sect6">
-<h7 id="_rrd_storage_type"><a class="anchor" href="#_rrd_storage_type"></a>RRD Storage Type</h7>
+<h6 id="_rrd_storage_type"><a class="anchor" href="#_rrd_storage_type"></a>RRD Storage Type</h6>
 <div class="paragraph">
 <p>In PNP4Nagios RRD Storage type "MULTIPLE" is of great importance for Sakuli checks, because the number of steps can change by time (=if you are adding/deleting some).</p>
 </div>
@@ -8037,8 +7700,8 @@ The <code>LeadingWhitespaceRemover</code> has been introduced, to make the imple
 </div>
 </div>
 </div>
-<div class="sect6">
-<h7 id="pnp4nagios-rrd-heartbeat"><a class="anchor" href="#pnp4nagios-rrd-heartbeat"></a>RRD heartbeat</h7>
+<div class="sect5">
+<h6 id="pnp4nagios-rrd-heartbeat"><a class="anchor" href="#pnp4nagios-rrd-heartbeat"></a>RRD heartbeat</h6>
 <div class="paragraph">
 <p>Each RRD file contains a heartbeat value, which determines how much time must pass without any new update, before RRDtool writes an UNKNOWN value (nan) into the data slot (the graph will have a gap then). In PNP4nagios heartbeat is defined at approx. 2 1/2 hours. If your Sakuli check runs only every 2 hours, this value will be fine. But for a 5 minute interval, this is way too long. As a consequence, the graph line will be continuously drawed even Sakuli did no check for two hours. Hence, always make sure to adapt the heartbeat to a value which is slightly higher than the interval of Sakuli checks (and indeally the same as <a href="#omd-gearman-freshness_threshold">[omd-gearman-freshness_threshold]</a>, if you use the gearman receiver):</p>
 </div>
@@ -8050,8 +7713,8 @@ OMD[sakuli]:~$ for file in sakuli_e2e_webshop*.rrd; do rrdtool tune $file --hear
 </div>
 </div>
 </div>
-<div class="sect6">
-<h7 id="_install_pnp_graph_template"><a class="anchor" href="#_install_pnp_graph_template"></a>install PNP graph template</h7>
+<div class="sect5">
+<h6 id="_install_pnp_graph_template"><a class="anchor" href="#_install_pnp_graph_template"></a>install PNP graph template</h6>
 <div class="paragraph">
 <p>Copy the PNP4nagios graph template into the templates folder:</p>
 </div>
@@ -8061,8 +7724,8 @@ OMD[sakuli]:~$ for file in sakuli_e2e_webshop*.rrd; do rrdtool tune $file --hear
 </div>
 </div>
 </div>
-<div class="sect6">
-<h7 id="_include_cpu_memory_metrics_in_sakuli_graphs_optional"><a class="anchor" href="#_include_cpu_memory_metrics_in_sakuli_graphs_optional"></a>Include CPU/Memory metrics in Sakuli graphs (optional)</h7>
+<div class="sect5">
+<h6 id="_cpu_memory_metrics"><a class="anchor" href="#_cpu_memory_metrics"></a>CPU/Memory metrics</h6>
 <div class="paragraph">
 <p>If Sakuli reports a long check runtime, it is good to know the CPU/Memory metrics on the Sakuli client machine, because CPU/IO bottlenecks affect Sakuli tests, too.</p>
 </div>
@@ -8284,13 +7947,331 @@ The Sakui graph should now contain also CPU/Memory values.</p>
 </div>
 </div>
 </div>
-<div class="sect5">
-<h6 id="_grafana_2"><a class="anchor" href="#_grafana_2"></a>Grafana</h6>
+<div class="sect4">
+<h5 id="omd-containerized"><a class="anchor" href="#omd-containerized"></a>1.4.1.8. OMD Containerized</h5>
 <div id="git-edit-section" class="paragraph">
-<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/grafana.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/grafana.adoc" target="_blank">edit</a></p>
+<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/omd-containerized.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/omd-containerized.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<p>tbd</p>
+<div class="title">OMD Labs Docker images with Sakuli extension</div>
+<p>These images provide a nightly build of OMD Labs (<a href="https://labs.consol.de/OMD/">https://labs.consol.de/OMD/</a>) with Sakuli extensions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sakuli PNP template</p>
+</li>
+<li>
+<p>Screenshot eventhandler which stores screenshots in the file system</p>
+</li>
+<li>
+<p>Thruk SSI to display screenshots in a lightbox</p>
+</li>
+<li>
+<p>check_mysql_health to check a Sakuli result database</p>
+</li>
+<li>
+<p>adapted version of gearman_proxy.pl to retrieve results in a separate result queue (e.g. for replacing message substrings)</p>
+</li>
+<li>
+<p>Nagios example config files</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<div class="title">Automated builds</div>
+<p>Each "omd-labs-sakuli" image build gets triggered by webhook when a new "omd-labs" image was created.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/consol/omd-labs-centos-sakuli/builds/">https://hub.docker.com/r/consol/omd-labs-centos-sakuli/builds/</a></p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/consol/omd-labs-debian-sakuli/builds/">https://hub.docker.com/r/consol/omd-labs-debian-sakuli/builds/</a></p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/consol/omd-labs-ubuntu-sakuli/builds/">https://hub.docker.com/r/consol/omd-labs-ubuntu-sakuli/builds/</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The image already contains a "demo" site.</p>
+</div>
+<div class="sect5">
+<h6 id="_usage_2"><a class="anchor" href="#_usage_2"></a>Usage</h6>
+<div class="listingblock">
+<div class="title">Run the "demo" site in OMD Labs Edition:</div>
+<div class="content">
+<pre class="CodeRay highlight"><code># Centos 7
+docker run -p 8443:443 consol/omd-labs-centos-sakuli
+# Ubuntu 16.04
+docker run -p 8443:443 consol/omd-labs-ubuntu-sakuli
+# Debian 8
+docker run -p 8443:443 consol/omd-labs-debian-sakuli</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use the Makefile to work with <em>locally built</em> images:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code># run a local image
+make start
+# build a "local/" image without overwriting the consol/ image
+make build
+# start just the bash
+make bash</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Run a custom site</div>
+<p>If you want to create a custom site, you have to build an own image of OMD-labs <strong>and</strong> OMD-labs-sakuli.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>see the documentation of <a href="https://github.com/ConSol/omd-labs-docker">https://github.com/ConSol/omd-labs-docker</a>, section "run a custom site" how to build a local image of OMD-labs.</p>
+</li>
+<li>
+<p>then clone this repository, <code>cd</code> into the folder containg the Dockerfile, e.g. <code>omd-labs-centos-sakuli</code></p>
+</li>
+<li>
+<p>build a local image:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>export NEW_SITENAME=mynewsite
+make build</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>run the image:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>docker run -p 8443:443 local/omd-labs-centos-sakuli</pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_ansible_drop_ins"><a class="anchor" href="#_ansible_drop_ins"></a>Ansible drop-ins</h6>
+<div class="paragraph">
+<p>You can also configure this OMD labs container with Ansible playbooks. See <a href="https://github.com/ConSol/omd-labs-docker">https://github.com/ConSol/omd-labs-docker</a> for more information.</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_omd_screenshot_history"><a class="anchor" href="#_omd_screenshot_history"></a>1.4.1.9. OMD Screenshot History</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/omd-screenshot-history.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/omd-screenshot-history.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>Since Sakuli <code>v1.1.0</code>, exception messages containing a screenshot also provide a CSS based magnifier/lightbox option to enlarge the currently displayed image. This perfect if you can live with the fact that a screenshot is only visible for the time until the next result arrives - which will update the service output and the embedded image.</p>
+</div>
+<div class="paragraph">
+<p>It is also possible to view a screenshot history. (This has been tested in OMD; for other monitoring systems you might have to adapt the SSI.)</p>
+</div>
+<div class="paragraph">
+<p>Each Sakuli check is combined with an event handler script, which saves the base64 encoded image to the local file system if the result is CRITICAL and the output contains the pattern "EXCEPTION". The monitoring web frontend (in OMD: Thruk) then can load these images into a lightbox.</p>
+</div>
+<div class="paragraph">
+<div class="title">configure event handler (OMD system)</div>
+<p>Copy the event handler script to the local plugin directory</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ cp __TEMP__/sakuli-vx.x.x-SNAPSHOT/setup/nagios/screenshot_lightbox/eh_sakuli_screenshot.sh ~/local/lib/nagios/plugins/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and define a command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>vim ~/etc/nagios/conf.d/commands.cfg
+
+define command {
+    command_name                   eh_sakuli_screenshot
+    command_line                   $USER2$/eh_sakuli_screenshot.sh $SERVICESTATE$ $HOSTNAME$ $SERVICEDESC$ $LASTSERVICECHECK$
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The eventhandler script also deletes screenshots older than 30 days. If you want to overwrite this, define the number of days to keep screenshots as a custom macro (e.g. <code>$USER12$</code>) and use this variable as fifth parameter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>    command_line                   $USER2$/eh_sakuli_screenshot.sh $SERVICESTATE$ $HOSTNAME$ $SERVICEDESC$ $LASTSERVICECHECK$ $USER12$</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now connect the event handler command to every Sakuli service:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>define service {
+    service_description            sakuli_ubuntu
+    host_name                      sakuli_client
+    use                            generic-service,srv-pnp
+    ...
+    ...
+    event_handler                  eh_sakuli_screenshot
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Reload the monitoring core.</p>
+</div>
+<div class="paragraph">
+<div class="title">screenshot directory</div>
+<p>Create the screenshot directory:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ mkdir -p ${OMD_ROOT}/var/sakuli/screenshots</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Install the Apache configuration file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ cp __TEMP__/sakuli-vx.x.x-SNAPSHOT/setup/nagios/screenshot_lightbox/sakuli_screenshots.conf ~/etc/apache/conf.d/sakuli_screenshots.conf</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Thruk SSI</div>
+<p>SSI (Server Side Include) is a technique to include additional code delivered by the web server. You have to extend Thruks SSI files with some HTML/CSS/JS, to make the lightbox working. Upcoming versions of Thruk will support custom SSI files, too (<a href="https://github.com/sni/Thruk/commit/1183f28071855a76d43ec49bd60aaba316d7fcb0">commit</a>).</p>
+</div>
+<div class="paragraph">
+<p>Open <code><em>TEMP</em>/sakuli-vx.x.x-SNAPSHOT/setup/nagios/screenshot_lightbox/extinfo-header.ssi.add</code> and follow the instructions how to add the JavaScript/CSS/HTML to <code>extinfo-header.ssi</code>.</p>
+</div>
+<div class="paragraph">
+<p>From now, clicking on a screenshot opens the lightbox which shows the last event. Use the buttons on the bottom right corner or the arrow keys to browse through all previous events; press Esc to close the lightbox again:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/screenshot-history.png" alt="screenshot history"></span></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="forwarder-template"><a class="anchor" href="#forwarder-template"></a>1.4.1.10. Forwarder Templates</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/forwarder-templates.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/forwarder-templates.adoc" target="_blank">edit</a></p>
+</div>
+<div class="paragraph">
+<p>With release <code>1.1</code> Sakuli introduced the <a href="http://jtwig.org/">Jtwig</a> template engine, which is used for generating the output of the Sakuli test suite for certain forwarders. (Currently only the <a href="forwarder-checkmk.md">Check_MK forwarder</a> supports Jtwig templates.)</p>
+</div>
+<div class="paragraph">
+<p>Using templates for the forwarder output makes it possible to easily modify the output of Sakuli and adapt it without the need to release a new Sakuli version.</p>
+</div>
+<div class="paragraph">
+<p>Here we want to describe how Jtwig is working, how to use a customized template and what you have to pay attention to.</p>
+</div>
+<div class="sect5">
+<h6 id="_jtwig_template"><a class="anchor" href="#_jtwig_template"></a>JTwig template</h6>
+<div class="paragraph">
+<p><a href="http://jtwig.org/">Jtwig</a> is a template engine based on Java, which has a simple and understandable syntax und is easy to use. The following snippet shows an example of a Jtwig template used in Sakuli.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml">    {% for testStep in testCase.stepsAsSortedSet %}
+        , step &quot;{{ testStep.name }}&quot;$whitespace$
+        {% if (testStep.state.error) %}
+            EXCEPTION: {{ errorMessageCreator.exceptionMessage(testStep) }}
+        {% else %}
+            over runtime ({{ testStep.duration }}s/warn at {{ testStep.warningTime }}s)
+        {% endif %}
+    {% endfor %}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The input for this template is the <code>testCase</code> object, which has a set ot test steps. The template iterates over all the steps and prints certain step information based on the state of the test step.</p>
+</div>
+<div class="paragraph">
+<p>The whole <a href="http://jtwig.org/">Jtwig</a> feature set is supported and can be used within the Sakuli forwarder.
+For more detailed information about Jtwig templates, please refer to <a href="http://jtwig.org/">Jtwig</a>.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_customized_jtwig_functions"><a class="anchor" href="#_customized_jtwig_functions"></a>Customized Jtwig Functions</h6>
+<div class="paragraph">
+<p><a href="http://jtwig.org/">Jtwig</a> comes with a list of functions like <code>abs</code>, <code>concat</code> etc, which can be used within a template. In addition to the standard functions, Jtwig supports the implementation and injection of custom functions. Sakuli provides following custom functions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/src/core/src/main/java/org/sakuli/services/forwarder/configuration/AbbreviateFunction.java" target="_blank">abbreviate</a></code> - The function abbreviates a certain string to a specified length. The implementation is based on the StringUtils.abbreviate method from the Apache commons library.</p>
+</li>
+<li>
+<p><code><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/src/core/src/main/java/org/sakuli/services/forwarder/configuration/ExtractScreenshotFunction.java" target="_blank">extractScreenshot</a></code> - The function extracts the screenshot from a specified test data entity, which contains an exception.</p>
+</li>
+<li>
+<p><code><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/src/core/src/main/java/org/sakuli/services/forwarder/configuration/GetOutputDurationFunction.java" target="_blank">getOutputDuration</a></code> - The function returns the formatted duration for a specified test entity.</p>
+</li>
+<li>
+<p><code><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/src/core/src/main/java/org/sakuli/services/forwarder/configuration/GetOutputStateFunction.java" target="_blank">getOutputState</a></code> - The function returns the <code><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/src/core/src/main/java/org/sakuli/datamodel/state/SakuliState.java" target="_blank">OutputState</a></code> for a specified SakuliState.</p>
+</li>
+<li>
+<p><code><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/src/core/src/main/java/org/sakuli/services/forwarder/configuration/IsBlankFunction.java" target="_blank">isBlank</a></code> - The function checks whether the specified string parameter is blank.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Please refer to the Sakuli <a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/src/common/src/main/resources/org/sakuli/common/config/templates" target="_blank">default Jtwig templates</a>, to see the custom functions in action.</p>
+</div>
+<div class="paragraph">
+<div class="title">Handling of white spaces and new lines</div>
+<p>The forwarder implementation provides a special handling of white spaces and new lines within the templates. For this feature the <code>jtwig-spaceless-extension</code> has been used, which comes with a SpaceRemover interface. This has been implemented by the <code>LeadingWhitespaceRemover</code>. The <code>LeadingWhitespaceRemover</code> is configured in the twig template engine and removes all leading whitespaces for every line and all line endings within the template. It can be activated by adding the text snippet or the whole template within the following tags <code>{% spaceless %}</code> and <code>{% endspaceless %}</code>.
+The <code>LeadingWhitespaceRemover</code> has been introduced, to make the implementation and maintaining of the templates easier.</p>
+</div>
+<div class="paragraph">
+<p>Since the leading white spaces and the new lines are removed, some special placeholder have been introduced, which are replaced by the real characters at the end of the template generation:
+* <code>$whitespace$</code> - the placeholder will be replaced by a real white space.
+* <code>$newline$</code> - the placeholder will be replaced by a new line <code>&#39;\n&#39;</code>.</p>
+</div>
+<div class="paragraph">
+<div class="title">Using a customized templates</div>
+<p>Sakuli provides a default template set, which is placed within the templates directory under <code><em>SAKULI_HOME</em>/config/templates</code> within the Sakuli home folder (e.g. the default Check_MK templates can be found in a subdirectory <code>check_mk</code>).</p>
+</div>
+<div class="paragraph">
+<p>The property <code>sakuli.forwarder.template.folder</code> defines the path to the main.twig template for the respective forwarder. The default value is set to <code>${sakuli.home.folder}/config/templates</code>.</p>
+</div>
+<div class="paragraph">
+<p>Before customizing a default template, it is essential to copy the templates to a new location and configure that location as the template location in Sakuli, otherwise installing a new Sakuli release would overwrite the modified templates within the config directory.</p>
+</div>
+<div class="paragraph">
+<div class="title">Structure of the default main template</div>
+<p>Generally the forwarder is expecting to find a certain template file named <code>main.twig</code> within the configured template directory. The default <code>main.twig</code> template doesn&#8217;t contain the whole output, but includes further templates to make the single templates more readable. Since the templates are fully customizable, the user can decide how the templates are structured, whether to use nested templates or to define everything within a single file.</p>
+</div>
+<div class="paragraph">
+<p>The following snippet shows the default <code>main.twig</code> template provided by Sakuli for the Check_MK forwarder. This template is also showing the use of the spaceless extension and the special character for a new line.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml">    {% spaceless %}
+    {% import 'error_message_creator.twig' as errorMessageCreator %}
+        <span class="error">&lt;</span><span class="error">&lt;</span><span class="tag">&lt;local&gt;</span><span class="error">&gt;</span><span class="error">&gt;</span>$newline$
+        {% include 'performance_data.twig' %}
+        {% include 'short_summary.twig' %}
+        {% include 'detailed_summary.twig' %}
+        $newline$
+    {% endspaceless %}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<div class="title">Supported Forwarder</div>
+<ul>
+<li>
+<p>Check_MK: see <a href="#check_mk">Check_MK</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -8313,7 +8294,10 @@ The Sakui graph should now contain also CPU/Memory values.</p>
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/sql-database.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/sql-database.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<p>This page describes how the results of the Sakuli tests <strong>example_windows7/ubuntu/opensuse</strong> can be written into a <strong>MySQL database</strong> which can be read by other 3rd party systems.</p>
+<p>This page describes how the results of Sakuli can be stored into a <strong>MySQL database</strong> which can be read by other 3rd party systems.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/sql_schema.png" alt="sakuli-db-schema"></span></p>
 </div>
 <div class="sect5">
 <h6 id="sql-database-create-db"><a class="anchor" href="#sql-database-create-db"></a>Create Sakuli DB</h6>
@@ -8343,7 +8327,7 @@ The Sakui graph should now contain also CPU/Memory values.</p>
 <div class="sect5">
 <h6 id="sql-database-enable-forwarder"><a class="anchor" href="#sql-database-enable-forwarder"></a>Enable database forwarder</h6>
 <div class="paragraph">
-<p>On the Sakuli client you must set the global properties for the database receiver. For this, edit <code>sakuli.properties</code> in the folder containing the test suites (you can copy the lines from <code><em>SAKULI_HOME</em>/conf/sakuli-default.properties</code>):</p>
+<p>On the Sakuli client you must set the <a href="#property-loading-mechanism">properties</a> for the database receiver. For this, edit <code>sakuli.properties</code> in the folder containing the test suites (you can copy the lines from <code><em>SAKULI_HOME</em>/conf/sakuli-default.properties</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8383,6 +8367,15 @@ sakuli.forwarder.database.password=__DB_PW__</code></pre>
 </div>
 <div class="paragraph">
 <p>The database should now contain the results.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_integration_in_other_tools"><a class="anchor" href="#_integration_in_other_tools"></a>Integration in other tools</h6>
+<div class="paragraph">
+<p>You can find queries using the Sakuli DB in <code>/setup/nagios/CheckMySQLHealthSakuli.pm</code> in the extracted Sakuli sources folder.</p>
+</div>
+<div class="paragraph">
+<p>We are looking forward to reading your story of how you integrated the DB results in your toolchain.</p>
 </div>
 </div>
 <div class="sect5">
@@ -10496,7 +10489,7 @@ Website: <a href="http://www.consol.de">www.consol.de</a></p>
 <div id="footer">
 <div id="footer-text">
 Version v1.1.0-SNAPSHOT<br>
-Last updated 2017-06-01 19:40:54 CEST
+Last updated 2017-06-02 14:07:20 CEST
 </div>
 </div>
 <!--
