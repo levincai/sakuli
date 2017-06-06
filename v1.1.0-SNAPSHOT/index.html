@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.1.0-SNAPSHOT,</span>
-<span id="revdate">02.06.2017 @ 14:07:19 CEST</span>
+<span id="revdate">06.06.2017 @ 18:48:33 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -610,11 +610,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#supporters">Valued supporters</a></li>
 <li><a href="#download">Download</a></li>
 <li><a href="#_branches_build_status">Branches &amp; build status</a></li>
-<li><a href="#why-sakuli">Why Sakuli?</a>
-<ul class="sectlevel3">
-<li><a href="#why-sakuli.key-features">Key Features</a></li>
-</ul>
-</li>
+<li><a href="#why-sakuli">Why Sakuli?</a></li>
+<li><a href="#key-features">Key Features</a></li>
 <li><a href="#concept">Concept</a></li>
 </ul>
 </li>
@@ -835,7 +832,7 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 <li><a href="#_developer_documentation">1.5. Developer Documentation</a>
 <ul class="sectlevel3">
-<li><a href="#dev-installation">1.5.1. Installation Guide for Sakuli-Developers</a></li>
+<li><a href="#dev-installation">1.5.1. Installation guide for Sakuli-Developers</a></li>
 <li><a href="#dev-new-release">1.5.2. How to create a new release</a></li>
 <li><a href="#dev-maven-aspects">1.5.3. Maven aspects</a></li>
 <li><a href="#dev-ascii-doc">1.5.4. AsciiDoc documentation aspects</a></li>
@@ -845,11 +842,11 @@ table.CodeRay td.code>pre{padding:0}
 </ul>
 </li>
 <li><a href="#examples">2. Example projects on GitHub</a></li>
-<li><a href="#_publications">3. Publications</a></li>
-<li><a href="#_events">4. Events</a></li>
+<li><a href="#publications">3. Publications</a></li>
+<li><a href="#events">4. Events</a></li>
 <li><a href="#media">5. Media</a></li>
 <li><a href="#changelog">6. Change Log</a></li>
-<li><a href="#_support">7. Support</a>
+<li><a href="#support">7. Support</a>
 <ul class="sectlevel2">
 <li><a href="#_training">7.1. Training</a></li>
 <li><a href="#_contact">7.2. Contact</a></li>
@@ -954,7 +951,7 @@ table.CodeRay td.code>pre{padding:0}
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/download.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/download.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<div class="title">Installer</div>
+<div class="title">Installer (recommended)</div>
 <p><strong>Platform independent Java installer: <a href="https://labs.consol.de/sakuli/install/sakuli-v1.1.0-SNAPSHOT-installer.jar" target="_blank">sakuli-v1.1.0-SNAPSHOT-installer.jar</a></strong></p>
 </div>
 <div class="paragraph">
@@ -967,7 +964,10 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 <div class="paragraph">
 <div class="title">Raw ZIP</div>
-<p>Raw Sakuli installation directory, containing Sakuli, Sahi and examples: <a href="https://labs.consol.de/sakuli/install/sakuli-v1.1.0-SNAPSHOT.zip" target="_blank">sakuli-v1.1.0-SNAPSHOT.zip</a></p>
+<p>Raw Sakuli installation directory, containing Sakuli, Sahi and examples. Useful if you want to build your own installation routines. The installation scripts and the Sakuli binary can be found in <code>sakuli-v1.1.0-SNAPSHOT/bin/</code>:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://labs.consol.de/sakuli/install/sakuli-v1.1.0-SNAPSHOT.zip" target="_blank">sakuli-v1.1.0-SNAPSHOT.zip</a></p>
 </div>
 <div class="paragraph">
 <div class="title">PDF manual</div>
@@ -976,6 +976,9 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 <div class="sect2">
 <h3 id="_branches_build_status"><a class="anchor" href="#_branches_build_status"></a>Branches &amp; build status</h3>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/build_states.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/build_states.adoc" target="_blank">edit</a></p>
+</div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 33%;">
@@ -1045,12 +1048,16 @@ table.CodeRay td.code>pre{padding:0}
 <p><strong>Far from reality</strong>: There are tools to test web applications on protocol level - but to know whether a web application is working or not requires a test from the user&#8217;s perspective.</p>
 </li>
 <li>
-<p><strong>Unflexible</strong>: Hardly one of these tools brings the ability to integrate into other systems (like Nagios or Jenkins).</p>
+<p><strong>Inflexible</strong>: Hardly one of these tools brings the ability to integrate into other systems (like Nagios or Jenkins).</p>
 </li>
 </ul>
 </div>
-<div class="sect3">
-<h4 id="why-sakuli.key-features"><a class="anchor" href="#why-sakuli.key-features"></a>Key Features</h4>
+</div>
+<div class="sect2">
+<h3 id="key-features"><a class="anchor" href="#key-features"></a>Key Features</h3>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/key-features.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/key-features.adoc" target="_blank">edit</a></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -1089,7 +1096,6 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </li>
 </ul>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -1245,7 +1251,7 @@ table.CodeRay td.code>pre{padding:0}
 <h6 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h6>
 <div class="paragraph">
 <p>This page describes the steps to <strong>install and test</strong> Sakuli on <strong>Windows</strong>.
-If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.adoc">upgrade process</a> documentation.</p>
+If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process">Upgrade process</a> documentation.</p>
 </div>
 <div class="paragraph">
 <p>The default installation path of a particular Sakuli version is referenced as <code>%SAKULI_HOME%</code> (also called the "<em>version</em>" folder) which is inside of the folder "sakuli":</p>
@@ -1391,7 +1397,7 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 <p>Click on any browser icon: it should start and present you the start page of Sahi:</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="images/sahi_startpage.png" alt="sahi_start"></span></p>
+<p><span class="image"><img src="images/sahi_startpage.jpg" alt="sahi_start"></span></p>
 </div>
 <div class="paragraph">
 <p>At last, test the <strong>Sahi Controller</strong> by holding the <strong>ALT key</strong> and double-clicking on any white space on the page. If you are getting a new window showing the "Sahi Controller", you&#8217;re done. Close all browser windows and Sahi.</p>
@@ -1674,7 +1680,7 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 <h6 id="_installation_2"><a class="anchor" href="#_installation_2"></a>Installation</h6>
 <div class="paragraph">
 <p>This page describes the steps to <strong>install and test</strong> Sakuli on <strong>Ubuntu Linux 16.04 LTS</strong>.
-For other distributions (CentOS, OpenSuSE, &#8230;&#8203;) they be mostly identical. If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.adoc">upgrade process</a> documentation.</p>
+For other distributions (CentOS, OpenSuSE, &#8230;&#8203;) they be mostly identical. If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process">Upgrade process</a> documentation.</p>
 </div>
 <div class="paragraph">
 <p>The default installation path of a particular Sakuli version is referenced as <code>$SAKULI_HOME</code> (also called the "<em>version</em>" folder) which is inside of the folder "sakuli":</p>
@@ -1783,7 +1789,7 @@ For other distributions (CentOS, OpenSuSE, &#8230;&#8203;) they be mostly identi
 <p>set/update the environment variable <code>$SAKULI_HOME</code> which points to the new version.</p>
 </li>
 <li>
-<p>set/update <code>.bashc</code></p>
+<p>set/update <code>.bashrc</code></p>
 </li>
 <li>
 <p>install one example test suite per OS which help you to test and understand Sakuli.</p>
@@ -2720,17 +2726,8 @@ ENTRYPOINT [&quot;/dockerstartup/startup.sh&quot;]</code></pre>
 <div class="paragraph">
 <p>There is more than one way to integrate a custom testsuite in a container, discussed in the following.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Assume you want to run a suite called <code>suite_1</code> located on your host at the path <code>/home/myuser/my-sakuli-testsuites</code> - use one of the following ways:
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Assume you want to run a suite called <code>suite_1</code> located on your host at the path <code>/home/myuser/my-sakuli-testsuites</code> - use one of the following ways:</p>
 </div>
 <div class="sect6">
 <h7 id="docker-run-command"><a class="anchor" href="#docker-run-command"></a>docker run command</h7>
@@ -2756,9 +2753,17 @@ Assume you want to run a suite called <code>suite_1</code> located on your host 
 </div>
 </div>
 <div class="paragraph">
-<p>This command will
- * mount the test suites folder to <code>/my-sakuli-testsuites</code> within the container
- * execute the suite <code>suite_1</code></p>
+<p>This command will</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>mount the test suites folder to <code>/my-sakuli-testsuites</code> within the container</p>
+</li>
+<li>
+<p>execute the suite <code>suite_1</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <div class="title">2) Using docker-compose</div>
@@ -2766,7 +2771,7 @@ Assume you want to run a suite called <code>suite_1</code> located on your host 
 </div>
 </div>
 <div class="sect6">
-<h7 id="docker-environmen-variable"><a class="anchor" href="#docker-environmen-variable"></a>Environment variable SAKULI_TEST_SUITE`</h7>
+<h7 id="docker-environmen-variable"><a class="anchor" href="#docker-environmen-variable"></a>Environment variable <code>SAKULI_TEST_SUITE</code></h7>
 <div class="paragraph">
 <p>Mount a folder on your host into the container and overwrite the environment variable <code>SAKULI_TEST_SUITE</code>.</p>
 </div>
@@ -2788,7 +2793,7 @@ Assume you want to run a suite called <code>suite_1</code> located on your host 
 <div class="sect5">
 <h6 id="docker-java-based-test"><a class="anchor" href="#docker-java-based-test"></a>Run Java based test</h6>
 <div class="paragraph">
-<p>Also for Sakuli test writen in Java and executed through <a href="https://maven.apache.org">Maven</a>, we provide to preconfigured docker images: <a href="https://hub.docker.com/search/?isAutomated=0&amp;isOfficial=0&amp;page=1&amp;pullCount=0&amp;q=sakuli-java&amp;starCount=0">consol/sakuli-xxx-xxx-java</a>. More information about how to write a Java based Sakuli test, see <a href="#sakuli-java-dsl">Sakuli Java DSL</a>. Now take a look at the important lines in the <em>Dockerfile</em> which define how the container will start:</p>
+<p>Also for Sakuli test writen in Java and executed through <a href="https://maven.apache.org">Maven</a>, we provide to preconfigured docker images: <a href="https://hub.docker.com/search/?isAutomated=0&amp;isOfficial=0&amp;page=1&amp;pullCount=0&amp;q=sakuli-java&amp;starCount=0">consol/sakuli-xxx-xxx-java</a>. For more information about how to write a Java based Sakuli test see <a href="#sakuli-java-dsl">Sakuli Java DSL</a>. Now take a look at the important lines in the <em>Dockerfile</em> which define how the container will start:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5974,7 +5979,7 @@ __SUITE_FOLDER__/*/_logs/* __SUITE_FOLDER__/*/_logs/_screenshots/* {
 <p>Among other parameters, Sakuli uses the MAC address of a local network interface card as a encryption salt. Hence no virtual adapters can be choosen.</p>
 </div>
 <div class="paragraph">
-<p>You can decide whether Sakuli should automatically select an adapter…</p>
+<p>You can decide whether Sakuli should automatically select an adapter by setting the following <a href="#property-loading-mechanism">properties</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6033,7 +6038,7 @@ Encrypted secret with interface 'eth3': CKXIAZmO7rSoBVMGgJZPDQ==
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/testdefinition/advanced-topics/sakuli-screenshot-settings.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/testdefinition/advanced-topics/sakuli-screenshot-settings.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<p>To set the format and destination folder for screenshots taken by Sakuli:</p>
+<p>To set the format and destination folder for screenshots taken by Sakuli change the following <a href="#property-loading-mechanism">properties</a>:</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -8409,7 +8414,7 @@ sakuli.forwarder.database.password=__DB_PW__</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Basic: <a href="#dev-installation">Installation Guide for Sakuli-Developers</a></p>
+<p>Basic: <a href="#dev-installation">Installation guide for Sakuli-Developers</a></p>
 </li>
 <li>
 <p>Jenkins-CI <a href="http://labs-build.consol.de/view/Sakuli/">labs-build.consol.de/view/Sakuli</a></p>
@@ -8432,7 +8437,7 @@ sakuli.forwarder.database.password=__DB_PW__</code></pre>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="dev-installation"><a class="anchor" href="#dev-installation"></a>1.5.1. Installation Guide for Sakuli-Developers</h4>
+<h4 id="dev-installation"><a class="anchor" href="#dev-installation"></a>1.5.1. Installation guide for Sakuli-Developers</h4>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/development/how-to-release.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/development/how-to-release.adoc" target="_blank">edit</a></p>
 </div>
@@ -8463,7 +8468,7 @@ sakuli.forwarder.database.password=__DB_PW__</code></pre>
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-<strong>For Ubuntu users!!!</strong> - check the maven version over ` apt show maven` )
+<strong>For Ubuntu users!!!</strong> - check the maven version with <code>apt show maven</code>
 </td>
 </tr>
 </table>
@@ -9062,14 +9067,14 @@ mvn install:install-file -DgroupId=net.sf.sahi -DartifactId=sahi-install -Dversi
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/development/ascii-doc-aspects.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/development/ascii-doc-aspects.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<div class="title">Generate AciiDoc Dokumentation</div>
+<div class="title">Generate AsciiDoc documentation</div>
 <p>Execute:</p>
 </div>
 <div class="paragraph">
 <p><code>mvn install -f src/docs-manual/pom.xml -P generate-manual</code></p>
 </div>
 <div class="paragraph">
-<p>The <a href="http://asciidoctor.org/docs/asciidoctor-maven-plugin">Asciidoctor-maven-plugin</a> now generates an HTML page and the PDF:</p>
+<p>The <a href="http://asciidoctor.org/docs/asciidoctor-maven-plugin">Asciidoctor-maven-plugin</a> now generates a HTML page and the PDF:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9078,7 +9083,7 @@ mvn install:install-file -DgroupId=net.sf.sahi -DartifactId=sahi-install -Dversi
 </div>
 </div>
 <div class="paragraph">
-<p>Then you can open the file <code>src/docs-manual/target/generated-docs/index.html</code> in your favorite browser.</p>
+<p>Then you can open the file <code>src/docs-manual/target/generated-docs/index.html</code> in your favourite browser.</p>
 </div>
 <div class="paragraph">
 <div class="title">Upload to GitHub Pages</div>
@@ -9091,25 +9096,35 @@ mvn install:install-file -DgroupId=net.sf.sahi -DartifactId=sahi-install -Dversi
 <p><strong>OR</strong> use the Jenkins CI job <a href="http://labs-build.consol.de/view/Sakuli/job/Sakuli_CI_update_documentation/">Sakuli_CI_update_documentation</a></p>
 </div>
 <div class="paragraph">
-<div class="title">Live Rendering in Browser</div>
-<p>During the writing of the documentation it is useful to have a "live watch" possibility. There you can do the following</p>
+<div class="title">Live preview in browser</div>
+<p>While writing the documentation it is useful to have a live preview. For this you can do the following:</p>
+</div>
+<div class="paragraph">
+<p>Start the <code>auto-refresh</code> goal of the <a href="http://asciidoctor.org/docs/asciidoctor-maven-plugin">Asciidoctor-maven-plugin</a>, which re-creates the html pages as soon as there are changes on the file system:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>live-server src/docs-manual/target/generated-docs &amp; <i class="conum" data-value="1"></i><b>(1)</b>
-
-mvn clean install -f src/docs-manual/pom.xml -P generate-manual-watch <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+<pre class="CodeRay highlight"><code>mvn clean install -f src/docs-manual/pom.xml -P generate-manual-watch</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then use one of the following methods to serve the documentation locally with an ad-hoc webserver:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>python -m SimpleHTTPServer <i class="conum" data-value="1"></i><b>(1)</b>
+live-server src/docs-manual/target/generated-docs <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Opens a webserver under <a href="http://127.0.0.1:8080" class="bare">http://127.0.0.1:8080</a> with automatic refresh when any file get updated, see <a href="https://github.com/tapio/live-server#installation">tapio/live-server</a>.</td>
+<td>Open a small python adhoc web server on <a href="http://127.0.0.1:8000" class="bare">http://127.0.0.1:8000</a> (manual refresh)</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Use the <code>auto-refresh</code> goal of the <a href="http://asciidoctor.org/docs/asciidoctor-maven-plugin">Asciidoctor-maven-plugin</a></td>
+<td>Install and open the NPM based <a href="https://github.com/tapio/live-server#installation">"live-server"</a> on <a href="http://127.0.0.1:8080" class="bare">http://127.0.0.1:8080</a>; will refresh the broewser window on every page recreation.</td>
 </tr>
 </table>
 </div>
@@ -9283,7 +9298,7 @@ sudo apt-get install libtesseract-dev
 </div>
 </div>
 <div class="sect1">
-<h2 id="_publications"><a class="anchor" href="#_publications"></a>3. Publications</h2>
+<h2 id="publications"><a class="anchor" href="#publications"></a>3. Publications</h2>
 <div class="sectionbody">
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/publications.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/publications.adoc" target="_blank">edit</a></p>
@@ -9325,7 +9340,7 @@ Testautomatisierung darf nicht bei Unit-Tests Halt machen </a></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_events"><a class="anchor" href="#_events"></a>4. Events</h2>
+<h2 id="events"><a class="anchor" href="#events"></a>4. Events</h2>
 <div class="sectionbody">
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/events.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/events.adoc" target="_blank">edit</a></p>
@@ -10425,7 +10440,7 @@ will also be transferred. This will be fixed in the next version</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_support"><a class="anchor" href="#_support"></a>7. Support</h2>
+<h2 id="support"><a class="anchor" href="#support"></a>7. Support</h2>
 <div class="sectionbody">
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/support.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/support.adoc" target="_blank">edit</a></p>
@@ -10489,7 +10504,7 @@ Website: <a href="http://www.consol.de">www.consol.de</a></p>
 <div id="footer">
 <div id="footer-text">
 Version v1.1.0-SNAPSHOT<br>
-Last updated 2017-06-02 14:07:20 CEST
+Last updated 2017-06-06 18:48:34 CEST
 </div>
 </div>
 <!--
