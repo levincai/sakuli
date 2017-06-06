@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.0.2,</span>
-<span id="revdate">06.06.2017 @ 16:03:17 CEST</span>
+<span id="revdate">06.06.2017 @ 16:36:39 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -610,11 +610,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#supporters">Valued supporters</a></li>
 <li><a href="#download">Download</a></li>
 <li><a href="#_branches_build_status">Branches &amp; build status</a></li>
-<li><a href="#why-sakuli">Why Sakuli?</a>
-<ul class="sectlevel3">
+<li><a href="#why-sakuli">Why Sakuli?</a></li>
 <li><a href="#why-sakuli.key-features">Key Features</a></li>
-</ul>
-</li>
 <li><a href="#concept">Concept</a></li>
 </ul>
 </li>
@@ -780,7 +777,6 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_cpu_memory_metrics">CPU/Memory metrics</a></li>
 </ul>
 </li>
-<li><a href="#_screenshot_history">1.4.1.7. Screenshot history</a></li>
 </ul>
 </li>
 <li><a href="#continuous_integration">1.4.2. Continuous Integration</a>
@@ -800,7 +796,7 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 <li><a href="#_developer_documentation">1.5. Developer Documentation</a>
 <ul class="sectlevel3">
-<li><a href="#dev-installation">1.5.1. Installation Guide for Sakuli-Developers</a></li>
+<li><a href="#dev-installation">1.5.1. Installation guide for Sakuli-Developers</a></li>
 <li><a href="#dev-new-release">1.5.2. How to create a new release</a></li>
 <li><a href="#dev-maven-aspects">1.5.3. Maven aspects</a></li>
 <li><a href="#dev-ascii-doc">1.5.4. AsciiDoc documentation aspects</a></li>
@@ -1017,8 +1013,9 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 </ul>
 </div>
-<div class="sect3">
-<h4 id="why-sakuli.key-features"><a class="anchor" href="#why-sakuli.key-features"></a>Key Features</h4>
+</div>
+<div class="sect2">
+<h3 id="why-sakuli.key-features"><a class="anchor" href="#why-sakuli.key-features"></a>Key Features</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1057,7 +1054,6 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </li>
 </ul>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -1207,7 +1203,7 @@ table.CodeRay td.code>pre{padding:0}
 <h6 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h6>
 <div class="paragraph">
 <p>This page describes the steps to <strong>install and test</strong> Sakuli on <strong>Windows</strong>.
-If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.adoc">upgrade process</a> documentation.</p>
+If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process">Upgrade process</a> documentation.</p>
 </div>
 <div class="paragraph">
 <p>The default installation path of a particular Sakuli version is referenced as <code>%SAKULI_HOME%</code> (also called the "<em>version</em>" folder) which is inside of the folder "sakuli":</p>
@@ -1353,7 +1349,7 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 <p>Click on any browser icon: it should start and present you the start page of Sahi:</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="images/sahi_startpage.png" alt="sahi_start"></span></p>
+<p><span class="image"><img src="images/sahi_startpage.jpg" alt="sahi_start"></span></p>
 </div>
 <div class="paragraph">
 <p>At last, test the <strong>Sahi Controller</strong> by holding the <strong>ALT key</strong> and double-clicking on any white space on the page. If you are getting a new window showing the "Sahi Controller", you&#8217;re done. Close all browser windows and Sahi.</p>
@@ -1633,7 +1629,7 @@ If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.
 <h6 id="_installation_2"><a class="anchor" href="#_installation_2"></a>Installation</h6>
 <div class="paragraph">
 <p>This page describes the steps to <strong>install and test</strong> Sakuli on <strong>Ubuntu Linux 16.04 LTS</strong>.
-For other distributions (CentOS, OpenSuSE, &#8230;&#8203;) they be mostly identical. If you want to <strong>update</strong> Sakuli, see the <a href="upgrade-process.adoc">upgrade process</a> documentation.</p>
+For other distributions (CentOS, OpenSuSE, &#8230;&#8203;) they be mostly identical. If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process">Upgrade process</a> documentation.</p>
 </div>
 <div class="paragraph">
 <p>The default installation path of a particular Sakuli version is referenced as <code>$SAKULI_HOME</code> (also called the "<em>version</em>" folder) which is inside of the folder "sakuli":</p>
@@ -1742,7 +1738,7 @@ For other distributions (CentOS, OpenSuSE, &#8230;&#8203;) they be mostly identi
 <p>set/update the environment variable <code>$SAKULI_HOME</code> which points to the new version.</p>
 </li>
 <li>
-<p>set/update <code>.bashc</code></p>
+<p>set/update <code>.bashrc</code></p>
 </li>
 <li>
 <p>install one example test suite per OS which help you to test and understand Sakuli.</p>
@@ -2618,17 +2614,8 @@ CMD [&quot;run $SAKULI_TEST_SUITE&quot;]</code></pre>
 <div class="paragraph">
 <p>There is more than one way to integrate a custom testsuite in a container, discussed in the following.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Assume you want to run a suite called <code>suite_1</code> located on your host at the path <code>/home/myuser/my-sakuli-testsuites</code> - use one of the following ways:
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Assume you want to run a suite called <code>suite_1</code> located on your host at the path <code>/home/myuser/my-sakuli-testsuites</code> - use one of the following ways:</p>
 </div>
 <div class="sect6">
 <h7 id="docker-run-command"><a class="anchor" href="#docker-run-command"></a>docker run command</h7>
@@ -2654,9 +2641,17 @@ Assume you want to run a suite called <code>suite_1</code> located on your host 
 </div>
 </div>
 <div class="paragraph">
-<p>This command will
- * mount the test suites folder to <code>/my-sakuli-testsuites</code> within the container
- * execute the suite <code>suite_1</code></p>
+<p>This command will</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>mount the test suites folder to <code>/my-sakuli-testsuites</code> within the container</p>
+</li>
+<li>
+<p>execute the suite <code>suite_1</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <div class="title">2) Using docker-compose</div>
@@ -2664,7 +2659,7 @@ Assume you want to run a suite called <code>suite_1</code> located on your host 
 </div>
 </div>
 <div class="sect6">
-<h7 id="docker-environmen-variable"><a class="anchor" href="#docker-environmen-variable"></a>Environment variable SAKULI_TEST_SUITE`</h7>
+<h7 id="docker-environmen-variable"><a class="anchor" href="#docker-environmen-variable"></a>Environment variable <code>SAKULI_TEST_SUITE</code></h7>
 <div class="paragraph">
 <p>Mount a folder on your host into the container and override the environment variable <code>SAKULI_TEST_SUITE</code>.</p>
 </div>
@@ -2699,7 +2694,7 @@ Assume you want to run a suite called <code>suite_1</code> located on your host 
 </ul>
 </div>
 <div class="paragraph">
-<p>More information about how to write a Java based Sakuli test, see <a href="#sakuli_java_dsl">[sakuli_java_dsl]</a>. Now take a look at the important lines in the <em>Dockerfile</em> which define how the container will start:</p>
+<p>For more information about how to write a Java based Sakuli test see <a href="#sakuli_java_dsl">[sakuli_java_dsl]</a>. Now take a look at the important lines in the <em>Dockerfile</em> which define how the container will start:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5568,7 +5563,7 @@ __SUITE_FOLDER__/*/_logs/* __SUITE_FOLDER__/*/_logs/_screenshots/* {
 <p>Among other parameters, Sakuli uses the MAC address of a local network interface card as a encryption salt. Hence no virtual adapters can be choosen.</p>
 </div>
 <div class="paragraph">
-<p>You can decide whether Sakuli should automatically select an adapter…</p>
+<p>You can decide whether Sakuli should automatically select an adapter by setting the following <a href="#property-loading-mechanism">properties</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5627,7 +5622,7 @@ Encrypted secret with interface 'eth3': CKXIAZmO7rSoBVMGgJZPDQ==
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-screenshot-settings.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/testdefinition/advanced-topics/sakuli-screenshot-settings.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<p>To set the format and destination folder for screenshots taken by Sakuli:</p>
+<p>To set the format and destination folder for screenshots taken by Sakuli change the following <a href="#property-loading-mechanism">properties</a>:</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -6081,7 +6076,7 @@ This is a browser-specific solution and can be different in newer Browser versio
 </div>
 <div class="paragraph">
 <div class="title">Internet Explorer</div>
-<p>See Sahi description <a href="http://sahipro.com/docs/using-sahi/sahi-configuration-basic.html#Configure%20SSL">Configer SSL in Sahi</a>.</p>
+<p>See Sahi description <a href="http://sahipro.com/docs/using-sahi/sahi-configuration-basic.html#Configure%20SSL">Configure SSL in Sahi</a>.</p>
 </div>
 </div>
 </div>
@@ -7413,15 +7408,6 @@ The Sakui graph should now contain also CPU/Memory values.</p>
 </div>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_screenshot_history"><a class="anchor" href="#_screenshot_history"></a>1.4.1.7. Screenshot history</h5>
-<div id="git-edit-section" class="paragraph">
-<p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/integration/monitoring/screenshot_history.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/integration/monitoring/screenshot_history.adoc" target="_blank">edit</a></p>
-</div>
-<div class="paragraph">
-<p>tbd</p>
-</div>
-</div>
 </div>
 <div class="sect3">
 <h4 id="continuous_integration"><a class="anchor" href="#continuous_integration"></a>1.4.2. Continuous Integration</h4>
@@ -7556,7 +7542,7 @@ sakuli.forwarder.database.password=__DB_PW__</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Basic: <a href="#dev-installation">Installation Guide for Sakuli-Developers</a></p>
+<p>Basic: <a href="#dev-installation">Installation guide for Sakuli-Developers</a></p>
 </li>
 <li>
 <p>Jenkins-CI <a href="http://labs-build.consol.de/view/Sakuli/">labs-build.consol.de/view/Sakuli</a></p>
@@ -7579,7 +7565,7 @@ sakuli.forwarder.database.password=__DB_PW__</code></pre>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="dev-installation"><a class="anchor" href="#dev-installation"></a>1.5.1. Installation Guide for Sakuli-Developers</h4>
+<h4 id="dev-installation"><a class="anchor" href="#dev-installation"></a>1.5.1. Installation guide for Sakuli-Developers</h4>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/development/how-to-release.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/development/how-to-release.adoc" target="_blank">edit</a></p>
 </div>
@@ -7610,7 +7596,7 @@ sakuli.forwarder.database.password=__DB_PW__</code></pre>
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-<strong>For Ubuntu users!!!</strong> - check the maven version over ` apt show maven` )
+<strong>For Ubuntu users!!!</strong> - check the maven version with <code>apt show maven</code>
 </td>
 </tr>
 </table>
@@ -9537,7 +9523,7 @@ Website: <a href="http://www.consol.de">www.consol.de</a></p>
 <div id="footer">
 <div id="footer-text">
 Version v1.0.2<br>
-Last updated 2017-06-06 16:03:17 CEST
+Last updated 2017-06-06 16:36:40 CEST
 </div>
 </div>
 <!--
