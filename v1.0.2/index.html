@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.0.2,</span>
-<span id="revdate">06.06.2017 @ 10:55:08 CEST</span>
+<span id="revdate">06.06.2017 @ 11:43:00 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -8209,14 +8209,14 @@ mvn install:install-file -DgroupId=net.sf.sahi -DartifactId=sahi-install -Dversi
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/development/ascii-doc-aspects.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/development/ascii-doc-aspects.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<div class="title">Generate AciiDoc Dokumentation</div>
+<div class="title">Generate AsciiDoc documentation</div>
 <p>Execute:</p>
 </div>
 <div class="paragraph">
 <p><code>mvn install -f src/docs-manual/pom.xml -P generate-manual</code></p>
 </div>
 <div class="paragraph">
-<p>The <a href="http://asciidoctor.org/docs/asciidoctor-maven-plugin">Asciidoctor-maven-plugin</a> now generates an HTML page and the PDF:</p>
+<p>The <a href="http://asciidoctor.org/docs/asciidoctor-maven-plugin">Asciidoctor-maven-plugin</a> now generates a HTML page and the PDF:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8225,7 +8225,7 @@ mvn install:install-file -DgroupId=net.sf.sahi -DartifactId=sahi-install -Dversi
 </div>
 </div>
 <div class="paragraph">
-<p>Then you can open the file <code>src/docs-manual/target/generated-docs/index.html</code> in your favorite browser.</p>
+<p>Then you can open the file <code>src/docs-manual/target/generated-docs/index.html</code> in your favourite browser.</p>
 </div>
 <div class="paragraph">
 <div class="title">Upload to GitHub Pages</div>
@@ -8238,25 +8238,35 @@ mvn install:install-file -DgroupId=net.sf.sahi -DartifactId=sahi-install -Dversi
 <p><strong>OR</strong> use the Jenkins CI job <a href="http://labs-build.consol.de/view/Sakuli/job/Sakuli_CI_update_documentation/">Sakuli_CI_update_documentation</a></p>
 </div>
 <div class="paragraph">
-<div class="title">Live Rendering in Browser</div>
-<p>During the writing of the documentation it is useful to have a "live watch" possibility. There you can do the following</p>
+<div class="title">Live preview in browser</div>
+<p>While writing the documentation it is useful to have a live preview. For this you can do the following:</p>
+</div>
+<div class="paragraph">
+<p>Start the <code>auto-refresh</code> goal of the <a href="http://asciidoctor.org/docs/asciidoctor-maven-plugin">Asciidoctor-maven-plugin</a>, which re-creates the html pages as soon as there are changes on the file system:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>live-server src/docs-manual/target/generated-docs &amp; <i class="conum" data-value="1"></i><b>(1)</b>
-
-mvn clean install -f src/docs-manual/pom.xml -P generate-manual-watch <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+<pre class="CodeRay highlight"><code>mvn clean install -f src/docs-manual/pom.xml -P generate-manual-watch</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then use one of the following methods to serve the documentation locally with an ad-hoc webserver:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>python -m SimpleHTTPServer <i class="conum" data-value="1"></i><b>(1)</b>
+live-server src/docs-manual/target/generated-docs <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Opens a webserver under <a href="http://127.0.0.1:8080" class="bare">http://127.0.0.1:8080</a> with automatic refresh when any file get updated, see <a href="https://github.com/tapio/live-server#installation">tapio/live-server</a>.</td>
+<td>Open a small python adhoc web server on <a href="http://127.0.0.1:8000" class="bare">http://127.0.0.1:8000</a> (manual refresh)</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Use the <code>auto-refresh</code> goal of the <a href="http://asciidoctor.org/docs/asciidoctor-maven-plugin">Asciidoctor-maven-plugin</a></td>
+<td>Install and open the NPM based <a href="https://github.com/tapio/live-server#installation">"live-server"</a> on <a href="http://127.0.0.1:8080" class="bare">http://127.0.0.1:8080</a>; will refresh the broewser window on every page recreation.</td>
 </tr>
 </table>
 </div>
@@ -9527,7 +9537,7 @@ Website: <a href="http://www.consol.de">www.consol.de</a></p>
 <div id="footer">
 <div id="footer-text">
 Version v1.0.2<br>
-Last updated 2017-06-06 10:55:11 CEST
+Last updated 2017-06-06 11:43:01 CEST
 </div>
 </div>
 <!--
