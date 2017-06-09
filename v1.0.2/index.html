@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.0.2,</span>
-<span id="revdate">09.06.2017 @ 23:20:28 CEST</span>
+<span id="revdate">09.06.2017 @ 23:24:33 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -742,8 +742,6 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#omd-preparation">1.4.1.1. OMD preparation</a>
 <ul class="sectlevel5">
 <li><a href="#_requirements">Requirements</a></li>
-<li><a href="#_download_sakuli_sources">Download Sakuli sources</a></li>
-<li><a href="#_configuration_2">Configuration</a></li>
 </ul>
 </li>
 <li><a href="#omd-gearman">1.4.1.2. Gearman forwarder</a>
@@ -6290,7 +6288,7 @@ java%sakuli.jar</code></pre>
 <p><a href="https://github.com/ConSol/sakuli/blob/hotfix/documentation_update/docs/manual/integration/monitoring/omd-preparation.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/hotfix/documentation_update/docs/manual/integration/monitoring/omd-preparation.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<p>This chapter describes all necessary steps to prepare a OMD site with a <strong>Nagios</strong> compatible monitoring system to receive Sakuli test results with one of the forwarders <a href="#omd-gearman">gearman</a>, <a href="#omd-sql-database">database</a> or <a href="#icinga2-integration">icinga2-api</a>. OMD with Thruk as web frontend is highly recommended, but any other Nagios based system will do also (the configuration steps may vary then). The steps described here refer to Nagios as monitoring core.</p>
+<p>This chapter describes all necessary steps to prepare a OMD site with a <strong>Nagios</strong> compatible monitoring system to receive Sakuli test results with one of the forwarders <a href="#omd-gearman">gearman</a>, <a href="#omd-sql-database">database</a> or <a href="#icinga2-integration">icinga2-api</a>. For some parts of this documentation, OMD with Thruk as web frontend will be presupposed, but any other Nagios based system will do also (the configuration steps may vary then).</p>
 </div>
 <div class="sect5">
 <h6 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h6>
@@ -6300,43 +6298,9 @@ java%sakuli.jar</code></pre>
 <p><strong><a href="https://labs.consol.de/OMD/">OMD</a></strong> installed on a Linux operating system</p>
 </li>
 <li>
-<p>a running <strong>OMD site</strong> (here: <strong>sakuli</strong>)</p>
+<p>a running <strong>OMD site</strong></p>
 </li>
 </ul>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_download_sakuli_sources"><a class="anchor" href="#_download_sakuli_sources"></a>Download Sakuli sources</h6>
-<div class="paragraph">
-<p>General note: you should download the <strong>same package version of Sakuli</strong> as you did on the clients. <strong>Do not mix versions</strong>.</p>
-</div>
-<div class="paragraph">
-<p>Download <strong>Sakuli</strong> from <a href="http://labs.consol.de/sakuli/install">http://labs.consol.de/sakuli/install</a> into a temporary folder <code><em>TEMP</em></code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>cd __TEMP__
-wget http://labs.consol.de/sakuli/install/sakuli-vx.x.x-SNAPSHOT.zip</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Decompress it:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>unzip sakuli-vx.x.x-SNAPSHOT.zip</code></pre>
-</div>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_configuration_2"><a class="anchor" href="#_configuration_2"></a>Configuration</h6>
-<div class="paragraph">
-<p>All following steps should be done as the <strong>OMD site user</strong> (here: "sakuli"):</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>su - sakuli</code></pre>
-</div>
 </div>
 <div class="sect6">
 <h7 id="_html_escaping"><a class="anchor" href="#_html_escaping"></a>HTML escaping</h7>
@@ -9800,7 +9764,7 @@ Website: <a href="http://www.consol.de">www.consol.de</a></p>
 <div id="footer">
 <div id="footer-text">
 Version v1.0.2<br>
-Last updated 2017-06-09 23:20:29 CEST
+Last updated 2017-06-09 23:24:36 CEST
 </div>
 </div>
 <!--
