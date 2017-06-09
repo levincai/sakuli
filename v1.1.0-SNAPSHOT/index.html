@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.1.0-SNAPSHOT,</span>
-<span id="revdate">06.06.2017 @ 19:07:44 CEST</span>
+<span id="revdate">09.06.2017 @ 22:38:12 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -759,22 +759,20 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#omd-preparation">1.4.1.1. OMD preparation</a>
 <ul class="sectlevel5">
 <li><a href="#_requirements">Requirements</a></li>
-<li><a href="#_download_sakuli_sources">Download Sakuli sources</a></li>
-<li><a href="#_configuration_2">Configuration</a></li>
 </ul>
 </li>
 <li><a href="#omd-gearman">1.4.1.2. Gearman forwarder</a>
 <ul class="sectlevel5">
 <li><a href="#_omd_configuration">OMD Configuration</a></li>
-<li><a href="#_sakuli_client_configuration">Sakuli Client Configuration</a></li>
+<li><a href="#sakuli_client_config">Sakuli Client Configuration</a></li>
 <li><a href="#_using_aes_encryption_optional">Using AES encryption (optional)</a></li>
-<li><a href="#_adapt_perfdata_spooling_optional">Adapt perfdata spooling (optional)</a></li>
+<li><a href="#gearman_proxy">Gearman proxy (optional)</a></li>
 </ul>
 </li>
 <li><a href="#omd-sql-database">1.4.1.3. Database forwarder</a>
 <ul class="sectlevel5">
 <li><a href="#_omd_configuration_2">OMD Configuration</a></li>
-<li><a href="#_sakuli_client_configuration_2">Sakuli Client Configuration</a></li>
+<li><a href="#_sakuli_client_configuration">Sakuli Client Configuration</a></li>
 <li><a href="#_database_cleanup_optional">Database cleanup (optional)</a></li>
 <li><a href="#_troubleshooting_4">Troubleshooting</a></li>
 </ul>
@@ -782,17 +780,31 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#icinga2-integration">1.4.1.4. Icinga2 forwarder</a>
 <ul class="sectlevel5">
 <li><a href="#_icinga2_configuration">Icinga2 Configuration</a></li>
-<li><a href="#_sakuli_client_configuration_3">Sakuli Client Configuration</a></li>
+<li><a href="#_sakuli_client_configuration_2">Sakuli Client Configuration</a></li>
 <li><a href="#_graph_settings">Graph settings</a></li>
 </ul>
 </li>
 <li><a href="#check_mk">1.4.1.5. Check_MK</a>
 <ul class="sectlevel5">
-<li><a href="#_sakuli_client_configuration_4">Sakuli Client Configuration</a></li>
+<li><a href="#_sakuli_client_configuration_3">Sakuli Client Configuration</a></li>
 </ul>
 </li>
-<li><a href="#_grafana_graphs">1.4.1.6. Grafana graphs</a></li>
-<li><a href="#_pnp4nagios_graphs">1.4.1.7. PNP4Nagios graphs</a>
+<li><a href="#screenshot_history">1.4.1.6. Screenshot history</a>
+<ul class="sectlevel5">
+<li><a href="#_feature_description">Feature description</a></li>
+<li><a href="#_activating_the_feature">Activating the feature</a></li>
+<li><a href="#screenshot_history_eh">Event handler</a></li>
+<li><a href="#_thruk_action_menu">Thruk action_menu</a></li>
+<li><a href="#_grafana_integration">Grafana integration</a></li>
+</ul>
+</li>
+<li><a href="#grafana_graphs">1.4.1.7. Grafana graphs</a>
+<ul class="sectlevel5">
+<li><a href="#_feature_activation">Feature activation</a></li>
+<li><a href="#screenshot_annotations">Screenshot annotations</a></li>
+</ul>
+</li>
+<li><a href="#_pnp4nagios_graphs">1.4.1.8. PNP4Nagios graphs</a>
 <ul class="sectlevel5">
 <li><a href="#_rrd_storage_type">RRD Storage Type</a></li>
 <li><a href="#pnp4nagios-rrd-heartbeat">RRD heartbeat</a></li>
@@ -800,14 +812,14 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_cpu_memory_metrics">CPU/Memory metrics</a></li>
 </ul>
 </li>
-<li><a href="#omd-containerized">1.4.1.8. OMD Containerized</a>
+<li><a href="#omd-containerized">1.4.1.9. OMD Containerized</a>
 <ul class="sectlevel5">
 <li><a href="#_usage_2">Usage</a></li>
 <li><a href="#_ansible_drop_ins">Ansible drop-ins</a></li>
 </ul>
 </li>
-<li><a href="#_omd_screenshot_history">1.4.1.9. OMD Screenshot History</a></li>
-<li><a href="#forwarder-template">1.4.1.10. Forwarder Templates</a>
+<li><a href="#_omd_screenshot_history">1.4.1.10. OMD Screenshot History</a></li>
+<li><a href="#forwarder-template">1.4.1.11. Forwarder Templates</a>
 <ul class="sectlevel5">
 <li><a href="#_jtwig_template">JTwig template</a></li>
 <li><a href="#_customized_jtwig_functions">Customized Jtwig Functions</a></li>
@@ -1516,7 +1528,7 @@ If you want to <strong>update</strong> Sakuli, see the <a href="#upgrade_process
 <div class="ulist">
 <ul>
 <li>
-<p>Read our <a href="first-steps.md">first-steps tutorial</a> and learn to handle Sakuli</p>
+<p>Read our <a href="https://github.com/ConSol/sakuli-examples/blob/master/tutorials/first-steps/first-steps.md">first-steps tutorial</a> and learn to handle Sakuli</p>
 </li>
 <li>
 <p>Integrate Sakuli results in monitoring systems:</p>
@@ -1957,7 +1969,7 @@ On Linux deskops the ALT key is often predefined to drag windows. In this case, 
 <div class="ulist">
 <ul>
 <li>
-<p>Read our <a href="first-steps.md">first-steps tutorial</a> and learn to handle Sakuli</p>
+<p>Read our <a href="https://github.com/ConSol/sakuli-examples/blob/master/tutorials/first-steps/first-steps.md">first-steps tutorial</a> and learn to handle Sakuli</p>
 </li>
 <li>
 <p>Integrate Sakuli results in monitoring systems:</p>
@@ -6703,7 +6715,7 @@ java%sakuli.jar</code></pre>
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/omd-preparation.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/omd-preparation.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<p>This chapter describes all necessary steps to prepare a OMD site with a <strong>Nagios</strong> compatible monitoring system to receive Sakuli test results with one of the forwarders <a href="#omd-gearman">gearman</a>, <a href="#omd-sql-database">database</a> or <a href="#icinga2-integration">icinga2-api</a>. OMD with Thruk as web frontend is highly recommended, but any other Nagios based system will do also (the configuration steps may vary then). The steps described here refer to Nagios as monitoring core.</p>
+<p>This chapter describes all necessary steps to prepare a OMD site with a <strong>Nagios</strong> compatible monitoring system to receive Sakuli test results with one of the forwarders <a href="#omd-gearman">gearman</a>, <a href="#omd-sql-database">database</a>, <a href="#check_mk">Check_MK</a> or <a href="#icinga2-integration">icinga2-api</a>. For some parts of this documentation, OMD with Thruk as web frontend will be presupposed, but any other Nagios based system will do also (the configuration steps may vary then).</p>
 </div>
 <div class="sect5">
 <h6 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h6>
@@ -6713,43 +6725,9 @@ java%sakuli.jar</code></pre>
 <p><strong><a href="https://labs.consol.de/OMD/">OMD</a></strong> installed on a Linux operating system</p>
 </li>
 <li>
-<p>a running <strong>OMD site</strong> (here: <strong>sakuli</strong>)</p>
+<p>a running <strong>OMD site</strong></p>
 </li>
 </ul>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_download_sakuli_sources"><a class="anchor" href="#_download_sakuli_sources"></a>Download Sakuli sources</h6>
-<div class="paragraph">
-<p>General note: you should download the <strong>same package version of Sakuli</strong> as you did on the clients. <strong>Do not mix versions</strong>.</p>
-</div>
-<div class="paragraph">
-<p>Download <strong>Sakuli</strong> from <a href="http://labs.consol.de/sakuli/install">http://labs.consol.de/sakuli/install</a> into a temporary folder <code><em>TEMP</em></code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>cd __TEMP__
-wget http://labs.consol.de/sakuli/install/sakuli-vx.x.x-SNAPSHOT.zip</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Decompress it:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>unzip sakuli-vx.x.x-SNAPSHOT.zip</code></pre>
-</div>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_configuration_2"><a class="anchor" href="#_configuration_2"></a>Configuration</h6>
-<div class="paragraph">
-<p>All following steps should be done as the <strong>OMD site user</strong> (here: "sakuli"):</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>su - sakuli</code></pre>
-</div>
 </div>
 <div class="sect6">
 <h7 id="_html_escaping"><a class="anchor" href="#_html_escaping"></a>HTML escaping</h7>
@@ -6866,7 +6844,18 @@ do_hostchecks=no</code></pre>
 <div class="sect6">
 <h7 id="_create_a_nagios_service"><a class="anchor" href="#_create_a_nagios_service"></a>Create a Nagios service</h7>
 <div class="paragraph">
-<p>The receiving host/service in the monitoring system derives from the following <a href="#property-loading-mechanism">properties</a>:</p>
+<p>Use the Makefile located in <code>$OMD_ROOT/share/sakuli/</code> to install predefined Nagios/Naemon service templates (optional):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[foo]:~/share/sakuli/setup$ make config
+cp ./omd/etc/nagios/conf.d/sakuli_nagios_templates.cfg /omd/sites/foo/etc/core/conf.d/
+omd reload core
+Reloading naemon configuration (PID: 17405)... OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create a service which should receive Sakuli test results. Host/service names derive from the following <a href="#property-loading-mechanism">properties</a>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -6878,70 +6867,27 @@ do_hostchecks=no</code></pre>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Create a check_command, which will be executed only if Nagios did not receive a Sakuli result within the last 30 minutes. This ensures that you get a notification even if no passive check results arrive in Nagios at all:</p>
-</div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>vim ~/etc/nagios/conf.d/commands.cfg
-
-define command {
-  command_name                   check_dummy
-  command_line                   $USER1$/check_dummy $ARG1$ $ARG2$
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Create a host object for the Sakuli client:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>OMD[sakuli]:~$ vim etc/nagios/conf.d/hosts.cfg
-
-define host {
+<pre class="CodeRay highlight"><code>define service {
+  service_description            example_xfce
   host_name                      sakuli_client
-  alias                          Sakuli Client
-  address                        [IP]
-  use                            generic-host
-}</code></pre>
-</div>
-</div>
-<div id="omd-gearman-freshness_threshold" class="paragraph">
-<p>Create the following service object for the first test case. <em>freshness_threshold</em> should be slightly higher than the interval Sakuli tests are planned (see also <a href="#pnp4nagios-rrd-heartbeat">RRD heartbeat</a> )</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>vim ~/etc/nagios/conf.d/services.cfg
-
-OMD[sakuli]:~$ vim etc/nagios/conf.d/services.cfg
-
-define service {
-  # service_description            example_windows7
-  # service_description            example_opensuse
-  service_description            example_ubuntu
-  host_name                      sakuli_client
-  use                            generic-service,srv-pnp
-  active_checks_enabled          0
-  check_command                  check_dummy!3!'Did not receive any Sakuli result within 3 minutes.'
-  check_freshness                1
+  use                            tpl_s_sakuli_gearman
   freshness_threshold            180
-  passive_checks_enabled         1
 }</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Reload OMD:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>omd reload</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now open Thruk; you should see now the Sakuli host with one service attached:</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="images/omd-pending2.png" alt="omd_pending2"></span></p>
+<div id="omd-gearman-freshness_threshold" class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<em>freshness_threshold</em> should be slightly higher than the interval Sakuli tests are executed
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>The check is waiting now for check results from a Sakuli client.</p>
@@ -6949,7 +6895,7 @@ define service {
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sakuli_client_configuration"><a class="anchor" href="#_sakuli_client_configuration"></a>Sakuli Client Configuration</h6>
+<h6 id="sakuli_client_config"><a class="anchor" href="#sakuli_client_config"></a>Sakuli Client Configuration</h6>
 <div class="paragraph">
 <div class="title">Modify Sakuli gearman forwarder parameter</div>
 <p>On the Sakuli client you must set the global <a href="#property-loading-mechanism">properties</a> for the gearman receiver. For this, edit <code>sakuli.properties</code> in the folder containing the test suites (you can copy the lines from <code><em>SAKULI_HOME</em>/conf/sakuli-default.properties</code>):.</p>
@@ -6958,43 +6904,26 @@ define service {
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="properties">__INST_DIR__/example_test_suites/sakuli.properties:
 
-## Gearman server settings:
 sakuli.forwarder.gearman.enabled=true
-sakuli.forwarder.gearman.server.host=__OMD_HOST__
-sakuli.forwarder.gearman.server.port=4730
-# Nagios host where all Sakuli services are defined on. If neccessary, overwrite this value per test suite.
-sakuli.forwarder.gearman.nagios.hostname=sakuli_client</code></pre>
+sakuli.forwarder.gearman.encryption=false
+sakuli.forwarder.gearman.secret.key=secret_password
+sakuli.forwarder.gearman.server.host=__GEARMAN_IP__
+sakuli.forwarder.gearman.server.port=[Gearman Port defined in &quot;omd config&quot; (default:4730)]
+sakuli.forwarder.gearman.server.queue=check_results <i class="conum" data-value="1"></i><b>(1)</b>
+
+# Nagios host where all Sakuli services are defined on. If neccessary, override this value per test suite.
+# (Nagios service name is defined by testsuite.properties -&gt; suiteID)
+sakuli.forwarder.gearman.nagios.hostname=sakuli_client
+sakuli.forwarder.gearman.nagios.check_command=check_sakuli</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>For other <strong>OPTIONAL</strong> gearman parameters you can adjust, see <a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/src/common/src/main/resources/org/sakuli/common/config/sakuli-default.properties" target="_blank">sakuli-default.properties</a> file.</p>
-</div>
-<div class="paragraph">
-<div class="title">Test result transmission to OMD</div>
-<p>Execute one of the example test case:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Ubuntu</strong>: <code>sakuli run <em>INST_DIR</em>/example_test_suites/example_ubuntu/</code></p>
-</li>
-<li>
-<p><strong>openSUSE</strong>: <code>sakuli run <em>INST_DIR</em>/example_test_suites/example_opensuse/</code></p>
-</li>
-<li>
-<p><strong>Windows7</strong>: <code>sakuli run <em>INST_DIR</em>\example_test_suites\example_windows7\</code></p>
-</li>
-<li>
-<p><strong>Windows8</strong>: <code>sakuli run <em>INST_DIR</em>\example_test_suites\example_windows8\</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The service should change its status to:</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="images/omd-ok.png" alt="omd_pending2"></span>
-<span class="image"><img src="images/omd-ok-details.png" alt="omd_pending2"></span></p>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Change this queue name if you use the <a href="#gearman_proxy">Sakuli Gearman proxy</a></td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect5">
@@ -7037,44 +6966,122 @@ accept_clear_results=yes</code></pre>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_adapt_perfdata_spooling_optional"><a class="anchor" href="#_adapt_perfdata_spooling_optional"></a>Adapt perfdata spooling (optional)</h6>
+<h6 id="gearman_proxy"><a class="anchor" href="#gearman_proxy"></a>Gearman proxy (optional)</h6>
 <div class="paragraph">
-<p>By default, the timestamp on which perfdata are getting stored in RRDTOOL comes from <em>service_perfdata_template</em>, which can be found in <code>~/etc/nagios/nagios.d/pnp4nagios.cfg</code>:</p>
+<p><span class="image"><img src="images/gearman_proxy.png" alt="gearman_proxy" width="780"></span></p>
+</div>
+<div class="paragraph">
+<p>Use the Sakuli gearman proxy script if you want to intervene into the communication between Sakuli and Naemon/Nagios.</p>
+</div>
+<div class="paragraph">
+<p><strong>Possible use cases</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Change parts of the messages Sakuki sends to the monitoring system &#8658; there are some examples contained already</p>
+</li>
+<li>
+<p>Getting notified when Sakuli sends results to services which do not exists</p>
+</li>
+<li>
+<p>Auto-create services for incoming results (not yet implemented)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Use the Makefile located in <code>$OMD_ROOT/share/sakuli/</code> to enable the feature:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>service_perfdata_file_template=DATATYPE::SERVICEPERFDATA\tTIMET::$TIMET$\tHOSTNAME::$HOSTNAME$ ... ...</code></pre>
+<pre class="CodeRay highlight"><code>OMD[demo]:~/share/sakuli/setup$ make gearman_proxy
+cp ./omd/etc/init.d/sakuli_gearman_proxy /omd/sites/demo/etc/init.d/
+chmod +x /omd/sites/demo/etc/init.d/sakuli_gearman_proxy
+cp ./omd/local/bin/sakuli_gearman_proxy.pl /omd/sites/demo/local/bin/
+cp ./omd/etc/mod-gearman/sakuli_gearman_proxy.cfg /omd/sites/demo/etc/mod-gearman/</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Using the <a href="https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/macrolist.html#timet">Nagios macro</a> <code>$TIMET$</code> (= current timestamp) as the perfdata time is absolutely ok as long as there is no network outage between the Sakuli client and OMD. But if Sakuli cannot send the result to gearmand, it appends the result to <code>.gearman_cache</code> within the Suite folder and tries to send first the cached results before the current result.</p>
-</div>
-<div class="paragraph">
-<p>With the template above, cached check results would get false (=current) timestamp. To prevent this, replace <code>$TIMET$</code> by <code>$LASTSERVICECHECK$</code>.</p>
+<p>Edit <code>etc/mod-gearman/sakuli_gearman_proxy.cfg</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>service_perfdata_file_template=DATATYPE::SERVICEPERFDATA\tTIMET::$LASTSERVICECHECK$\tHOSTNAME::$HOSTNAME$ ... ...</code></pre>
+<pre class="CodeRay highlight"><code>$remoteHost="172.17.0.2"; <i class="conum" data-value="1"></i><b>(1)</b>
+$remotePort="4730"; <i class="conum" data-value="1"></i><b>(1)</b>
+$localHost="172.17.0.2"; <i class="conum" data-value="2"></i><b>(2)</b>
+$localPort="4730"; <i class="conum" data-value="2"></i><b>(2)</b>
+$queues = {
+    "$remoteHost:$remotePort/check_results_sakuli"  =&gt; "$localHost:$localPort/check_results",
+}; <i class="conum" data-value="3"></i><b>(3)</b> <i class="conum" data-value="4"></i><b>(4)</b>
+
+$err_h = 'error_host'; <i class="conum" data-value="5"></i><b>(5)</b>
+$err_s = 'eror_svc';
+$err_r = '2'; <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Gearman IP/Port listening for Sakuli results. Set this to the same values as &lt;2&gt; unless gearman_proxy.pl is running on another system.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Gearman IP/Port of the monitoring system</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><code>check_results_sakuli</code> &#8658; queue name to receive Sakuli results. Make sure this queue name is defined in property <code>sakuli.forwarder.gearman.server.queue</code> on all Sakuli clients (see <a href="#sakuli_client_config">Sakuli Client Configuration</a>)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><code>check_results</code> &#8658; default queue of mod-gearman where gearman workers write back their results. (no need to change that)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The proxy does a livestatus query for each incoming package to ensure that the receiving host/service exists. Provide a special "error host/service" pair where the proxy can send a message when there are results coming in for non-existent services.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Status of messages for non-existent services (2=CRITICAL)</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Now, the performance data of a cached check result like this one in <code>.gearman_cache</code></p>
+<p>Start the proxy:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>======= check_results:sakuli_ubuntu__2016_03_24_12_34_08_716
-type=passive
-host_name=sakuli_client
-start_time=1458800000.000
-finish_time=1458822225.000
-return_code=0
-service_description=sakuli_ubuntu
-output=[OK] Cache-result 5 | foobar=112;333;444;;
-=======</code></pre>
+<pre class="CodeRay highlight"><code data-lang="bash">OMD[demo]:~$ omd start sakuli_gearman_proxy
+Starting sakuli_gearman_proxy...OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>will get stored in RRD correctly with the timestamp of "start_time" = 1458800000.</p>
+<p>Check that the queue <code>check_results_sakuli</code> is running in addition to the default queue <code>check_results</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[demo]:~$ gearman_top
+2017-06-09 13:37:28  -  localhost:4730  -  v0.33
+
+ Queue Name           | Worker Available | Jobs Waiting | Jobs Running
+-----------------------------------------------------------------------
+ check_results        |               1  |           0  |           0
+ check_results_sakuli |               1  |           0  |           0
+-----------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+This change does affect other monitoring checks executed with mod-gearman, because only Sakuli will send results into the queue <code>check_results_sakuli</code>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -7291,7 +7298,7 @@ define service {
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sakuli_client_configuration_2"><a class="anchor" href="#_sakuli_client_configuration_2"></a>Sakuli Client Configuration</h6>
+<h6 id="_sakuli_client_configuration"><a class="anchor" href="#_sakuli_client_configuration"></a>Sakuli Client Configuration</h6>
 <div class="paragraph">
 <div class="title">Modify Sakuli database forwarder parameter</div>
 <p>On the Sakuli client you must set the global <a href="#property-loading-mechanism">properties</a> for the database receiver, as described here: <a href="#sql-database-enable-forwarder">Enable database forwarder</a></p>
@@ -7522,7 +7529,7 @@ object Host "sakuliclient01" {
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sakuli_client_configuration_3"><a class="anchor" href="#_sakuli_client_configuration_3"></a>Sakuli Client Configuration</h6>
+<h6 id="_sakuli_client_configuration_2"><a class="anchor" href="#_sakuli_client_configuration_2"></a>Sakuli Client Configuration</h6>
 <div class="paragraph">
 <div class="title">Sakuli Icinga2 forwarder parameter</div>
 <p>On the Sakuli client you must set the global <a href="#property-loading-mechanism">properties</a> for the Icinga2 receiver. For this, edit <code>sakuli.properties</code> in the folder containing the test suites (you can copy the lines from <code><em>SAKULI_HOME</em>/conf/sakuli-default.properties</code>):</p>
@@ -7613,7 +7620,7 @@ sakuli.forwarder.icinga2.hostname=sakuliclient01</code></pre>
 <p><span class="image"><img src="images/sakuli-checkmk.png" alt="sakuli-checkmk"></span></p>
 </div>
 <div class="sect5">
-<h6 id="_sakuli_client_configuration_4"><a class="anchor" href="#_sakuli_client_configuration_4"></a>Sakuli Client Configuration</h6>
+<h6 id="_sakuli_client_configuration_3"><a class="anchor" href="#_sakuli_client_configuration_3"></a>Sakuli Client Configuration</h6>
 <div class="paragraph">
 <p>It is assumed that the client is already monitored by Check_MK and a agent is installed and running on it.</p>
 </div>
@@ -7681,16 +7688,201 @@ sakuli.forwarder.check_mk.service_description=My_Custom_Service</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_grafana_graphs"><a class="anchor" href="#_grafana_graphs"></a>1.4.1.6. Grafana graphs</h5>
+<h5 id="screenshot_history"><a class="anchor" href="#screenshot_history"></a>1.4.1.6. Screenshot history</h5>
 <div id="git-edit-section" class="paragraph">
-<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/graph_grafana.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/graph_grafana.adoc" target="_blank">edit</a></p>
+<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/screenshot_history.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/screenshot_history.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<p>tbd</p>
+<p>INFO: This section applies to <a href="http://http://labs.consol.de/OMD/">OMD-Labs</a> and the web interface <a href="https://www.thruk.org/">Thruk</a>. To use the screenshot history functionality on other platforms/web interfaces, the steps may vary.</p>
+</div>
+<div class="sect5">
+<h6 id="_feature_description"><a class="anchor" href="#_feature_description"></a>Feature description</h6>
+<div class="paragraph">
+<p>In case of an exception, Sakuli takes a screenshot of the current screen and embeds this image into the <strong>service output</strong> (base64 encoded). The user is able to view the screenshot on the monitoring user interface.</p>
+</div>
+<div class="paragraph">
+<p>The drawback of this method is that the screenshot only resists in the monitoring core&#8217;s memory; as soon as the test recovers, the test output changes back to OK and the image is gone. There are the Nagios/Naemon event logs to inspect former exceptions, but they do not contain the screenshots (fortunately).</p>
+</div>
+<div class="paragraph">
+<p>With the <strong>Screenshot history</strong> feature, the monitoring core (Nagios/Naemon/Icinga) fires a event handler script each time the check has a CRITICAL result. The script analyzes the service output, parses the image data and stores it on the local file system within a folder structure published by the OMD site apache process. Sakuli services contain a <a href="https://www.thruk.org/documentation/action-menu.html">Thruk action menu</a> which allow the user to see all saved screenshots.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_activating_the_feature"><a class="anchor" href="#_activating_the_feature"></a>Activating the feature</h6>
+<div class="paragraph">
+<p>Use the Makefile located in <code>$OMD_ROOT/share/sakuli/</code> to enable the feature:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">OMD[demo]:~/share/sakuli/setup$ make screenshot_history
+cp ./omd/local/lib/nagios/plugins/sakuli_screenshot_eventhandler.sh /omd/sites/demo/local/lib/nagios/plugins/
+cp ./omd/etc/nagios/conf.d/sakuli_screenshot_eventhandler.cfg /omd/sites/demo/etc/core/conf.d/
+cp ./omd/local/bin/sakuli_screenshot_cleanup.sh /omd/sites/demo/local/bin/
+cp ./omd/etc/cron.d/sakuli_screenshot_cleanup /omd/sites/demo/etc/cron.d/
+cp ./omd/etc/thruk/ssi/*.ssi /omd/sites/demo/etc/thruk/ssi/
+cp ./omd/etc/thruk/thruk_local.d/sakuli_action_menu.conf /omd/sites/demo/etc/thruk/thruk_local.d/
+cp ./omd/etc/apache/conf.d/sakuli_screenshots.conf /omd/sites/demo/etc/apache/conf.d/
+omd reload crontab
+Removing Crontab...OK
+Initializing Crontab...OK
+omd reload apache
+Reloading dedicated Apache for site demo
+omd reload core
+Reloading naemon configuration (PID: 3511)... OK</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="screenshot_history_eh"><a class="anchor" href="#screenshot_history_eh"></a>Event handler</h6>
+<div class="paragraph">
+<p>Now assign the command <code>sakuli_screenshot_eventhandler</code> to all Sakuli services:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>define service {
+  service_description            example_xfce
+  host_name                      sakuli_client
+  use                            tpl_s_sakuli_gearman_grafana
+  event_handler                  sakuli_screenshot_eventhandler
+  event_handler_enabled          1
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each time a CRITICAL Sakuli result comes in, the eventhandler will log its actions:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[demo]:$ tail -f var/log/sakuli_screenshot_eventhandler.log
+...
+[6893] 06/08/17 03:28:27 ---------------------------------------
+[6893] 06/08/17 03:28:27 HOST/SERVICE: sakuli_client / example_xfce
+[6893] 06/08/17 03:28:27 STATE: CRITICAL
+[6893] 06/08/17 03:28:27 LASTSERVICECHECK: 1496892468
+[6893] 06/08/17 03:28:27 PLUGIN_OUT: [CRIT] Sakuli suite "example_xfce" (23.11s) EXCEPTION: 'CASE "case1": STEP "Test_Sahi_landing_page": _highlight(_link("XSSL Manager")): TypeError: el is undefined Sahi.prototype._highlight@http://sahi ...\
+[6893] 06/08/17 03:28:27 Found screenshot format: jpg
+[6893] 06/08/17 03:28:27 IMG_DIR: /omd/sites/demo/var/sakuli/screenshots/sakuli_client/example_xfce/1496892468
+[6893] 06/08/17 03:28:27 Moving /omd/sites/demo/tmp/sakuli/screenshot_1496892468.jpg to /omd/sites/demo/var/sakuli/screenshots/sakuli_client/example_xfce/1496892468/screenshot.jpg
+[6893] 06/08/17 03:28:27 Writing image path to InfluxDB...
+[6893] 06/08/17 03:28:27 InfluxDB responded: &lt; HTTP/1.1 404 Not Found
+[6955] 06/08/17 03:29:18 ---------------------------------------</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_thruk_action_menu"><a class="anchor" href="#_thruk_action_menu"></a>Thruk action_menu</h6>
+<div class="paragraph">
+<p>Open <code>$OMD_ROOT/etc/thruk/thruk_local.d/sakuli_action_menu.conf</code> and adapt the section <code>&lt;action_menu_apply&gt;</code>. The following example applies the action_menu only on services whose host names begin with "sakuli". See the <a href="https://www.thruk.org/documentation/configuration.html#action-menu-settings">Thruk documentation for more examples</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code># Apply the action_menu on all services of hosts starting with "sakuli"
+&lt;action_menu_apply&gt;
+     sakuli_history_menu = ^sakuli.*;.+$
+&lt;/action_menu_apply&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After reloading the web server you should see a small dropdown arrow on each Sakuli service, giving you access to the screenshot history lightbox:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/screenshot_hist_action_menu.png" alt="screenshot_hist_action_menu"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/screenshot_hist_lightbox.png" alt="screenshot_hist_lightbox" width="500"></span></p>
+</div>
+<div class="paragraph">
+<p>The lightbox always shows the last/current screenshot and the error message. To navigate forth/back, use the left/right arrow keys or the buttons in the bottom right corner. Press Esc to close the box again.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_grafana_integration"><a class="anchor" href="#_grafana_integration"></a>Grafana integration</h6>
+<div class="paragraph">
+<p>Read the <a href="#screenshot_annotations">Grafana screenshot annotations</a> section if you want to integrate the screnshots as Grafana annotations.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For PNP4Nagios there is no such feature available.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_pnp4nagios_graphs"><a class="anchor" href="#_pnp4nagios_graphs"></a>1.4.1.7. PNP4Nagios graphs</h5>
+<h5 id="grafana_graphs"><a class="anchor" href="#grafana_graphs"></a>1.4.1.7. Grafana graphs</h5>
+<div id="git-edit-section" class="paragraph">
+<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/graph_grafana.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/graph_grafana.adoc" target="_blank">edit</a></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This section is written for OMD-Labs environments with InfluxDB/Grafana enabled. It may be useful for others too, but the steps may vary then.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_feature_activation"><a class="anchor" href="#_feature_activation"></a>Feature activation</h6>
+<div class="paragraph">
+<p>Check the <a href="https://labs.consol.de/de/nagios/omd/2015/10/21/activate-nagflux.html">OMD Labs documentation</a> for infos on how to enable Grafana/InfluxDB.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+OMD-Labs already contains a graph template <code>check_sakuli</code> for <a href="https://github.com/Griesbacher/histou/">Histou</a>, the Grafana templating system.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect5">
+<h6 id="screenshot_annotations"><a class="anchor" href="#screenshot_annotations"></a>Screenshot annotations</h6>
+<div class="paragraph">
+<p>Grafana graphs can also show screenshots of the <a href="#screenshot_history">Screenshot history</a> as <a href="http://docs.grafana.org/reference/annotations/">anotations</a>.</p>
+</div>
+<div class="paragraph">
+<p>Execute the Sakuli Makefile to patch the influxDB init script. It will restart InfluxDB and create the Sakuli image database:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>OMD[demo]:~/share/sakuli/setup$ make grafana
+patch -d /omd/sites/demo -p0 &lt; ./omd/etc/init.d/sakuli_influxdb.patch
+patching file etc/init.d/influxdb
+omd restart influxdb
+Stopping influxdb.....OK
+Starting influxdb....OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In case of an exception, the <a href="#screenshot_history_eh">screenshot history event_handler</a> saves the image on the file system <strong>and</strong> its path into the InfluxDB database "sakuli" (measurement: <strong>images</strong>).</p>
+</div>
+<div class="paragraph">
+<p>Violet vertical lines in the Sakuli graph indicate a saved screenshot. Hover the mouse over the bottom of the line to show the thumbnail:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/grafana_screenshot.png" alt="grafana_screenshot"></span></p>
+</div>
+<div class="paragraph">
+<p>Click the thumbnail to get the image enlarged.</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_pnp4nagios_graphs"><a class="anchor" href="#_pnp4nagios_graphs"></a>1.4.1.8. PNP4Nagios graphs</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/graph_pnp4nagios.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/graph_pnp4nagios.adoc" target="_blank">edit</a></p>
 </div>
@@ -7965,7 +8157,7 @@ The Sakui graph should now contain also CPU/Memory values.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="omd-containerized"><a class="anchor" href="#omd-containerized"></a>1.4.1.8. OMD Containerized</h5>
+<h5 id="omd-containerized"><a class="anchor" href="#omd-containerized"></a>1.4.1.9. OMD Containerized</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/omd-containerized.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/omd-containerized.adoc" target="_blank">edit</a></p>
 </div>
@@ -8085,7 +8277,7 @@ make build</pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_omd_screenshot_history"><a class="anchor" href="#_omd_screenshot_history"></a>1.4.1.9. OMD Screenshot History</h5>
+<h5 id="_omd_screenshot_history"><a class="anchor" href="#_omd_screenshot_history"></a>1.4.1.10. OMD Screenshot History</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/omd-screenshot-history.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/omd-screenshot-history.adoc" target="_blank">edit</a></p>
 </div>
@@ -8178,7 +8370,7 @@ define command {
 </div>
 </div>
 <div class="sect4">
-<h5 id="forwarder-template"><a class="anchor" href="#forwarder-template"></a>1.4.1.10. Forwarder Templates</h5>
+<h5 id="forwarder-template"><a class="anchor" href="#forwarder-template"></a>1.4.1.11. Forwarder Templates</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/forwarder-templates.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/forwarder-templates.adoc" target="_blank">edit</a></p>
 </div>
@@ -10516,7 +10708,7 @@ Website: <a href="http://www.consol.de">www.consol.de</a></p>
 <div id="footer">
 <div id="footer-text">
 Version v1.1.0-SNAPSHOT<br>
-Last updated 2017-06-06 19:07:46 CEST
+Last updated 2017-06-09 22:38:14 CEST
 </div>
 </div>
 <!--
