@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.1.0-SNAPSHOT,</span>
-<span id="revdate">09.06.2017 @ 22:38:12 CEST</span>
+<span id="revdate">09.06.2017 @ 22:49:56 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -3199,7 +3199,7 @@ Intentionally, <code>docker-compose</code> is made to bring up environments with
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/execution/containerized/kubernetes.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/execution/containerized/kubernetes.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<p>Following we will describe, how to use <a href="https://www.openshift.com/">Kubernetes</a> for Sakuli E2E testing and monitoring. First go the folder of the Kubernetes conf:</p>
+<p>The following section describes how to use <a href="https://www.openshift.com/">Kubernetes</a> for Sakuli E2E tests and monitoring. First go the folder of the Kubernetes configuration:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3207,13 +3207,13 @@ Intentionally, <code>docker-compose</code> is made to bring up environments with
 </div>
 </div>
 <div class="paragraph">
-<p>You will find the kubernetes config example under:
+<p>You will find the kubernetes config example in:
 <code><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docker/kubernetes/kubernetes.sakuli.example.pod.run.yaml" target="_blank">docker/kubernetes/kubernetes.sakuli.example.pod.run.yaml</a></code></p>
 </div>
 <div class="sect5">
 <h6 id="kubernetes-start-pod"><a class="anchor" href="#kubernetes-start-pod"></a>Start execution pod</h6>
 <div class="paragraph">
-<p>To start an execution of a Sakuli E2E testing container in the kubernetes cluster, execute from the command line:</p>
+<p>To execute a Sakuli E2E testing container in the kubernetes cluster create a pod:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3221,13 +3221,23 @@ Intentionally, <code>docker-compose</code> is made to bring up environments with
 </div>
 </div>
 <div class="paragraph">
-<p>This creates the following components in the Kubernetes cluster:
-* new Namespace <code>sakuli</code>
-* 1 Pod with the sakuli container running
-* 1 Service to make the container ports <code>6901</code> and <code>5901</code> accessible</p>
+<p>This creates the following components in the Kubernetes cluster:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a new namespace <code>sakuli</code></p>
+</li>
+<li>
+<p>a pod with the Sakuli container running</p>
+</li>
+<li>
+<p>a service to make the container ports <code>6901</code> and <code>5901</code> accessible</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Take a look to the running pods on the Kubernetes dashboard</p>
+<p>Now view the running pods on the Kubernetes dashboard:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3246,7 +3256,7 @@ Intentionally, <code>docker-compose</code> is made to bring up environments with
 </div>
 </div>
 <div class="paragraph">
-<p>Also you can take a look at the log output</p>
+<p>You can also take a look at the log output:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3254,11 +3264,11 @@ Intentionally, <code>docker-compose</code> is made to bring up environments with
 </div>
 </div>
 <div class="paragraph">
-<p>If you wan&#8217;t to take a look to the UI during the test execution, you can connect (only during the container runtime) to the container through the defined external HTTP port <code>32001</code> of the service <code>test-sakuli-kub</code>:</p>
+<p>If you want to watch the test execution you can connect to the container on the external HTTP port <code>32001</code> of the service <code>test-sakuli-kub</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>http://&lt;kubernets-cluster-ip&gt;:32001/vnc_auto.html?password=sakuli&amp;view_only=true</code></pre>
+<pre class="CodeRay highlight"><code>http://&lt;kubernetes-cluster-ip&gt;:32001/vnc_auto.html?password=sakuli&amp;view_only=true</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3267,6 +3277,9 @@ Intentionally, <code>docker-compose</code> is made to bring up environments with
 </div>
 <div class="sect5">
 <h6 id="kubernetes-delete-pod"><a class="anchor" href="#kubernetes-delete-pod"></a>Delete execution pod</h6>
+<div class="paragraph">
+<p>Delete the Sakuli pod with the following command:</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code>kubectl delete -f kubernetes.sakuli.example.pod.run.yaml</code></pre>
@@ -10708,7 +10721,7 @@ Website: <a href="http://www.consol.de">www.consol.de</a></p>
 <div id="footer">
 <div id="footer-text">
 Version v1.1.0-SNAPSHOT<br>
-Last updated 2017-06-09 22:38:14 CEST
+Last updated 2017-06-09 22:49:58 CEST
 </div>
 </div>
 <!--
