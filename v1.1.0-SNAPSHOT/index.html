@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.1.0-SNAPSHOT,</span>
-<span id="revdate">09.06.2017 @ 23:03:56 CEST</span>
+<span id="revdate">09.06.2017 @ 23:31:36 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -812,13 +812,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_cpu_memory_metrics">CPU/Memory metrics</a></li>
 </ul>
 </li>
-<li><a href="#omd-containerized">1.4.1.9. OMD Containerized</a>
-<ul class="sectlevel5">
-<li><a href="#_usage_2">Usage</a></li>
-<li><a href="#_ansible_drop_ins">Ansible drop-ins</a></li>
-</ul>
-</li>
-<li><a href="#forwarder-template">1.4.1.10. Forwarder Templates</a>
+<li><a href="#forwarder-template">1.4.1.9. Forwarder Templates</a>
 <ul class="sectlevel5">
 <li><a href="#_jtwig_template">JTwig template</a></li>
 <li><a href="#_customized_jtwig_functions">Customized Jtwig Functions</a></li>
@@ -2962,7 +2956,7 @@ USER 1984</code></pre>
 <p><a href="#kubernetes">Kubernetes</a></p>
 </li>
 <li>
-<p><a href="#omd-containerized">OMD Containerized</a></p>
+<p><a href="#omd-containerized">[omd-containerized]</a></p>
 </li>
 <li>
 <p>Publications:</p>
@@ -8178,127 +8172,7 @@ The Sakui graph should now contain also CPU/Memory values.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="omd-containerized"><a class="anchor" href="#omd-containerized"></a>1.4.1.9. OMD Containerized</h5>
-<div id="git-edit-section" class="paragraph">
-<p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/omd-containerized.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/omd-containerized.adoc" target="_blank">edit</a></p>
-</div>
-<div class="paragraph">
-<div class="title">OMD Labs Docker images with Sakuli extension</div>
-<p>These images provide a nightly build of OMD Labs (<a href="https://labs.consol.de/OMD/">https://labs.consol.de/OMD/</a>) with Sakuli extensions:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Sakuli PNP template</p>
-</li>
-<li>
-<p>Screenshot eventhandler which stores screenshots in the file system</p>
-</li>
-<li>
-<p>Thruk SSI to display screenshots in a lightbox</p>
-</li>
-<li>
-<p>check_mysql_health to check a Sakuli result database</p>
-</li>
-<li>
-<p>adapted version of gearman_proxy.pl to retrieve results in a separate result queue (e.g. for replacing message substrings)</p>
-</li>
-<li>
-<p>Nagios example config files</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Automated builds</div>
-<p>Each "omd-labs-sakuli" image build gets triggered by webhook when a new "omd-labs" image was created.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://hub.docker.com/r/consol/omd-labs-centos-sakuli/builds/">https://hub.docker.com/r/consol/omd-labs-centos-sakuli/builds/</a></p>
-</li>
-<li>
-<p><a href="https://hub.docker.com/r/consol/omd-labs-debian-sakuli/builds/">https://hub.docker.com/r/consol/omd-labs-debian-sakuli/builds/</a></p>
-</li>
-<li>
-<p><a href="https://hub.docker.com/r/consol/omd-labs-ubuntu-sakuli/builds/">https://hub.docker.com/r/consol/omd-labs-ubuntu-sakuli/builds/</a></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The image already contains a "demo" site.</p>
-</div>
-<div class="sect5">
-<h6 id="_usage_2"><a class="anchor" href="#_usage_2"></a>Usage</h6>
-<div class="listingblock">
-<div class="title">Run the "demo" site in OMD Labs Edition:</div>
-<div class="content">
-<pre class="CodeRay highlight"><code># Centos 7
-docker run -p 8443:443 consol/omd-labs-centos-sakuli
-# Ubuntu 16.04
-docker run -p 8443:443 consol/omd-labs-ubuntu-sakuli
-# Debian 8
-docker run -p 8443:443 consol/omd-labs-debian-sakuli</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Use the Makefile to work with <em>locally built</em> images:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code># run a local image
-make start
-# build a "local/" image without overwriting the consol/ image
-make build
-# start just the bash
-make bash</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<div class="title">Run a custom site</div>
-<p>If you want to create a custom site, you have to build an own image of OMD-labs <strong>and</strong> OMD-labs-sakuli.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>see the documentation of <a href="https://github.com/ConSol/omd-labs-docker">https://github.com/ConSol/omd-labs-docker</a>, section "run a custom site" how to build a local image of OMD-labs.</p>
-</li>
-<li>
-<p>then clone this repository, <code>cd</code> into the folder containg the Dockerfile, e.g. <code>omd-labs-centos-sakuli</code></p>
-</li>
-<li>
-<p>build a local image:</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>export NEW_SITENAME=mynewsite
-make build</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>run the image:</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>docker run -p 8443:443 local/omd-labs-centos-sakuli</pre>
-</div>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_ansible_drop_ins"><a class="anchor" href="#_ansible_drop_ins"></a>Ansible drop-ins</h6>
-<div class="paragraph">
-<p>You can also configure this OMD labs container with Ansible playbooks. See <a href="https://github.com/ConSol/omd-labs-docker">https://github.com/ConSol/omd-labs-docker</a> for more information.</p>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="forwarder-template"><a class="anchor" href="#forwarder-template"></a>1.4.1.10. Forwarder Templates</h5>
+<h5 id="forwarder-template"><a class="anchor" href="#forwarder-template"></a>1.4.1.9. Forwarder Templates</h5>
 <div id="git-edit-section" class="paragraph">
 <p><a href="https://github.com/ConSol/sakuli/blob/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/forwarder-templates.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/feature/#243_docu_for_v1.1/docs/manual/integration/monitoring/advanced-topics/forwarder-templates.adoc" target="_blank">edit</a></p>
 </div>
@@ -10636,7 +10510,7 @@ Website: <a href="http://www.consol.de">www.consol.de</a></p>
 <div id="footer">
 <div id="footer-text">
 Version v1.1.0-SNAPSHOT<br>
-Last updated 2017-06-09 23:03:58 CEST
+Last updated 2017-06-09 23:31:38 CEST
 </div>
 </div>
 <!--
