@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.1.0-SNAPSHOT,</span>
-<span id="revdate">12.06.2017 @ 18:47:31 CEST</span>
+<span id="revdate">12.06.2017 @ 19:40:14 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -682,6 +682,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#kubernetes">1.2.3.3. Kubernetes</a>
 <ul class="sectlevel5">
 <li><a href="#kubernetes-start-pod">Start execution pod</a></li>
+<li><a href="#kubernetes-job-config">Job Config</a></li>
 <li><a href="#kubernetes-delete-pod">Delete execution pod</a></li>
 </ul>
 </li>
@@ -690,6 +691,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#openshift-run-image">Run image from Dockerhub</a></li>
 <li><a href="#_build_run_your_own_image">Build &amp; run your own image</a></li>
 <li><a href="#_run_git_based_tests">Run git based tests</a></li>
+<li><a href="#_job_config">Job Config</a></li>
 <li><a href="#_other_useful_commands">Other useful commands</a></li>
 </ul>
 </li>
@@ -3269,6 +3271,42 @@ Intentionally, <code>docker-compose</code> is made to bring up environments with
 </div>
 </div>
 <div class="sect5">
+<h6 id="kubernetes-job-config"><a class="anchor" href="#kubernetes-job-config"></a>Job Config</h6>
+<div class="paragraph">
+<p>The Kubernetes <a href="https://kubernetes.io/docs/api-reference/v1.5/#job-v1">Job</a> object checks exit code of executed job. By default, the Sakuli container will return the value of the sakuli test execution (<code>0</code> ok, <code>1-6</code> warning to critical state codes). To prevent that the job will be rescheduled you can set the environment variable <code>KUBERNETES_RUN_MODE</code> to <code>job</code> and the container will return <code>0</code> for all "normal" sakuli executions. Like in this example:</p>
+</div>
+<div class="listingblock">
+<div class="title">sakuli.job.run.yaml</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yml">        <span class="comment"># ...</span>
+        <span class="key">containers</span>:
+        - <span class="string"><span class="content">name: sakuli-job-pod</span></span>
+          <span class="key">image</span>: <span class="string"><span class="content">consol/sakuli-ubuntu-xfce</span></span>
+          <span class="key">imagePullPolicy</span>: <span class="string"><span class="content">Always</span></span>
+          <span class="key">env</span>:
+            - <span class="string"><span class="content">name: KUBERNETES_RUN_MODE</span></span>
+              <span class="key">value</span>: <span class="string"><span class="content">job</span></span>
+          <span class="key">args</span>:
+       <span class="comment"># ...</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As indicator that the environment variable is set, the output will contain:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="commandline">===========  SAKULI Testsuite &quot;example_xfce&quot; execution FINISHED - ERRORS ======================
+
+ERROR [2017-06-12 17:21:56.959] - ERROR:
+CASE &quot;case1&quot;: Can't find &quot;[id=not-valid, path=/headless/sakuli/test/case1/not-valid.png ]&quot; inR[0,0 1280x1024]@S(0)waitFor function in 5 sec.
+
+SAKULI_RETURN_VAL: 6
+KUBERNETES_RUN_MODE=job =&gt; return exit code 0
+EXIT_CODE: 0</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
 <h6 id="kubernetes-delete-pod"><a class="anchor" href="#kubernetes-delete-pod"></a>Delete execution pod</h6>
 <div class="paragraph">
 <p>Delete the Sakuli pod with the following command:</p>
@@ -3441,6 +3479,12 @@ If something went wrong, you maybe have to enable this volume type in the cluste
 - gitRepo</code></pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_job_config"><a class="anchor" href="#_job_config"></a>Job Config</h6>
+<div class="paragraph">
+<p>Currently OpenShift (Version 3.5) have no different behaviour as Kubernetes itself, so take a look at <a href="#kubernetes-job-config">Job Config</a>.</p>
 </div>
 </div>
 <div class="sect5">
@@ -10510,7 +10554,7 @@ Website: <a href="http://www.consol.de">www.consol.de</a></p>
 <div id="footer">
 <div id="footer-text">
 Version v1.1.0-SNAPSHOT<br>
-Last updated 2017-06-12 18:47:32 CEST
+Last updated 2017-06-12 19:40:16 CEST
 </div>
 </div>
 <!--
