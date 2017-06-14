@@ -45,7 +45,7 @@ ENV MAVEN_HOME $HOME/apps/maven
 RUN $INST_SCRIPTS/maven.sh
 
 ### Install Sakuli
-ARG SAKULI_VERSION=1.1.0-SNAPSHOT
+ARG SAKULI_VERSION=1.1.0-SNAPSHOT-243_docu_for_v1.1
 # Testsuite folder default permissions after text execution
 ENV SAKULI_UMASK 0000
 # Define Sakuli default startup testsuite
