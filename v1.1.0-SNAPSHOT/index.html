@@ -599,7 +599,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">The Sakuli Team</span><br>
 <span id="email" class="email"><a href="mailto:sakuli@consol.de">sakuli@consol.de</a></span><br>
 <span id="revnumber">version v1.1.0-SNAPSHOT,</span>
-<span id="revdate">05.07.2017 @ 14:07:07 CEST</span>
+<span id="revdate">05.07.2017 @ 14:49:12 CEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Sakuli E2E</div>
@@ -4762,10 +4762,10 @@ aware which os you are running, maybe us to check <code>Environment#isLinux()</c
 <p><a href="https://github.com/ConSol/sakuli/blob/dev/docs/manual/testdefinition/sakuli-api-key.adoc" target="_blank">view</a> | <a href="https://github.com/ConSol/sakuli/edit/dev/docs/manual/testdefinition/sakuli-api-key.adoc" target="_blank">edit</a></p>
 </div>
 <div class="paragraph">
-<p>Key - representing some key constants which can be used in type functions as input text and as modifier keys.</p>
+<p>All non-character keys are represented by <strong>Key</strong> constants which can be used in type functions.</p>
 </div>
 <div class="paragraph">
-<p>The following <strong>Key</strong> values are possible:</p>
+<p>The following <strong>Key</strong> values are available:</p>
 </div>
 <div class="paragraph">
 <p><code>SPACE</code>, <code>ENTER</code>, <code>BACKSPACE</code>, <code>TAB</code>, <code>ESC</code>, <code>UP</code>, <code>RIGHT</code>, <code>DOWN</code>, <code>LEFT</code>, <code>PAGE_UP</code>, <code>PAGE_DOWN</code>, <code>DELETE</code>, <code>END</code>,
@@ -4775,21 +4775,27 @@ aware which os you are running, maybe us to check <code>Environment#isLinux()</c
 <code>MULTIPLY</code>, <code>DIVIDE</code>, <code>DECIMAL</code>, <code>CONTEXT</code></p>
 </div>
 <div class="paragraph">
-<p><strong>Using <code>Key.ALTGR</code> on Unix:</strong>
-To enable the key command <code>ALTGR</code> for unix systems please bind it to <code>CTRL + ALT</code>, for more information
-see <a href="http://unix.stackexchange.com/questions/157834/how-to-bind-altgr-to-ctrl-alt">stackexchange.com - how-to-bind-altgr-to-ctrl-alt</a>.</p>
+<p><strong>Examples</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Examples</strong>
-Closing an window by typing the shortcut <code>ALT + F4</code>:</p>
+<p>Press <code>F1</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="js">env.type(Key.F4, Key.ALT);</code></pre>
+<pre class="CodeRay highlight"><code data-lang="js">env.type(Key.F1);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Open the file manager on Windows with <code>WIN + e</code>:</p>
+<p>Close a window by typing the shortcut <code>ALT + F4</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="js"><span class="comment">// the second parameter is the held (=&quot;modifier&quot;) key</span>
+env.type(Key.F4, Key.ALT);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Open the file manager on Windows with shortcut <code>WIN + e</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4797,12 +4803,28 @@ Closing an window by typing the shortcut <code>ALT + F4</code>:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Type <code>CTRL + ALT + b</code> (CTRL + ALT = ALTGR):</p>
+<p>Do something application specific with shortcut <code>CTRL + ALT + b</code> (CTRL + ALT = ALTGR):</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="js">env.type(<span class="string"><span class="delimiter">&quot;</span><span class="content">b</span><span class="delimiter">&quot;</span></span>, Key.ALTGR)</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p><strong>Using <code>Key.ALTGR</code> on Unix:</strong></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To enable the key command <code>ALTGR</code> on unix systems please bind it to <code>CTRL + ALT</code>. For more information
+see <a href="http://unix.stackexchange.com/questions/157834/how-to-bind-altgr-to-ctrl-alt">stackexchange.com - how-to-bind-altgr-to-ctrl-alt</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><strong>Members</strong></p>
@@ -9171,7 +9193,7 @@ live-server src/docs-manual/target/generated-docs <i class="conum" data-value="2
 <p>Currently there is no fully automated way between the documented Sakuli API in <a href="https://github.com/ConSol/sakuli/blob/dev/docs/manual/testdefinition/sakuli-api.md">docs/manual/testdefinition/sakuli-api.md</a> and the final <a href="https://github.com/ConSol/sakuli/blob/dev/docs/manual/testdefinition/sakuli-api.adoc">docs/manual/testdefinition/sakuli-api.adoc</a> .</p>
 </div>
 <div class="paragraph">
-<p><strong>Following Steps have to be executed:</strong></p>
+<p><strong>The following steps have to be executed:</strong></p>
 </div>
 <div class="paragraph">
 <p>1) Generate the <code>sakuli-api.md</code> file
@@ -10542,7 +10564,7 @@ Website: <a href="http://www.consol.de">www.consol.de</a></p>
 <div id="footer">
 <div id="footer-text">
 Version v1.1.0-SNAPSHOT<br>
-Last updated 2017-07-05 14:07:09 CEST
+Last updated 2017-07-05 14:49:14 CEST
 </div>
 </div>
 <!--
